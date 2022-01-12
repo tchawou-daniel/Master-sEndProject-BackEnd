@@ -40,7 +40,7 @@ In this working session:
 - we thought again about the technologies we should use, notably the advantages and disadvantages, 
 the ease of implementation, and for others the ease of learning 
 ```
-### Second 4h hours
+### Second 5h hours
 ```
 In this working session:
 - we have planned the time to complete the project (minimum functional)
