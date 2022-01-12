@@ -33,7 +33,20 @@ use for that.
 ```
 [The document ](https://docs.google.com/document/d/1yIE2LbqWsI8fIg_zS-Ywr3HgrX2ibk2yNp6sQqmCxp8/edit?usp=sharing) produced today on the technologies we will use
 ## - Tuesday, January 11th 2022 -
-
+### First 3h hours
 ```
+In this working session:
+- we have chosen a subject for our project
+- we thought again about the technologies we should use, notably the advantages and disadvantages, 
+the ease of implementation, and for others the ease of learning 
+```
+### Second 4h hours
+```
+In this working session:
+- we have planned the time to complete the project (minimum functional)
+- It was also important for us to select the trainings that we should follow to carry out the project.
+- Another point concerned the definition of use cases. We have started to define them and to choose the ones 
+that have priority for the v0 version.
+- At the end of this session, we had a problem with our working pc, so we lost more than 45min
 ```
 
