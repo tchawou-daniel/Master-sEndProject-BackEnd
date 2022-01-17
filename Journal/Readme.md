@@ -50,3 +50,19 @@ that have priority for the v0 version.
 - At the end of this session, we had a problem with our working pc, so we lost more than 45min
 ```
 
+## - Monday, January 17th 2022 -
+
+### First 4h hours
+
+```
+The content of this working session :
+- Definition of the use case for version V1
+- Design of the project architecture
+- Improved description and justification of chosen technologies 
+```
+### Second 4h hours
+```
+- Analysis of DevOps tools to be used for the project
+- Change the structure of the project
+- Add some DevOps technologies in our document
+```
