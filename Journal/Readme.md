@@ -66,3 +66,19 @@ The content of this working session :
 - Change the structure of the project
 - Add some DevOps technologies in our document
 ```
+
+## - Monday, February 15th 2022 -
+
+### First 3h hours
+
+```
+The content of this working session :
+- We followed a cypress training before this session, in the morning on unit tests through a youtube video. Here is the link of the training https://www.youtube.com/watch?v=OVNjsIto9xM&t=461s. Here is the link of my repository concerning this training(...)
+- We have browsed the documentation on Circleci, docker, Netlify, Heroku
+- We also installed the environment of work and configure webstorm
+```
+### Second 4h hours
+```
+- We have browsed the documentation on Auth0
+- we have started to prepare the working environment for the front-end(Cypress, Storybook, reactjs, Typescript, dependencies...)
+```
