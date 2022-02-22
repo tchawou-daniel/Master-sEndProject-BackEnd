@@ -6,7 +6,7 @@
 
 .idea
 .vscode
-src/
+apps/api/
 
 cypress/screenshots
 
