@@ -1,0 +1,21 @@
+# dependencies
+/node_modules
+
+# testing
+/coveragegot
+
+.idea
+.vscode
+src/
+
+cypress/screenshots
+
+.yarnrc.yml
+
+
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
