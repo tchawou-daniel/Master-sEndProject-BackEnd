@@ -97,9 +97,21 @@ The content of this working session :
 - We have tried to resolve the issue with storybook
 ```
 
-## - Tuesday, February 21th 2022 -
+## - Tuesday, February 22th 2022 -
 ### For 40 minutes outside the school schedule
 ```
 - small training on youtube concerning the storybook: https://www.youtube.com/watch?v=CLwX9EWlWJM&ab_channel=Grafikart.fr
+```
+### First 3h hours
+```
+- We have worked on the conception of the database
+- We resolved the issue concerning the storybook
+```
+### Second 4h hours
+```
+- We started to set up the back-end environment 
+- We resolved some circleci issues concerning the front-end of our apps
+- We have tried unsuccessfully to solve this problem Circleci : Error: ENOENT: no such file or directory, open '/home/circleci/project/src/react-app-env.d.ts'
+
 ```
 
