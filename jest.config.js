@@ -4,8 +4,17 @@ module.exports = {
     'json',
     'ts',
   ],
+  rootDir: "apps",
+  testRegex: ".*\\.spec\\.ts$",
+  transform: {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "collectCoverageFrom": [
+    "**/*.(t|j)s"
+  ],
   coverageReporters: ['text', 'json'],
   testEnvironment: 'node',
+  coverageDirectory: "../coverage",
   testRegex: [
     '.e2e-spec.ts$',
     '.test.ts$',
@@ -22,4 +31,5 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
+
 };
