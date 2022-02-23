@@ -31,21 +31,19 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
-  jest: {
-    watchPlugins: [
-      // default
-      "jest-watch-suspend",
-      // configure
-      [
-        "jest-watch-suspend", {
-        // override key press
-        "key": "s",
-        // override prompt
-        "prompt": "suspend watch mode",
-        // starts in suspend mode
-        "suspend-on-start": true
-      }
-      ]
+  watchPlugins: [
+    // default
+    "jest-watch-suspend",
+    // configure
+    [
+      "jest-watch-suspend", {
+      // override key press
+      "key": "s",
+      // override prompt
+      "prompt": "suspend watch mode",
+      // starts in suspend mode
+      "suspend-on-start": true
+    }
     ]
-  }
+  ]
 };
