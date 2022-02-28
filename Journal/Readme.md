@@ -114,4 +114,27 @@ The content of this working session :
 - We have tried unsuccessfully to solve this problem Circleci : Error: ENOENT: no such file or directory, open '/home/circleci/project/src/react-app-env.d.ts'
 
 ```
+## - Wednesday, February 23th 2022 -
+- We resolved the issues concerning the back-end side and we have continued to configure the environment
+- We have continued the training about the nestjs on Udemy (...)
+
+## - Saturday, February 26th 2022 -
+- We continued and finished the training about the nestjs on Udemy (...)
+
+### First 3h hours
+
+```
+We encoutered some problems  regarding the circleci of the front-end part such as:
+- warning ../../package.json: No license field
+- Error: Cannot find module '/home/.../config/webpack.config.dev'
+- react-dom.development.js:24828 Uncaught Error: Target container is not a DOM element.
+
+```
+### Second 4h hours
+```
+- We advanced with the database schema and architecture
+- We resolved the issues with the front-end side
+- We fixed the errors of the circleci on the back-end side
+```
+
 
