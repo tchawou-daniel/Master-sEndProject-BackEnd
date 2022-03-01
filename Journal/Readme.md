@@ -115,12 +115,17 @@ The content of this working session :
 
 ```
 ## - Wednesday, February 23th 2022 -
+```
 - We resolved the issues concerning the back-end side and we have continued to configure the environment
 - We have continued the training about the nestjs on Udemy (...)
+```
 
 ## - Saturday, February 26th 2022 -
+```
 - We continued and finished the training about the nestjs on Udemy (...)
+```
 
+## - Monday, February 28th 2022 -
 ### First 3h hours
 
 ```
@@ -135,6 +140,23 @@ We encoutered some problems  regarding the circleci of the front-end part such a
 - We advanced with the database schema and architecture
 - We resolved the issues with the front-end side
 - We fixed the errors of the circleci on the back-end side
+```
+## - Monday, March 1st 2022 -
+### First 3h hours
+```
+we worked on the database schema:
+- We have tried to see the best approach for our application architecture. How we are going to index the companies for example and the sub-branches of those companies.
+- We have evaluated if we have to use mysql or postgresql.
+- We evaluated if we should start for the v0 application with a multi-tenant architecture or not, because in the long run we want to use a multi-tenant architecture. This is the best architecture for our project.
+
+we looked at the documentation and some videos about auth0 to see if we will finally use this authentication method or not.
+
+```
+### Second 4h hours
+```
+- We connected the back-end to our database
+- We started to implement the authentification. It's already possible to sign in and sign up an user. 
+- We have created the security around the authentication. 
 ```
 
 
