@@ -67,7 +67,7 @@ The content of this working session :
 - Add some DevOps technologies in our document
 ```
 
-## - Monday, February 15th 2022 -
+## - Tuesday, February 15th 2022 -
 
 ### First 3h hours
 
@@ -82,3 +82,24 @@ The content of this working session :
 - We have browsed the documentation on Auth0
 - we have started to prepare the working environment for the front-end(Cypress, Storybook, reactjs, Typescript, dependencies...)
 ```
+
+## - Monday, February 21th 2022 -
+
+### First 3h hours
+
+```
+The content of this working session :
+- we started to make the schema of the database
+```
+### Second 4h hours
+```
+- We configured the circleci in the front and back project
+- We have tried to resolve the issue with storybook
+```
+
+## - Tuesday, February 21th 2022 -
+### For 40 minutes outside the school schedule
+```
+- small training on youtube concerning the storybook: https://www.youtube.com/watch?v=CLwX9EWlWJM&ab_channel=Grafikart.fr
+```
+
