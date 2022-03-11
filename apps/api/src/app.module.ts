@@ -13,7 +13,8 @@ import {TypeOrmModule} from "@nestjs/typeorm";
       password: '',
       database: '',
       entities: [],
-      synchronize: true,
+      autoLoadEntities: true,
+      synchronize: true
     }),
   ],
   controllers: [AppController],

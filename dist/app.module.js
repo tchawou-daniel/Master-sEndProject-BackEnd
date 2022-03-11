@@ -17,14 +17,15 @@ AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
-                type: '',
-                host: '',
-                port: ,
-                username: '',
-                password: '',
-                database: '',
+                type: 'mysql',
+                host: 'localhost',
+                port: 3306,
+                username: 'jordan',
+                password: 'jordan96',
+                database: 'empreintt_M2_2022',
                 entities: [],
-                synchronize: true,
+                autoLoadEntities: true,
+                synchronize: true
             }),
         ],
         controllers: [app_controller_1.AppController],
