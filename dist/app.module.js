@@ -24,7 +24,8 @@ AppModule = __decorate([
                 password: '',
                 database: '',
                 entities: [],
-                synchronize: true,
+                autoLoadEntities: true,
+                synchronize: true
             }),
         ],
         controllers: [app_controller_1.AppController],
