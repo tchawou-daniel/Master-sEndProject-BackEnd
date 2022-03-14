@@ -23,11 +23,15 @@ AuthModule = __decorate([
         imports: [
             config_1.ConfigModule,
             passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
-            jwt_1.JwtModule.register({
-                secret: 'topSecret',
-                signOptions: {
-                    expiresIn: 3600,
-                },
+            jwt_1.JwtModule.registerAsync({
+                imports: [config_1.ConfigModule],
+                inject: [config_1.ConfigService],
+                useFactory: async (configService) => ({
+                    secret: configService.get('JWT_SECRET'),
+                    signOptions: {
+                        expiresIn: 3600,
+                    },
+                })
             }),
             typeorm_1.TypeOrmModule.forFeature([users_repository_1.UsersRepository]),
         ],
