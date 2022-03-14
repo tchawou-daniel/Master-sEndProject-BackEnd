@@ -19,3 +19,6 @@ cypress/screenshots
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
+
+.env.stage.dev
+.env.stage.prod
