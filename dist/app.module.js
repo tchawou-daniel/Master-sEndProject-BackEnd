@@ -12,11 +12,13 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const auth_module_1 = require("./auth/auth.module");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+<<<<<<< HEAD
             typeorm_1.TypeOrmModule.forRoot({
                 type: '',
                 host: '',
@@ -27,6 +29,27 @@ AppModule = __decorate([
                 entities: [],
                 autoLoadEntities: true,
                 synchronize: true
+=======
+            config_1.ConfigModule.forRoot({
+                envFilePath: [`.env.stage.${process.env.STAGE}`]
+            }),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                imports: [config_1.ConfigModule],
+                inject: [config_1.ConfigService],
+                useFactory: async (configService) => {
+                    return {
+                        entities: [],
+                        autoLoadEntities: true,
+                        synchronize: true,
+                        type: 'mysql',
+                        host: configService.get('DB_HOST'),
+                        port: configService.get('DB_PORT'),
+                        username: configService.get('DB_USERNAME'),
+                        password: configService.get('DB_PASSWORD'),
+                        database: configService.get('DB_DATABASE'),
+                    };
+                }
+>>>>>>> 664c981... feat(#8-configuration-management)
             }),
             auth_module_1.AuthModule,
         ],
