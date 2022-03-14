@@ -18,13 +18,15 @@ const passport_1 = require("@nestjs/passport");
 const passport_jwt_1 = require("passport-jwt");
 const typeorm_1 = require("@nestjs/typeorm");
 const users_repository_1 = require("./users.repository");
+const config_1 = require("@nestjs/config");
 let JwtStartegy = class JwtStartegy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy) {
-    constructor(usersRepository) {
+    constructor(usersRepository, configService) {
         super({
-            secretOrKey: 'topSecret',
+            secretOrKey: configService.get('JWT_SECRET'),
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
         });
         this.usersRepository = usersRepository;
+        this.configService = configService;
     }
     async validate(payload) {
         const { username } = payload;
@@ -38,7 +40,8 @@ let JwtStartegy = class JwtStartegy extends (0, passport_1.PassportStrategy)(pas
 JwtStartegy = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(users_repository_1.UsersRepository)),
-    __metadata("design:paramtypes", [users_repository_1.UsersRepository])
+    __metadata("design:paramtypes", [users_repository_1.UsersRepository,
+        config_1.ConfigService])
 ], JwtStartegy);
 exports.JwtStartegy = JwtStartegy;
 //# sourceMappingURL=jwt.startegy.js.map

@@ -15,11 +15,13 @@ const typeorm_1 = require("@nestjs/typeorm");
 const passport_1 = require("@nestjs/passport");
 const jwt_1 = require("@nestjs/jwt");
 const jwt_startegy_1 = require("./jwt.startegy");
+const config_1 = require("@nestjs/config");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule,
             passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
             jwt_1.JwtModule.register({
                 secret: 'topSecret',
