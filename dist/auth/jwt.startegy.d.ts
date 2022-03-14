@@ -1,11 +1,7 @@
-import { Strategy } from 'passport-jwt';
-import { UsersRepository } from './users.repository';
-import { JwtPayload } from './jwt-payload.interface';
-import { User } from './user.entity';
+import { Strategy, VerifiedCallback } from 'passport-jwt';
 declare const JwtStartegy_base: new (...args: any[]) => Strategy;
 export declare class JwtStartegy extends JwtStartegy_base {
-    private usersRepository;
-    constructor(usersRepository: UsersRepository);
-    validate(payload: JwtPayload): Promise<User>;
+    constructor();
+    validate(payload: any, done: VerifiedCallback): Promise<void>;
 }
 export {};

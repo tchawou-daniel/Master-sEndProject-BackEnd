@@ -8,7 +8,7 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.useGlobalInterceptors(new transform_repository_1.TransformInterceptor());
-    await app.listen(5000);
+    await app.listen(process.env.PORT || 5000);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

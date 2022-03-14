@@ -8,37 +8,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JwtStartegy = void 0;
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
+const jwks_rsa_1 = require("jwks-rsa");
+const dotenv = require("dotenv");
 const passport_jwt_1 = require("passport-jwt");
-const typeorm_1 = require("@nestjs/typeorm");
-const users_repository_1 = require("./users.repository");
+dotenv.config();
 let JwtStartegy = class JwtStartegy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy) {
-    constructor(usersRepository) {
+    constructor() {
         super({
-            secretOrKey: 'topSecret',
+            secretOrKeyProvider: (0, jwks_rsa_1.passportJwtSecret)({
+                cache: true,
+                rateLimit: true,
+                jwksRequestsPerMinute: 5,
+                jwksUri: `${process.env.AUTH0_ISSUER_BASE_URL}/.well-known/jwks.json`,
+            }),
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
+            issuer: `${process.env.AUTH0_ISSUER_BASE_URL}`,
+            algorithms: ['RS256'],
         });
-        this.usersRepository = usersRepository;
     }
-    async validate(payload) {
-        const { username } = payload;
-        const user = await this.usersRepository.findOne({ username });
-        if (!user) {
-            throw new common_1.UnauthorizedException();
+    async validate(payload, done) {
+        if (!payload) {
+            done(new common_1.UnauthorizedException(), false);
         }
-        return user;
+        return done(null, payload);
     }
 };
 JwtStartegy = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(users_repository_1.UsersRepository)),
-    __metadata("design:paramtypes", [users_repository_1.UsersRepository])
+    __metadata("design:paramtypes", [])
 ], JwtStartegy);
 exports.JwtStartegy = JwtStartegy;
 //# sourceMappingURL=jwt.startegy.js.map

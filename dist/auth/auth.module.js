@@ -10,8 +10,6 @@ exports.AuthModule = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const auth_controller_1 = require("./auth.controller");
-const users_repository_1 = require("./users.repository");
-const typeorm_1 = require("@nestjs/typeorm");
 const passport_1 = require("@nestjs/passport");
 const jwt_1 = require("@nestjs/jwt");
 const jwt_startegy_1 = require("./jwt.startegy");
@@ -21,15 +19,8 @@ AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
             passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
-            jwt_1.JwtModule.register({
-                secret: 'topSecret',
-                signOptions: {
-                    expiresIn: 3600,
-                },
-            }),
-            typeorm_1.TypeOrmModule.forFeature([users_repository_1.UsersRepository]),
         ],
-        providers: [auth_service_1.AuthService, jwt_startegy_1.JwtStartegy],
+        providers: [jwt_1.JwtService, auth_service_1.AuthService, jwt_startegy_1.JwtStartegy],
         controllers: [auth_controller_1.AuthController],
         exports: [jwt_startegy_1.JwtStartegy, passport_1.PassportModule],
     })
