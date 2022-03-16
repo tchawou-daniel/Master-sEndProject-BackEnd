@@ -8,7 +8,7 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.useGlobalInterceptors(new transform_repository_1.TransformInterceptor());
-    const port = process.env.;
+    const port = process.env.PORT;
     await app.listen(port);
 }
 bootstrap();
