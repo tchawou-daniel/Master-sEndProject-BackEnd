@@ -2,8 +2,9 @@ import {
   Body, Controller, Post, Req, UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+
 import { AuthService } from './auth.service';
+import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 
 @Controller('auth')
 export class AuthController {
