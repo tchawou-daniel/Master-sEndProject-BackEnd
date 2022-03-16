@@ -16,11 +16,17 @@ import {configValidationSchema} from "@api/config.schema";
           imports: [ConfigModule],
           inject: [ConfigService],
           useFactory: async (configService: ConfigService) => {
+              const isProduction = configService.get('STAGE') === 'prod';
+
               return  {
+                  ssh: isProduction,
+                  extra: {
+                      ssl: isProduction ? {rejectUnauthorized: false}: null,
+                  },
                   entities: [],
                   autoLoadEntities: true,
                   synchronize: true,
-                  type: 'mysql',
+                  type: 'postgres',
                   host: configService.get('DB_HOST'),
                   port: configService.get('DB_PORT'),
                   username: configService.get('DB_USERNAME'),
