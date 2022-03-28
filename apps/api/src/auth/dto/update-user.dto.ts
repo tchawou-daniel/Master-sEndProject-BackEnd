@@ -7,7 +7,7 @@ import {
     MinLength,
     IsDate, IsOptional
 } from 'class-validator';
-import {UserRole} from "../../../common/user";
+import {UserRole, WorkerIntegrationStatus} from "../../../common/user";
 import {Type} from "class-transformer";
 
 
@@ -27,6 +27,9 @@ export class UpdateUserDto {
 
     @IsEnum(UserRole)
     role: UserRole;
+
+    @IsEnum(WorkerIntegrationStatus)
+    workerIntegrationStatus?: WorkerIntegrationStatus;
 
     @MinLength(8)
     @MaxLength(50)

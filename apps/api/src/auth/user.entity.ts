@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import {UserRole} from "../../common/user";
+import {UserRole, WorkerIntegrationStatus} from "../../common/user";
 
 @Entity()
 export class User {
@@ -25,10 +25,17 @@ export class User {
   })
   role: UserRole;
 
-  @Column({default: ''})
+  @Column({
+    type: 'enum',
+    enum: WorkerIntegrationStatus,
+    default: WorkerIntegrationStatus.NO_STATUS,
+  })
+  workerIntegrationStatus: WorkerIntegrationStatus;
+
+  @Column({ default: null })
   bio: string;
 
-  @Column({default: ''})
+  @Column({ default: null })
   avatar: string;
 
   @Column({ type: 'timestamptz', default: null, nullable: true })
