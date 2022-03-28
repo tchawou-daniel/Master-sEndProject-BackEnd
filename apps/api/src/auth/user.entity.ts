@@ -1,6 +1,7 @@
-import { Column, Entity } from 'typeorm';
+import {Column, Entity, OneToMany} from 'typeorm';
 import {SEX, UserRole, WorkerIntegrationStatus} from "../../common/types/user";
 import {BaseEntity} from "@api/shared/entities/base.entity";
+import {UsersWorkForCompanies} from "@api/usersWorkForCompanies/usersWorkForCompanies.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -52,4 +53,9 @@ export class User extends BaseEntity {
   })
   sex: SEX;
 
+  @Column({ default: null })
+  salary: number;
+
+  @OneToMany(() => UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.user)
+  public usersWorkForCompanies!: UsersWorkForCompanies[];
 }

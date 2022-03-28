@@ -14,17 +14,22 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const auth_credentials_dto_1 = require("./dto/auth-credentials.dto");
-const auth_service_1 = require("./auth.service");
 const passport_1 = require("@nestjs/passport");
+const auth_service_1 = require("./auth.service");
+const auth_credentials_dto_1 = require("./dto/auth-credentials.dto");
+const common_2 = require("@nestjs/common");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
+        this.logger = new common_2.Logger('AuthController');
     }
     signUp(authCredentialsDto) {
+        this.logger.verbose(`User "${authCredentialsDto}"`);
+        console.log(authCredentialsDto);
         return this.authService.signUp(authCredentialsDto);
     }
     signIn(authCredentialsDto) {
+        this.logger.verbose(`User "${authCredentialsDto}"`);
         return this.authService.signIn(authCredentialsDto);
     }
     test(req) {

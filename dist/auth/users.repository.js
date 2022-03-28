@@ -7,22 +7,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersRepository = void 0;
-const typeorm_1 = require("typeorm");
-const user_entity_1 = require("./user.entity");
 const common_1 = require("@nestjs/common");
 const bcrypt = require("bcrypt");
+const typeorm_1 = require("typeorm");
+const user_entity_1 = require("./user.entity");
 let UsersRepository = class UsersRepository extends typeorm_1.Repository {
     async createUser(authCredentialsDto) {
-        const { username, password } = authCredentialsDto;
+        const { firstName, lastName, email, password } = authCredentialsDto;
+        let logger = new common_1.Logger('UsersRepository');
+        logger.verbose(`User "${authCredentialsDto}"`);
+        console.log(authCredentialsDto);
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
-        const user = this.create({ username, password: hashedPassword });
+        const user = this.create({ firstName, lastName, email, password: hashedPassword });
         try {
             await this.save(user);
         }
         catch (error) {
             if (error.code === '23505') {
-                throw new common_1.ConflictException('Username already exists');
+                throw new common_1.ConflictException('Email already exists');
             }
             else {
                 throw new common_1.InternalServerErrorException();

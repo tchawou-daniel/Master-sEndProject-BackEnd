@@ -1,9 +1,10 @@
-import {Column, Entity} from "typeorm";
+import {Column, Entity, OneToMany} from "typeorm";
 import {BaseEntity} from "@api/shared/entities/base.entity";
-import {CompanySector, CompanyStatus} from "../../common/types/company";
+import {CompanySector, CompanyStatus, Hiring} from "../../common/types/company";
+import {UsersWorkForCompanies} from "@api/usersWorkForCompanies/usersWorkForCompanies.entity";
 
 @Entity()
-export class CompanyEntity extends BaseEntity {
+export class Company extends BaseEntity {
     @Column()
     name: string;
 
@@ -14,6 +15,17 @@ export class CompanyEntity extends BaseEntity {
     })
     companyStatus?: CompanyStatus;
 
+    @Column()
+    country: string;
+
+    @Column()
+    town: string;
+
+    @Column()
+    street: string;
+
+    @Column()
+    zipCode: string;
 
     @Column({
         type: 'enum',
@@ -22,6 +34,16 @@ export class CompanyEntity extends BaseEntity {
     })
     companySector?: CompanySector;
 
+    @Column({
+        type: 'enum',
+        enum: Hiring,
+        default: Hiring.ONGOING,
+    })
+    hiringStatus: Hiring;
+
     @Column({ type: 'timestamptz', default: null, nullable: true })
     clearedAt: Date;
+
+    @OneToMany(() => UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.company)
+    public usersWorkForCompanies!: UsersWorkForCompanies[];
 }
