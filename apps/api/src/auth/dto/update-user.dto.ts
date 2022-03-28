@@ -7,7 +7,7 @@ import {
     MinLength,
     IsDate, IsOptional
 } from 'class-validator';
-import {UserRole, WorkerIntegrationStatus} from "../../../common/user";
+import {UserRole, WorkerIntegrationStatus} from "../../../common/types/user";
 import {Type} from "class-transformer";
 
 

@@ -1,5 +1,5 @@
 import {IsEnum, IsOptional, IsString} from "class-validator";
-import {UserRole, WorkerIntegrationStatus} from "../../../common/user";
+import {UserRole, WorkerIntegrationStatus} from "../../../common/types/user";
 
 export class GetUsersFliterDto {
     @IsOptional()

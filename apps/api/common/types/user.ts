@@ -8,7 +8,7 @@ export enum UserRole {
 }
 
 /* if the user is already assigned to a company or not */
-export enum UserStatus {
+export enum WorkerIntegrationStatus {
     NO_STATUS = 'NO_STATUS',
     ACTIF = 'ACTIF',
     INACTIF = 'INACTIF',

@@ -1,11 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import {UserRole, WorkerIntegrationStatus} from "../../common/user";
+import { Column, Entity } from 'typeorm';
+import {SEX, UserRole, WorkerIntegrationStatus} from "../../common/types/user";
+import {BaseEntity} from "@api/shared/entities/base.entity";
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn('uuid')
-  idUser: string;
-
+export class User extends BaseEntity {
   @Column({ nullable: false })
   firstName: string;
 
@@ -47,5 +45,11 @@ export class User {
   @Column({ type: 'timestamptz', default: null, nullable: true })
   lastConnection: Date;
 
+  @Column({
+    type: 'enum',
+    enum: SEX,
+    default: SEX.MALE,
+  })
+  sex: SEX;
 
 }
