@@ -14,3 +14,4 @@ export enum UserStatus {
     INACTIF = 'INACTIF',
     POTENTIAL = 'POTENTIAL',
 }
+

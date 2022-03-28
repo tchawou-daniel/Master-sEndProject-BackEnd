@@ -1,25 +1,29 @@
 import {
-  IsEmail,
+  IsEmail, IsEnum, IsOptional,
   IsString,
   Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
-
+import {UserRole} from "../../../common/user";
 
 export class AuthCredentialsDto {
   @IsString()
   @MinLength(4)
   @MaxLength(20)
-  readonly firstName: string;
+  firstName: string;
 
   @IsString()
   @MinLength(4)
   @MaxLength(20)
-  readonly lastName: string;
+  lastName: string;
 
   @IsEmail()
   email: string;
+
+  @IsEnum(UserRole)
+  @IsOptional()
+  role: UserRole;
 
   @IsString()
   @MinLength(4)

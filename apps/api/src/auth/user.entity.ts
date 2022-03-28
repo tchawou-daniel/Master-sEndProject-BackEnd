@@ -6,10 +6,10 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   idUser: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   firstName: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   lastName: string;
 
   @Column()
@@ -31,13 +31,13 @@ export class User {
   @Column({default: ''})
   avatar: string;
 
-  @Column({ type: 'timestamp', default: null, nullable: true })
+  @Column({ type: 'timestamptz', default: null, nullable: true })
   clearedAt: Date;
 
-  @Column({ type: 'timestamp', default: null, nullable: true })
+  @Column({ type: 'timestamptz', default: null, nullable: true })
   joinAt: Date;
 
-  @Column({ type: 'timestamp', default: null, nullable: true })
+  @Column({ type: 'timestamptz', default: null, nullable: true })
   lastConnection: Date;
 
 
