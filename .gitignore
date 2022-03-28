@@ -1,0 +1,30 @@
+# dependencies
+/node_modules
+/dist
+
+# testing
+/coveragegot
+
+.idea
+.vscode
+
+# dist
+/dist
+/tmp
+
+
+
+cypress/screenshots
+
+.yarnrc.yml
+
+
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+.env.stage.dev
+.env.stage.prod
