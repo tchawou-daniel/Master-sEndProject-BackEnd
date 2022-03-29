@@ -1,18 +1,15 @@
 import {
-    IsEmail,
     IsEnum,
     IsString,
-    Matches,
     MaxLength,
     MinLength,
-    IsDate, IsOptional
+    IsDate,
 } from 'class-validator';
 import {UserRole, WorkerIntegrationStatus} from "../../../common/types/user";
 import {Type} from "class-transformer";
-import {AuthCredentialsDto} from "@api/auth/dto/auth-credentials.dto";
 
 
-export class UpdateUserDto extends AuthCredentialsDto {
+export class UpdateUserDto {
     @IsString()
     @MinLength(4)
     @MaxLength(20)
