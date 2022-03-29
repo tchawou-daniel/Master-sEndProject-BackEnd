@@ -1,9 +1,8 @@
 import {IsEmail, IsString, Matches, MaxLength, MinLength} from 'class-validator';
-import {AuthCredentialsDto} from "@api/auth/dto/auth-credentials.dto";
 
-export class LoginUserDto extends AuthCredentialsDto {
+export class LoginUserDto {
     @IsEmail()
-    readonly email: string;
+    email: string;
 
     @IsString()
     @MinLength(4)

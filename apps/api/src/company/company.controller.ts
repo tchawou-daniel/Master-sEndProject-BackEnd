@@ -12,11 +12,11 @@ export class CompanyController {
     constructor(private companyService: CompanyService) {}
 
     @Get()
-    getCopany(
+    getCopanies(
         @Query() filterDto: GetCompaniesFilterDto,
         @GetUser() user: User,
     ): Promise<Company[]> {
-        return this.companyService.getCompany(filterDto, user);
+        return this.companyService.getCompanies(filterDto, user);
     }
 
 }

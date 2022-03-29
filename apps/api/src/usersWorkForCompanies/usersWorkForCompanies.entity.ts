@@ -12,7 +12,13 @@ export class UsersWorkForCompanies extends BaseEntity {
     public companyId!: number
 
     @Column()
-    public order!: number
+    public scoreCompany!: number
+
+    @Column()
+    public companyReviews!: string
+
+    @Column()
+    public workerReviews!: string
 
     @ManyToOne(() => User, (user) => user.usersWorkForCompanies)
     public user!: User
