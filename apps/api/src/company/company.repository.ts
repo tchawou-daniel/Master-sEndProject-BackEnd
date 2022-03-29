@@ -18,7 +18,7 @@ export class CompanyRepository extends Repository<Company>{
 
         if (search) {
             query.andWhere(
-                '(LOWER(company.title) LIKE LOWER(:search) OR LOWER(company.description) LIKE LOWER(:search))',
+                '(LOWER(company.name) LIKE LOWER(:search) OR LOWER(company.description) LIKE LOWER(:search))',
                 { search: `%${search}%` },
             );
         }

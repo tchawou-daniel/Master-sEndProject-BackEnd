@@ -1,5 +1,5 @@
 import {Column, Entity, OneToMany} from 'typeorm';
-import {SEX, UserRole, WorkerIntegrationStatus} from "../../common/types/user";
+import {Sex, UserRole, WorkerIntegrationStatus} from "../../common/types/user";
 import {BaseEntity} from "@api/shared/entities/base.entity";
 import {UsersWorkForCompanies} from "@api/usersWorkForCompanies/usersWorkForCompanies.entity";
 
@@ -48,10 +48,10 @@ export class User extends BaseEntity {
 
   @Column({
     type: 'enum',
-    enum: SEX,
-    default: SEX.MALE,
+    enum: Sex,
+    default: Sex.MALE,
   })
-  sex: SEX;
+  sex: Sex;
 
   @Column({ default: null })
   salary: number;

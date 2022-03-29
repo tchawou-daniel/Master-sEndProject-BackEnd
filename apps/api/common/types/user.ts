@@ -15,8 +15,8 @@ export enum WorkerIntegrationStatus {
     POTENTIAL = 'POTENTIAL',
 }
 
-export enum SEX {
-    MALE="MALE",
-    FEMALE="FEMALE"
+export enum Sex {
+    MALE = 'MALE',
+    FEMALE = 'FEMALE',
 }
 

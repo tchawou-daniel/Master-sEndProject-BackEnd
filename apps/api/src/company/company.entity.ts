@@ -27,6 +27,9 @@ export class Company extends BaseEntity {
     @Column()
     zipCode: string;
 
+    @Column()
+    description: string;
+
     @Column({
         type: 'enum',
         enum: CompanySector,
