@@ -4,8 +4,9 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 
 import { AuthService } from './auth.service';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import {Logger} from '@nestjs/common'
+import {CreateUserDto} from "@api/auth/dto/create-user.dto";
+import {LoginUserDto} from "@api/auth/dto/login-user.dto";
 
 @Controller('auth')
 export class AuthController {
@@ -13,19 +14,18 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/signup')
-  signUp(@Body() authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    this.logger.verbose(`User "${authCredentialsDto}"`)
-    console.log(authCredentialsDto)
+  signUp(@Body('user') createUserDto: CreateUserDto): Promise<void> {
+    this.logger.verbose(`User "${createUserDto}"`)
 
-    return this.authService.signUp(authCredentialsDto);
+    return this.authService.signUp(createUserDto);
   }
 
   @Post('/signin')
   signIn(
-    @Body() authCredentialsDto: AuthCredentialsDto,
+    @Body('user') loginUserDto: LoginUserDto,
   ): Promise<{ accessToken: string }> {
-    this.logger.verbose(`User "${authCredentialsDto}"`)
-    return this.authService.signIn(authCredentialsDto);
+    this.logger.verbose(`User "${loginUserDto}"`)
+    return this.authService.signIn(loginUserDto);
   }
 
   @Post('/test')

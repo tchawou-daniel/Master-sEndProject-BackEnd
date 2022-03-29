@@ -4,14 +4,13 @@ import {UserRole, WorkerIntegrationStatus} from "../../../common/types/user";
 export class GetUsersFliterDto {
     @IsOptional()
     @IsEnum(UserRole)
-    userRole?: UserRole;
+    readonly userRole?: UserRole;
 
     @IsOptional()
     @IsString()
-    search?: string;
+    readonly search?: string;
 
     @IsOptional()
     @IsEnum(WorkerIntegrationStatus)
-    workerIntegrationStatus?: WorkerIntegrationStatus;
-
+    readonly workerIntegrationStatus?: WorkerIntegrationStatus;
 }

@@ -9,9 +9,10 @@ import {
 } from 'class-validator';
 import {UserRole, WorkerIntegrationStatus} from "../../../common/types/user";
 import {Type} from "class-transformer";
+import {AuthCredentialsDto} from "@api/auth/dto/auth-credentials.dto";
 
 
-export class UpdateUserDto {
+export class UpdateUserDto extends AuthCredentialsDto {
     @IsString()
     @MinLength(4)
     @MaxLength(20)
@@ -22,39 +23,28 @@ export class UpdateUserDto {
     @MaxLength(20)
     readonly lastName: string;
 
-    @IsEmail()
-    email: string;
-
     @IsEnum(UserRole)
-    role: UserRole;
+    readonly role: UserRole;
 
     @IsEnum(WorkerIntegrationStatus)
-    workerIntegrationStatus?: WorkerIntegrationStatus;
+    readonly workerIntegrationStatus?: WorkerIntegrationStatus;
 
     @MinLength(8)
     @MaxLength(50)
-    bio: string;
+    readonly bio: string;
 
     @IsString()
-    avatar: string;
+    readonly avatar: string;
 
     @Type(() => Date)
     @IsDate()
-    clearedAt: Date;
+    readonly clearedAt: Date;
 
     @Type(() => Date)
     @IsDate()
-    joinAt: Date;
+    readonly joinAt: Date;
 
     @Type(() => Date)
     @IsDate()
-    lastConnection: Date;
-
-    @IsString()
-    @MinLength(4)
-    @MaxLength(20)
-    @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-        message: 'password is too weak',
-    })
-    password: string;
+    readonly lastConnection: Date;
 }

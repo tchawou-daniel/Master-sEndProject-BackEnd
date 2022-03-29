@@ -46,13 +46,6 @@ export class User extends BaseEntity {
   @Column({ type: 'timestamptz', default: null, nullable: true })
   lastConnection: Date;
 
-  @Column({
-    type: 'enum',
-    enum: Sex,
-    default: Sex.MALE,
-  })
-  sex: Sex;
-
   @Column({ default: null })
   salary: number;
 

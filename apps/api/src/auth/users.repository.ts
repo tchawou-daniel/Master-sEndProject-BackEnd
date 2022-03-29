@@ -7,15 +7,16 @@ import { EntityRepository, Repository } from 'typeorm';
 
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { User } from './user.entity';
+import {CreateUserDto} from "@api/auth/dto/create-user.dto";
 
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
-  async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    const {firstName, lastName, email, password} = authCredentialsDto;
+  async createUser(createUserDto: CreateUserDto): Promise<void> {
+    const {firstName, lastName, email, password} = createUserDto;
     let logger = new Logger('UsersRepository');
-    logger.verbose(`User "${authCredentialsDto}"`)
-    console.log(authCredentialsDto)
+    logger.verbose(`User "${CreateUserDto}"`)
+    console.log(createUserDto)
 
 
     // hash

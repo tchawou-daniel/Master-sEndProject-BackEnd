@@ -8,22 +8,18 @@ import {
 import {UserRole} from "../../../common/types/user";
 
 export class AuthCredentialsDto {
-  @IsString()
-  @MinLength(4)
-  @MaxLength(20)
-  firstName: string;
+  @IsOptional()
+  readonly firstName: string;
 
-  @IsString()
-  @MinLength(4)
-  @MaxLength(20)
-  lastName: string;
-
-  @IsEmail()
-  email: string;
+  @IsOptional()
+  readonly lastName: string;
 
   @IsEnum(UserRole)
   @IsOptional()
-  role: UserRole;
+  readonly role: UserRole;
+
+  @IsEmail()
+  readonly email: string;
 
   @IsString()
   @MinLength(4)
@@ -31,5 +27,5 @@ export class AuthCredentialsDto {
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message: 'password is too weak',
   })
-    password: string;
+  readonly password: string;
 }
