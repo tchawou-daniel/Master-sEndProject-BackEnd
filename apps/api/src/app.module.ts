@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CompanyModule } from './company/company.module';
 import { UsersWorkForCompaniesModule } from './usersWorkForCompanies/usersWorkForCompanies.module';
+import { EmploymentModule } from './employment/employment.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { UsersWorkForCompaniesModule } from './usersWorkForCompanies/usersWorkFo
     AuthModule,
     CompanyModule,
     UsersWorkForCompaniesModule,
+    EmploymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

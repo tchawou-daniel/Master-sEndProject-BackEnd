@@ -14,7 +14,7 @@ export class CompanyController {
     constructor(private companyService: CompanyService) {}
 
     @Get()
-    getCopanies(
+    getCompanies(
         @Query() filterDto: GetCompaniesFilterDto,
         @GetUser() user: User,
     ): Promise<Company[]> {
