@@ -49,10 +49,12 @@ export class Company extends BaseEntity {
     @Column({ type: 'timestamptz', default: null, nullable: true })
     clearedAt: Date;
 
-    // @ManyToOne((_type) => User, (user) => user.usersWorkForCompanies, { eager: false })
-    // @Exclude({ toPlainOnly: true })
-    // user: User;
+    @ManyToOne((_type) => User, (user) => user.company, { eager: false })
+    @Exclude({ toPlainOnly: true })
+    user: User;
 
     @OneToMany(() => UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.company)
     public usersWorkForCompanies!: UsersWorkForCompanies[];
+
+
 }

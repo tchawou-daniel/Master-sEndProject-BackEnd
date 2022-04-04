@@ -2,6 +2,7 @@ import {Column, Entity, OneToMany} from 'typeorm';
 import {Sex, UserRole, WorkerIntegrationStatus} from "../../common/types/user";
 import {BaseEntity} from "@api/shared/entities/base.entity";
 import {UsersWorkForCompanies} from "@api/usersWorkForCompanies/usersWorkForCompanies.entity";
+import {Company} from "@api/company/company.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -48,6 +49,9 @@ export class User extends BaseEntity {
 
   @Column({ default: null })
   salary: number;
+
+  @OneToMany((_type) => Company, (company) => company.user, { eager: true })
+  company: Company[];
 
   @OneToMany(() => UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.user)
   public usersWorkForCompanies!: UsersWorkForCompanies[];

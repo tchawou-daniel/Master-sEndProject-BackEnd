@@ -5,9 +5,9 @@ import {Hiring} from "../../../common/types/company";
 export class GetCompaniesFilterDto {
     @IsOptional()
     @IsEnum(Company)
-    hiringStatus?: Hiring;
+    readonly hiringStatus?: Hiring;
 
     @IsOptional()
     @IsString()
-    search?: string;
+    readonly search?: string;
 }

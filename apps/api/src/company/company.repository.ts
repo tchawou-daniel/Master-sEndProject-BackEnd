@@ -2,9 +2,8 @@ import {EntityRepository, Repository} from "typeorm";
 import {Company} from "@api/company/company.entity";
 import {GetCompaniesFilterDto} from "@api/company/dto/get-companies-filter.dto";
 import {User} from "@api/auth/user.entity";
-import {NotFoundException} from "@nestjs/common";
-import {InjectRepository} from "@nestjs/typeorm";
 import {CreateCompanyDto} from "@api/company/dto/create-company.dto";
+import {UserRole} from "../../common/types/user";
 
 @EntityRepository(Company)
 export class CompanyRepository extends Repository<Company>{
@@ -13,7 +12,8 @@ export class CompanyRepository extends Repository<Company>{
         const { hiringStatus, search } = filterDto;
 
         const query = this.createQueryBuilder('company');
-        query.where({ user });
+        ///query.where({user});
+        // query.andWhere('user.role = :userRole', {userRole: 'ADMIN' })
 
         if (hiringStatus) {
             query.andWhere('company.hiringStatus = :hiringStatus', { hiringStatus });
@@ -38,9 +38,10 @@ export class CompanyRepository extends Repository<Company>{
             town,
             street,
             zipCode,
+            description,
             companySector,
             hiringStatus,
-            clearedAt
+            clearedAt,
         } = createTaskDto;
 
         const company = this.create({
@@ -50,9 +51,11 @@ export class CompanyRepository extends Repository<Company>{
             town,
             street,
             zipCode,
+            description,
             companySector,
             hiringStatus,
-            clearedAt
+            clearedAt,
+            user,
         });
         await this.save(company);
         return company;

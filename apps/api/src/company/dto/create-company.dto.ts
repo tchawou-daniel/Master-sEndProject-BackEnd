@@ -3,32 +3,32 @@ import {CompanySector, CompanyStatus, Hiring} from "../../../common/types/compan
 
 export class CreateCompanyDto {
     @IsNotEmpty()
-    name: string;
+    readonly name: string;
 
     @IsOptional()
-    companyStatus: CompanyStatus;
+    readonly companyStatus: CompanyStatus;
 
     @IsNotEmpty()
-    country: string;
+    readonly country: string;
 
     @IsNotEmpty()
-    town: string;
+    readonly town: string;
 
     @IsNotEmpty()
-    street: string;
+    readonly street: string;
 
     @IsNotEmpty()
-    zipCode: string;
+    readonly zipCode: string;
 
     @IsNotEmpty()
-    description: string;
+    readonly description: string;
 
     @IsNotEmpty()
-    companySector: CompanySector;
+    readonly companySector: CompanySector;
 
-    @IsNotEmpty()
-    hiringStatus: Hiring;
+    @IsOptional()
+    readonly hiringStatus: Hiring;
 
-    @IsNotEmpty()
-    clearedAt: Date;
+    @IsOptional()
+    readonly clearedAt: Date;
 }
