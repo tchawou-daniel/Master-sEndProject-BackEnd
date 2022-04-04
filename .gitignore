@@ -1,6 +1,5 @@
 # dependencies
 /node_modules
-/dist
 
 # testing
 /coveragegot
@@ -9,7 +8,6 @@
 .vscode
 
 # dist
-/dist
 /tmp
 
 
