@@ -8,6 +8,7 @@
 .vscode
 
 # dist
+/dist
 /tmp
 
 
