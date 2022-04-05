@@ -3,6 +3,7 @@ import {Sex, UserRole, WorkerIntegrationStatus} from "../../common/types/user";
 import {BaseEntity} from "@api/shared/entities/base.entity";
 import {UsersWorkForCompanies} from "@api/usersWorkForCompanies/usersWorkForCompanies.entity";
 import {Company} from "@api/company/company.entity";
+import {Employment} from "@api/employment/employment.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -52,6 +53,9 @@ export class User extends BaseEntity {
 
   @OneToMany((_type) => Company, (company) => company.user, { eager: true })
   company: Company[];
+
+  @OneToMany((_type) => Employment, (employment) => employment.user, { eager: true })
+  employment: Employment[];
 
   @OneToMany(() => UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.user)
   public usersWorkForCompanies!: UsersWorkForCompanies[];
