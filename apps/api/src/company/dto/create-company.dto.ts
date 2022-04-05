@@ -5,7 +5,7 @@ import { CompanySector, CompanyStatus, Hiring } from '../../../common/types/comp
 
 export class CreateCompanyDto extends TestDto {
     @IsOptional()
-  readonly companyStatus: CompanyStatus;
+    readonly companyStatus: CompanyStatus;
 
     @IsNotEmpty()
     readonly country: string;

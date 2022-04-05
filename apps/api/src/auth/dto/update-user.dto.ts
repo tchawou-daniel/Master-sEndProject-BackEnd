@@ -13,7 +13,7 @@ export class UpdateUserDto {
     @IsString()
     @MinLength(4)
     @MaxLength(20)
-  readonly firstName: string;
+    readonly firstName: string;
 
     @IsString()
     @MinLength(4)

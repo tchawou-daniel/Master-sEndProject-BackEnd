@@ -1,14 +1,11 @@
 import { Employment } from '@api/employment/employment.entity';
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsOptional } from 'class-validator';
 
 import { Hiring } from '../../../common/types/Employment';
+import { FilterDto } from '@api/shared/dto/filter.dto';
 
-export class GetEmploymentsFilterDto {
+export class GetEmploymentsFilterDto extends FilterDto {
     @IsOptional()
     @IsEnum(Employment)
-  readonly hiringStatus?: Hiring;
-
-    @IsOptional()
-    @IsString()
-    readonly search?: string;
+    readonly hiringStatus?: Hiring;
 }

@@ -6,7 +6,7 @@ import { UserRole } from '../../../common/types/user';
 
 export class CreateUserDto {
     @IsOptional()
-  readonly firstName: string;
+    readonly firstName: string;
 
     @IsOptional()
     readonly lastName: string;

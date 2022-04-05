@@ -4,7 +4,7 @@ import {
 
 export class LoginUserDto {
     @IsEmail()
-  readonly email: string;
+    readonly email: string;
 
     @IsString()
     @MinLength(4)

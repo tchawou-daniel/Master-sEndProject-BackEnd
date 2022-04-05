@@ -4,7 +4,7 @@ import { EmploymentSector, Hiring } from '../../../common/types/Employment';
 
 export class CreateEmploymentDto {
     @IsNotEmpty()
-  readonly name: string;
+    readonly name: string;
 
     @IsNotEmpty()
     readonly description: string;
