@@ -141,7 +141,7 @@ We encoutered some problems  regarding the circleci of the front-end part such a
 - We resolved the issues with the front-end side
 - We fixed the errors of the circleci on the back-end side
 ```
-## - Monday, March 1st 2022 -
+## - Tuesday, March 1st 2022 -
 ### First 3h hours
 ```
 we worked on the database schema:
@@ -159,4 +159,25 @@ we looked at the documentation and some videos about auth0 to see if we will fin
 - We have created the security around the authentication. 
 ```
 
+## - Monday, March 14st 2022 -
+### First 7h hours
+```
+- we have configured the environment, access to the database on mysql
+- We tried to implement the authentication part with auth0 and we wasted a lot of time on it without success in the end
+```
 
+## - Tuesday, March 15st 2022 -
+### First 2h hours
+```
+- We finally found how to implement auth0 with nest but we choose to use Jwt Authentication for earn in time. 
+   And perhaps we will change our way to authenticate later in order to use Auth0.
+```
+
+### Second 5h hours
+```
+- We advanced with the database schema and architecture
+- We started to visualise on miro how the application will be in terms of interface
+- We change our database (mysql to postgres) because it's cheaper to deploy a database on postgres on heroku 
+than to deploy a mysql database.
+- we compared the prices and advantages of the free and paid plan in terms of the connection limit number, the storage capacity, the row limit number
+```
