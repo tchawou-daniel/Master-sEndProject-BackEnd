@@ -57,5 +57,6 @@ export class EmploymentRepository extends Repository<Employment> {
       hasManySubsidiaries,
     });
     await this.save(employment);
+    return employment;
   }
 }
