@@ -160,7 +160,7 @@ we looked at the documentation and some videos about auth0 to see if we will fin
 ```
 
 ## - Monday, March 14st 2022 -
-### First 7h hours
+### 7h hours
 ```
 - we have configured the environment, access to the database on mysql
 - We tried to implement the authentication part with auth0 and we wasted a lot of time on it without success in the end
@@ -181,3 +181,10 @@ we looked at the documentation and some videos about auth0 to see if we will fin
 than to deploy a mysql database.
 - we compared the prices and advantages of the free and paid plan in terms of the connection limit number, the storage capacity, the row limit number
 ```
+
+## - Monday,Tuesday, March 28, 29 2022 -
+###  14h hours
+```
+```
+
+
