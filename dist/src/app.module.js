@@ -17,6 +17,8 @@ const app_service_1 = require("./app.service");
 const company_module_1 = require("./company/company.module");
 const usersWorkForCompanies_module_1 = require("./usersWorkForCompanies/usersWorkForCompanies.module");
 const employment_module_1 = require("./employment/employment.module");
+const employment_period_module_1 = require("./employment-period/employment-period.module");
+const employment_days_module_1 = require("./employment-days/employment-days.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -52,6 +54,8 @@ AppModule = __decorate([
             company_module_1.CompanyModule,
             usersWorkForCompanies_module_1.UsersWorkForCompaniesModule,
             employment_module_1.EmploymentModule,
+            employment_period_module_1.EmploymentPeriodModule,
+            employment_days_module_1.EmploymentDaysModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

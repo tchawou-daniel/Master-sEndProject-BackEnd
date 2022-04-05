@@ -12,12 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCompanyDto = void 0;
 const class_validator_1 = require("class-validator");
 const company_1 = require("../../../common/types/company");
-class CreateCompanyDto {
+const test_dto_1 = require("../../shared/dto/test.dto");
+class CreateCompanyDto extends test_dto_1.TestDto {
 }
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateCompanyDto.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)

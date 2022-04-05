@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, OneToMany} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, Unique} from "typeorm";
 import {BaseEntity} from "@api/shared/entities/base.entity";
 import {CompanySector, CompanyStatus, Hiring} from "../../common/types/company";
 import {UsersWorkForCompanies} from "@api/usersWorkForCompanies/usersWorkForCompanies.entity";
@@ -6,6 +6,7 @@ import {User} from "@api/auth/user.entity";
 import {Exclude} from "class-transformer";
 
 @Entity()
+@Unique("index_name", ["name"])
 export class Company extends BaseEntity {
     @Column()
     name: string;
@@ -55,6 +56,4 @@ export class Company extends BaseEntity {
 
     @OneToMany(() => UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.company)
     public usersWorkForCompanies!: UsersWorkForCompanies[];
-
-
 }

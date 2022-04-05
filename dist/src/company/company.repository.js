@@ -9,10 +9,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyRepository = void 0;
 const typeorm_1 = require("typeorm");
 const company_entity_1 = require("./company.entity");
+const user_1 = require("../../common/types/user");
 let CompanyRepository = class CompanyRepository extends typeorm_1.Repository {
     async getCompanies(filterDto, user) {
         const { hiringStatus, search } = filterDto;
         const query = this.createQueryBuilder('company');
+        query.where({ user });
+        query.andWhere('user.role = :userRole', { userRole: user_1.UserRole.ADMIN });
         if (hiringStatus) {
             query.andWhere('company.hiringStatus = :hiringStatus', { hiringStatus });
         }
@@ -23,22 +26,24 @@ let CompanyRepository = class CompanyRepository extends typeorm_1.Repository {
         return companies;
     }
     async createCompany(createTaskDto, user) {
-        const { name, companyStatus, country, town, street, zipCode, description, companySector, hiringStatus, clearedAt, } = createTaskDto;
-        const company = this.create({
-            name,
-            companyStatus,
-            country,
-            town,
-            street,
-            zipCode,
-            description,
-            companySector,
-            hiringStatus,
-            clearedAt,
-            user,
-        });
-        await this.save(company);
-        return company;
+        if (user.role === user_1.UserRole.ADMIN || user.role === user_1.UserRole.PARTNER_COMPANY_EMPLOYEE_ADMIN) {
+            const { name, companyStatus, country, town, street, zipCode, description, companySector, hiringStatus, clearedAt, } = createTaskDto;
+            const company = this.create({
+                name,
+                companyStatus,
+                country,
+                town,
+                street,
+                zipCode,
+                description,
+                companySector,
+                hiringStatus,
+                clearedAt,
+                user,
+            });
+            await this.save(company);
+            return company;
+        }
     }
 };
 CompanyRepository = __decorate([

@@ -80,7 +80,8 @@ __decorate([
     __metadata("design:type", Array)
 ], Company.prototype, "usersWorkForCompanies", void 0);
 Company = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)(),
+    (0, typeorm_1.Unique)("index_name", ["name"])
 ], Company);
 exports.Company = Company;
 //# sourceMappingURL=company.entity.js.map
