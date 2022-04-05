@@ -7,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyRepository = void 0;
-const typeorm_1 = require("typeorm");
 const company_entity_1 = require("./company.entity");
+const typeorm_1 = require("typeorm");
 const user_1 = require("../../common/types/user");
 let CompanyRepository = class CompanyRepository extends typeorm_1.Repository {
     async getCompanies(filterDto, user) {
@@ -26,24 +26,22 @@ let CompanyRepository = class CompanyRepository extends typeorm_1.Repository {
         return companies;
     }
     async createCompany(createTaskDto, user) {
-        if (user.role === user_1.UserRole.ADMIN || user.role === user_1.UserRole.PARTNER_COMPANY_EMPLOYEE_ADMIN) {
-            const { name, companyStatus, country, town, street, zipCode, description, companySector, hiringStatus, clearedAt, } = createTaskDto;
-            const company = this.create({
-                name,
-                companyStatus,
-                country,
-                town,
-                street,
-                zipCode,
-                description,
-                companySector,
-                hiringStatus,
-                clearedAt,
-                user,
-            });
-            await this.save(company);
-            return company;
-        }
+        const { name, companyStatus, country, town, street, zipCode, description, companySector, hiringStatus, clearedAt, } = createTaskDto;
+        const company = this.create({
+            name,
+            companyStatus,
+            country,
+            town,
+            street,
+            zipCode,
+            description,
+            companySector,
+            hiringStatus,
+            clearedAt,
+            user,
+        });
+        await this.save(company);
+        return company;
     }
 };
 CompanyRepository = __decorate([

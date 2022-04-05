@@ -1,10 +1,11 @@
-import {IsEnum, IsOptional, IsString} from "class-validator";
-import {UserRole, WorkerIntegrationStatus} from "../../../common/types/user";
+import { IsEnum, IsOptional, IsString } from 'class-validator';
+
+import { UserRole, WorkerIntegrationStatus } from '../../../common/types/user';
 
 export class GetUsersFliterDto {
     @IsOptional()
     @IsEnum(UserRole)
-    readonly userRole?: UserRole;
+  readonly userRole?: UserRole;
 
     @IsOptional()
     @IsString()

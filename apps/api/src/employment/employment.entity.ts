@@ -1,36 +1,37 @@
-import {BaseEntity} from "@api/shared/entities/base.entity";
-import {IsOptional} from "class-validator";
-import {Column, Entity, ManyToOne} from "typeorm";
-import {EmploymentSector, Hiring} from "../../common/types/Employment";
-import {User} from "@api/auth/user.entity";
-import {Exclude} from "class-transformer";
+import { User } from '@api/auth/user.entity';
+import { BaseEntity } from '@api/shared/entities/base.entity';
+import { Exclude } from 'class-transformer';
+import { IsOptional } from 'class-validator';
+import { Column, Entity, ManyToOne } from 'typeorm';
+
+import { EmploymentSector, Hiring } from '../../common/types/Employment';
 
 @Entity()
 export class Employment extends BaseEntity {
     @Column()
-    name: string;
+      name: string;
 
     @Column()
-    description: string;
+      description: string;
 
     @Column()
-    country: string;
+      country: string;
 
     @Column()
-    town: string;
+      town: string;
 
     @Column()
-    street: string;
+      street: string;
 
     @Column()
-    zipCode: string;
+      zipCode: string;
 
     @Column({
-        type: 'enum',
-        enum: Hiring,
-        default: Hiring.ONGOING,
+      type: 'enum',
+      enum: Hiring,
+      default: Hiring.ONGOING,
     })
-    hiringStatus: Hiring;
+      hiringStatus: Hiring;
 
     @IsOptional()
     readonly clearedAt: Date;
@@ -47,7 +48,7 @@ export class Employment extends BaseEntity {
     @IsOptional()
     readonly employementSector: EmploymentSector;
 
-    @ManyToOne((_type) => User, (user) => user.employment, { eager: false })
+    @ManyToOne(_type => User, user => user.employment, { eager: false })
     @Exclude({ toPlainOnly: true })
-    user: User;
+      user: User;
 }

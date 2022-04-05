@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetCompaniesFilterDto = void 0;
-const class_validator_1 = require("class-validator");
 const company_entity_1 = require("../company.entity");
+const class_validator_1 = require("class-validator");
 const company_1 = require("../../../common/types/company");
 class GetCompaniesFilterDto {
 }

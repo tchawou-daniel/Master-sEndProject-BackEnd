@@ -1,4 +1,4 @@
-import { UserRole } from "../../../common/types/user";
+import { UserRole } from '../../../common/types/user';
 export declare class CreateUserDto {
     readonly firstName: string;
     readonly lastName: string;

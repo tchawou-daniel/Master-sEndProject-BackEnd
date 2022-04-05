@@ -2,11 +2,11 @@ import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'type
 
 export class BaseEntity {
     @PrimaryGeneratedColumn('uuid')
-    id?: string;
+      id?: string;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'LOCALTIMESTAMP' })
-    createdAt?: Date;
+      createdAt?: Date;
 
     @UpdateDateColumn({ type: 'timestamp', default: () => 'LOCALTIMESTAMP' })
-    updatedAt?: Date;
+      updatedAt?: Date;
 }

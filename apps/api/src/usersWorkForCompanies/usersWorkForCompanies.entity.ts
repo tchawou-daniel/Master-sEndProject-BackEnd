@@ -1,28 +1,30 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
-import {User} from "@api/auth/user.entity";
-import {Company} from "@api/company/company.entity";
-import {BaseEntity} from "@api/shared/entities/base.entity";
+import { User } from '@api/auth/user.entity';
+import { Company } from '@api/company/company.entity';
+import { BaseEntity } from '@api/shared/entities/base.entity';
+import {
+  Column, Entity, ManyToOne, PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class UsersWorkForCompanies extends BaseEntity {
     @Column()
-    public userId!: number
+  public userId!: number;
 
     @Column()
-    public companyId!: number
+    public companyId!: number;
 
     @Column()
-    public scoreCompany!: number
+    public scoreCompany!: number;
 
     @Column()
-    public companyReviews!: string
+    public companyReviews!: string;
 
     @Column()
-    public workerReviews!: string
+    public workerReviews!: string;
 
-    @ManyToOne(() => User, (user) => user.usersWorkForCompanies)
-    public user!: User
+    @ManyToOne(() => User, user => user.usersWorkForCompanies)
+    public user!: User;
 
-    @ManyToOne(() => Company, (category) => category.usersWorkForCompanies)
-    public company!: Company
+    @ManyToOne(() => Company, category => category.usersWorkForCompanies)
+    public company!: Company;
 }

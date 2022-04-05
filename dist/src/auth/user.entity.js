@@ -10,12 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
-const typeorm_1 = require("typeorm");
-const user_1 = require("../../common/types/user");
-const base_entity_1 = require("../shared/entities/base.entity");
-const usersWorkForCompanies_entity_1 = require("../usersWorkForCompanies/usersWorkForCompanies.entity");
 const company_entity_1 = require("../company/company.entity");
 const employment_entity_1 = require("../employment/employment.entity");
+const base_entity_1 = require("../shared/entities/base.entity");
+const usersWorkForCompanies_entity_1 = require("../usersWorkForCompanies/usersWorkForCompanies.entity");
+const typeorm_1 = require("typeorm");
+const user_1 = require("../../common/types/user");
 let User = class User extends base_entity_1.BaseEntity {
 };
 __decorate([
@@ -75,11 +75,11 @@ __decorate([
     __metadata("design:type", Number)
 ], User.prototype, "salary", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)((_type) => company_entity_1.Company, (company) => company.user, { eager: true }),
+    (0, typeorm_1.OneToMany)(_type => company_entity_1.Company, company => company.user, { eager: true }),
     __metadata("design:type", Array)
 ], User.prototype, "company", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)((_type) => employment_entity_1.Employment, (employment) => employment.user, { eager: true }),
+    (0, typeorm_1.OneToMany)(_type => employment_entity_1.Employment, employment => employment.user, { eager: true }),
     __metadata("design:type", Array)
 ], User.prototype, "employment", void 0);
 __decorate([

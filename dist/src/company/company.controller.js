@@ -13,13 +13,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyController = void 0;
-const common_1 = require("@nestjs/common");
-const passport_1 = require("@nestjs/passport");
 const get_user_decorator_1 = require("../auth/get-user.decorator");
 const user_entity_1 = require("../auth/user.entity");
-const get_companies_filter_dto_1 = require("./dto/get-companies-filter.dto");
 const company_service_1 = require("./company.service");
 const create_company_dto_1 = require("./dto/create-company.dto");
+const get_companies_filter_dto_1 = require("./dto/get-companies-filter.dto");
+const common_1 = require("@nestjs/common");
+const passport_1 = require("@nestjs/passport");
 let CompanyController = class CompanyController {
     constructor(companyService) {
         this.companyService = companyService;

@@ -1,12 +1,11 @@
-import {Get, Injectable} from "@nestjs/common";
-import {UsersWorkForCompaniesRepository} from "@api/usersWorkForCompanies/usersWorkForCompanies.repository";
+import { UsersWorkForCompaniesRepository } from '@api/usersWorkForCompanies/usersWorkForCompanies.repository';
+import { Get, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UsersWorkForCompaniesService {
-    constructor(
+  constructor(
         @InjectRepository(UsersWorkForCompaniesRepository)
         private usersWorkForCompaniesRepository: UsersWorkForCompaniesRepository,
-    ) {}
-
+  ) {}
 }

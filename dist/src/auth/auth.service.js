@@ -24,7 +24,7 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
     }
     async signUp(authCredentialsDto) {
-        let logger = new common_1.Logger('UsersRepository');
+        const logger = new common_1.Logger('UsersRepository');
         logger.verbose(`User "${authCredentialsDto}"`);
         console.log(authCredentialsDto);
         return this.usersRepository.createUser(authCredentialsDto);

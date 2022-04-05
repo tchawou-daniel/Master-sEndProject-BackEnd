@@ -1,6 +1,6 @@
-import { User } from "@api/auth/user.entity";
-import { Company } from "@api/company/company.entity";
-import { BaseEntity } from "@api/shared/entities/base.entity";
+import { User } from '@api/auth/user.entity';
+import { Company } from '@api/company/company.entity';
+import { BaseEntity } from '@api/shared/entities/base.entity';
 export declare class UsersWorkForCompanies extends BaseEntity {
     userId: number;
     companyId: number;

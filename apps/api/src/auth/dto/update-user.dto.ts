@@ -1,19 +1,19 @@
+import { Type } from 'class-transformer';
 import {
-    IsEnum,
-    IsString,
-    MaxLength,
-    MinLength,
-    IsDate,
+  IsEnum,
+  IsString,
+  MaxLength,
+  MinLength,
+  IsDate,
 } from 'class-validator';
-import {UserRole, WorkerIntegrationStatus} from "../../../common/types/user";
-import {Type} from "class-transformer";
 
+import { UserRole, WorkerIntegrationStatus } from '../../../common/types/user';
 
 export class UpdateUserDto {
     @IsString()
     @MinLength(4)
     @MaxLength(20)
-    readonly firstName: string;
+  readonly firstName: string;
 
     @IsString()
     @MinLength(4)

@@ -1,4 +1,4 @@
-import {Injectable, Logger, UnauthorizedException} from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
@@ -16,9 +16,9 @@ export class AuthService {
   ) {}
 
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    let logger = new Logger('UsersRepository');
-    logger.verbose(`User "${authCredentialsDto}"`)
-    console.log(authCredentialsDto)
+    const logger = new Logger('UsersRepository');
+    logger.verbose(`User "${authCredentialsDto}"`);
+    console.log(authCredentialsDto);
     return this.usersRepository.createUser(authCredentialsDto);
   }
 

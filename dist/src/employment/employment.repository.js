@@ -7,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmploymentRepository = void 0;
-const typeorm_1 = require("typeorm");
 const employment_entity_1 = require("./employment.entity");
+const typeorm_1 = require("typeorm");
 let EmploymentRepository = class EmploymentRepository extends typeorm_1.Repository {
     async getEmployements(filterDto, user) {
         const { hiringStatus, search } = filterDto;
@@ -39,7 +39,6 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
             hasManySubsidiaries,
         });
         await this.save(employment);
-        return;
     }
 };
 EmploymentRepository = __decorate([

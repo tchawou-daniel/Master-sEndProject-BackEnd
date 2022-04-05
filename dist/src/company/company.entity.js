@@ -10,12 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Company = void 0;
-const typeorm_1 = require("typeorm");
-const base_entity_1 = require("../shared/entities/base.entity");
-const company_1 = require("../../common/types/company");
-const usersWorkForCompanies_entity_1 = require("../usersWorkForCompanies/usersWorkForCompanies.entity");
 const user_entity_1 = require("../auth/user.entity");
+const base_entity_1 = require("../shared/entities/base.entity");
+const usersWorkForCompanies_entity_1 = require("../usersWorkForCompanies/usersWorkForCompanies.entity");
 const class_transformer_1 = require("class-transformer");
+const typeorm_1 = require("typeorm");
+const company_1 = require("../../common/types/company");
 let Company = class Company extends base_entity_1.BaseEntity {
 };
 __decorate([
@@ -71,7 +71,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Company.prototype, "clearedAt", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)((_type) => user_entity_1.User, (user) => user.company, { eager: false }),
+    (0, typeorm_1.ManyToOne)(_type => user_entity_1.User, user => user.company, { eager: false }),
     (0, class_transformer_1.Exclude)({ toPlainOnly: true }),
     __metadata("design:type", user_entity_1.User)
 ], Company.prototype, "user", void 0);
@@ -81,7 +81,7 @@ __decorate([
 ], Company.prototype, "usersWorkForCompanies", void 0);
 Company = __decorate([
     (0, typeorm_1.Entity)(),
-    (0, typeorm_1.Unique)("index_name", ["name"])
+    (0, typeorm_1.Unique)('index_name', ['name'])
 ], Company);
 exports.Company = Company;
 //# sourceMappingURL=company.entity.js.map

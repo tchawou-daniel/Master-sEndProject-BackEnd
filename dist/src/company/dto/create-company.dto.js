@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCompanyDto = void 0;
+const test_dto_1 = require("../../shared/dto/test.dto");
 const class_validator_1 = require("class-validator");
 const company_1 = require("../../../common/types/company");
-const test_dto_1 = require("../../shared/dto/test.dto");
 class CreateCompanyDto extends test_dto_1.TestDto {
 }
 __decorate([

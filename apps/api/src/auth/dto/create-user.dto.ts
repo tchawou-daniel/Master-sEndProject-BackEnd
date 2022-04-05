@@ -1,9 +1,12 @@
-import {IsEmail, IsEnum, IsOptional, IsString, Matches, MaxLength, MinLength} from 'class-validator';
-import {UserRole} from "../../../common/types/user";
+import {
+  IsEmail, IsEnum, IsOptional, IsString, Matches, MaxLength, MinLength,
+} from 'class-validator';
+
+import { UserRole } from '../../../common/types/user';
 
 export class CreateUserDto {
     @IsOptional()
-    readonly firstName: string;
+  readonly firstName: string;
 
     @IsOptional()
     readonly lastName: string;
@@ -19,7 +22,7 @@ export class CreateUserDto {
     @MinLength(4)
     @MaxLength(20)
     @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-        message: 'password is too weak',
+      message: 'password is too weak',
     })
     readonly password: string;
 }

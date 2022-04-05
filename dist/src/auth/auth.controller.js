@@ -13,16 +13,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
+const create_user_dto_1 = require("./dto/create-user.dto");
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 const auth_service_1 = require("./auth.service");
 const auth_credentials_dto_1 = require("./dto/auth-credentials.dto");
-const common_2 = require("@nestjs/common");
-const create_user_dto_1 = require("./dto/create-user.dto");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
-        this.logger = new common_2.Logger('AuthController');
+        this.logger = new common_1.Logger('AuthController');
     }
     signUp(createUserDto) {
         this.logger.verbose(`User "${createUserDto}"`);

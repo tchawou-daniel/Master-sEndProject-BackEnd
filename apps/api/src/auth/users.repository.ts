@@ -8,20 +8,23 @@ import { EntityRepository, Repository } from 'typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { User } from './user.entity';
 
-
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
   async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    const {firstName, lastName, email, password} = authCredentialsDto;
-    let logger = new Logger('UsersRepository');
-    logger.verbose(`User "${authCredentialsDto}"`)
-    console.log(authCredentialsDto)
+    const {
+      firstName, lastName, email, password,
+    } = authCredentialsDto;
+    const logger = new Logger('UsersRepository');
+    logger.verbose(`User "${authCredentialsDto}"`);
+    console.log(authCredentialsDto);
 
     // hash
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const user = this.create({firstName, lastName, email, password: hashedPassword});
+    const user = this.create({
+      firstName, lastName, email, password: hashedPassword,
+    });
     try {
       await this.save(user);
     } catch (error) {

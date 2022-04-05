@@ -1,58 +1,61 @@
-import {Column, Entity, ManyToOne, OneToMany, Unique} from "typeorm";
-import {BaseEntity} from "@api/shared/entities/base.entity";
-import {CompanySector, CompanyStatus, Hiring} from "../../common/types/company";
-import {UsersWorkForCompanies} from "@api/usersWorkForCompanies/usersWorkForCompanies.entity";
-import {User} from "@api/auth/user.entity";
-import {Exclude} from "class-transformer";
+import { User } from '@api/auth/user.entity';
+import { BaseEntity } from '@api/shared/entities/base.entity';
+import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
+import { Exclude } from 'class-transformer';
+import {
+  Column, Entity, ManyToOne, OneToMany, Unique,
+} from 'typeorm';
+
+import { CompanySector, CompanyStatus, Hiring } from '../../common/types/company';
 
 @Entity()
-@Unique("index_name", ["name"])
+@Unique('index_name', ['name'])
 export class Company extends BaseEntity {
     @Column()
-    name: string;
+      name: string;
 
     @Column({
-        type: 'enum',
-        enum: CompanyStatus,
-        default: CompanyStatus.ACTIVE,
+      type: 'enum',
+      enum: CompanyStatus,
+      default: CompanyStatus.ACTIVE,
     })
-    companyStatus?: CompanyStatus;
+      companyStatus?: CompanyStatus;
 
     @Column()
-    country: string;
+      country: string;
 
     @Column()
-    town: string;
+      town: string;
 
     @Column()
-    street: string;
+      street: string;
 
     @Column()
-    zipCode: string;
+      zipCode: string;
 
     @Column()
-    description: string;
+      description: string;
 
     @Column({
-        type: 'enum',
-        enum: CompanySector,
-        default: CompanySector.EAUDECHETS,
+      type: 'enum',
+      enum: CompanySector,
+      default: CompanySector.EAUDECHETS,
     })
-    companySector?: CompanySector;
+      companySector?: CompanySector;
 
     @Column({
-        type: 'enum',
-        enum: Hiring,
-        default: Hiring.ONGOING,
+      type: 'enum',
+      enum: Hiring,
+      default: Hiring.ONGOING,
     })
-    hiringStatus: Hiring;
+      hiringStatus: Hiring;
 
     @Column({ type: 'timestamptz', default: null, nullable: true })
-    clearedAt: Date;
+      clearedAt: Date;
 
-    @ManyToOne((_type) => User, (user) => user.company, { eager: false })
+    @ManyToOne(_type => User, user => user.company, { eager: false })
     @Exclude({ toPlainOnly: true })
-    user: User;
+      user: User;
 
     @OneToMany(() => UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.company)
     public usersWorkForCompanies!: UsersWorkForCompanies[];

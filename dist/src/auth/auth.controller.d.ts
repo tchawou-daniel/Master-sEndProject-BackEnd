@@ -1,6 +1,6 @@
+import { CreateUserDto } from '@api/auth/dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
-import { CreateUserDto } from "@api/auth/dto/create-user.dto";
 export declare class AuthController {
     private authService;
     private logger;

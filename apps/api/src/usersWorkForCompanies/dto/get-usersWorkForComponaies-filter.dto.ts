@@ -1,13 +1,14 @@
-import {IsEnum, IsOptional, IsString} from "class-validator";
-import {Company} from "@api/company/company.entity";
-import {Hiring} from "../../../common/types/company";
+import { Company } from '@api/company/company.entity';
+import { IsEnum, IsOptional, IsString } from 'class-validator';
 
-export class GetUsersWorkForComponaiesFilterDto{
+import { Hiring } from '../../../common/types/company';
+
+export class GetUsersWorkForComponaiesFilterDto {
     @IsOptional()
     @IsEnum(Company)
-    hiringStatus?: Hiring;
+      hiringStatus?: Hiring;
 
     @IsOptional()
     @IsString()
-    search?: string;
+      search?: string;
 }

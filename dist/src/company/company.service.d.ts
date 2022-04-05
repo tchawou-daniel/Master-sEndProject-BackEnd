@@ -1,8 +1,8 @@
-import { CompanyRepository } from "@api/company/company.repository";
-import { GetCompaniesFilterDto } from "@api/company/dto/get-companies-filter.dto";
-import { Company } from "@api/company/company.entity";
-import { User } from "@api/auth/user.entity";
-import { CreateCompanyDto } from "@api/company/dto/create-company.dto";
+import { User } from '@api/auth/user.entity';
+import { Company } from '@api/company/company.entity';
+import { CompanyRepository } from '@api/company/company.repository';
+import { CreateCompanyDto } from '@api/company/dto/create-company.dto';
+import { GetCompaniesFilterDto } from '@api/company/dto/get-companies-filter.dto';
 export declare class CompanyService {
     private companyRepository;
     constructor(companyRepository: CompanyRepository);

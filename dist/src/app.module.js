@@ -15,10 +15,10 @@ const typeorm_1 = require("@nestjs/typeorm");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const company_module_1 = require("./company/company.module");
-const usersWorkForCompanies_module_1 = require("./usersWorkForCompanies/usersWorkForCompanies.module");
-const employment_module_1 = require("./employment/employment.module");
-const employment_period_module_1 = require("./employment-period/employment-period.module");
 const employment_days_module_1 = require("./employment-days/employment-days.module");
+const employment_period_module_1 = require("./employment-period/employment-period.module");
+const employment_module_1 = require("./employment/employment.module");
+const usersWorkForCompanies_module_1 = require("./usersWorkForCompanies/usersWorkForCompanies.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([

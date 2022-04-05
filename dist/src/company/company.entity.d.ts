@@ -1,7 +1,7 @@
-import { BaseEntity } from "@api/shared/entities/base.entity";
-import { CompanySector, CompanyStatus, Hiring } from "../../common/types/company";
-import { UsersWorkForCompanies } from "@api/usersWorkForCompanies/usersWorkForCompanies.entity";
-import { User } from "@api/auth/user.entity";
+import { User } from '@api/auth/user.entity';
+import { BaseEntity } from '@api/shared/entities/base.entity';
+import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
+import { CompanySector, CompanyStatus, Hiring } from '../../common/types/company';
 export declare class Company extends BaseEntity {
     name: string;
     companyStatus?: CompanyStatus;

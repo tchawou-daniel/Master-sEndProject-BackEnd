@@ -1,5 +1,5 @@
-import {Controller, UseGuards} from "@nestjs/common";
-import {AuthGuard} from "@nestjs/passport";
+import { Controller, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('usersWorkForCompanies')
 @UseGuards(AuthGuard())

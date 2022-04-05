@@ -1,4 +1,4 @@
-import { UserRole, WorkerIntegrationStatus } from "../../../common/types/user";
+import { UserRole, WorkerIntegrationStatus } from '../../../common/types/user';
 export declare class UpdateUserDto {
     readonly firstName: string;
     readonly lastName: string;

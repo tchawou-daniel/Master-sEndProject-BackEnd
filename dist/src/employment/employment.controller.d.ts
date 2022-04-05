@@ -1,8 +1,8 @@
-import { EmploymentService } from "@api/employment/employment.service";
-import { User } from "@api/auth/user.entity";
-import { CreateEmploymentDto } from "@api/employment/dto/create-employment.dto";
-import { GetEmploymentsFilterDto } from "@api/employment/dto/get-employments-filter.dto";
-import { Employment } from "@api/employment/employment.entity";
+import { User } from '@api/auth/user.entity';
+import { CreateEmploymentDto } from '@api/employment/dto/create-employment.dto';
+import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-filter.dto';
+import { Employment } from '@api/employment/employment.entity';
+import { EmploymentService } from '@api/employment/employment.service';
 export declare class EmploymentController {
     private employmentService;
     private logger;

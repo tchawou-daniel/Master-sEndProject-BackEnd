@@ -13,12 +13,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyService = void 0;
+const user_entity_1 = require("../auth/user.entity");
+const company_repository_1 = require("./company.repository");
+const create_company_dto_1 = require("./dto/create-company.dto");
+const get_companies_filter_dto_1 = require("./dto/get-companies-filter.dto");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const company_repository_1 = require("./company.repository");
-const get_companies_filter_dto_1 = require("./dto/get-companies-filter.dto");
-const user_entity_1 = require("../auth/user.entity");
-const create_company_dto_1 = require("./dto/create-company.dto");
 let CompanyService = class CompanyService {
     constructor(companyRepository) {
         this.companyRepository = companyRepository;

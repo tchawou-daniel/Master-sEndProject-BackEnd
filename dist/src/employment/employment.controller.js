@@ -13,13 +13,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmploymentController = void 0;
-const common_1 = require("@nestjs/common");
-const passport_1 = require("@nestjs/passport");
-const employment_service_1 = require("./employment.service");
 const get_user_decorator_1 = require("../auth/get-user.decorator");
 const user_entity_1 = require("../auth/user.entity");
 const create_employment_dto_1 = require("./dto/create-employment.dto");
 const get_employments_filter_dto_1 = require("./dto/get-employments-filter.dto");
+const employment_service_1 = require("./employment.service");
+const common_1 = require("@nestjs/common");
+const passport_1 = require("@nestjs/passport");
 let EmploymentController = class EmploymentController {
     constructor(employmentService) {
         this.employmentService = employmentService;

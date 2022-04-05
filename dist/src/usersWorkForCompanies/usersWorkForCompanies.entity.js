@@ -10,10 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersWorkForCompanies = void 0;
-const typeorm_1 = require("typeorm");
 const user_entity_1 = require("../auth/user.entity");
 const company_entity_1 = require("../company/company.entity");
 const base_entity_1 = require("../shared/entities/base.entity");
+const typeorm_1 = require("typeorm");
 let UsersWorkForCompanies = class UsersWorkForCompanies extends base_entity_1.BaseEntity {
 };
 __decorate([
@@ -37,11 +37,11 @@ __decorate([
     __metadata("design:type", String)
 ], UsersWorkForCompanies.prototype, "workerReviews", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.usersWorkForCompanies),
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, user => user.usersWorkForCompanies),
     __metadata("design:type", user_entity_1.User)
 ], UsersWorkForCompanies.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => company_entity_1.Company, (category) => category.usersWorkForCompanies),
+    (0, typeorm_1.ManyToOne)(() => company_entity_1.Company, category => category.usersWorkForCompanies),
     __metadata("design:type", company_entity_1.Company)
 ], UsersWorkForCompanies.prototype, "company", void 0);
 UsersWorkForCompanies = __decorate([

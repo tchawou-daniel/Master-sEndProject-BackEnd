@@ -13,13 +13,15 @@ const typeorm_1 = require("typeorm");
 const user_entity_1 = require("./user.entity");
 let UsersRepository = class UsersRepository extends typeorm_1.Repository {
     async createUser(authCredentialsDto) {
-        const { firstName, lastName, email, password } = authCredentialsDto;
-        let logger = new common_1.Logger('UsersRepository');
+        const { firstName, lastName, email, password, } = authCredentialsDto;
+        const logger = new common_1.Logger('UsersRepository');
         logger.verbose(`User "${authCredentialsDto}"`);
         console.log(authCredentialsDto);
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
-        const user = this.create({ firstName, lastName, email, password: hashedPassword });
+        const user = this.create({
+            firstName, lastName, email, password: hashedPassword,
+        });
         try {
             await this.save(user);
         }

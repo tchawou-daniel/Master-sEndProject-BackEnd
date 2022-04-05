@@ -16,7 +16,6 @@ export enum WorkerIntegrationStatus {
 }
 
 export enum Sex {
-    MALE ,
-    FEMALE ,
+    MALE,
+    FEMALE,
 }
-

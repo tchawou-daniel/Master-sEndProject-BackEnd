@@ -1,8 +1,8 @@
-import { UserRole, WorkerIntegrationStatus } from "../../common/types/user";
-import { BaseEntity } from "@api/shared/entities/base.entity";
-import { UsersWorkForCompanies } from "@api/usersWorkForCompanies/usersWorkForCompanies.entity";
-import { Company } from "@api/company/company.entity";
-import { Employment } from "@api/employment/employment.entity";
+import { Company } from '@api/company/company.entity';
+import { Employment } from '@api/employment/employment.entity';
+import { BaseEntity } from '@api/shared/entities/base.entity';
+import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
+import { UserRole, WorkerIntegrationStatus } from '../../common/types/user';
 export declare class User extends BaseEntity {
     firstName: string;
     lastName: string;

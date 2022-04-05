@@ -1,10 +1,11 @@
-import {IsNotEmpty, IsOptional} from 'class-validator';
-import {CompanySector, CompanyStatus, Hiring} from "../../../common/types/company";
-import {TestDto} from "@api/shared/dto/test.dto";
+import { TestDto } from '@api/shared/dto/test.dto';
+import { IsNotEmpty, IsOptional } from 'class-validator';
+
+import { CompanySector, CompanyStatus, Hiring } from '../../../common/types/company';
 
 export class CreateCompanyDto extends TestDto {
     @IsOptional()
-    readonly companyStatus: CompanyStatus;
+  readonly companyStatus: CompanyStatus;
 
     @IsNotEmpty()
     readonly country: string;

@@ -7,10 +7,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CompanyModule } from './company/company.module';
-import { UsersWorkForCompaniesModule } from './usersWorkForCompanies/usersWorkForCompanies.module';
-import { EmploymentModule } from './employment/employment.module';
-import { EmploymentPeriodModule } from './employment-period/employment-period.module';
 import { EmploymentDaysModule } from './employment-days/employment-days.module';
+import { EmploymentPeriodModule } from './employment-period/employment-period.module';
+import { EmploymentModule } from './employment/employment.module';
+import { UsersWorkForCompaniesModule } from './usersWorkForCompanies/usersWorkForCompanies.module';
 
 @Module({
   imports: [

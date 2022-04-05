@@ -13,8 +13,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersWorkForCompaniesService = void 0;
-const common_1 = require("@nestjs/common");
 const usersWorkForCompanies_repository_1 = require("./usersWorkForCompanies.repository");
+const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 let UsersWorkForCompaniesService = class UsersWorkForCompaniesService {
     constructor(usersWorkForCompaniesRepository) {

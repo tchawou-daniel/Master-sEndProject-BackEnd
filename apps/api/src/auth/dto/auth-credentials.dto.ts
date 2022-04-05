@@ -5,7 +5,8 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import {UserRole} from "../../../common/types/user";
+
+import { UserRole } from '../../../common/types/user';
 
 export class AuthCredentialsDto {
   @IsOptional()

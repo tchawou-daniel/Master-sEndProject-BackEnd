@@ -7,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersWorkForCompaniesRepository = void 0;
-const typeorm_1 = require("typeorm");
 const usersWorkForCompanies_entity_1 = require("./usersWorkForCompanies.entity");
+const typeorm_1 = require("typeorm");
 let UsersWorkForCompaniesRepository = class UsersWorkForCompaniesRepository extends typeorm_1.Repository {
     async getUsersWorkForCompanies(filterDto, company) {
         const { hiringStatus, search } = filterDto;

@@ -1,4 +1,4 @@
-import { EmploymentSector, Hiring } from "../../../common/types/Employment";
+import { EmploymentSector, Hiring } from '../../../common/types/Employment';
 export declare class CreateEmploymentDto {
     readonly name: string;
     readonly description: string;
