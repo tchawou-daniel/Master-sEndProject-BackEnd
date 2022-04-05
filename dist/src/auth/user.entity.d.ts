@@ -2,6 +2,7 @@ import { UserRole, WorkerIntegrationStatus } from "../../common/types/user";
 import { BaseEntity } from "@api/shared/entities/base.entity";
 import { UsersWorkForCompanies } from "@api/usersWorkForCompanies/usersWorkForCompanies.entity";
 import { Company } from "@api/company/company.entity";
+import { Employment } from "@api/employment/employment.entity";
 export declare class User extends BaseEntity {
     firstName: string;
     lastName: string;
@@ -16,5 +17,6 @@ export declare class User extends BaseEntity {
     lastConnection: Date;
     salary: number;
     company: Company[];
+    employment: Employment[];
     usersWorkForCompanies: UsersWorkForCompanies[];
 }

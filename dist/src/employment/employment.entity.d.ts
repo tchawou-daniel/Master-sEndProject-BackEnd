@@ -1,5 +1,6 @@
 import { BaseEntity } from "@api/shared/entities/base.entity";
 import { EmploymentSector, Hiring } from "../../common/types/Employment";
+import { User } from "@api/auth/user.entity";
 export declare class Employment extends BaseEntity {
     name: string;
     description: string;
@@ -13,4 +14,5 @@ export declare class Employment extends BaseEntity {
     readonly companyName: Date;
     readonly hasManySubsidiaries: boolean;
     readonly employementSector: EmploymentSector;
+    user: User;
 }

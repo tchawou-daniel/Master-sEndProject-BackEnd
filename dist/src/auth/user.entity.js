@@ -15,6 +15,7 @@ const user_1 = require("../../common/types/user");
 const base_entity_1 = require("../shared/entities/base.entity");
 const usersWorkForCompanies_entity_1 = require("../usersWorkForCompanies/usersWorkForCompanies.entity");
 const company_entity_1 = require("../company/company.entity");
+const employment_entity_1 = require("../employment/employment.entity");
 let User = class User extends base_entity_1.BaseEntity {
 };
 __decorate([
@@ -77,6 +78,10 @@ __decorate([
     (0, typeorm_1.OneToMany)((_type) => company_entity_1.Company, (company) => company.user, { eager: true }),
     __metadata("design:type", Array)
 ], User.prototype, "company", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)((_type) => employment_entity_1.Employment, (employment) => employment.user, { eager: true }),
+    __metadata("design:type", Array)
+], User.prototype, "employment", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => usersWorkForCompanies_entity_1.UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.user),
     __metadata("design:type", Array)

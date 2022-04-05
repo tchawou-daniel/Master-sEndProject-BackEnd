@@ -14,8 +14,10 @@ const base_entity_1 = require("../shared/entities/base.entity");
 const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
 const Employment_1 = require("../../common/types/Employment");
-class Employment extends base_entity_1.BaseEntity {
-}
+const user_entity_1 = require("../auth/user.entity");
+const class_transformer_1 = require("class-transformer");
+let Employment = class Employment extends base_entity_1.BaseEntity {
+};
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
@@ -68,5 +70,13 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], Employment.prototype, "employementSector", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)((_type) => user_entity_1.User, (user) => user.employment, { eager: false }),
+    (0, class_transformer_1.Exclude)({ toPlainOnly: true }),
+    __metadata("design:type", user_entity_1.User)
+], Employment.prototype, "user", void 0);
+Employment = __decorate([
+    (0, typeorm_1.Entity)()
+], Employment);
 exports.Employment = Employment;
 //# sourceMappingURL=employment.entity.js.map
