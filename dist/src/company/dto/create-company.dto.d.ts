@@ -1,6 +1,6 @@
-import { TestDto } from '@api/shared/dto/test.dto';
 import { CompanySector, CompanyStatus, Hiring } from '../../../common/types/company';
-export declare class CreateCompanyDto extends TestDto {
+export declare class CreateCompanyDto {
+    readonly name: string;
     readonly companyStatus: CompanyStatus;
     readonly country: string;
     readonly town: string;

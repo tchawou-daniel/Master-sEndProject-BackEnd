@@ -13,17 +13,13 @@ exports.GetEmploymentsFilterDto = void 0;
 const employment_entity_1 = require("../employment.entity");
 const class_validator_1 = require("class-validator");
 const Employment_1 = require("../../../common/types/Employment");
-class GetEmploymentsFilterDto {
+const filter_dto_1 = require("../../shared/dto/filter.dto");
+class GetEmploymentsFilterDto extends filter_dto_1.FilterDto {
 }
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(employment_entity_1.Employment),
     __metadata("design:type", String)
 ], GetEmploymentsFilterDto.prototype, "hiringStatus", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], GetEmploymentsFilterDto.prototype, "search", void 0);
 exports.GetEmploymentsFilterDto = GetEmploymentsFilterDto;
 //# sourceMappingURL=get-employments-filter.dto.js.map

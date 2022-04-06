@@ -39,6 +39,7 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
             hasManySubsidiaries,
         });
         await this.save(employment);
+        return employment;
     }
 };
 EmploymentRepository = __decorate([

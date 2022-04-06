@@ -1,5 +1,5 @@
 import { Hiring } from '../../../common/types/Employment';
-export declare class GetEmploymentsFilterDto {
+import { FilterDto } from '@api/shared/dto/filter.dto';
+export declare class GetEmploymentsFilterDto extends FilterDto {
     readonly hiringStatus?: Hiring;
-    readonly search?: string;
 }

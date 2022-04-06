@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { EmploymentPeriodController } from './employment-period.controller';
-import { EmploymentPeriodService } from './employment-period.service';
+import { EmploymentPeriodController } from './employmentPeriod.controller';
+import { EmploymentPeriodService } from './employmentPeriod.service';
 
 @Module({
   controllers: [EmploymentPeriodController],

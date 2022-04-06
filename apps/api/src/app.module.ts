@@ -7,8 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CompanyModule } from './company/company.module';
-import { EmploymentDaysModule } from './employment-days/employment-days.module';
-import { EmploymentPeriodModule } from './employment-period/employment-period.module';
+import { EmploymentDaysModule } from './employmentDays/employmentDays.module';
+import { EmploymentPeriodModule } from './employmentPeriods/employmentPeriod.module';
 import { EmploymentModule } from './employment/employment.module';
 import { UsersWorkForCompaniesModule } from './usersWorkForCompanies/usersWorkForCompanies.module';
 

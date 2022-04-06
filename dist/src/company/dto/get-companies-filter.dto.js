@@ -13,17 +13,13 @@ exports.GetCompaniesFilterDto = void 0;
 const company_entity_1 = require("../company.entity");
 const class_validator_1 = require("class-validator");
 const company_1 = require("../../../common/types/company");
-class GetCompaniesFilterDto {
+const filter_dto_1 = require("../../shared/dto/filter.dto");
+class GetCompaniesFilterDto extends filter_dto_1.FilterDto {
 }
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(company_entity_1.Company),
     __metadata("design:type", String)
 ], GetCompaniesFilterDto.prototype, "hiringStatus", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], GetCompaniesFilterDto.prototype, "search", void 0);
 exports.GetCompaniesFilterDto = GetCompaniesFilterDto;
 //# sourceMappingURL=get-companies-filter.dto.js.map
