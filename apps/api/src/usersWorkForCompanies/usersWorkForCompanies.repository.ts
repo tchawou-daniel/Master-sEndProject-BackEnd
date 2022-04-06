@@ -6,7 +6,10 @@ import { EntityRepository, Repository } from 'typeorm';
 @EntityRepository(UsersWorkForCompanies)
 export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForCompanies> {
   // to change
-  async getUsersWorkForCompanies(filterDto: GetUsersWorkForComponaiesFilterDto, company: Company): Promise<UsersWorkForCompanies[]> {
+  async getUsersWorkForCompanies(
+    filterDto: GetUsersWorkForComponaiesFilterDto,
+    company: Company,
+  ): Promise<UsersWorkForCompanies[]> {
     const { hiringStatus, search } = filterDto;
 
     const query = this.createQueryBuilder('user');

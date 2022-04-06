@@ -20,7 +20,11 @@ export class WorkerDays extends BaseEntity {
   })
   weekday: WeekDays;
 
-  @ManyToOne((_type) => WorkerPeriods, (workerPeriods) => workerPeriods.workerDays, { eager: false })
+  @ManyToOne(
+    (_type) => WorkerPeriods,
+    (workerPeriods) => workerPeriods.workerDays,
+    { eager: false },
+  )
   @Exclude({ toPlainOnly: true })
   workerPeriods: WorkerPeriods;
 }

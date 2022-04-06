@@ -6,13 +6,18 @@ import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(Employment)
 export class EmploymentRepository extends Repository<Employment> {
-  async getEmployements(filterDto: GetEmploymentsFilterDto, user: User): Promise<Employment[]> {
+  async getEmployements(
+    filterDto: GetEmploymentsFilterDto,
+    user: User,
+  ): Promise<Employment[]> {
     const { hiringStatus, search } = filterDto;
 
     const query = this.createQueryBuilder('employment');
 
     if (hiringStatus) {
-      query.andWhere('employment.hiringStatus = :hiringStatus', { hiringStatus });
+      query.andWhere('employment.hiringStatus = :hiringStatus', {
+        hiringStatus,
+      });
     }
 
     if (search) {
@@ -26,7 +31,10 @@ export class EmploymentRepository extends Repository<Employment> {
     return employments;
   }
 
-  async createEmployment(createEmploymentDto:CreateEmploymentDto, user: User): Promise<Employment> {
+  async createEmployment(
+    createEmploymentDto: CreateEmploymentDto,
+    user: User,
+  ): Promise<Employment> {
     const {
       name,
       description,

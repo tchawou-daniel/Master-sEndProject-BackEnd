@@ -1,5 +1,7 @@
 import {
-  IsEmail, IsEnum, IsOptional,
+  IsEmail,
+  IsEnum,
+  IsOptional,
   IsString,
   Matches,
   MaxLength,

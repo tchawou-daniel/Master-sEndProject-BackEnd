@@ -9,7 +9,10 @@ import { UserRole } from '../../common/types/user';
 @EntityRepository(Company)
 export class CompanyRepository extends Repository<Company> {
   // according to the user access
-  async getCompanies(filterDto: GetCompaniesFilterDto, user: User): Promise<Company[]> {
+  async getCompanies(
+    filterDto: GetCompaniesFilterDto,
+    user: User,
+  ): Promise<Company[]> {
     const { hiringStatus, search } = filterDto;
     const query = this.createQueryBuilder('company');
     query.where({ user });
@@ -32,7 +35,10 @@ export class CompanyRepository extends Repository<Company> {
     return companies;
   }
 
-  async createCompany(createCompanyDto: CreateCompanyDto, user: User): Promise<Company> {
+  async createCompany(
+    createCompanyDto: CreateCompanyDto,
+    user: User,
+  ): Promise<Company> {
     // if(user.role === UserRole.ADMIN || user.role === UserRole.PARTNER_COMPANY_EMPLOYEE_ADMIN){
     const {
       name,

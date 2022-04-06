@@ -9,17 +9,26 @@ import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class EmploymentService {
   constructor(
-        @InjectRepository(EmploymentRepository)
-        private employementRepository: EmploymentRepository,
+    @InjectRepository(EmploymentRepository)
+    private employementRepository: EmploymentRepository,
   ) {}
 
-    @Get()
-  getEmployments(filterDto: GetEmploymentsFilterDto, user: User):Promise<Employment[]> {
+  @Get()
+  getEmployments(
+    filterDto: GetEmploymentsFilterDto,
+    user: User,
+  ): Promise<Employment[]> {
     return this.employementRepository.getEmployements(filterDto, user);
   }
 
-    @Post()
-    createEmployment(createEmploymentDto: CreateEmploymentDto, user: User): Promise<Employment> {
-      return this.employementRepository.createEmployment(createEmploymentDto, user);
-    }
+  @Post()
+  createEmployment(
+    createEmploymentDto: CreateEmploymentDto,
+    user: User,
+  ): Promise<Employment> {
+    return this.employementRepository.createEmployment(
+      createEmploymentDto,
+      user,
+    );
+  }
 }

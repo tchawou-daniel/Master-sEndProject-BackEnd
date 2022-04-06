@@ -1,22 +1,23 @@
-{
-    "env": {
-        "es2021": true,
-        "node": true
-       // "jest/globals": true
+module.exports = {
+    env: {
+        'es2021': true,
+        'node': true,
+        'jest/globals': true,
     },
-    "extends": [
-        "airbnb-base"
-        //"airbnb-typescript/base"
+    extends: [
+        'airbnb-base',
+        'airbnb-typescript/base',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:prettier/recommended',
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest"
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        ecmaVersion: 'latest',
+        project: 'tsconfig.json',
+        sourceType: 'module',
     },
-    "plugins": [
-        "@typescript-eslint"
-        //"jest"
-    ],
-    "settings": {
+    plugins: ['@typescript-eslint/eslint-plugin', 'jest'],
+    settings: {
         "import/resolver": {
             "node": {
                 "extensions": [
@@ -27,14 +28,15 @@
                 ]
             }
         },
-        "jest": {
+        jest: {
             "version": 27
         }
 
     },
-    "rules": {
+    ignorePatterns: ['.eslintrc.js'],
+    rules: {
         "max-len": ["error", { "code": 150 }],
-        "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
+        "arrow-parens": ["error", "always"],
         "no-restricted-syntax": "off",
         "class-methods-use-this": "off",
         "no-lonely-if": "off",
@@ -89,8 +91,9 @@
                 "tsx": "never"
             }
         ],
-        "@typescript-eslint/no-unused-vars": [2, { "argsIgnorePattern": "^_"}],
-        "no-await-in-loop": "warn",
-        "import/no-extraneous-dependencies": ["off"]
-    }
-}
+        '@typescript-eslint/no-unused-vars': [2, { "argsIgnorePattern": "^_"}],
+        'no-await-in-loop': 'warn',
+        'import/no-extraneous-dependencies': 'off'
+    },
+
+};

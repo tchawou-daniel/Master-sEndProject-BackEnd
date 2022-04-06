@@ -6,8 +6,8 @@ import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import { AuthModule } from '@api/auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([WorkerDays]),AuthModule],
+  imports: [TypeOrmModule.forFeature([WorkerDays]), AuthModule],
   controllers: [WorkerDaysController],
-  providers: [WorkerDaysService]
+  providers: [WorkerDaysService],
 })
 export class WorkerDaysModule {}

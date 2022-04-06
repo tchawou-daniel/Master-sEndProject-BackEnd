@@ -4,11 +4,11 @@ import { IsEnum, IsOptional, IsString } from 'class-validator';
 import { Hiring } from '../../../common/types/company';
 
 export class GetUsersWorkForComponaiesFilterDto {
-    @IsOptional()
-    @IsEnum(Company)
-      hiringStatus?: Hiring;
+  @IsOptional()
+  @IsEnum(Company)
+  hiringStatus?: Hiring;
 
-    @IsOptional()
-    @IsString()
-      search?: string;
+  @IsOptional()
+  @IsString()
+  search?: string;
 }

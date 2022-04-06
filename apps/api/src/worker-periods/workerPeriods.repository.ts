@@ -1,12 +1,14 @@
-import { Repository } from 'typeorm';
-import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
-import { CreateWorkerPeriodsFilterDto } from '@api/worker-periods/dto/create-worker-periods-filter.dto';
 import { User } from '@api/auth/user.entity';
+import { CreateWorkerPeriodsFilterDto } from '@api/worker-periods/dto/create-worker-periods-filter.dto';
 import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods.dto';
+import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
+import { Repository } from 'typeorm';
 
 export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
-
-  async getWorkerPeriods(filterDto: GetWorkerPeriodsFilterDto, user: User): Promise<WorkerPeriods[]> {
+  async getWorkerPeriods(
+    filterDto: GetWorkerPeriodsFilterDto,
+    user: User,
+  ): Promise<WorkerPeriods[]> {
     const { status, search } = filterDto;
 
     const query = this.createQueryBuilder('wokerPeriods');
@@ -27,8 +29,12 @@ export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
     return workerPeriods;
   }
 
-  async createWorkerPeriod(createWorkerPeriods: CreateWorkerPeriodsFilterDto, user: User): Promise<WorkerPeriods> {
-    const {effectiveAsOf, effectiveUntil, numberOfHours, workerPeriodStatus} = createWorkerPeriods;
+  async createWorkerPeriod(
+    createWorkerPeriods: CreateWorkerPeriodsFilterDto,
+    user: User,
+  ): Promise<WorkerPeriods> {
+    const { effectiveAsOf, effectiveUntil, numberOfHours, workerPeriodStatus } =
+      createWorkerPeriods;
     const workerPeriods = this.create({
       effectiveAsOf,
       effectiveUntil,

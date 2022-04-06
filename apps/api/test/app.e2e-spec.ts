@@ -16,8 +16,6 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
   // when we are going to write a test in oder to know if the data is connected, we have to remove fit
-  it('/ (GET)', () => request(app.getHttpServer())
-    .get('/')
-    .expect(200)
-    .expect('Hello World!'));
+  it('/ (GET)', () =>
+    request(app.getHttpServer()).get('/').expect(200).expect('Hello World!'));
 });

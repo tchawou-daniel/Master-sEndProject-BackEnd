@@ -1,10 +1,11 @@
-import { Get, Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { User } from '@api/auth/user.entity';
+import { CreateWorkerPeriodsFilterDto } from '@api/worker-periods/dto/create-worker-periods-filter.dto';
+import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods.dto';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 import { WorkerPeriodsRepository } from '@api/worker-periods/workerPeriods.repository';
-import { CreateWorkerPeriodsFilterDto } from '@api/worker-periods/dto/create-worker-periods-filter.dto';
-import { User } from '@api/auth/user.entity';
-import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods.dto';
+import { Get, Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
 import { WorkerPeriodStatus } from '../../common/types/workerPeriods';
 
 @Injectable()
@@ -15,16 +16,27 @@ export class WorkerPeriodsService {
   ) {}
 
   @Get()
-  getWorkerPeriods(filterDto: GetWorkerPeriodsFilterDto, user: User): Promise<WorkerPeriods[]> {
+  getWorkerPeriods(
+    filterDto: GetWorkerPeriodsFilterDto,
+    user: User,
+  ): Promise<WorkerPeriods[]> {
     return this.workerPeriodRepository.getWorkerPeriods(filterDto, user);
   }
 
-  createWorkerPeriod(createWorkerPeriodsDto: CreateWorkerPeriodsFilterDto, user: User): Promise<WorkerPeriods> {
-    return this.workerPeriodRepository.createWorkerPeriod(createWorkerPeriodsDto, user);
+  createWorkerPeriod(
+    createWorkerPeriodsDto: CreateWorkerPeriodsFilterDto,
+    user: User,
+  ): Promise<WorkerPeriods> {
+    return this.workerPeriodRepository.createWorkerPeriod(
+      createWorkerPeriodsDto,
+      user,
+    );
   }
 
   async getWorkerPeriodById(id: string, user: User): Promise<WorkerPeriods> {
-    const found = await this.workerPeriodRepository.findOne({ where: { id, user } });
+    const found = await this.workerPeriodRepository.findOne({
+      where: { id, user },
+    });
     if (!found) {
       throw new NotFoundException(`Worker Period with ID "${id}" not found`);
     }
@@ -35,7 +47,7 @@ export class WorkerPeriodsService {
     id: string,
     status: WorkerPeriodStatus,
     user: User,
-  ):Promise<WorkerPeriods> {
+  ): Promise<WorkerPeriods> {
     const workerPeriods = await this.getWorkerPeriodById(id, user);
     workerPeriods.workerPeriodStatus = status;
     await this.workerPeriodRepository.save(workerPeriods);

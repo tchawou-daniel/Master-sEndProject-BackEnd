@@ -8,44 +8,44 @@ import { BaseEntity } from '../SHARED/entities/base.entity';
 
 @Entity()
 export class Employment extends BaseEntity {
-    @Column()
-      name: string;
+  @Column()
+  name: string;
 
-    @Column()
-      description: string;
+  @Column()
+  description: string;
 
-    @Column()
-      country: string;
+  @Column()
+  country: string;
 
-    @Column()
-      town: string;
+  @Column()
+  town: string;
 
-    @Column()
-      street: string;
+  @Column()
+  street: string;
 
-    @Column()
-      zipCode: string;
+  @Column()
+  zipCode: string;
 
-    @Column({
-      type: 'enum',
-      enum: Hiring,
-      default: Hiring.ONGOING,
-    })
-      hiringStatus: Hiring;
+  @Column({
+    type: 'enum',
+    enum: Hiring,
+    default: Hiring.ONGOING,
+  })
+  hiringStatus: Hiring;
 
-    @Column({ type: 'timestamp', default: null, nullable: true })
-      clearedAt: Date;
+  @Column({ type: 'timestamp', default: null, nullable: true })
+  clearedAt: Date;
 
-    @Column({ type: 'timestamp', default: null, nullable: true })
-      companyName: Date;
+  @Column({ type: 'timestamp', default: null, nullable: true })
+  companyName: Date;
 
-    @Column({ default: false })
-      hasManySubsidiaries: boolean;
+  @Column({ default: false })
+  hasManySubsidiaries: boolean;
 
-    @IsOptional()
-      employementSector: EmploymentSector;
+  @IsOptional()
+  employementSector: EmploymentSector;
 
-    @ManyToOne(_type => User, user => user.employment, { eager: false })
-    @Exclude({ toPlainOnly: true })
-      createdBy: User;
+  @ManyToOne((_type) => User, (user) => user.employments, { eager: false })
+  @Exclude({ toPlainOnly: true })
+  createdBy: User;
 }

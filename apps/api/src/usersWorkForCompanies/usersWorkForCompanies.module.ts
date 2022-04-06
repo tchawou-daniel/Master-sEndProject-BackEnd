@@ -6,7 +6,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UsersWorkForCompaniesRepository]), AuthModule],
+  imports: [
+    TypeOrmModule.forFeature([UsersWorkForCompaniesRepository]),
+    AuthModule,
+  ],
   controllers: [UsersWorkForCompaniesController],
   providers: [UsersWorkForCompaniesService],
 })

@@ -5,7 +5,13 @@ import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-fil
 import { Employment } from '@api/employment/employment.entity';
 import { EmploymentService } from '@api/employment/employment.service';
 import {
-  Body, Controller, Get, Logger, Post, Query, UseGuards,
+  Body,
+  Controller,
+  Get,
+  Logger,
+  Post,
+  Query,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -16,24 +22,24 @@ export class EmploymentController {
 
   constructor(private employmentService: EmploymentService) {}
 
-    @Get()
+  @Get()
   getEmployment(
-        @Query() filterDto: GetEmploymentsFilterDto,
-        @GetUser() user: User,
+    @Query() filterDto: GetEmploymentsFilterDto,
+    @GetUser() user: User,
   ) {
     this.logger.verbose(
-      `"User ${user.firstName}" retrieving all employments Filters: ${JSON.stringify(
-        filterDto,
-      )}`,
+      `"User ${
+        user.firstName
+      }" retrieving all employments Filters: ${JSON.stringify(filterDto)}`,
     );
     return this.employmentService.getEmployments(filterDto, user);
   }
 
-    @Post()
-    createEmployment(
-        @Body() createEmploymentDto: CreateEmploymentDto,
-        @GetUser() user: User,
-    ): Promise<Employment> {
-      return this.employmentService.createEmployment(createEmploymentDto, user);
-    }
+  @Post()
+  createEmployment(
+    @Body() createEmploymentDto: CreateEmploymentDto,
+    @GetUser() user: User,
+  ): Promise<Employment> {
+    return this.employmentService.createEmployment(createEmploymentDto, user);
+  }
 }

@@ -3,5 +3,4 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('usersWorkForCompanies')
 @UseGuards(AuthGuard())
-export class UsersWorkForCompaniesController {
-}
+export class UsersWorkForCompaniesController {}
