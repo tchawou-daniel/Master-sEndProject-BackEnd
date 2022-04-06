@@ -33,20 +33,17 @@ export class Employment extends BaseEntity {
     })
       hiringStatus: Hiring;
 
-    @IsOptional()
-    readonly clearedAt: Date;
+    @Column({ type: 'timestamp', default: null, nullable: true })
+      clearedAt: Date;
+
+    @Column({ type: 'timestamp', default: null, nullable: true })
+      companyName: Date;
+
+    @Column({ default: false })
+      hasManySubsidiaries: boolean;
 
     @IsOptional()
-    readonly updateAt: Date;
-
-    @IsOptional()
-    readonly companyName: Date;
-
-    @IsOptional()
-    readonly hasManySubsidiaries: boolean;
-
-    @IsOptional()
-    readonly employementSector: EmploymentSector;
+      employementSector: EmploymentSector;
 
     @ManyToOne(_type => User, user => user.employment, { eager: false })
     @Exclude({ toPlainOnly: true })

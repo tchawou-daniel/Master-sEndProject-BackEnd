@@ -44,7 +44,7 @@ export class User extends BaseEntity {
     clearedAt: Date;
 
   @Column({ type: 'timestamptz', default: null, nullable: true })
-    joinAt: Date;
+    joinedAt: Date;
 
   @Column({ type: 'timestamptz', default: null, nullable: true })
     lastConnection: Date;
@@ -59,5 +59,5 @@ export class User extends BaseEntity {
     employment: Employment[];
 
   @OneToMany(() => UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.user)
-  public usersWorkForCompanies!: UsersWorkForCompanies[];
+    usersWorkForCompanies!: UsersWorkForCompanies[];
 }
