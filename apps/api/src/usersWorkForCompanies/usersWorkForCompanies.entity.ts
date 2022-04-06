@@ -1,9 +1,9 @@
 import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
-import { BaseEntity } from '@api/shared/entities/base.entity';
 import {
   Column, Entity, ManyToOne, PrimaryGeneratedColumn,
 } from 'typeorm';
+import { BaseEntity } from '../SHARED/entities/base.entity';
 
 @Entity()
 export class UsersWorkForCompanies extends BaseEntity {

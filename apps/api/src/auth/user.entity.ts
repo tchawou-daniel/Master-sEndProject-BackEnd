@@ -1,10 +1,11 @@
 import { Company } from '@api/company/company.entity';
 import { Employment } from '@api/employment/employment.entity';
-import { BaseEntity } from '@api/shared/entities/base.entity';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 import { Sex, UserRole, WorkerIntegrationStatus } from '../../common/types/user';
+import { BaseEntity } from '@api/SHARED/entities/base.entity';
+import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -55,8 +56,11 @@ export class User extends BaseEntity {
   @OneToMany(_type => Company, company => company.user, { eager: true })
     company: Company[];
 
-  @OneToMany(_type => Employment, employment => employment.user, { eager: true })
+  @OneToMany(_type => Employment, employment => employment.createBy, { eager: true })
     employment: Employment[];
+
+  @OneToMany(_type => WorkerPeriods, workerPeriods => workerPeriods.user, { eager: true })
+    workerPeriod: Company[];
 
   @OneToMany(() => UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.user)
     usersWorkForCompanies!: UsersWorkForCompanies[];

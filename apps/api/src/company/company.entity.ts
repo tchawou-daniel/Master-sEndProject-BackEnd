@@ -1,5 +1,5 @@
 import { User } from '@api/auth/user.entity';
-import { BaseEntity } from '@api/shared/entities/base.entity';
+import { BaseEntity } from '@api/../../SHARED/entities/base.entity';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { Exclude } from 'class-transformer';
 import {

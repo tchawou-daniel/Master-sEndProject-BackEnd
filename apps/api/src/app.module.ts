@@ -13,8 +13,6 @@ import { EmploymentModule } from './employment/employment.module';
 import { UsersWorkForCompaniesModule } from './usersWorkForCompanies/usersWorkForCompanies.module';
 import { WorkerPeriodsModule } from './worker-periods/workerPeriods.module';
 import { WorkerDaysModule } from './worker-days/workerDays.module';
-import { WokerPeriodsController } from './woker-periods/woker-periods.controller';
-import { WokerDaysController } from './woker-days/woker-days.controller';
 
 @Module({
   imports: [
@@ -54,7 +52,7 @@ import { WokerDaysController } from './woker-days/woker-days.controller';
     WorkerPeriodsModule,
     WorkerDaysModule,
   ],
-  controllers: [AppController, WokerPeriodsController, WokerDaysController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

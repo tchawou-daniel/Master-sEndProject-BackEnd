@@ -43,6 +43,7 @@
     "class-validator": "^0.13.2",
     "dotenv": "^16.0.0",
     "eslint-config-airbnb-typescript": "^16.1.2",
+    "eslint-import-resolver-typescript": "^2.7.1",
     "has-package-lock": "^2.0.0",
     "jest-watch-suspend": "^1.1.2",
     "mysql2": "^2.3.3",

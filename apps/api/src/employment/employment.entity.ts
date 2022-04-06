@@ -1,10 +1,10 @@
 import { User } from '@api/auth/user.entity';
-import { BaseEntity } from '@api/shared/entities/base.entity';
 import { Exclude } from 'class-transformer';
 import { IsOptional } from 'class-validator';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
-import { EmploymentSector, Hiring } from '../../common/types/Employment';
+import { EmploymentSector, Hiring } from '../../common/types/employment';
+import { BaseEntity } from '../SHARED/entities/base.entity';
 
 @Entity()
 export class Employment extends BaseEntity {
@@ -47,5 +47,5 @@ export class Employment extends BaseEntity {
 
     @ManyToOne(_type => User, user => user.employment, { eager: false })
     @Exclude({ toPlainOnly: true })
-      user: User;
+      createBy: User;
 }

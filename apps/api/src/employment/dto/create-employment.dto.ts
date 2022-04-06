@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
 
-import { EmploymentSector, Hiring } from '../../../common/types/Employment';
+import { EmploymentSector, Hiring } from '../../../common/types/employment';
 
 export class CreateEmploymentDto {
     @IsNotEmpty()

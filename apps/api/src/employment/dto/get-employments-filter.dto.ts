@@ -1,8 +1,8 @@
 import { Employment } from '@api/employment/employment.entity';
 import { IsEnum, IsOptional } from 'class-validator';
 
-import { Hiring } from '../../../common/types/Employment';
-import { FilterDto } from '@api/shared/dto/filter.dto';
+import { Hiring } from '../../../common/types/employment';
+import { FilterDto } from '@api/../../../SHARED/dto/filter.dto';
 
 export class GetEmploymentsFilterDto extends FilterDto {
     @IsOptional()
