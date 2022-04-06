@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { WorkerPeriodsController } from './worker-periods.controller';
-import { WorkerPeriodsService } from './worker-periods.service';
+import { WorkerPeriodsController } from './workerPeriods.controller';
+import { WorkerPeriodsService } from './workerPeriods.service';
 
 @Module({
   controllers: [WorkerPeriodsController],
