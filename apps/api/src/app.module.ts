@@ -12,7 +12,7 @@ import { EmploymentPeriodModule } from './employmentPeriods/employmentPeriod.mod
 import { EmploymentModule } from './employment/employment.module';
 import { UsersWorkForCompaniesModule } from './usersWorkForCompanies/usersWorkForCompanies.module';
 import { WorkerPeriodsModule } from './worker-periods/workerPeriods.module';
-import { WorkerDaysModule } from './worker-days/workerDays.module';
+import { WorkerDaysModule } from './workerDays/workerDays.module';
 
 @Module({
   imports: [

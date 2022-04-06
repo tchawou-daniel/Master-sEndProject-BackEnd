@@ -54,13 +54,13 @@ export class User extends BaseEntity {
     salary: number;
 
   @OneToMany(_type => Company, company => company.user, { eager: true })
-    company: Company[];
+    companies: Company[];
 
   @OneToMany(_type => Employment, employment => employment.createdBy, { eager: true })
-    employment: Employment[];
+    employments: Employment[];
 
   @OneToMany(_type => WorkerPeriods, workerPeriods => workerPeriods.user, { eager: true })
-    workerPeriod: Company[];
+    workerPeriods: WorkerPeriods[];
 
   @OneToMany(() => UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.user)
     usersWorkForCompanies!: UsersWorkForCompanies[];

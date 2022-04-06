@@ -27,12 +27,12 @@ export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
     return workerPeriods;
   }
 
-  async createWorkerPeriods(createWorkerPeriods: CreateWorkerPeriodsFilterDto, user: User): Promise<WorkerPeriods> {
-    const {effectiveAsOf, effectiveUntil, periodStatus, numberOfHours} = createWorkerPeriods;
+  async createWorkerPeriod(createWorkerPeriods: CreateWorkerPeriodsFilterDto, user: User): Promise<WorkerPeriods> {
+    const {effectiveAsOf, effectiveUntil, numberOfHours, workerPeriodStatus} = createWorkerPeriods;
     const workerPeriods = this.create({
       effectiveAsOf,
       effectiveUntil,
-      periodStatus,
+      workerPeriodStatus,
       numberOfHours,
     });
     await this.save(workerPeriods);

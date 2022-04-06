@@ -1,8 +1,9 @@
 import { BaseEntity } from '../SHARED/entities/base.entity';
-import { Column, ManyToOne } from 'typeorm';
-import { PeriodStatus } from '../../common/types/workerPeriods';
+import { Column, ManyToOne, OneToMany } from 'typeorm';
+import { WorkerPeriodStatus } from '../../common/types/workerPeriods';
 import { User } from '@api/auth/user.entity';
 import { Exclude } from 'class-transformer';
+import { WorkerDays } from '@api/workerDays/workerDays.entity';
 
 export class WorkerPeriods extends BaseEntity {
 
@@ -14,15 +15,19 @@ export class WorkerPeriods extends BaseEntity {
 
   @Column({
     type: 'enum',
-    enum: PeriodStatus,
-    default: PeriodStatus.AVAILABLE
+    enum: WorkerPeriodStatus,
+    default: WorkerPeriodStatus.AVAILABLE
   })
-    periodStatus: PeriodStatus;
+  workerPeriodStatus: WorkerPeriodStatus;
 
   @Column()
   numberOfHours: number;
 
-  @ManyToOne(_type => User, user => user.employment, { eager: false })
+  @ManyToOne(_type => User, user => user.workerPeriods, { eager: false })
   @Exclude({ toPlainOnly: true })
   user : User;
+
+  // bind with workerPeriods entity
+  @OneToMany((_type) => WorkerDays, (workerDays) => workerDays.workerPeriods, { eager: true })
+  workerDays: WorkerDays[];
 }

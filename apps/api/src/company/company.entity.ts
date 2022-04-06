@@ -1,5 +1,4 @@
 import { User } from '@api/auth/user.entity';
-import { BaseEntity } from '@api/../../SHARED/entities/base.entity';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { Exclude } from 'class-transformer';
 import {
@@ -7,6 +6,7 @@ import {
 } from 'typeorm';
 
 import { CompanySector, CompanyStatus, Hiring } from '../../common/types/company';
+import { BaseEntity } from '@api/SHARED/entities/base.entity';
 
 @Entity()
 @Unique('index_name', ['name'])
@@ -53,7 +53,7 @@ export class Company extends BaseEntity {
     @Column({ type: 'timestamptz', default: null, nullable: true })
       clearedAt: Date;
 
-    @ManyToOne(_type => User, user => user.company, { eager: false })
+    @ManyToOne(_type => User, user => user.companies, { eager: false })
     @Exclude({ toPlainOnly: true })
       user: User;
 
