@@ -32,7 +32,7 @@ export class CompanyRepository extends Repository<Company> {
     return companies;
   }
 
-  async createCompany(createTaskDto: CreateCompanyDto, user: User): Promise<Company> {
+  async createCompany(createCompanyDto: CreateCompanyDto, user: User): Promise<Company> {
     // if(user.role === UserRole.ADMIN || user.role === UserRole.PARTNER_COMPANY_EMPLOYEE_ADMIN){
     const {
       name,
@@ -45,7 +45,7 @@ export class CompanyRepository extends Repository<Company> {
       companySector,
       hiringStatus,
       clearedAt,
-    } = createTaskDto;
+    } = createCompanyDto;
 
     const company = this.create({
       name,

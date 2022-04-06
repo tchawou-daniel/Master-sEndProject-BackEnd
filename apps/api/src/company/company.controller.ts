@@ -31,9 +31,9 @@ export class CompanyController {
 
     @Post()
     createCompany(
-        @Body() createTaskDto: CreateCompanyDto,
+        @Body() createCompanyDto: CreateCompanyDto,
         @GetUser() user: User,
     ): Promise<Company> {
-      return this.companyService.createCompany(createTaskDto, user);
+      return this.companyService.createCompany(createCompanyDto, user);
     }
 }

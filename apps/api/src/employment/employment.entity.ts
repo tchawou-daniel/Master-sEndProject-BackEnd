@@ -47,5 +47,5 @@ export class Employment extends BaseEntity {
 
     @ManyToOne(_type => User, user => user.employment, { eager: false })
     @Exclude({ toPlainOnly: true })
-      createBy: User;
+      createdBy: User;
 }

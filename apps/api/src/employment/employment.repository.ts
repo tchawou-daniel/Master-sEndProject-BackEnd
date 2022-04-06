@@ -37,7 +37,8 @@ export class EmploymentRepository extends Repository<Employment> {
       employementSector,
       hiringStatus,
       clearedAt,
-      updateAt,
+      updatedAt,
+      createdAt,
       companyName,
       hasManySubsidiaries,
     } = createEmploymentDto;
@@ -52,7 +53,8 @@ export class EmploymentRepository extends Repository<Employment> {
       employementSector,
       hiringStatus,
       clearedAt,
-      updateAt,
+      updatedAt,
+      createdAt,
       companyName,
       hasManySubsidiaries,
     });

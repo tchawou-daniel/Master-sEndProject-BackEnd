@@ -1,6 +1,7 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 
 import { EmploymentSector, Hiring } from '../../../common/types/employment';
+import { IsNull } from 'typeorm';
 
 export class CreateEmploymentDto {
     @IsNotEmpty()
@@ -31,7 +32,10 @@ export class CreateEmploymentDto {
     readonly clearedAt: Date;
 
     @IsOptional()
-    readonly updateAt: Date;
+    readonly updatedAt: Date;
+
+    @IsOptional()
+    readonly createdAt: Date;
 
     @IsOptional()
     readonly companyName: Date;
