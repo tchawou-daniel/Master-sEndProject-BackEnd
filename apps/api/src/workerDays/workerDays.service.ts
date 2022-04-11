@@ -1,5 +1,5 @@
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
-import { WorkerDaysDto } from '@api/workerDays/dto/workerDays.dto';
+import { WorkerDaysDto } from '@api/workerDays/dto/worker-days.dto';
 import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import { WorkerDaysRepository } from '@api/workerDays/workerDays.repository';
 import { Get, Injectable, NotFoundException } from '@nestjs/common';
