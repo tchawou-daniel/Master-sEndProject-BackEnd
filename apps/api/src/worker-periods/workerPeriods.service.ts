@@ -55,11 +55,10 @@ export class WorkerPeriodsService {
     return workerPeriods;
   }
 
-  // we have firstly to delete date attach to this before and if we don't have date attach we can delete without problem
-  // async deleteWorkerPeriods(id: string, user: User): Promise<void> {
-  //   const result = await this.workerPeriodRepository.delete({id, user});
-  //   if(result.affected === 0) {
-  //     throw new NotFoundException(`Worker Periods with ID "${id}" not found`);
-  //   }
-  // }
+  async deleteWorkerPeriods(id: string, user: User): Promise<void> {
+    const result = await this.workerPeriodRepository.delete({ id, user });
+    if (result.affected === 0) {
+      throw new NotFoundException(`Worker Periods with ID "${id}" not found`);
+    }
+  }
 }
