@@ -7,3 +7,8 @@ export enum WeekDays {
   SATURDAY = 'SATURDAY',
   SUNDAY = 'SUNDAY',
 }
+
+export enum WorkerDayStatus {
+  AVAILABLE = 'AVAILABLE',
+  OCCUPIED = 'OCCUPIED',
+}

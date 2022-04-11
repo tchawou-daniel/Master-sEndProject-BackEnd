@@ -2,8 +2,9 @@ import { User } from '@api/auth/user.entity';
 import { CreateWorkerPeriodsFilterDto } from '@api/worker-periods/dto/create-worker-periods-filter.dto';
 import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods.dto';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
-import { Repository } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
 
+@EntityRepository(WorkerPeriods)
 export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
   async getWorkerPeriods(
     filterDto: GetWorkerPeriodsFilterDto,

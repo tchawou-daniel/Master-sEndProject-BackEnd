@@ -1,9 +1,11 @@
 import { BaseEntity } from '@api/SHARED/entities/base.entity';
-import { WeekDays } from '../../common/types/workerDays';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
-import { Column, IsNull, ManyToOne } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
+import { WeekDays, WorkerDayStatus } from '../../common/types/workerDays';
+
+@Entity()
 export class WorkerDays extends BaseEntity {
   @Column({ type: 'int', nullable: false })
   startTime: number;
@@ -12,7 +14,14 @@ export class WorkerDays extends BaseEntity {
   endTime: number;
 
   @Column({ type: 'int', nullable: false })
-  nbHours: number;
+  numberOfHours: number;
+
+  @Column({
+    type: 'enum',
+    enum: WorkerDayStatus,
+    default: WorkerDayStatus.AVAILABLE,
+  })
+  workerDayStatus: WorkerDayStatus;
 
   @Column({
     type: 'enum',

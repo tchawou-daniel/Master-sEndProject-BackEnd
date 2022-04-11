@@ -1,24 +1,15 @@
 module.exports = {
-  moduleFileExtensions: [
-    'js',
-    'json',
-    'ts',
-  ],
-  rootDir: "apps",
-  testRegex: ".*\\.spec\\.ts$",
+  moduleFileExtensions: ['js', 'json', 'ts'],
+  rootDir: 'apps',
+  testRegex: '.*\\.spec\\.ts$',
   transform: {
-    "^.+\\.(t|j)s$": "ts-jest"
+    '^.+\\.(t|j)s$': 'ts-jest',
   },
-  collectCoverageFrom: [
-    "**/*.(t|j)s"
-  ],
+  collectCoverageFrom: ['**/*.(t|j)s'],
   coverageReporters: ['text', 'json'],
   testEnvironment: 'node',
-  coverageDirectory: "../coverage",
-  testRegex: [
-    '.e2e-spec.ts$',
-    '.test.ts$',
-  ],
+  coverageDirectory: '../coverage',
+  // testRegex: ['.e2e-spec.ts$', '.test.ts$'],
   testTimeout: 20000,
   watchPlugins: [
     [
@@ -28,22 +19,23 @@ module.exports = {
       },
     ],
   ],
-  transform: {
+  /*   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
   watchPlugins: [
     // default
-    "jest-watch-suspend",
+    'jest-watch-suspend',
     // configure
     [
-      "jest-watch-suspend", {
-      // override key press
-      "key": "s",
-      // override prompt
-      "prompt": "suspend watch mode",
-      // starts in suspend mode
-      "suspend-on-start": true
-    }
-    ]
-  ]
+      'jest-watch-suspend',
+      {
+        // override key press
+        key: 's',
+        // override prompt
+        prompt: 'suspend watch mode',
+        // starts in suspend mode
+        'suspend-on-start': true,
+      },
+    ],
+  ], */
 };

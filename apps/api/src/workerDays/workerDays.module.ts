@@ -1,12 +1,13 @@
+import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
+import { WorkerDaysRepository } from '@api/workerDays/workerDays.repository';
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { WorkerDaysController } from './workerDays.controller';
 import { WorkerDaysService } from './workerDays.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { WorkerDays } from '@api/workerDays/workerDays.entity';
-import { AuthModule } from '@api/auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([WorkerDays]), AuthModule],
+  imports: [TypeOrmModule.forFeature([WorkerDaysRepository]), WorkerPeriods],
   controllers: [WorkerDaysController],
   providers: [WorkerDaysService],
 })
