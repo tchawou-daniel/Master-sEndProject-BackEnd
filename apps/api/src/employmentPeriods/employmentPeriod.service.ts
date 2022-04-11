@@ -6,6 +6,7 @@ import { Get, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { EmploymentPeriodStatus } from '../../common/types/EmploymentPeriods';
+import { CreateEmploymentPeriodsFilterDto } from '@api/employmentPeriods/dto/employment-periods.dto';
 
 @Injectable()
 export class EmploymentPeriodService {
@@ -26,7 +27,7 @@ export class EmploymentPeriodService {
   }
 
   createEmploymentPeriod(
-    createEmploymentPeriodsDto: CreateEmploymentPeriodsFilterDto,
+    createEmploymentPeriodsDto: EmploymentPeriodsFilterDto,
     user: User,
   ): Promise<EmploymentPeriods> {
     return this.employmentPeriodsRepository.createEmploymentPeriod(

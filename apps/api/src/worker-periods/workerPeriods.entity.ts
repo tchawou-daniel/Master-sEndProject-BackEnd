@@ -1,5 +1,6 @@
 import { User } from '@api/auth/user.entity';
-import { EmploymentDays } from '@api/workerDays/workerDays.entity';
+import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
+import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import { Exclude } from 'class-transformer';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
@@ -29,7 +30,7 @@ export class WorkerPeriods extends BaseEntity {
   user: User;
 
   // bind with workerPeriods entity
-  @OneToMany((_type) => EmploymentDays, (workerDays) => workerDays.workerPeriods, {
+  @OneToMany((_type) => WorkerDays, (workerDays) => workerDays.workerPeriods, {
     eager: true,
   })
   workerDays: EmploymentDays[];
