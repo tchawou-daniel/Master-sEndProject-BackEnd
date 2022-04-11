@@ -1,8 +1,7 @@
 import { GetWorkerPeriods } from '@api/worker-periods/get-workerPeriods.decorator';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
-import { CreateWorkerDaysDto } from '@api/workerDays/dto/create-worker-days.dto';
-import { GetWorkerDaysFilterDto } from '@api/workerDays/dto/get-workerDays-filter.dto';
 import { UpdateWorkerDaysStatusDto } from '@api/workerDays/dto/update-workerDays-status.dto';
+import { WorkerDaysDto } from '@api/workerDays/dto/workerDays.dto';
 import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import { WorkerDaysService } from '@api/workerDays/workerDays.service';
 import {
@@ -15,9 +14,12 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('workerDays')
+@UseGuards(AuthGuard())
 export class WorkerDaysController {
   private logger = new Logger('WorkerDaysController');
 
@@ -25,11 +27,11 @@ export class WorkerDaysController {
 
   @Get()
   getWorkerDays(
-    @Query() filterDto: GetWorkerDaysFilterDto,
+    @Query() filterDto: WorkerDaysDto,
     @GetWorkerPeriods() workerPeriods: WorkerPeriods,
   ): Promise<WorkerDays[]> {
     this.logger.verbose(
-      `"User ${
+      `"Worker Day ${
         workerPeriods.workerPeriodStatus
       }" retrieving all worker days Filters: ${JSON.stringify(filterDto)}`,
     );
@@ -46,7 +48,7 @@ export class WorkerDaysController {
 
   @Post()
   createWorkerPeriod(
-    @Body() createWorkerDayDto: CreateWorkerDaysDto,
+    @Body() createWorkerDayDto: WorkerDaysDto,
     @GetWorkerPeriods() workerPeriods: WorkerPeriods,
   ): Promise<WorkerDays> {
     return this.workerDaysService.createWorkerDay(
@@ -67,9 +69,26 @@ export class WorkerDaysController {
   updateWorkerDayStatus(
     @Param('id') id: string,
     @GetWorkerPeriods() workerPeriods: WorkerPeriods,
-    @Body() updateWorkerkStatusDto: UpdateWorkerDaysStatusDto,
+    @Body() updateWorkerkDayStatusDto: UpdateWorkerDaysStatusDto,
   ): Promise<WorkerDays> {
-    const { status } = updateWorkerkStatusDto;
-    return this.workerDaysService.updateWorkerDaysStatus(id, status, workerPeriods);
+    const { status } = updateWorkerkDayStatusDto;
+    return this.workerDaysService.updateWorkerDaysStatus(
+      id,
+      status,
+      workerPeriods,
+    );
+  }
+
+  @Patch('/:id')
+  updateWorkerDay(
+    @Param('id') id: string,
+    @GetWorkerPeriods() workerPeriods: WorkerPeriods,
+    @Body() updateWorkerkDays: WorkerDaysDto,
+  ): Promise<WorkerDays> {
+    return this.workerDaysService.updateWorkerDay(
+      id,
+      updateWorkerkDays,
+      workerPeriods,
+    );
   }
 }

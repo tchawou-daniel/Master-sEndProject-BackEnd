@@ -1,17 +1,15 @@
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
-import { CreateWorkerDaysDto } from '@api/workerDays/dto/create-worker-days.dto';
-import { GetWorkerDaysFilterDto } from '@api/workerDays/dto/get-workerDays-filter.dto';
+import { WorkerDaysDto } from '@api/workerDays/dto/workerDays.dto';
 import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(WorkerDays)
 export class WorkerDaysRepository extends Repository<WorkerDays> {
   async getWorkerDays(
-    filterDto: GetWorkerDaysFilterDto,
+    filterDto: WorkerDaysDto,
     workerPeriod: WorkerPeriods,
   ): Promise<WorkerDays[]> {
-    const { numberOfHours, startTime, endTime, weekday, workerDayStatus } =
-      filterDto;
+    const { numberOfHours, startTime, endTime, weekday, status } = filterDto;
 
     const query = this.createQueryBuilder('workerDays');
     query.where({ workerPeriod });
@@ -35,9 +33,9 @@ export class WorkerDaysRepository extends Repository<WorkerDays> {
       query.andWhere('workerDays.weekday = :weekday', { weekday });
     }
 
-    if (workerDayStatus) {
+    if (status) {
       query.andWhere('workerDays.workerDayStatus = :workerDayStatus', {
-        workerDayStatus,
+        status,
       });
     }
 
@@ -46,7 +44,7 @@ export class WorkerDaysRepository extends Repository<WorkerDays> {
   }
 
   async createWorkerDay(
-    createWorkerDayDto: CreateWorkerDaysDto,
+    createWorkerDayDto: WorkerDaysDto,
     workerPeriods: WorkerPeriods,
   ): Promise<WorkerDays> {
     const { startTime, endTime, weekday, numberOfHours, status } =

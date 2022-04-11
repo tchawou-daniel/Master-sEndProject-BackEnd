@@ -1,6 +1,5 @@
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
-import { CreateWorkerDaysDto } from '@api/workerDays/dto/create-worker-days.dto';
-import { GetWorkerDaysFilterDto } from '@api/workerDays/dto/get-workerDays-filter.dto';
+import { WorkerDaysDto } from '@api/workerDays/dto/workerDays.dto';
 import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import { WorkerDaysRepository } from '@api/workerDays/workerDays.repository';
 import { Get, Injectable, NotFoundException } from '@nestjs/common';
@@ -17,7 +16,7 @@ export class WorkerDaysService {
 
   @Get()
   getWorkerDays(
-    filterDto: GetWorkerDaysFilterDto,
+    filterDto: WorkerDaysDto,
     workerPeriod: WorkerPeriods,
   ): Promise<WorkerDays[]> {
     return this.workerDaysRepository.getWorkerDays(filterDto, workerPeriod);
@@ -37,7 +36,7 @@ export class WorkerDaysService {
   }
 
   createWorkerDay(
-    createWorkerDayDto: CreateWorkerDaysDto,
+    createWorkerDayDto: WorkerDaysDto,
     workerPeriod: WorkerPeriods,
   ): Promise<WorkerDays> {
     return this.workerDaysRepository.createWorkerDay(
@@ -67,6 +66,18 @@ export class WorkerDaysService {
     const workerDays = await this.getWorkerDayById(id, workerPeriod);
 
     workerDays.workerDayStatus = status;
+    await this.workerDaysRepository.save(workerDays);
+
+    return workerDays;
+  }
+
+  async updateWorkerDay(
+    id: string,
+    workerDay: WorkerDaysDto,
+    workerPeriod: WorkerPeriods,
+  ): Promise<WorkerDays> {
+    const workerDays = await this.getWorkerDayById(id, workerPeriod);
+
     await this.workerDaysRepository.save(workerDays);
 
     return workerDays;
