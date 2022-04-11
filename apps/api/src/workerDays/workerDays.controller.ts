@@ -83,11 +83,11 @@ export class WorkerDaysController {
   updateWorkerDay(
     @Param('id') id: string,
     @GetWorkerPeriods() workerPeriods: WorkerPeriods,
-    @Body() updateWorkerkDays: WorkerDaysDto,
+    @Body() updateWorkerkDaysDto: WorkerDaysDto,
   ): Promise<WorkerDays> {
     return this.workerDaysService.updateWorkerDay(
       id,
-      updateWorkerkDays,
+      updateWorkerkDaysDto,
       workerPeriods,
     );
   }

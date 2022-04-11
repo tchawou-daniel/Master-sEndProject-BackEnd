@@ -1,6 +1,7 @@
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
+import { BaseEntity } from '@api/SHARED/entities/base.entity';
 import { Exclude } from 'class-transformer';
-import { BaseEntity, Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 import {
   EmploymentDayStatus,

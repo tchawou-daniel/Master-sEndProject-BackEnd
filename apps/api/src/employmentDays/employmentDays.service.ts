@@ -27,10 +27,10 @@ export class EmploymentDaysService {
 
   async getEmploymentDayById(
     id: string,
-    employmentPeriods: EmploymentPeriods,
+    employmentPeriod: EmploymentPeriods,
   ): Promise<EmploymentDays> {
     const found = await this.employmentDaysRepository.findOne({
-      where: { id, employmentPeriods },
+      where: { id, employmentPeriod },
     });
     if (!found) {
       throw new NotFoundException(`Employment day with ID "${id}" not found`);
@@ -56,7 +56,6 @@ export class EmploymentDaysService {
       id,
       employmentPeriods,
     });
-
     if (result.affected === 0) {
       throw new NotFoundException(`Employment day with ID "${id}" not found`);
     }
@@ -80,16 +79,16 @@ export class EmploymentDaysService {
 
   async updateEmploymentDay(
     id: string,
-    employmentDay: EmploymentDaysDto,
-    employmentPeriod: EmploymentPeriods,
+    employemntDay: EmploymentDaysDto,
+    employemntPeriod: EmploymentPeriods,
   ): Promise<EmploymentDays> {
-    const employmentDays = await this.getEmploymentDayById(
+    const employemntDays = await this.getEmploymentDayById(
       id,
-      employmentPeriod,
+      employemntPeriod,
     );
 
-    await this.employmentDaysRepository.save(employmentDays);
+    await this.employmentDaysRepository.save(employemntDays);
 
-    return employmentDays;
+    return employemntDays;
   }
 }

@@ -1,11 +1,12 @@
 import { User } from '@api/auth/user.entity';
-import { WorkerDays } from '@api/workerDays/workerDays.entity';
+import { EmploymentDays } from '@api/workerDays/workerDays.entity';
 import { Exclude } from 'class-transformer';
-import { Column, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 import { WorkerPeriodStatus } from '../../common/types/workerPeriods';
 import { BaseEntity } from '../SHARED/entities/base.entity';
 
+@Entity()
 export class WorkerPeriods extends BaseEntity {
   @Column({ default: null, nullable: true, type: 'int' })
   effectiveAsOf: number;
@@ -28,8 +29,8 @@ export class WorkerPeriods extends BaseEntity {
   user: User;
 
   // bind with workerPeriods entity
-  @OneToMany((_type) => WorkerDays, (workerDays) => workerDays.workerPeriods, {
+  @OneToMany((_type) => EmploymentDays, (workerDays) => workerDays.workerPeriods, {
     eager: true,
   })
-  workerDays: WorkerDays[];
+  workerDays: EmploymentDays[];
 }

@@ -31,10 +31,6 @@ export class EmploymentDaysRepository extends Repository<EmploymentDays> {
       query.andWhere('employmentDays.weekday = :weekday', { weekday });
     }
 
-    if (weekday) {
-      query.andWhere('employmentDays.weekday = :weekday', { weekday });
-    }
-
     if (status) {
       query.andWhere(
         'employmentDays.employmentDayStatus = :employmentDayStatus',
@@ -58,10 +54,10 @@ export class EmploymentDaysRepository extends Repository<EmploymentDays> {
     const employmentDay = this.create({
       endTime,
       startTime,
-      employmentDayStatus: status,
-      numberOfHours,
       weekday,
       employmentPeriods,
+      numberOfHours,
+      employmentDayStatus: status,
     });
     await this.save(employmentDay);
     return employmentDay;

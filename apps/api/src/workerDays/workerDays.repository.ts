@@ -29,10 +29,6 @@ export class WorkerDaysRepository extends Repository<WorkerDays> {
       query.andWhere('workerDays.weekday = :weekday', { weekday });
     }
 
-    if (weekday) {
-      query.andWhere('workerDays.weekday = :weekday', { weekday });
-    }
-
     if (status) {
       query.andWhere('workerDays.workerDayStatus = :workerDayStatus', {
         status,

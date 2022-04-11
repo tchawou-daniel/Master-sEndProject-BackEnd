@@ -59,15 +59,14 @@ export class EmploymentDaysController {
   }
 
   @Patch('/:id')
-  updateEmployment(
+  updateEmploymentDay(
     @Param('id') id: string,
     @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
-    @Body() updateDayEmploymentDto: UpdateEmploymentDaysStatusDto,
+    @Body() updateEmploymentDayDto: EmploymentDaysDto,
   ): Promise<EmploymentDays> {
-    const { status } = updateDayEmploymentDto;
-    return this.employmentDaysService.updateEmploymentDaysStatus(
+    return this.employmentDaysService.updateEmploymentDay(
       id,
-      status,
+      updateEmploymentDayDto,
       employmentPeriods,
     );
   }
