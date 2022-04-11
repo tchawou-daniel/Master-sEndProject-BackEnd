@@ -1,4 +1,5 @@
 import { User } from '@api/auth/user.entity';
+import { EmploymentPeriodsDto } from '@api/employmentPeriods/dto/employment-periods.dto';
 import { GetEmploymentPeriodsFilterDto } from '@api/employmentPeriods/dto/get-employment-periods-filter.dto';
 import { EmploymentPeriodsRepository } from '@api/employmentPeriods/employementPeriods.repository';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
@@ -6,7 +7,6 @@ import { Get, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { EmploymentPeriodStatus } from '../../common/types/EmploymentPeriods';
-import { CreateEmploymentPeriodsFilterDto } from '@api/employmentPeriods/dto/employment-periods.dto';
 
 @Injectable()
 export class EmploymentPeriodService {
@@ -27,7 +27,7 @@ export class EmploymentPeriodService {
   }
 
   createEmploymentPeriod(
-    createEmploymentPeriodsDto: EmploymentPeriodsFilterDto,
+    createEmploymentPeriodsDto: EmploymentPeriodsDto,
     user: User,
   ): Promise<EmploymentPeriods> {
     return this.employmentPeriodsRepository.createEmploymentPeriod(

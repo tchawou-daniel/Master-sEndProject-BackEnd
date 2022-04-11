@@ -33,5 +33,5 @@ export class WorkerPeriods extends BaseEntity {
   @OneToMany((_type) => WorkerDays, (workerDays) => workerDays.workerPeriods, {
     eager: true,
   })
-  workerDays: EmploymentDays[];
+  workerDays: WorkerDays[];
 }

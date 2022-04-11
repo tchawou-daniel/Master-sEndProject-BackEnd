@@ -1,7 +1,8 @@
 import { User } from '@api/auth/user.entity';
+import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { Exclude } from 'class-transformer';
 import { IsOptional } from 'class-validator';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 import { EmploymentSector, Hiring } from '../../common/types/employment';
 import { BaseEntity } from '../SHARED/entities/base.entity';
@@ -44,6 +45,13 @@ export class Employment extends BaseEntity {
 
   @IsOptional()
   employementSector: EmploymentSector;
+
+  @OneToMany(
+    (_type) => EmploymentPeriods,
+    (employmentPeriods) => employmentPeriods.employment,
+    { eager: true },
+  )
+  employmentPeriods: EmploymentPeriods[];
 
   @ManyToOne((_type) => User, (user) => user.employments, { eager: false })
   @Exclude({ toPlainOnly: true })

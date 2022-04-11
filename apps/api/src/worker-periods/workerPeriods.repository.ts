@@ -12,7 +12,7 @@ export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
   ): Promise<WorkerPeriods[]> {
     const { status, search } = filterDto;
 
-    const query = this.createQueryBuilder('wokerPeriods');
+    const query = this.createQueryBuilder('workerPeriods');
     query.where({ user });
 
     if (status) {

@@ -2,7 +2,7 @@ import { IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 
 import { EmploymentPeriodStatus } from '../../../common/types/EmploymentPeriods';
 
-export class CreateEmploymentPeriodsDto {
+export class EmploymentPeriodsDto {
   @IsNotEmpty()
   @IsOptional()
   @IsNumber()
@@ -18,5 +18,5 @@ export class CreateEmploymentPeriodsDto {
   numberOfHours: number;
 
   @IsNotEmpty()
-  workerPeriodStatus: EmploymentPeriodStatus;
+  employmentPeriodStatus: EmploymentPeriodStatus;
 }
