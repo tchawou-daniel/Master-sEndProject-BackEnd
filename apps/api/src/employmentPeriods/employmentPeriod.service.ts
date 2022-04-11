@@ -1,4 +1,5 @@
 import { User } from '@api/auth/user.entity';
+import { Employment } from '@api/employment/employment.entity';
 import { EmploymentPeriodsDto } from '@api/employmentPeriods/dto/employment-periods.dto';
 import { GetEmploymentPeriodsFilterDto } from '@api/employmentPeriods/dto/get-employment-periods-filter.dto';
 import { EmploymentPeriodsRepository } from '@api/employmentPeriods/employementPeriods.repository';
@@ -18,30 +19,30 @@ export class EmploymentPeriodService {
   @Get()
   getEmploymentPeriods(
     filterDto: GetEmploymentPeriodsFilterDto,
-    user: User,
+    employment: Employment,
   ): Promise<EmploymentPeriods[]> {
     return this.employmentPeriodsRepository.getEmploymentPeriods(
       filterDto,
-      user,
+      employment,
     );
   }
 
   createEmploymentPeriod(
     createEmploymentPeriodsDto: EmploymentPeriodsDto,
-    user: User,
+    employment: Employment,
   ): Promise<EmploymentPeriods> {
     return this.employmentPeriodsRepository.createEmploymentPeriod(
       createEmploymentPeriodsDto,
-      user,
+      employment,
     );
   }
 
   async getEmploymentPeriodById(
     id: string,
-    user: User,
+    employment: Employment,
   ): Promise<EmploymentPeriods> {
     const found = await this.employmentPeriodsRepository.findOne({
-      where: { id, user },
+      where: { id, employment },
     });
     if (!found) {
       throw new NotFoundException(
@@ -51,20 +52,29 @@ export class EmploymentPeriodService {
     return found;
   }
 
-  async updateEmploymentPeriod(
+  async updateEmploymentPeriodStatus(
     id: string,
     status: EmploymentPeriodStatus,
-    user: User,
+    employment: Employment,
   ): Promise<EmploymentPeriods> {
-    const employmentPeriods = await this.getEmploymentPeriodById(id, user);
+    const employmentPeriods = await this.getEmploymentPeriodById(
+      id,
+      employment,
+    );
     employmentPeriods.employmentPeriodStatus = status;
     await this.employmentPeriodsRepository.save(employmentPeriods);
 
     return employmentPeriods;
   }
 
-  async deleteEmploymentPeriods(id: string, user: User): Promise<void> {
-    const result = await this.employmentPeriodsRepository.delete({ id, user });
+  async deleteEmploymentPeriods(
+    id: string,
+    employment: Employment,
+  ): Promise<void> {
+    const result = await this.employmentPeriodsRepository.delete({
+      id,
+      employment,
+    });
     if (result.affected === 0) {
       throw new NotFoundException(
         `Employment Periods with ID "${id}" not found`,
