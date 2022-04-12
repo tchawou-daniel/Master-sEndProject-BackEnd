@@ -8,5 +8,6 @@ export declare class CompanyService {
     constructor(companyRepository: CompanyRepository);
     getCompanies(filterDto: GetCompaniesFilterDto, user: User): Promise<Company[]>;
     getCompanyById(id: string, user: User): Promise<Company>;
+    getCompanyByName(companyName: string, user: User): Promise<Company>;
     createCompany(createCompanyDto: CreateCompanyDto, user: User): Promise<Company>;
 }

@@ -3,13 +3,11 @@ import { Company } from '@api/company/company.entity';
 import { CompanyRepository } from '@api/company/company.repository';
 import { CreateCompanyDto } from '@api/company/dto/create-company.dto';
 import { GetCompaniesFilterDto } from '@api/company/dto/get-companies-filter.dto';
-import {
-  Get,
-  Injectable,
-  NotFoundException,
-  Post,
-} from '@nestjs/common';
+import { Get, Injectable, NotFoundException, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { isEqual } from 'lodash';
+
+import { UserRole } from '../../common/types/user';
 
 @Injectable()
 export class CompanyService {
@@ -33,6 +31,27 @@ export class CompanyService {
       throw new NotFoundException(`Company with ID "${id}" not found`);
     }
     return found;
+  }
+
+  async getCompanyByName(
+    companyName: string,
+    user: User,
+  ): Promise<Company> {
+    if (
+      !isEqual(UserRole.PERMANENT_WORKER, user.role) ||
+      !isEqual(UserRole.TEMPORARY_WORKER, user.role)
+    ) {
+      const idFound = await this.companyRepository.findOne({
+        where: { companyName },
+      });
+      if (!idFound) {
+        throw new NotFoundException(
+          `Company id with name "${companyName}" not found`,
+        );
+      }
+      return idFound;
+    }
+    throw new NotFoundException(`ERROR 404`);
   }
 
   @Post()

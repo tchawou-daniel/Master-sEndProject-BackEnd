@@ -19,6 +19,8 @@ const create_company_dto_1 = require("./dto/create-company.dto");
 const get_companies_filter_dto_1 = require("./dto/get-companies-filter.dto");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const lodash_1 = require("lodash");
+const user_1 = require("../../common/types/user");
 let CompanyService = class CompanyService {
     constructor(companyRepository) {
         this.companyRepository = companyRepository;
@@ -33,6 +35,19 @@ let CompanyService = class CompanyService {
             throw new common_1.NotFoundException(`Company with ID "${id}" not found`);
         }
         return found;
+    }
+    async getCompanyByName(companyName, user) {
+        if (!(0, lodash_1.isEqual)(user_1.UserRole.PERMANENT_WORKER, user.role) ||
+            !(0, lodash_1.isEqual)(user_1.UserRole.TEMPORARY_WORKER, user.role)) {
+            const idFound = await this.companyRepository.findOne({
+                where: { companyName },
+            });
+            if (!idFound) {
+                throw new common_1.NotFoundException(`Company id with name "${companyName}" not found`);
+            }
+            return idFound;
+        }
+        throw new common_1.NotFoundException(`ERROR 404`);
     }
     createCompany(createCompanyDto, user) {
         return this.companyRepository.createCompany(createCompanyDto, user);
