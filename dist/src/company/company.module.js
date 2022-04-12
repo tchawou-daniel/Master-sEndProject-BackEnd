@@ -20,6 +20,7 @@ CompanyModule = __decorate([
         imports: [typeorm_1.TypeOrmModule.forFeature([company_repository_1.CompanyRepository]), auth_module_1.AuthModule],
         controllers: [company_controller_1.CompanyController],
         providers: [company_service_1.CompanyService],
+        exports: [company_service_1.CompanyService],
     })
 ], CompanyModule);
 exports.CompanyModule = CompanyModule;

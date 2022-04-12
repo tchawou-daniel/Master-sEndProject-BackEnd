@@ -10,5 +10,6 @@ import { CompanyService } from './company.service';
   imports: [TypeOrmModule.forFeature([CompanyRepository]), AuthModule],
   controllers: [CompanyController],
   providers: [CompanyService],
+  exports: [CompanyService],
 })
 export class CompanyModule {}
