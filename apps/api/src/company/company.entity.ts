@@ -1,4 +1,5 @@
 import { User } from '@api/auth/user.entity';
+import { Employment } from '@api/employment/employment.entity';
 import { BaseEntity } from '@api/SHARED/entities/base.entity';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { Exclude } from 'class-transformer';
@@ -58,6 +59,11 @@ export class Company extends BaseEntity {
   @ManyToOne((_type) => User, (user) => user.companies, { eager: false })
   @Exclude({ toPlainOnly: true })
   user: User;
+
+  @OneToMany((_type) => Employment, (employment) => employment.company, {
+    eager: true,
+  })
+  employments: Employment[];
 
   @OneToMany(
     () => UsersWorkForCompanies,

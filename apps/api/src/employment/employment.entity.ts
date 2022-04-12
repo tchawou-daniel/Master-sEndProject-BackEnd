@@ -1,4 +1,5 @@
 import { User } from '@api/auth/user.entity';
+import { Company } from '@api/company/company.entity';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { Exclude } from 'class-transformer';
 import { IsOptional } from 'class-validator';
@@ -45,6 +46,12 @@ export class Employment extends BaseEntity {
 
   @IsOptional()
   employementSector: EmploymentSector;
+
+  @ManyToOne((_type) => Company, (company) => company.employments, {
+    eager: false,
+  })
+  @Exclude({ toPlainOnly: true })
+  company: Company;
 
   @OneToMany(
     (_type) => EmploymentPeriods,
