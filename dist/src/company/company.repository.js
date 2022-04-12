@@ -25,8 +25,8 @@ let CompanyRepository = class CompanyRepository extends typeorm_1.Repository {
         const companies = await query.getMany();
         return companies;
     }
-    async createCompany(createTaskDto, user) {
-        const { name, companyStatus, country, town, street, zipCode, description, companySector, hiringStatus, clearedAt, } = createTaskDto;
+    async createCompany(createCompanyDto, user) {
+        const { name, companyStatus, country, town, street, zipCode, description, companySector, hiringStatus, clearedAt, } = createCompanyDto;
         const company = this.create({
             name,
             companyStatus,

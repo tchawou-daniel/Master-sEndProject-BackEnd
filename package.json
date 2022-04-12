@@ -46,6 +46,7 @@
     "eslint-import-resolver-typescript": "^2.7.1",
     "has-package-lock": "^2.0.0",
     "jest-watch-suspend": "^1.1.2",
+    "lodash": "^4.17.21",
     "mysql2": "^2.3.3",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",

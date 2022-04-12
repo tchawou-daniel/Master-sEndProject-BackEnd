@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersWorkForCompaniesModule = void 0;
 const auth_module_1 = require("../auth/auth.module");
+const company_module_1 = require("../company/company.module");
 const usersWorkForCompanies_controller_1 = require("./usersWorkForCompanies.controller");
 const usersWorkForCompanies_repository_1 = require("./usersWorkForCompanies.repository");
 const usersWorkForCompanies_service_1 = require("./usersWorkForCompanies.service");
@@ -17,7 +18,11 @@ let UsersWorkForCompaniesModule = class UsersWorkForCompaniesModule {
 };
 UsersWorkForCompaniesModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([usersWorkForCompanies_repository_1.UsersWorkForCompaniesRepository]), auth_module_1.AuthModule],
+        imports: [
+            typeorm_1.TypeOrmModule.forFeature([usersWorkForCompanies_repository_1.UsersWorkForCompaniesRepository]),
+            auth_module_1.AuthModule,
+            company_module_1.CompanyModule,
+        ],
         controllers: [usersWorkForCompanies_controller_1.UsersWorkForCompaniesController],
         providers: [usersWorkForCompanies_service_1.UsersWorkForCompaniesService],
     })

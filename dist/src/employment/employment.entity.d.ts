@@ -1,6 +1,8 @@
 import { User } from '@api/auth/user.entity';
-import { BaseEntity } from '@api/shared/entities/base.entity';
-import { EmploymentSector, Hiring } from '../../common/types/Employment';
+import { Company } from '@api/company/company.entity';
+import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
+import { EmploymentSector, Hiring } from '../../common/types/employment';
+import { BaseEntity } from '../SHARED/entities/base.entity';
 export declare class Employment extends BaseEntity {
     name: string;
     description: string;
@@ -9,10 +11,11 @@ export declare class Employment extends BaseEntity {
     street: string;
     zipCode: string;
     hiringStatus: Hiring;
-    readonly clearedAt: Date;
-    readonly updateAt: Date;
-    readonly companyName: Date;
-    readonly hasManySubsidiaries: boolean;
-    readonly employementSector: EmploymentSector;
-    user: User;
+    clearedAt: Date;
+    companyName: Date;
+    hasManySubsidiaries: boolean;
+    employementSector: EmploymentSector;
+    company: Company;
+    employmentPeriods: EmploymentPeriods[];
+    createdBy: User;
 }

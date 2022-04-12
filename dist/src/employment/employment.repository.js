@@ -14,7 +14,9 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
         const { hiringStatus, search } = filterDto;
         const query = this.createQueryBuilder('employment');
         if (hiringStatus) {
-            query.andWhere('employment.hiringStatus = :hiringStatus', { hiringStatus });
+            query.andWhere('employment.hiringStatus = :hiringStatus', {
+                hiringStatus,
+            });
         }
         if (search) {
             query.andWhere('(LOWER(employment.name) LIKE LOWER(:search) OR LOWER(employment.description) LIKE LOWER(:search))', { search: `%${search}%` });
@@ -23,7 +25,7 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
         return employments;
     }
     async createEmployment(createEmploymentDto, user) {
-        const { name, description, country, town, street, zipCode, employementSector, hiringStatus, clearedAt, updateAt, companyName, hasManySubsidiaries, } = createEmploymentDto;
+        const { name, description, country, town, street, zipCode, employementSector, hiringStatus, clearedAt, updatedAt, createdAt, companyName, hasManySubsidiaries, } = createEmploymentDto;
         const employment = this.create({
             name,
             description,
@@ -34,7 +36,8 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
             employementSector,
             hiringStatus,
             clearedAt,
-            updateAt,
+            updatedAt,
+            createdAt,
             companyName,
             hasManySubsidiaries,
         });

@@ -1,5 +1,6 @@
 import { User } from '@api/auth/user.entity';
-import { BaseEntity } from '@api/shared/entities/base.entity';
+import { Employment } from '@api/employment/employment.entity';
+import { BaseEntity } from '@api/SHARED/entities/base.entity';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { CompanySector, CompanyStatus, Hiring } from '../../common/types/company';
 export declare class Company extends BaseEntity {
@@ -14,5 +15,6 @@ export declare class Company extends BaseEntity {
     hiringStatus: Hiring;
     clearedAt: Date;
     user: User;
+    employments: Employment[];
     usersWorkForCompanies: UsersWorkForCompanies[];
 }

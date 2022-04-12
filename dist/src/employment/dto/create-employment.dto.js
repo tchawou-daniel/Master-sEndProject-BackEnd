@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateEmploymentDto = void 0;
 const class_validator_1 = require("class-validator");
-const Employment_1 = require("../../../common/types/Employment");
+const employment_1 = require("../../../common/types/employment");
 class CreateEmploymentDto {
 }
 __decorate([
@@ -53,7 +53,11 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Date)
-], CreateEmploymentDto.prototype, "updateAt", void 0);
+], CreateEmploymentDto.prototype, "updatedAt", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Date)
+], CreateEmploymentDto.prototype, "createdAt", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Date)

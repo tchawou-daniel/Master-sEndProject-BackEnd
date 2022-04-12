@@ -79,16 +79,16 @@ export class EmploymentDaysService {
 
   async updateEmploymentDay(
     id: string,
-    employemntDay: EmploymentDaysDto,
-    employemntPeriod: EmploymentPeriods,
+    employmentDay: EmploymentDaysDto,
+    employmentPeriod: EmploymentPeriods,
   ): Promise<EmploymentDays> {
-    const employemntDays = await this.getEmploymentDayById(
+    const employmentDays = await this.getEmploymentDayById(
       id,
-      employemntPeriod,
+      employmentPeriod,
     );
 
-    await this.employmentDaysRepository.save(employemntDays);
+    await this.employmentDaysRepository.save(employmentDays);
 
-    return employemntDays;
+    return employmentDays;
   }
 }

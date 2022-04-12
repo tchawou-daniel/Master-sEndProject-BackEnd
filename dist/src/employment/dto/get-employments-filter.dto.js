@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetEmploymentsFilterDto = void 0;
 const employment_entity_1 = require("../employment.entity");
+const filter_dto_1 = require("../../SHARED/dto/filter.dto");
 const class_validator_1 = require("class-validator");
-const Employment_1 = require("../../../common/types/Employment");
-const filter_dto_1 = require("../../shared/dto/filter.dto");
+const employment_1 = require("../../../common/types/employment");
 class GetEmploymentsFilterDto extends filter_dto_1.FilterDto {
 }
 __decorate([

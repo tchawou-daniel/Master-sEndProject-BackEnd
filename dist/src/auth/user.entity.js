@@ -12,8 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const company_entity_1 = require("../company/company.entity");
 const employment_entity_1 = require("../employment/employment.entity");
-const base_entity_1 = require("../shared/entities/base.entity");
+const base_entity_1 = require("../SHARED/entities/base.entity");
 const usersWorkForCompanies_entity_1 = require("../usersWorkForCompanies/usersWorkForCompanies.entity");
+const workerPeriods_entity_1 = require("../worker-periods/workerPeriods.entity");
 const typeorm_1 = require("typeorm");
 const user_1 = require("../../common/types/user");
 let User = class User extends base_entity_1.BaseEntity {
@@ -65,7 +66,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ type: 'timestamptz', default: null, nullable: true }),
     __metadata("design:type", Date)
-], User.prototype, "joinAt", void 0);
+], User.prototype, "joinedAt", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'timestamptz', default: null, nullable: true }),
     __metadata("design:type", Date)
@@ -75,15 +76,23 @@ __decorate([
     __metadata("design:type", Number)
 ], User.prototype, "salary", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(_type => company_entity_1.Company, company => company.user, { eager: true }),
+    (0, typeorm_1.OneToMany)((_type) => company_entity_1.Company, (company) => company.user, { eager: true }),
     __metadata("design:type", Array)
-], User.prototype, "company", void 0);
+], User.prototype, "companies", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(_type => employment_entity_1.Employment, employment => employment.user, { eager: true }),
+    (0, typeorm_1.OneToMany)((_type) => employment_entity_1.Employment, (employment) => employment.createdBy, {
+        eager: true,
+    }),
     __metadata("design:type", Array)
-], User.prototype, "employment", void 0);
+], User.prototype, "employments", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => usersWorkForCompanies_entity_1.UsersWorkForCompanies, usersWorkForCompanies => usersWorkForCompanies.user),
+    (0, typeorm_1.OneToMany)((_type) => workerPeriods_entity_1.WorkerPeriods, (workerPeriods) => workerPeriods.user, {
+        eager: true,
+    }),
+    __metadata("design:type", Array)
+], User.prototype, "workerPeriods", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => usersWorkForCompanies_entity_1.UsersWorkForCompanies, (usersWorkForCompanies) => usersWorkForCompanies.user),
     __metadata("design:type", Array)
 ], User.prototype, "usersWorkForCompanies", void 0);
 User = __decorate([

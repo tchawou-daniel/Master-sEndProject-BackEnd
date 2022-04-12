@@ -1,32 +1,46 @@
+import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
-import { GetUsersWorkForComponaiesFilterDto } from '@api/usersWorkForCompanies/dto/get-usersWorkForComponaies-filter.dto';
+import { GetUsersWorkForComponiesFilterDto } from '@api/usersWorkForCompanies/dto/get-usersWorkForComponaies-filter.dto';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
+import { isEqual } from 'lodash';
 import { EntityRepository, Repository } from 'typeorm';
+
+import { UserRole } from '../../common/types/user';
 
 @EntityRepository(UsersWorkForCompanies)
 export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForCompanies> {
-  // to change
-  async getUsersWorkForCompanies(
-    filterDto: GetUsersWorkForComponaiesFilterDto,
-    company: Company,
+  // ##############       TEMPORARY_WORKER || PERMANENT_WORKER                  ##############
+  async getMyOwnCompanies(
+    filterDto: GetUsersWorkForComponiesFilterDto,
+    user: User,
   ): Promise<UsersWorkForCompanies[]> {
-    const { hiringStatus, search } = filterDto;
+    const query = this.createQueryBuilder('usersWorkForCompanies');
+    query.where({ user });
 
-    const query = this.createQueryBuilder('user');
-    query.where({ company });
-
-    if (hiringStatus) {
-      query.andWhere('company.hiringStatus = :hiringStatus', { hiringStatus });
-    }
-
-    if (search) {
-      query.andWhere(
-        '(LOWER(company.name) LIKE LOWER(:search) OR LOWER(company.description) LIKE LOWER(:search))',
-        { search: `%${search}%` },
-      );
-    }
-
-    const usersWorkForCompanies = await query.getMany();
-    return usersWorkForCompanies;
+    return query.getMany();
   }
+
+  // ##############   PARTNER_COMPANY_EMPLOYEE, PARTNER_COMPANY_EMPLOYEE_ADMIN  ##############
+  // find workers of my company
+  async getWorkerOfMyCompany(
+    filterDto: GetUsersWorkForComponiesFilterDto,
+    company: Company,
+    user: User,
+  ): Promise<UsersWorkForCompanies[]> {
+    if (
+      isEqual(user.role, UserRole.PARTNER_COMPANY_EMPLOYEE_ADMIN) ||
+      isEqual(user.role, UserRole.PARTNER_COMPANY_EMPLOYEE)
+    ) {
+      const query = this.createQueryBuilder('usersWorkForCompanies');
+      const userId = user.id;
+      query.where('usersWorkForCompanies.user = :userId', { userId });
+      query.andWhere({ user });
+      return query.getMany();
+    }
+  }
+  // find the notation of the company
+  // ##############   EMPLOYMENT_AGENCY, ADMIN                                  ##############
+  // all users and their corresponding companies
+
+  // find worker of a company companies (EMPLOYMENT_AGENCY, ADMIN)
 }

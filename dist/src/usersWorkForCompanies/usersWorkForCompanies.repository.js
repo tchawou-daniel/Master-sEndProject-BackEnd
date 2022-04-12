@@ -8,20 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersWorkForCompaniesRepository = void 0;
 const usersWorkForCompanies_entity_1 = require("./usersWorkForCompanies.entity");
+const lodash_1 = require("lodash");
 const typeorm_1 = require("typeorm");
+const user_1 = require("../../common/types/user");
 let UsersWorkForCompaniesRepository = class UsersWorkForCompaniesRepository extends typeorm_1.Repository {
-    async getUsersWorkForCompanies(filterDto, company) {
-        const { hiringStatus, search } = filterDto;
-        const query = this.createQueryBuilder('user');
-        query.where({ company });
-        if (hiringStatus) {
-            query.andWhere('company.hiringStatus = :hiringStatus', { hiringStatus });
+    async getMyOwnCompanies(filterDto, user) {
+        const query = this.createQueryBuilder('usersWorkForCompanies');
+        query.where({ user });
+        return query.getMany();
+    }
+    async getWorkerOfMyCompany(filterDto, company, user) {
+        if ((0, lodash_1.isEqual)(user.role, user_1.UserRole.PARTNER_COMPANY_EMPLOYEE_ADMIN) ||
+            (0, lodash_1.isEqual)(user.role, user_1.UserRole.PARTNER_COMPANY_EMPLOYEE)) {
+            const query = this.createQueryBuilder('usersWorkForCompanies');
+            const userId = user.id;
+            query.where('usersWorkForCompanies.user = :userId', { userId });
+            query.andWhere({ user });
+            return query.getMany();
         }
-        if (search) {
-            query.andWhere('(LOWER(company.name) LIKE LOWER(:search) OR LOWER(company.description) LIKE LOWER(:search))', { search: `%${search}%` });
-        }
-        const usersWorkForCompanies = await query.getMany();
-        return usersWorkForCompanies;
     }
 };
 UsersWorkForCompaniesRepository = __decorate([

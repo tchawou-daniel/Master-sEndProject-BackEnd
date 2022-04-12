@@ -29,8 +29,8 @@ let CompanyController = class CompanyController {
         this.logger.verbose(`"User ${user.firstName}" retrieving all company Filters: ${JSON.stringify(filterDto)}`);
         return this.companyService.getCompanies(filterDto, user);
     }
-    createCompany(createTaskDto, user) {
-        return this.companyService.createCompany(createTaskDto, user);
+    createCompany(createCompanyDto, user) {
+        return this.companyService.createCompany(createCompanyDto, user);
     }
 };
 __decorate([

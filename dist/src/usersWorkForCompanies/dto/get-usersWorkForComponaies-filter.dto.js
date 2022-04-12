@@ -9,21 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetUsersWorkForComponaiesFilterDto = void 0;
+exports.GetUsersWorkForComponiesFilterDto = void 0;
 const company_entity_1 = require("../../company/company.entity");
 const class_validator_1 = require("class-validator");
 const company_1 = require("../../../common/types/company");
-class GetUsersWorkForComponaiesFilterDto {
+class GetUsersWorkForComponiesFilterDto {
 }
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(company_entity_1.Company),
     __metadata("design:type", String)
-], GetUsersWorkForComponaiesFilterDto.prototype, "hiringStatus", void 0);
+], GetUsersWorkForComponiesFilterDto.prototype, "hiringStatus", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], GetUsersWorkForComponaiesFilterDto.prototype, "search", void 0);
-exports.GetUsersWorkForComponaiesFilterDto = GetUsersWorkForComponaiesFilterDto;
+], GetUsersWorkForComponiesFilterDto.prototype, "search", void 0);
+exports.GetUsersWorkForComponiesFilterDto = GetUsersWorkForComponiesFilterDto;
 //# sourceMappingURL=get-usersWorkForComponaies-filter.dto.js.map

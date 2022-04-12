@@ -33,13 +33,15 @@ let EmploymentService = class EmploymentService {
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [get_employments_filter_dto_1.GetEmploymentsFilterDto, user_entity_1.User]),
+    __metadata("design:paramtypes", [get_employments_filter_dto_1.GetEmploymentsFilterDto,
+        user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], EmploymentService.prototype, "getEmployments", null);
 __decorate([
     (0, common_1.Post)(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_employment_dto_1.CreateEmploymentDto, user_entity_1.User]),
+    __metadata("design:paramtypes", [create_employment_dto_1.CreateEmploymentDto,
+        user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], EmploymentService.prototype, "createEmployment", null);
 EmploymentService = __decorate([

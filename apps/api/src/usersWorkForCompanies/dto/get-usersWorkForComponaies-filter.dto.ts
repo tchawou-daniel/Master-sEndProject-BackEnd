@@ -3,7 +3,7 @@ import { IsEnum, IsOptional, IsString } from 'class-validator';
 
 import { Hiring } from '../../../common/types/company';
 
-export class GetUsersWorkForComponaiesFilterDto {
+export class GetUsersWorkForComponiesFilterDto {
   @IsOptional()
   @IsEnum(Company)
   hiringStatus?: Hiring;

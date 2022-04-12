@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmploymentModule = void 0;
 const auth_module_1 = require("../auth/auth.module");
+const company_module_1 = require("../company/company.module");
 const employment_repository_1 = require("./employment.repository");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
@@ -17,7 +18,11 @@ let EmploymentModule = class EmploymentModule {
 };
 EmploymentModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([employment_repository_1.EmploymentRepository]), auth_module_1.AuthModule],
+        imports: [
+            typeorm_1.TypeOrmModule.forFeature([employment_repository_1.EmploymentRepository]),
+            auth_module_1.AuthModule,
+            company_module_1.CompanyModule,
+        ],
         controllers: [employment_controller_1.EmploymentController],
         providers: [employment_service_1.EmploymentService],
     })

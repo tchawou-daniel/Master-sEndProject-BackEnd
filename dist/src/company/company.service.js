@@ -41,13 +41,15 @@ let CompanyService = class CompanyService {
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [get_companies_filter_dto_1.GetCompaniesFilterDto, user_entity_1.User]),
+    __metadata("design:paramtypes", [get_companies_filter_dto_1.GetCompaniesFilterDto,
+        user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], CompanyService.prototype, "getCompanies", null);
 __decorate([
     (0, common_1.Post)(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_company_dto_1.CreateCompanyDto, user_entity_1.User]),
+    __metadata("design:paramtypes", [create_company_dto_1.CreateCompanyDto,
+        user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], CompanyService.prototype, "createCompany", null);
 CompanyService = __decorate([

@@ -1,4 +1,4 @@
-import { EmploymentSector, Hiring } from '../../../common/types/Employment';
+import { EmploymentSector, Hiring } from '../../../common/types/employment';
 export declare class CreateEmploymentDto {
     readonly name: string;
     readonly description: string;
@@ -9,7 +9,8 @@ export declare class CreateEmploymentDto {
     readonly employementSector: EmploymentSector;
     readonly hiringStatus: Hiring;
     readonly clearedAt: Date;
-    readonly updateAt: Date;
+    readonly updatedAt: Date;
+    readonly createdAt: Date;
     readonly companyName: Date;
     readonly hasManySubsidiaries: boolean;
 }

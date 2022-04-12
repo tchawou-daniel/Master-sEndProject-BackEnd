@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Employment = void 0;
 const user_entity_1 = require("../auth/user.entity");
-const base_entity_1 = require("../shared/entities/base.entity");
+const company_entity_1 = require("../company/company.entity");
+const employmentPeriods_entity_1 = require("../employmentPeriods/employmentPeriods.entity");
 const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
-const Employment_1 = require("../../common/types/Employment");
+const employment_1 = require("../../common/types/employment");
+const base_entity_1 = require("../SHARED/entities/base.entity");
 let Employment = class Employment extends base_entity_1.BaseEntity {
 };
 __decorate([
@@ -45,25 +47,21 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         type: 'enum',
-        enum: Employment_1.Hiring,
-        default: Employment_1.Hiring.ONGOING,
+        enum: employment_1.Hiring,
+        default: employment_1.Hiring.ONGOING,
     }),
     __metadata("design:type", String)
 ], Employment.prototype, "hiringStatus", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)({ type: 'timestamp', default: null, nullable: true }),
     __metadata("design:type", Date)
 ], Employment.prototype, "clearedAt", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Date)
-], Employment.prototype, "updateAt", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)({ type: 'timestamp', default: null, nullable: true }),
     __metadata("design:type", Date)
 ], Employment.prototype, "companyName", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)({ default: false }),
     __metadata("design:type", Boolean)
 ], Employment.prototype, "hasManySubsidiaries", void 0);
 __decorate([
@@ -71,10 +69,21 @@ __decorate([
     __metadata("design:type", String)
 ], Employment.prototype, "employementSector", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(_type => user_entity_1.User, user => user.employment, { eager: false }),
+    (0, typeorm_1.ManyToOne)((_type) => company_entity_1.Company, (company) => company.employments, {
+        eager: false,
+    }),
+    (0, class_transformer_1.Exclude)({ toPlainOnly: true }),
+    __metadata("design:type", company_entity_1.Company)
+], Employment.prototype, "company", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)((_type) => employmentPeriods_entity_1.EmploymentPeriods, (employmentPeriods) => employmentPeriods.employment, { eager: true }),
+    __metadata("design:type", Array)
+], Employment.prototype, "employmentPeriods", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)((_type) => user_entity_1.User, (user) => user.employments, { eager: false }),
     (0, class_transformer_1.Exclude)({ toPlainOnly: true }),
     __metadata("design:type", user_entity_1.User)
-], Employment.prototype, "user", void 0);
+], Employment.prototype, "createdBy", void 0);
 Employment = __decorate([
     (0, typeorm_1.Entity)()
 ], Employment);

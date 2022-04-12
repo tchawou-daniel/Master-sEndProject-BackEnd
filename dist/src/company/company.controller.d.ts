@@ -8,5 +8,5 @@ export declare class CompanyController {
     private logger;
     constructor(companyService: CompanyService);
     getCompanies(filterDto: GetCompaniesFilterDto, user: User): Promise<Company[]>;
-    createCompany(createTaskDto: CreateCompanyDto, user: User): Promise<Company>;
+    createCompany(createCompanyDto: CreateCompanyDto, user: User): Promise<Company>;
 }
