@@ -20,14 +20,14 @@ const employment_repository_1 = require("./employment.repository");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 let EmploymentService = class EmploymentService {
-    constructor(employementRepository) {
-        this.employementRepository = employementRepository;
+    constructor(employmentRepository) {
+        this.employmentRepository = employmentRepository;
     }
     getEmployments(filterDto, user) {
-        return this.employementRepository.getEmployements(filterDto, user);
+        return this.employmentRepository.getEmployements(filterDto, user);
     }
     createEmployment(createEmploymentDto, user) {
-        return this.employementRepository.createEmployment(createEmploymentDto, user);
+        return this.employmentRepository.createEmployment(createEmploymentDto, user);
     }
 };
 __decorate([

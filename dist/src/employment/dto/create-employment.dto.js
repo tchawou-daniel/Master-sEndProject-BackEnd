@@ -41,7 +41,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateEmploymentDto.prototype, "employementSector", void 0);
+], CreateEmploymentDto.prototype, "employmentSector", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)

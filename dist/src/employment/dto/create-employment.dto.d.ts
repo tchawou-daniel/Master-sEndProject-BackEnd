@@ -6,7 +6,7 @@ export declare class CreateEmploymentDto {
     readonly town: string;
     readonly street: string;
     readonly zipCode: string;
-    readonly employementSector: EmploymentSector;
+    readonly employmentSector: EmploymentSector;
     readonly hiringStatus: Hiring;
     readonly clearedAt: Date;
     readonly updatedAt: Date;

@@ -67,7 +67,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], Employment.prototype, "employementSector", void 0);
+], Employment.prototype, "employmentSector", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)((_type) => company_entity_1.Company, (company) => company.employments, {
         eager: false,

@@ -4,8 +4,8 @@ import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-fil
 import { Employment } from '@api/employment/employment.entity';
 import { EmploymentRepository } from '@api/employment/employment.repository';
 export declare class EmploymentService {
-    private employementRepository;
-    constructor(employementRepository: EmploymentRepository);
+    private employmentRepository;
+    constructor(employmentRepository: EmploymentRepository);
     getEmployments(filterDto: GetEmploymentsFilterDto, user: User): Promise<Employment[]>;
     createEmployment(createEmploymentDto: CreateEmploymentDto, user: User): Promise<Employment>;
 }

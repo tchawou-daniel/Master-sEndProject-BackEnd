@@ -22,7 +22,7 @@ export class CreateEmploymentDto {
   readonly zipCode: string;
 
   @IsNotEmpty()
-  readonly employementSector: EmploymentSector;
+  readonly employmentSector: EmploymentSector;
 
   @IsOptional()
   readonly hiringStatus: Hiring;

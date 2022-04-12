@@ -45,7 +45,7 @@ export class Employment extends BaseEntity {
   hasManySubsidiaries: boolean;
 
   @IsOptional()
-  employementSector: EmploymentSector;
+  employmentSector: EmploymentSector;
 
   @ManyToOne((_type) => Company, (company) => company.employments, {
     eager: false,

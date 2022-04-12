@@ -25,7 +25,7 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
         return employments;
     }
     async createEmployment(createEmploymentDto, user) {
-        const { name, description, country, town, street, zipCode, employementSector, hiringStatus, clearedAt, updatedAt, createdAt, companyName, hasManySubsidiaries, } = createEmploymentDto;
+        const { name, description, country, town, street, zipCode, employmentSector, hiringStatus, clearedAt, updatedAt, createdAt, companyName, hasManySubsidiaries, } = createEmploymentDto;
         const employment = this.create({
             name,
             description,
@@ -33,7 +33,7 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
             town,
             street,
             zipCode,
-            employementSector,
+            employmentSector,
             hiringStatus,
             clearedAt,
             updatedAt,

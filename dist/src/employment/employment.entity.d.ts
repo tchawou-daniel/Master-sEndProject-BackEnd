@@ -14,7 +14,7 @@ export declare class Employment extends BaseEntity {
     clearedAt: Date;
     companyName: Date;
     hasManySubsidiaries: boolean;
-    employementSector: EmploymentSector;
+    employmentSector: EmploymentSector;
     company: Company;
     employmentPeriods: EmploymentPeriods[];
     createdBy: User;

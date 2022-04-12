@@ -10,7 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class EmploymentService {
   constructor(
     @InjectRepository(EmploymentRepository)
-    private employementRepository: EmploymentRepository,
+    private employmentRepository: EmploymentRepository,
   ) {}
 
   @Get()
@@ -18,7 +18,7 @@ export class EmploymentService {
     filterDto: GetEmploymentsFilterDto,
     user: User,
   ): Promise<Employment[]> {
-    return this.employementRepository.getEmployements(filterDto, user);
+    return this.employmentRepository.getEmployements(filterDto, user);
   }
 
   @Post()
@@ -26,7 +26,7 @@ export class EmploymentService {
     createEmploymentDto: CreateEmploymentDto,
     user: User,
   ): Promise<Employment> {
-    return this.employementRepository.createEmployment(
+    return this.employmentRepository.createEmployment(
       createEmploymentDto,
       user,
     );

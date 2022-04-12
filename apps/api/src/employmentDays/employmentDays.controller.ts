@@ -22,63 +22,63 @@ import { AuthGuard } from '@nestjs/passport';
 export class EmploymentDaysController {
   constructor(private employmentDaysService: EmploymentDaysService) {}
 
-  // @Get()
-  // get(
-  //   @Query() filterDto: EmploymentDaysDto,
-  //   @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
-  // ): Promise<EmploymentDays[]> {
-  //   return this.employmentDaysService.getEmploymentDays(
-  //     filterDto,
-  //     employmentPeriods,
-  //   );
-  // }
-  //
-  // @Post()
-  // createEmploymentPeriods(
-  //   @Body() createEmploymentDto: EmploymentDaysDto,
-  //   @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
-  // ): Promise<EmploymentDays> {
-  //   return this.employmentDaysService.createEmploymentDay(
-  //     createEmploymentDto,
-  //     employmentPeriods,
-  //   );
-  // }
-  //
-  // @Patch('/:id/status')
-  // updateEmploymentDayStatus(
-  //   @Param('id') id: string,
-  //   @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
-  //   @Body() updateEmploymentDayStatusDto: UpdateEmploymentDaysStatusDto,
-  // ): Promise<EmploymentDays> {
-  //   const { status } = updateEmploymentDayStatusDto;
-  //   return this.employmentDaysService.updateEmploymentDaysStatus(
-  //     id,
-  //     status,
-  //     employmentPeriods,
-  //   );
-  // }
-  //
-  // @Patch('/:id')
-  // updateEmploymentDay(
-  //   @Param('id') id: string,
-  //   @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
-  //   @Body() updateEmploymentDayDto: EmploymentDaysDto,
-  // ): Promise<EmploymentDays> {
-  //   return this.employmentDaysService.updateEmploymentDay(
-  //     id,
-  //     updateEmploymentDayDto,
-  //     employmentPeriods,
-  //   );
-  // }
-  //
-  // @Delete('/:id')
-  // deleteEmploymentDay(
-  //   @Param('id') id: string,
-  //   @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
-  // ): Promise<void> {
-  //   return this.employmentDaysService.deleteEmploymentDay(
-  //     id,
-  //     employmentPeriods,
-  //   );
-  // }
+  @Get()
+  get(
+    @Query() filterDto: EmploymentDaysDto,
+    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
+  ): Promise<EmploymentDays[]> {
+    return this.employmentDaysService.getEmploymentDays(
+      filterDto,
+      employmentPeriods,
+    );
+  }
+
+  @Post()
+  createEmploymentPeriods(
+    @Body() createEmploymentDto: EmploymentDaysDto,
+    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
+  ): Promise<EmploymentDays> {
+    return this.employmentDaysService.createEmploymentDay(
+      createEmploymentDto,
+      employmentPeriods,
+    );
+  }
+
+  @Patch('/:id/status')
+  updateEmploymentDayStatus(
+    @Param('id') id: string,
+    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
+    @Body() updateEmploymentDayStatusDto: UpdateEmploymentDaysStatusDto,
+  ): Promise<EmploymentDays> {
+    const { status } = updateEmploymentDayStatusDto;
+    return this.employmentDaysService.updateEmploymentDaysStatus(
+      id,
+      status,
+      employmentPeriods,
+    );
+  }
+
+  @Patch('/:id')
+  updateEmploymentDay(
+    @Param('id') id: string,
+    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
+    @Body() updateEmploymentDayDto: EmploymentDaysDto,
+  ): Promise<EmploymentDays> {
+    return this.employmentDaysService.updateEmploymentDay(
+      id,
+      updateEmploymentDayDto,
+      employmentPeriods,
+    );
+  }
+
+  @Delete('/:id')
+  deleteEmploymentDay(
+    @Param('id') id: string,
+    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
+  ): Promise<void> {
+    return this.employmentDaysService.deleteEmploymentDay(
+      id,
+      employmentPeriods,
+    );
+  }
 }
