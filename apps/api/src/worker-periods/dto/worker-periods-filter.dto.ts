@@ -1,22 +1,26 @@
-import { IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsInt, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 
 import { WorkerPeriodStatus } from '../../../common/types/workerPeriods';
 
-export class CreateWorkerPeriodsFilterDto {
+export class WorkerPeriodsFilterDto {
   @IsNotEmpty()
   @IsOptional()
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   effectiveAsOf: number;
 
   @IsNotEmpty()
   @IsOptional()
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   effectiveUntil: number;
 
   @IsOptional()
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   numberOfHours: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   workerPeriodStatus: WorkerPeriodStatus;
 }

@@ -20,9 +20,9 @@ export class WorkerPeriods extends BaseEntity {
     enum: WorkerPeriodStatus,
     default: WorkerPeriodStatus.AVAILABLE,
   })
-  workerPeriodStatus: WorkerPeriodStatus;
+  workerPeriodStatus?: WorkerPeriodStatus;
 
-  @Column()
+  @Column({ type: 'int' })
   numberOfHours: number;
 
   @ManyToOne((_type) => User, (user) => user.workerPeriods, { eager: false })

@@ -15,7 +15,7 @@ export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForComp
   ): Promise<UsersWorkForCompanies[]> {
     const { scoreCompany, companyReviews, workerReviews } = filterDto;
 
-    const query = this.createQueryBuilder('task');
+    const query = this.createQueryBuilder('usersWorkForCompanies');
     query.where({ user });
 
     if (scoreCompany) {

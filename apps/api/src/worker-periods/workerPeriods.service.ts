@@ -1,6 +1,6 @@
 import { User } from '@api/auth/user.entity';
-import { CreateWorkerPeriodsFilterDto } from '@api/worker-periods/dto/create-worker-periods-filter.dto';
 import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods.dto';
+import { WorkerPeriodsFilterDto } from '@api/worker-periods/dto/worker-periods-filter.dto';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 import { WorkerPeriodsRepository } from '@api/worker-periods/workerPeriods.repository';
 import { Get, Injectable, NotFoundException } from '@nestjs/common';
@@ -24,7 +24,7 @@ export class WorkerPeriodsService {
   }
 
   createWorkerPeriod(
-    createWorkerPeriodsDto: CreateWorkerPeriodsFilterDto,
+    createWorkerPeriodsDto: WorkerPeriodsFilterDto,
     user: User,
   ): Promise<WorkerPeriods> {
     return this.workerPeriodRepository.createWorkerPeriod(
@@ -45,11 +45,17 @@ export class WorkerPeriodsService {
 
   async updateWorkerPeriod(
     id: string,
-    status: WorkerPeriodStatus,
+    workerPeriodsFilterDto: WorkerPeriodsFilterDto,
     user: User,
   ): Promise<WorkerPeriods> {
+    const { workerPeriodStatus, numberOfHours, effectiveUntil, effectiveAsOf } =
+      workerPeriodsFilterDto;
     const workerPeriods = await this.getWorkerPeriodById(id, user);
-    workerPeriods.workerPeriodStatus = status;
+    if (workerPeriodStatus)
+      workerPeriods.workerPeriodStatus = workerPeriodStatus;
+    if (numberOfHours) workerPeriods.numberOfHours = numberOfHours;
+    if (effectiveUntil) workerPeriods.effectiveUntil = effectiveUntil;
+    if (effectiveAsOf) workerPeriods.effectiveAsOf = effectiveAsOf;
     await this.workerPeriodRepository.save(workerPeriods);
 
     return workerPeriods;

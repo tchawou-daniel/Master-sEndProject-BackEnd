@@ -1,5 +1,5 @@
 import { User } from '@api/auth/user.entity';
-import { CreateWorkerPeriodsFilterDto } from '@api/worker-periods/dto/create-worker-periods-filter.dto';
+import { WorkerPeriodsFilterDto } from '@api/worker-periods/dto/worker-periods-filter.dto';
 import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods.dto';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 import { EntityRepository, Repository } from 'typeorm';
@@ -31,7 +31,7 @@ export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
   }
 
   async createWorkerPeriod(
-    createWorkerPeriods: CreateWorkerPeriodsFilterDto,
+    createWorkerPeriods: WorkerPeriodsFilterDto,
     user: User,
   ): Promise<WorkerPeriods> {
     const { effectiveAsOf, effectiveUntil, numberOfHours, workerPeriodStatus } =
@@ -41,6 +41,7 @@ export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
       effectiveUntil,
       workerPeriodStatus,
       numberOfHours,
+      user,
     });
     await this.save(workerPeriods);
     return workerPeriods;

@@ -14,7 +14,7 @@ const user_1 = require("../../common/types/user");
 let UsersWorkForCompaniesRepository = class UsersWorkForCompaniesRepository extends typeorm_1.Repository {
     async getUsersWorkForCompanies(filterDto, user) {
         const { scoreCompany, companyReviews, workerReviews } = filterDto;
-        const query = this.createQueryBuilder('task');
+        const query = this.createQueryBuilder('usersWorkForCompanies');
         query.where({ user });
         if (scoreCompany) {
             query.andWhere('usersWorkForCompanies.scoreCompany = :scoreCompany', {
