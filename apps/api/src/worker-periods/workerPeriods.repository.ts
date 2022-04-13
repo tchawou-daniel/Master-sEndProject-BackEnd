@@ -1,6 +1,6 @@
 import { User } from '@api/auth/user.entity';
-import { WorkerPeriodsFilterDto } from '@api/worker-periods/dto/worker-periods-filter.dto';
-import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods.dto';
+import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods-filter.dto';
+import { UpdateWorkerPeriodsDto } from '@api/worker-periods/dto/update-worker-periods.dto';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 import { EntityRepository, Repository } from 'typeorm';
 
@@ -16,12 +16,12 @@ export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
     query.where({ user });
 
     if (status) {
-      query.andWhere('workerPeriods.status = :status', { status });
+      query.andWhere('worker_periods.status = :status', { status });
     }
 
     if (search) {
       query.andWhere(
-        '(LOWER(workerPeriods.title) LIKE LOWER(:search) OR LOWER(workerPeriods.description) LIKE LOWER(:search))',
+        '(LOWER(worker_periods.title) LIKE LOWER(:search) OR LOWER(workerPeriods.description) LIKE LOWER(:search))',
         { search: `%${search}%` },
       );
     }
@@ -31,7 +31,7 @@ export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
   }
 
   async createWorkerPeriod(
-    createWorkerPeriods: WorkerPeriodsFilterDto,
+    createWorkerPeriods: UpdateWorkerPeriodsDto,
     user: User,
   ): Promise<WorkerPeriods> {
     const { effectiveAsOf, effectiveUntil, numberOfHours, workerPeriodStatus } =

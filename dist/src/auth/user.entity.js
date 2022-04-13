@@ -18,6 +18,7 @@ const usersWorkForCompanies_entity_1 = require("../usersWorkForCompanies/usersWo
 const workerPeriods_entity_1 = require("../worker-periods/workerPeriods.entity");
 const typeorm_1 = require("typeorm");
 const user_1 = require("../../common/types/user");
+const class_transformer_1 = require("class-transformer");
 let User = class User extends base_entity_1.BaseEntity {
 };
 __decorate([
@@ -82,22 +83,26 @@ __decorate([
 ], User.prototype, "companies", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)((_type) => employmentDays_entity_1.EmploymentDays, (employmentDays) => employmentDays.user, { eager: true }),
+    (0, class_transformer_1.Exclude)({ toPlainOnly: true }),
     __metadata("design:type", Array)
 ], User.prototype, "employmentDays", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)((_type) => employment_entity_1.Employment, (employment) => employment.createdBy, {
         eager: true,
     }),
+    (0, class_transformer_1.Exclude)({ toPlainOnly: true }),
     __metadata("design:type", Array)
 ], User.prototype, "employments", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)((_type) => workerPeriods_entity_1.WorkerPeriods, (workerPeriods) => workerPeriods.user, {
         eager: true,
     }),
+    (0, class_transformer_1.Exclude)({ toPlainOnly: true }),
     __metadata("design:type", Array)
 ], User.prototype, "workerPeriods", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => usersWorkForCompanies_entity_1.UsersWorkForCompanies, (usersWorkForCompanies) => usersWorkForCompanies.user),
+    (0, class_transformer_1.Exclude)({ toPlainOnly: true }),
     __metadata("design:type", Array)
 ], User.prototype, "usersWorkForCompanies", void 0);
 User = __decorate([

@@ -17,7 +17,7 @@ import {
   Query,
 } from '@nestjs/common';
 
-@Controller('employmentPeriods')
+@Controller('api/v0/employmentPeriods')
 export class EmploymentPeriodController {
   constructor(private employmentPeriodsService: EmploymentPeriodService) {}
 

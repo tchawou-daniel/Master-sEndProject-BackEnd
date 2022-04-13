@@ -7,6 +7,7 @@ import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 import { UserRole, WorkerIntegrationStatus } from '../../common/types/user';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User extends BaseEntity {
@@ -62,21 +63,25 @@ export class User extends BaseEntity {
     (employmentDays) => employmentDays.user,
     { eager: true },
   )
+  @Exclude({ toPlainOnly: true })
   employmentDays: EmploymentDays[];
 
   @OneToMany((_type) => Employment, (employment) => employment.createdBy, {
     eager: true,
   })
+  @Exclude({ toPlainOnly: true })
   employments: Employment[];
 
   @OneToMany((_type) => WorkerPeriods, (workerPeriods) => workerPeriods.user, {
     eager: true,
   })
+  @Exclude({ toPlainOnly: true })
   workerPeriods: WorkerPeriods[];
 
   @OneToMany(
     () => UsersWorkForCompanies,
     (usersWorkForCompanies) => usersWorkForCompanies.user,
   )
+  @Exclude({ toPlainOnly: true })
   usersWorkForCompanies!: UsersWorkForCompanies[];
 }

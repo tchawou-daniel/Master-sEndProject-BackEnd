@@ -1,7 +1,7 @@
 import { GetUser } from '@api/auth/get-user.decorator';
 import { User } from '@api/auth/user.entity';
-import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods.dto';
-import { WorkerPeriodsFilterDto } from '@api/worker-periods/dto/worker-periods-filter.dto';
+import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods-filter.dto';
+import { UpdateWorkerPeriodsDto } from '@api/worker-periods/dto/update-worker-periods.dto';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 import { WorkerPeriodsService } from '@api/worker-periods/workerPeriods.service';
 import {
@@ -16,7 +16,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller('workerPeriods')
+@Controller('api/v0/workerPeriods')
 @UseGuards(AuthGuard())
 export class WorkerPeriodsController {
   constructor(private workerPeriodsService: WorkerPeriodsService) {}
@@ -39,7 +39,7 @@ export class WorkerPeriodsController {
 
   @Post()
   createWorkerPeriods(
-    @Body() createWorkerDto: WorkerPeriodsFilterDto,
+    @Body() createWorkerDto: UpdateWorkerPeriodsDto,
     @GetUser() user: User,
   ): Promise<WorkerPeriods> {
     return this.workerPeriodsService.createWorkerPeriod(createWorkerDto, user);
@@ -49,7 +49,7 @@ export class WorkerPeriodsController {
   updateWorkerPeriodStatus(
     @Param('id') id: string,
     @GetUser() user: User,
-    @Body() updateWorkerStatusDto: WorkerPeriodsFilterDto,
+    @Body() updateWorkerStatusDto: UpdateWorkerPeriodsDto,
   ): Promise<WorkerPeriods> {
     return this.workerPeriodsService.updateWorkerPeriod(
       id,

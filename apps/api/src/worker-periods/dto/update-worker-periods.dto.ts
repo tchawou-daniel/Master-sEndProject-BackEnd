@@ -1,9 +1,9 @@
 import { Type } from 'class-transformer';
-import { IsInt, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional } from 'class-validator';
 
 import { WorkerPeriodStatus } from '../../../common/types/workerPeriods';
 
-export class WorkerPeriodsFilterDto {
+export class UpdateWorkerPeriodsDto {
   @IsNotEmpty()
   @IsOptional()
   @IsInt()

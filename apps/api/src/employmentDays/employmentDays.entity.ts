@@ -1,3 +1,4 @@
+import { User } from '@api/auth/user.entity';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { BaseEntity } from '@api/SHARED/entities/base.entity';
 import { Exclude } from 'class-transformer';
@@ -7,7 +8,6 @@ import {
   EmploymentDayStatus,
   WeekDays,
 } from '../../common/types/employmentDays';
-import { User } from '@api/auth/user.entity';
 
 @Entity()
 export class EmploymentDays extends BaseEntity {

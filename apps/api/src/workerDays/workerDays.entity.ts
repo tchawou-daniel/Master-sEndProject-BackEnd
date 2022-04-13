@@ -1,7 +1,6 @@
 import { BaseEntity } from '@api/SHARED/entities/base.entity';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
-import { Exclude } from 'class-transformer';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, JoinTable, ManyToOne } from 'typeorm';
 
 import { WeekDays, WorkerDayStatus } from '../../common/types/workerDays';
 
@@ -34,6 +33,5 @@ export class WorkerDays extends BaseEntity {
     (workerPeriods) => workerPeriods.workerDays,
     { eager: false },
   )
-  @Exclude({ toPlainOnly: true })
   workerPeriods: WorkerPeriods;
 }

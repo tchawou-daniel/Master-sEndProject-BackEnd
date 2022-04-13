@@ -1,4 +1,5 @@
-import { EmploymentDaysDto } from '@api/employmentDays/dto/employmentDays.dto';
+import { EmploymentDaysDto } from '@api/employmentDays/dto/employment-days.dto';
+import { GetEmploymentDto } from '@api/employmentDays/dto/get-employment-dto';
 import { UpdateEmploymentDaysStatusDto } from '@api/employmentDays/dto/update-employment-days-status.dto';
 import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { EmploymentDaysService } from '@api/employmentDays/employmentDays.service';
@@ -17,14 +18,14 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller('employmentDays')
-@UseGuards(AuthGuard())
+@Controller('api/v0/employmentDays')
+@UseGuards(AuthGuard('jwt'))
 export class EmploymentDaysController {
   constructor(private employmentDaysService: EmploymentDaysService) {}
 
   @Get()
   get(
-    @Query() filterDto: EmploymentDaysDto,
+    @Query() filterDto: GetEmploymentDto,
     @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
   ): Promise<EmploymentDays[]> {
     return this.employmentDaysService.getEmploymentDays(

@@ -11,26 +11,26 @@ export class WorkerDaysRepository extends Repository<WorkerDays> {
   ): Promise<WorkerDays[]> {
     const { numberOfHours, startTime, endTime, weekday, status } = filterDto;
 
-    const query = this.createQueryBuilder('workerDays');
+    const query = this.createQueryBuilder('worker_days');
     query.where({ workerPeriod });
 
     if (numberOfHours) {
-      query.andWhere('workerDays.numberOfHours = :nbHours', { numberOfHours });
+      query.andWhere('worker_days.numberOfHours = :nbHours', { numberOfHours });
     }
 
     if (startTime) {
-      query.andWhere('workerDays.startTime = :startTime', { startTime });
+      query.andWhere('worker_days.startTime = :startTime', { startTime });
     }
 
     if (endTime) {
-      query.andWhere('workerDays.endTime = :endTime', { endTime });
+      query.andWhere('worker_days.endTime = :endTime', { endTime });
     }
     if (weekday) {
-      query.andWhere('workerDays.weekday = :weekday', { weekday });
+      query.andWhere('worker_days.weekday = :weekday', { weekday });
     }
 
     if (status) {
-      query.andWhere('workerDays.workerDayStatus = :workerDayStatus', {
+      query.andWhere('worker_days.workerDayStatus = :workerDayStatus', {
         status,
       });
     }

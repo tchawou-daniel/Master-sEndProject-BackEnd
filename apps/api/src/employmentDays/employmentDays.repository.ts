@@ -1,4 +1,4 @@
-import { EmploymentDaysDto } from '@api/employmentDays/dto/employmentDays.dto';
+import { EmploymentDaysDto } from '@api/employmentDays/dto/employment-days.dto';
 import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { EntityRepository, Repository } from 'typeorm';
