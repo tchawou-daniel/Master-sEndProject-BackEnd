@@ -9,13 +9,14 @@ import {
   Controller,
   Get,
   Logger,
+  Param,
   Post,
   Query,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller('company')
+@Controller('/api/v0/company')
 @UseGuards(AuthGuard())
 export class CompanyController {
   private logger = new Logger('CompanyController');
@@ -33,6 +34,14 @@ export class CompanyController {
       }" retrieving all company Filters: ${JSON.stringify(filterDto)}`,
     );
     return this.companyService.getCompanies(filterDto, user);
+  }
+
+  @Get('/:id')
+  getCompanyById(
+    @Param('id') id: string,
+    @GetUser() user: User,
+  ): Promise<Company> {
+    return this.companyService.getCompanyById(id, user);
   }
 
   @Post()

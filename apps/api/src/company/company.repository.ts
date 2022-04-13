@@ -2,6 +2,7 @@ import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
 import { CreateCompanyDto } from '@api/company/dto/create-company.dto';
 import { GetCompaniesFilterDto } from '@api/company/dto/get-companies-filter.dto';
+import { isEqual } from 'lodash';
 import { EntityRepository, Repository } from 'typeorm';
 
 import { UserRole } from '../../common/types/user';
@@ -16,9 +17,6 @@ export class CompanyRepository extends Repository<Company> {
     const { hiringStatus, search } = filterDto;
     const query = this.createQueryBuilder('company');
     query.where({ user });
-
-    // PARTNER_COMPANY_EMPLOYEE_ADMIN -- problem
-    query.andWhere('user.role = :userRole', { userRole: UserRole.ADMIN });
 
     if (hiringStatus) {
       query.andWhere('company.hiringStatus = :hiringStatus', { hiringStatus });
