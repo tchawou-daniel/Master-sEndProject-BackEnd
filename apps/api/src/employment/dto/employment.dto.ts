@@ -2,7 +2,7 @@ import { IsNotEmpty, IsOptional } from 'class-validator';
 
 import { EmploymentSector, Hiring } from '../../../common/types/employment';
 
-export class CreateEmploymentDto {
+export class EmploymentDto {
   @IsNotEmpty()
   readonly name: string;
 

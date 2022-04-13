@@ -13,6 +13,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersWorkForCompaniesService = void 0;
+const user_entity_1 = require("../auth/user.entity");
+const get_usersWorkForComponaies_filter_dto_1 = require("./dto/get-usersWorkForComponaies-filter.dto");
 const usersWorkForCompanies_repository_1 = require("./usersWorkForCompanies.repository");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
@@ -20,7 +22,27 @@ let UsersWorkForCompaniesService = class UsersWorkForCompaniesService {
     constructor(usersWorkForCompaniesRepository) {
         this.usersWorkForCompaniesRepository = usersWorkForCompaniesRepository;
     }
+    getUsersWorkForCompanies(filterDto, user) {
+        return this.usersWorkForCompaniesRepository.getUsersWorkForCompanies(filterDto, user);
+    }
+    async getUserWorkForCompaniesById(id, user) {
+        const found = await this.usersWorkForCompaniesRepository.findOne({
+            id,
+            user,
+        });
+        if (!found) {
+            throw new common_1.NotFoundException(`User work for company with ID "${id}" not found`);
+        }
+        return found;
+    }
 };
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [get_usersWorkForComponaies_filter_dto_1.GetUsersWorkForComponiesFilterDto,
+        user_entity_1.User]),
+    __metadata("design:returntype", Promise)
+], UsersWorkForCompaniesService.prototype, "getUsersWorkForCompanies", null);
 UsersWorkForCompaniesService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(usersWorkForCompanies_repository_1.UsersWorkForCompaniesRepository)),

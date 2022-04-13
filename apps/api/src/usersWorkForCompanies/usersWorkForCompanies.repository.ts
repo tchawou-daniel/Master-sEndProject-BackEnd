@@ -9,6 +9,39 @@ import { UserRole } from '../../common/types/user';
 
 @EntityRepository(UsersWorkForCompanies)
 export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForCompanies> {
+  async getUsersWorkForCompanies(
+    filterDto: GetUsersWorkForComponiesFilterDto,
+    user: User,
+  ): Promise<UsersWorkForCompanies[]> {
+    const { scoreCompany, companyReviews, workerReviews } = filterDto;
+
+    const query = this.createQueryBuilder('task');
+    query.where({ user });
+
+    if (scoreCompany) {
+      query.andWhere('usersWorkForCompanies.scoreCompany = :scoreCompany', {
+        scoreCompany,
+      });
+    }
+
+    if (companyReviews) {
+      query.andWhere(
+        '(LOWER(usersWorkForCompanies.companyReviews) LIKE LOWER(:search)',
+        { search: `%${companyReviews}%` },
+      );
+    }
+
+    if (workerReviews) {
+      query.andWhere(
+        '(LOWER(usersWorkForCompanies.workerReviews) LIKE LOWER(:search)',
+        { search: `%${workerReviews}%` },
+      );
+    }
+
+    const usersWorkForCompanies = await query.getMany();
+    return usersWorkForCompanies;
+  }
+
   // ##############       TEMPORARY_WORKER || PERMANENT_WORKER                  ##############
   async getMyOwnCompanies(
     filterDto: GetUsersWorkForComponiesFilterDto,
@@ -25,6 +58,7 @@ export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForComp
   async getWorkerOfMyCompany(
     filterDto: GetUsersWorkForComponiesFilterDto,
     company: Company,
+    usersWorkForCompanies: UsersWorkForCompanies,
     user: User,
   ): Promise<UsersWorkForCompanies[]> {
     if (
@@ -32,15 +66,13 @@ export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForComp
       isEqual(user.role, UserRole.PARTNER_COMPANY_EMPLOYEE)
     ) {
       const query = this.createQueryBuilder('usersWorkForCompanies');
-      const userId = user.id;
-      query.where('usersWorkForCompanies.user = :userId', { userId });
+      const { companyId } = usersWorkForCompanies;
+
+      query.where('usersWorkForCompanies.user = :userId', { user }); // userId
+
+      query.where('usersWorkForCompanies.company = :companyId', { user }); // userId
       query.andWhere({ user });
       return query.getMany();
     }
   }
-  // find the notation of the company
-  // ##############   EMPLOYMENT_AGENCY, ADMIN                                  ##############
-  // all users and their corresponding companies
-
-  // find worker of a company companies (EMPLOYMENT_AGENCY, ADMIN)
 }

@@ -1,4 +1,4 @@
-import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
@@ -6,6 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { JwtPayload } from './jwt-payload.interface';
 import { UsersRepository } from './users.repository';
+import { User } from '@api/auth/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -33,5 +34,14 @@ export class AuthService {
       return { accessToken };
     }
     throw new UnauthorizedException('Please check your login credentials');
+  }
+
+  async getUserById(id: string, user: User): Promise<User> {
+    const found = await this.usersRepository.findOne({ where: { id, user } });
+
+    if (!found) {
+      throw new NotFoundException(`User with ID "${id}" not found`);
+    }
+    return found;
   }
 }

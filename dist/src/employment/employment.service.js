@@ -14,7 +14,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmploymentService = void 0;
 const user_entity_1 = require("../auth/user.entity");
-const create_employment_dto_1 = require("./dto/create-employment.dto");
+const company_entity_1 = require("../company/company.entity");
+const employment_dto_1 = require("./dto/employment.dto");
 const get_employments_filter_dto_1 = require("./dto/get-employments-filter.dto");
 const employment_repository_1 = require("./employment.repository");
 const common_1 = require("@nestjs/common");
@@ -26,8 +27,28 @@ let EmploymentService = class EmploymentService {
     getEmployments(filterDto, user) {
         return this.employmentRepository.getEmployements(filterDto, user);
     }
+    async getEmploymentById(id, company) {
+        const found = await this.employmentRepository.findOne({
+            where: { id, company },
+        });
+        if (!found) {
+            throw new common_1.NotFoundException(`Employment with ID "${id}" not found`);
+        }
+        return this.employmentRepository.findOne(id);
+    }
     createEmployment(createEmploymentDto, user) {
         return this.employmentRepository.createEmployment(createEmploymentDto, user);
+    }
+    async deleteEmployment(id) {
+        const result = await this.employmentRepository.delete({ id });
+        if (result.affected === 0) {
+            throw new common_1.NotFoundException(`Employment with ID "${id}" not found`);
+        }
+    }
+    async updateEmploymentStatus(id, company) {
+        const employment = await this.getEmploymentById(id, company);
+        await this.employmentRepository.save(employment);
+        return employment;
     }
 };
 __decorate([
@@ -38,9 +59,15 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], EmploymentService.prototype, "getEmployments", null);
 __decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, company_entity_1.Company]),
+    __metadata("design:returntype", Promise)
+], EmploymentService.prototype, "getEmploymentById", null);
+__decorate([
     (0, common_1.Post)(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_employment_dto_1.CreateEmploymentDto,
+    __metadata("design:paramtypes", [employment_dto_1.EmploymentDto,
         user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], EmploymentService.prototype, "createEmployment", null);

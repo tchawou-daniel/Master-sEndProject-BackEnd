@@ -1,5 +1,5 @@
 import { User } from '@api/auth/user.entity';
-import { CreateEmploymentDto } from '@api/employment/dto/create-employment.dto';
+import { EmploymentDto } from '@api/employment/dto/employment.dto';
 import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-filter.dto';
 import { Employment } from '@api/employment/employment.entity';
 import { EntityRepository, Repository } from 'typeorm';
@@ -32,7 +32,7 @@ export class EmploymentRepository extends Repository<Employment> {
   }
 
   async createEmployment(
-    createEmploymentDto: CreateEmploymentDto,
+    createEmploymentDto: EmploymentDto,
     user: User,
   ): Promise<Employment> {
     const {

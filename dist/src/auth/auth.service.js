@@ -39,6 +39,13 @@ let AuthService = class AuthService {
         }
         throw new common_1.UnauthorizedException('Please check your login credentials');
     }
+    async getUserById(id, user) {
+        const found = await this.usersRepository.findOne({ where: { id, user } });
+        if (!found) {
+            throw new common_1.NotFoundException(`User with ID "${id}" not found`);
+        }
+        return found;
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),

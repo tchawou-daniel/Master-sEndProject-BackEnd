@@ -15,7 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmploymentController = void 0;
 const get_user_decorator_1 = require("../auth/get-user.decorator");
 const user_entity_1 = require("../auth/user.entity");
-const create_employment_dto_1 = require("./dto/create-employment.dto");
+const company_entity_1 = require("../company/company.entity");
+const get_company_decorator_1 = require("../company/get-company.decorator");
+const employment_dto_1 = require("./dto/employment.dto");
 const get_employments_filter_dto_1 = require("./dto/get-employments-filter.dto");
 const employment_service_1 = require("./employment.service");
 const common_1 = require("@nestjs/common");
@@ -32,6 +34,12 @@ let EmploymentController = class EmploymentController {
     createEmployment(createEmploymentDto, user) {
         return this.employmentService.createEmployment(createEmploymentDto, user);
     }
+    deleteEmployment(id) {
+        return this.employmentService.deleteEmployment(id);
+    }
+    updateEmploymentStatus(id, company) {
+        return this.employmentService.updateEmploymentStatus(id, company);
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -47,12 +55,27 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __param(1, (0, get_user_decorator_1.GetUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_employment_dto_1.CreateEmploymentDto,
+    __metadata("design:paramtypes", [employment_dto_1.EmploymentDto,
         user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], EmploymentController.prototype, "createEmployment", null);
+__decorate([
+    (0, common_1.Delete)('/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], EmploymentController.prototype, "deleteEmployment", null);
+__decorate([
+    (0, common_1.Patch)('/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, get_company_decorator_1.GetCompany)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, company_entity_1.Company]),
+    __metadata("design:returntype", Promise)
+], EmploymentController.prototype, "updateEmploymentStatus", null);
 EmploymentController = __decorate([
-    (0, common_1.Controller)('employment'),
+    (0, common_1.Controller)('/api/v0/employment'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     __metadata("design:paramtypes", [employment_service_1.EmploymentService])
 ], EmploymentController);

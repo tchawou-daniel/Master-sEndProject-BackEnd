@@ -29,6 +29,9 @@ let CompanyController = class CompanyController {
         this.logger.verbose(`"User ${user.firstName}" retrieving all company Filters: ${JSON.stringify(filterDto)}`);
         return this.companyService.getCompanies(filterDto, user);
     }
+    getCompanyById(id, user) {
+        return this.companyService.getCompanyById(id, user);
+    }
     createCompany(createCompanyDto, user) {
         return this.companyService.createCompany(createCompanyDto, user);
     }
@@ -43,6 +46,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CompanyController.prototype, "getCompanies", null);
 __decorate([
+    (0, common_1.Get)('/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, get_user_decorator_1.GetUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, user_entity_1.User]),
+    __metadata("design:returntype", Promise)
+], CompanyController.prototype, "getCompanyById", null);
+__decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, get_user_decorator_1.GetUser)()),
@@ -52,7 +63,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CompanyController.prototype, "createCompany", null);
 CompanyController = __decorate([
-    (0, common_1.Controller)('company'),
+    (0, common_1.Controller)('/api/v0/company'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     __metadata("design:paramtypes", [company_service_1.CompanyService])
 ], CompanyController);

@@ -10,20 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetUsersWorkForComponiesFilterDto = void 0;
-const company_entity_1 = require("../../company/company.entity");
 const class_validator_1 = require("class-validator");
-const company_1 = require("../../../common/types/company");
 class GetUsersWorkForComponiesFilterDto {
 }
 __decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(company_entity_1.Company),
-    __metadata("design:type", String)
-], GetUsersWorkForComponiesFilterDto.prototype, "hiringStatus", void 0);
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], GetUsersWorkForComponiesFilterDto.prototype, "scoreCompany", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], GetUsersWorkForComponiesFilterDto.prototype, "search", void 0);
+], GetUsersWorkForComponiesFilterDto.prototype, "companyReviews", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], GetUsersWorkForComponiesFilterDto.prototype, "workerReviews", void 0);
 exports.GetUsersWorkForComponiesFilterDto = GetUsersWorkForComponiesFilterDto;
 //# sourceMappingURL=get-usersWorkForComponaies-filter.dto.js.map
