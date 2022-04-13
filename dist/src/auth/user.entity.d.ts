@@ -1,5 +1,6 @@
 import { Company } from '@api/company/company.entity';
 import { Employment } from '@api/employment/employment.entity';
+import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { BaseEntity } from '@api/SHARED/entities/base.entity';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
@@ -18,6 +19,7 @@ export declare class User extends BaseEntity {
     lastConnection: Date;
     salary: number;
     companies: Company[];
+    employmentDays: EmploymentDays[];
     employments: Employment[];
     workerPeriods: WorkerPeriods[];
     usersWorkForCompanies: UsersWorkForCompanies[];

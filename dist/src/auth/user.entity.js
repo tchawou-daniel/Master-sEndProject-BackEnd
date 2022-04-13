@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const company_entity_1 = require("../company/company.entity");
 const employment_entity_1 = require("../employment/employment.entity");
+const employmentDays_entity_1 = require("../employmentDays/employmentDays.entity");
 const base_entity_1 = require("../SHARED/entities/base.entity");
 const usersWorkForCompanies_entity_1 = require("../usersWorkForCompanies/usersWorkForCompanies.entity");
 const workerPeriods_entity_1 = require("../worker-periods/workerPeriods.entity");
@@ -79,6 +80,10 @@ __decorate([
     (0, typeorm_1.OneToMany)((_type) => company_entity_1.Company, (company) => company.user, { eager: true }),
     __metadata("design:type", Array)
 ], User.prototype, "companies", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)((_type) => employmentDays_entity_1.EmploymentDays, (employmentDays) => employmentDays.user, { eager: true }),
+    __metadata("design:type", Array)
+], User.prototype, "employmentDays", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)((_type) => employment_entity_1.Employment, (employment) => employment.createdBy, {
         eager: true,

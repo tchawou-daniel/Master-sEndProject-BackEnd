@@ -7,6 +7,7 @@ import {
   EmploymentDayStatus,
   WeekDays,
 } from '../../common/types/employmentDays';
+import { User } from '@api/auth/user.entity';
 
 @Entity()
 export class EmploymentDays extends BaseEntity {
@@ -31,6 +32,10 @@ export class EmploymentDays extends BaseEntity {
     enum: WeekDays,
   })
   weekday: WeekDays;
+
+  @ManyToOne((_type) => User, (user) => user.companies, { eager: false })
+  @Exclude({ toPlainOnly: true })
+  user: User;
 
   @ManyToOne(
     (_type) => EmploymentPeriods,

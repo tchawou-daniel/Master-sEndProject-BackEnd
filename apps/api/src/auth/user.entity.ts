@@ -1,5 +1,6 @@
 import { Company } from '@api/company/company.entity';
 import { Employment } from '@api/employment/employment.entity';
+import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { BaseEntity } from '@api/SHARED/entities/base.entity';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
@@ -55,6 +56,13 @@ export class User extends BaseEntity {
 
   @OneToMany((_type) => Company, (company) => company.user, { eager: true })
   companies: Company[];
+
+  @OneToMany(
+    (_type) => EmploymentDays,
+    (employmentDays) => employmentDays.user,
+    { eager: true },
+  )
+  employmentDays: EmploymentDays[];
 
   @OneToMany((_type) => Employment, (employment) => employment.createdBy, {
     eager: true,
