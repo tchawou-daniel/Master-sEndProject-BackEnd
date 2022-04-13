@@ -16,12 +16,12 @@ export class EmploymentPeriodsRepository extends Repository<EmploymentPeriods> {
     query.where({ employment });
 
     if (hiringStatus) {
-      query.andWhere('employmentPeriods.status = :status', { hiringStatus });
+      query.andWhere('employment_periods.status = :status', { hiringStatus });
     }
 
     if (search) {
       query.andWhere(
-        '(LOWER(employmentPeriods.title) LIKE LOWER(:search) OR LOWER(employmentPeriods.description) LIKE LOWER(:search))',
+        '(LOWER(employment_periods.title) LIKE LOWER(:search) OR LOWER(employment_periods.description) LIKE LOWER(:search))',
         { search: `%${search}%` },
       );
     }

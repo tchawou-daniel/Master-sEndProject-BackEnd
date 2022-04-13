@@ -15,25 +15,25 @@ export class EmploymentDaysRepository extends Repository<EmploymentDays> {
     query.where({ employmentPeriod });
 
     if (numberOfHours) {
-      query.andWhere('employmentDays.numberOfHours = :nbHours', {
+      query.andWhere('employment_days.numberOfHours = :nbHours', {
         numberOfHours,
       });
     }
 
     if (startTime) {
-      query.andWhere('employmentDays.startTime = :startTime', { startTime });
+      query.andWhere('employment_days.startTime = :startTime', { startTime });
     }
 
     if (endTime) {
-      query.andWhere('employmentDays.endTime = :endTime', { endTime });
+      query.andWhere('employment_days.endTime = :endTime', { endTime });
     }
     if (weekday) {
-      query.andWhere('employmentDays.weekday = :weekday', { weekday });
+      query.andWhere('employment_days.weekday = :weekday', { weekday });
     }
 
     if (status) {
       query.andWhere(
-        'employmentDays.employmentDayStatus = :employmentDayStatus',
+        'employment_days.employmentDayStatus = :employmentDayStatus',
         {
           status,
         },
