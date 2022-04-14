@@ -12,7 +12,7 @@ export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
   ): Promise<WorkerPeriods[]> {
     const { status, search } = filterDto;
 
-    const query = this.createQueryBuilder('workerPeriods');
+    const query = this.createQueryBuilder('worker_periods');
     query.where({ user });
 
     if (status) {
@@ -21,7 +21,7 @@ export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
 
     if (search) {
       query.andWhere(
-        '(LOWER(worker_periods.title) LIKE LOWER(:search) OR LOWER(workerPeriods.description) LIKE LOWER(:search))',
+        '(LOWER(worker_periods.title) LIKE LOWER(:search) OR LOWER(worker_periods.description) LIKE LOWER(:search))',
         { search: `%${search}%` },
       );
     }

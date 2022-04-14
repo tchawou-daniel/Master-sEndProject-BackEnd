@@ -12,7 +12,7 @@ export class WorkerDaysRepository extends Repository<WorkerDays> {
     const { numberOfHours, startTime, endTime, weekday, status } = filterDto;
 
     const query = this.createQueryBuilder('worker_days');
-    query.where({ workerPeriod });
+    //query.where({ workerPeriod });
 
     if (numberOfHours) {
       query.andWhere('worker_days.numberOfHours = :nbHours', { numberOfHours });

@@ -6,7 +6,7 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { WorkerPeriodStatus } from '../../common/types/workerPeriods';
 import { BaseEntity } from '../SHARED/entities/base.entity';
 
-@Entity({ name: 'worker_period' })
+@Entity()
 export class WorkerPeriods extends BaseEntity {
   @Column({ default: null, nullable: true, type: 'int' })
   effectiveAsOf: number;

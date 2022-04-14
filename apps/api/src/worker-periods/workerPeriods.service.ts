@@ -6,8 +6,6 @@ import { WorkerPeriodsRepository } from '@api/worker-periods/workerPeriods.repos
 import { Get, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { WorkerPeriodStatus } from '../../common/types/workerPeriods';
-
 @Injectable()
 export class WorkerPeriodsService {
   constructor(
