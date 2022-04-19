@@ -1,18 +1,20 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { IsDecimal, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 import { WeekDays, WorkerDayStatus } from '../../../common/types/workerDays';
+import { Type } from 'class-transformer';
 
 export class WorkerDaysDto {
   @IsNotEmpty()
-  @IsNumber()
-  startTime: number;
+  @IsString()
+  startTime: string;
+
+  @IsNotEmpty()
+  @IsString()
+  endTime: string;
 
   @IsNotEmpty()
   @IsNumber()
-  endTime: number;
-
-  @IsNotEmpty()
-  @IsNumber()
+  @Type(() => Number)
   numberOfHours: number;
 
   @IsNotEmpty()
@@ -21,5 +23,5 @@ export class WorkerDaysDto {
 
   @IsNotEmpty()
   @IsEnum(WorkerDayStatus)
-  status: WorkerDayStatus;
+  workerDayStatus: WorkerDayStatus;
 }

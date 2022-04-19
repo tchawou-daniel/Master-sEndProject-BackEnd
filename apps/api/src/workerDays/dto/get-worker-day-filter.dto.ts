@@ -1,17 +1,23 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 import { WeekDays, WorkerDayStatus } from '../../../common/types/workerDays';
 
 export class GetWorkerDayFilterDto {
   @IsNotEmpty()
   @IsOptional()
-  @IsNumber()
-  startTime: number;
+  @IsString()
+  startTime: string;
 
   @IsNotEmpty()
   @IsOptional()
-  @IsNumber()
-  endTime: number;
+  @IsString()
+  endTime: string;
 
   @IsOptional()
   @IsNumber()
@@ -23,5 +29,5 @@ export class GetWorkerDayFilterDto {
 
   @IsOptional()
   @IsEnum(WorkerDayStatus)
-  status: WorkerDayStatus;
+  workerDayStatus: WorkerDayStatus;
 }

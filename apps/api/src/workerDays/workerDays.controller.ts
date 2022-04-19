@@ -1,5 +1,6 @@
 import { GetWorkerPeriods } from '@api/worker-periods/get-workerPeriods.decorator';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
+import { GetWorkerDayFilterDto } from '@api/workerDays/dto/get-worker-day-filter.dto';
 import { UpdateWorkerDaysStatusDto } from '@api/workerDays/dto/update-workerDays-status.dto';
 import { WorkerDaysDto } from '@api/workerDays/dto/worker-days.dto';
 import { WorkerDays } from '@api/workerDays/workerDays.entity';
@@ -17,7 +18,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GetWorkerDayFilterDto } from '@api/workerDays/dto/get-worker-day-filter.dto';
 
 @Controller('api/v0/workerDays')
 @UseGuards(AuthGuard('jwt'))
@@ -32,9 +32,9 @@ export class WorkerDaysController {
     @GetWorkerPeriods() workerPeriods: WorkerPeriods,
   ): Promise<WorkerDays[]> {
     this.logger.verbose(
-      `"Worker Periods ${
-        workerPeriods
-      }" retrieving all worker days Filters: ${JSON.stringify(filterDto)}`,
+      `"Worker Periods ${workerPeriods}" retrieving all worker days Filters: ${JSON.stringify(
+        filterDto,
+      )}`,
     );
     return this.workerDaysService.getWorkerDays(filterDto, workerPeriods);
   }

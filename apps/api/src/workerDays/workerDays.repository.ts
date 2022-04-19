@@ -9,7 +9,7 @@ export class WorkerDaysRepository extends Repository<WorkerDays> {
     filterDto: WorkerDaysDto,
     workerPeriod: WorkerPeriods,
   ): Promise<WorkerDays[]> {
-    const { numberOfHours, startTime, endTime, weekday, status } = filterDto;
+    const { numberOfHours, startTime, endTime, weekday, workerDayStatus } = filterDto;
 
     const query = this.createQueryBuilder('worker_days');
     //query.where({ workerPeriod });
@@ -29,9 +29,9 @@ export class WorkerDaysRepository extends Repository<WorkerDays> {
       query.andWhere('worker_days.weekday = :weekday', { weekday });
     }
 
-    if (status) {
+    if (workerDayStatus) {
       query.andWhere('worker_days.workerDayStatus = :workerDayStatus', {
-        status,
+        workerDayStatus,
       });
     }
 
@@ -43,13 +43,13 @@ export class WorkerDaysRepository extends Repository<WorkerDays> {
     createWorkerDayDto: WorkerDaysDto,
     workerPeriods: WorkerPeriods,
   ): Promise<WorkerDays> {
-    const { startTime, endTime, weekday, numberOfHours, status } =
+    const { startTime, endTime, weekday, numberOfHours, workerDayStatus } =
       createWorkerDayDto;
 
     const workerDay = this.create({
       endTime,
       startTime,
-      workerDayStatus: status,
+      workerDayStatus,
       numberOfHours,
       weekday,
       workerPeriods,
