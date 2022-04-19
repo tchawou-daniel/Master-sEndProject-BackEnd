@@ -1,6 +1,6 @@
 import { BaseEntity } from '@api/SHARED/entities/base.entity';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
-import { Column, Entity, JoinColumn, JoinTable, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 import { WeekDays, WorkerDayStatus } from '../../common/types/workerDays';
 

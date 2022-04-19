@@ -8,16 +8,17 @@ import {
   EmploymentDayStatus,
   WeekDays,
 } from '../../common/types/employmentDays';
+import { WorkerDayStatus } from '../../common/types/workerDays';
 
 @Entity()
 export class EmploymentDays extends BaseEntity {
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'time', nullable: false })
   startTime: number;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'time', nullable: false })
   endTime: number;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'float', nullable: false })
   numberOfHours: number;
 
   @Column({

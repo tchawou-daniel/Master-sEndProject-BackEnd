@@ -26,13 +26,26 @@ export class WorkerDaysController {
 
   constructor(private workerDaysService: WorkerDaysService) {}
 
-  @Get()
+  // check the status of the user
+  @Get(':id')
   getWorkerDays(
     @Query() filterDto: GetWorkerDayFilterDto,
     @GetWorkerPeriods() workerPeriods: WorkerPeriods,
   ): Promise<WorkerDays[]> {
     this.logger.verbose(
-      `"Worker Periods ${workerPeriods}" retrieving all worker days Filters: ${JSON.stringify(
+      `Retrieve all worker days Filters: ${JSON.stringify(filterDto)}`,
+    );
+    return this.workerDaysService.getWorkerDays(filterDto, workerPeriods);
+  }
+
+  // For a Period
+  @Get('period/:id')
+  getWorkerDaysByPeriodId(
+    @Query() filterDto: GetWorkerDayFilterDto,
+    @GetWorkerPeriods() workerPeriods: WorkerPeriods,
+  ): Promise<WorkerDays[]> {
+    this.logger.verbose(
+      `"For the worker period ${workerPeriods}" retrieving all worker days Filters: ${JSON.stringify(
         filterDto,
       )}`,
     );

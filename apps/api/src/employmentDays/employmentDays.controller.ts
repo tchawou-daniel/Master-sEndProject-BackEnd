@@ -5,6 +5,10 @@ import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { EmploymentDaysService } from '@api/employmentDays/employmentDays.service';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { GetEmploymentPeriods } from '@api/employmentPeriods/get-employmentPeriods.decorate';
+import { GetWorkerPeriods } from '@api/worker-periods/get-workerPeriods.decorator';
+import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
+import { GetWorkerDayFilterDto } from '@api/workerDays/dto/get-worker-day-filter.dto';
+import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import {
   Body,
   Controller,
@@ -23,8 +27,20 @@ import { AuthGuard } from '@nestjs/passport';
 export class EmploymentDaysController {
   constructor(private employmentDaysService: EmploymentDaysService) {}
 
-  @Get()
-  get(
+  @Get('/:id')
+  getEmploymentDaysByID(
+    @Query() filterDto: GetEmploymentDto,
+    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
+  ): Promise<EmploymentDays[]> {
+    return this.employmentDaysService.getEmploymentDays(
+      filterDto,
+      employmentPeriods,
+    );
+  }
+
+  // For a Period
+  @Get('/employmentPeriod/:id')
+  getEmploymentDaysByEmploymentPeriodId(
     @Query() filterDto: GetEmploymentDto,
     @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
   ): Promise<EmploymentDays[]> {
