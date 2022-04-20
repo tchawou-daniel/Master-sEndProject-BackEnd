@@ -8,10 +8,10 @@ import { EmploymentPeriodStatus } from '../../common/types/EmploymentPeriods';
 
 @Entity()
 export class EmploymentPeriods extends BaseEntity {
-  @Column({ default: null, nullable: true, type: 'int' })
+  @Column({ default: null, nullable: true, type: 'bigint' })
   effectiveAsOf: number;
 
-  @Column({ default: null, nullable: true, type: 'int' })
+  @Column({ default: null, nullable: true, type: 'bigint' })
   effectiveUntil: number;
 
   @Column({
@@ -23,6 +23,9 @@ export class EmploymentPeriods extends BaseEntity {
 
   @Column()
   numberOfHours: number;
+
+  @Column({ default: null })
+  numberOfDays: number;
 
   @ManyToOne(
     (_type) => Employment,

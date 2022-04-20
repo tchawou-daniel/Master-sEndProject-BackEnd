@@ -2,7 +2,6 @@ import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
 import { CreateEmploymentDto } from '@api/employment/dto/create-employment.dto';
 import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-filter.dto';
-import { UpdateEmploymentStatusDto } from '@api/employment/dto/update-employment-status.dto';
 import { UpdateEmploymentDto } from '@api/employment/dto/update-employment.dto';
 import { Employment } from '@api/employment/employment.entity';
 import { EmploymentRepository } from '@api/employment/employment.repository';

@@ -1,8 +1,6 @@
 import { GetUser } from '@api/auth/get-user.decorator';
 import { User } from '@api/auth/user.entity';
-import { Company } from '@api/company/company.entity';
 import { CompanyService } from '@api/company/company.service';
-import { GetCompany } from '@api/company/get-company.decorator';
 import { GetUsersWorkForComponiesFilterDto } from '@api/usersWorkForCompanies/dto/get-usersWorkForComponaies-filter.dto';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { UsersWorkForCompaniesService } from '@api/usersWorkForCompanies/usersWorkForCompanies.service';

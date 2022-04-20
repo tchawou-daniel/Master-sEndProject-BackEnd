@@ -1,6 +1,6 @@
 import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-filter.dto';
 import { Employment } from '@api/employment/employment.entity';
-import { EmploymentPeriodsDto } from '@api/employmentPeriods/dto/employment-periods.dto';
+import { CreateEmploymentPeriodsDto } from '@api/employmentPeriods/dto/create-employment-periods.dto';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { EntityRepository, Repository } from 'typeorm';
 
@@ -8,12 +8,12 @@ import { EntityRepository, Repository } from 'typeorm';
 export class EmploymentPeriodsRepository extends Repository<EmploymentPeriods> {
   async getEmploymentPeriods(
     filterDto: GetEmploymentsFilterDto,
-    employment: Employment,
+    employment?: Employment,
   ): Promise<EmploymentPeriods[]> {
     const { hiringStatus, search } = filterDto;
 
     const query = this.createQueryBuilder('employmentPeriods');
-    query.where({ employment });
+    // query.where({ employment });
 
     if (hiringStatus) {
       query.andWhere('employment_periods.status = :status', { hiringStatus });
@@ -31,21 +31,21 @@ export class EmploymentPeriodsRepository extends Repository<EmploymentPeriods> {
   }
 
   async createEmploymentPeriod(
-    createEmploymentPeriods: EmploymentPeriodsDto,
-    employment: Employment,
+    createEmploymentPeriods: CreateEmploymentPeriodsDto,
   ): Promise<EmploymentPeriods> {
     const {
       effectiveAsOf,
       effectiveUntil,
       numberOfHours,
       employmentPeriodStatus,
+      employmentId,
     } = createEmploymentPeriods;
     const employmentPeriods = this.create({
       effectiveAsOf,
       effectiveUntil,
       employmentPeriodStatus,
       numberOfHours,
-      employment,
+      employment: employmentId,
     });
     await this.save(employmentPeriods);
     return employmentPeriods;

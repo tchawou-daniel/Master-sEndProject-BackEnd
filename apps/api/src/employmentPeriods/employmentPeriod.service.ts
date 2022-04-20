@@ -1,7 +1,8 @@
-import { User } from '@api/auth/user.entity';
+import { UpdateEmploymentDto } from '@api/employment/dto/update-employment.dto';
 import { Employment } from '@api/employment/employment.entity';
-import { EmploymentPeriodsDto } from '@api/employmentPeriods/dto/employment-periods.dto';
+import { CreateEmploymentPeriodsDto } from '@api/employmentPeriods/dto/create-employment-periods.dto';
 import { GetEmploymentPeriodsFilterDto } from '@api/employmentPeriods/dto/get-employment-periods-filter.dto';
+import { UpdateEmploymentPeriodDto } from '@api/employmentPeriods/dto/update-employment-period.dto';
 import { EmploymentPeriodsRepository } from '@api/employmentPeriods/employementPeriods.repository';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { Get, Injectable, NotFoundException } from '@nestjs/common';
@@ -19,30 +20,25 @@ export class EmploymentPeriodService {
   @Get()
   getEmploymentPeriods(
     filterDto: GetEmploymentPeriodsFilterDto,
-    employment: Employment,
   ): Promise<EmploymentPeriods[]> {
-    return this.employmentPeriodsRepository.getEmploymentPeriods(
-      filterDto,
-      employment,
-    );
+    return this.employmentPeriodsRepository.getEmploymentPeriods(filterDto);
   }
 
   createEmploymentPeriod(
-    createEmploymentPeriodsDto: EmploymentPeriodsDto,
-    employment: Employment,
+    createEmploymentPeriodsDto: CreateEmploymentPeriodsDto,
   ): Promise<EmploymentPeriods> {
     return this.employmentPeriodsRepository.createEmploymentPeriod(
       createEmploymentPeriodsDto,
-      employment,
     );
   }
 
   async getEmploymentPeriodById(
     id: string,
-    employment: Employment,
+    employment?: Employment,
   ): Promise<EmploymentPeriods> {
     const found = await this.employmentPeriodsRepository.findOne({
-      where: { id, employment },
+      // where: { id, employment },
+      where: { id },
     });
     if (!found) {
       throw new NotFoundException(
@@ -55,13 +51,27 @@ export class EmploymentPeriodService {
   async updateEmploymentPeriodStatus(
     id: string,
     status: EmploymentPeriodStatus,
-    employment: Employment,
   ): Promise<EmploymentPeriods> {
-    const employmentPeriods = await this.getEmploymentPeriodById(
-      id,
-      employment,
-    );
+    const employmentPeriods = await this.getEmploymentPeriodById(id);
     employmentPeriods.employmentPeriodStatus = status;
+    await this.employmentPeriodsRepository.save(employmentPeriods);
+
+    return employmentPeriods;
+  }
+
+  async updateEmployment(
+    id: string,
+    updateEmploymentDto: UpdateEmploymentPeriodDto,
+  ): Promise<EmploymentPeriods> {
+    const employmentPeriods = await this.getEmploymentPeriodById(id);
+
+    employmentPeriods.employmentPeriodStatus =
+      updateEmploymentDto.employmentPeriodStatus;
+    employmentPeriods.numberOfDays = updateEmploymentDto.numberOfDays;
+    employmentPeriods.numberOfHours = updateEmploymentDto.numberOfHours;
+    employmentPeriods.effectiveAsOf = updateEmploymentDto.effectiveAsOf;
+    employmentPeriods.effectiveUntil = updateEmploymentDto.effectiveUntil;
+
     await this.employmentPeriodsRepository.save(employmentPeriods);
 
     return employmentPeriods;
