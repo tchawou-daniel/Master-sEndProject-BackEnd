@@ -11,5 +11,5 @@ export class CreateUsersWorkForCompaniesDto {
 
   @IsOptional()
   @IsNumber()
-  workerReviews?: number;
+  workerReviews?: string;
 }

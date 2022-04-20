@@ -1,5 +1,6 @@
 import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
+import { CreateUsersWorkForCompaniesDto } from '@api/usersWorkForCompanies/dto/create-usersWorkForCompanies.dto';
 import { GetUsersWorkForComponiesFilterDto } from '@api/usersWorkForCompanies/dto/get-usersWorkForComponaies-filter.dto';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { isEqual } from 'lodash';
@@ -74,5 +75,25 @@ export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForComp
       query.andWhere({ user });
       return query.getMany();
     }
+  }
+
+  async createUsersWorkForComany(
+    createUsersWorkForCompanies: CreateUsersWorkForCompaniesDto,
+    company: Company,
+    user: User,
+  ): Promise<UsersWorkForCompanies> {
+    const { scoreCompany, companyReviews, workerReviews } =
+      createUsersWorkForCompanies;
+
+    const usersWorkForCompanies = this.create({
+      scoreCompany,
+      companyReviews,
+      workerReviews,
+      company,
+      user,
+    });
+
+    await this.save(usersWorkForCompanies);
+    return usersWorkForCompanies;
   }
 }

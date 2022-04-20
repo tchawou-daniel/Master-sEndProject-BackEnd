@@ -26,7 +26,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], GetUsersWorkForComponiesFilterDto.prototype, "workerReviews", void 0);
 exports.GetUsersWorkForComponiesFilterDto = GetUsersWorkForComponiesFilterDto;
 //# sourceMappingURL=get-usersWorkForComponaies-filter.dto.js.map

@@ -35,6 +35,9 @@ let UsersWorkForCompaniesService = class UsersWorkForCompaniesService {
         }
         return found;
     }
+    createUsersWorkForCompany(createUsersWorkForCompaniesDto, user, company) {
+        return this.usersWorkForCompaniesRepository.createUsersWorkForComany(createUsersWorkForCompaniesDto, company, user);
+    }
 };
 __decorate([
     (0, common_1.Get)(),

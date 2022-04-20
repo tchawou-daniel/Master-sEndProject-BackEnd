@@ -11,5 +11,5 @@ export class GetUsersWorkForComponiesFilterDto {
 
   @IsOptional()
   @IsNumber()
-  workerReviews?: number;
+  workerReviews?: string;
 }

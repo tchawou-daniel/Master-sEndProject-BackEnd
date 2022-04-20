@@ -46,6 +46,18 @@ let UsersWorkForCompaniesRepository = class UsersWorkForCompaniesRepository exte
             return query.getMany();
         }
     }
+    async createUsersWorkForComany(createUsersWorkForCompanies, company, user) {
+        const { scoreCompany, companyReviews, workerReviews } = createUsersWorkForCompanies;
+        const usersWorkForCompanies = this.create({
+            scoreCompany,
+            companyReviews,
+            workerReviews,
+            company,
+            user,
+        });
+        await this.save(usersWorkForCompanies);
+        return usersWorkForCompanies;
+    }
 };
 UsersWorkForCompaniesRepository = __decorate([
     (0, typeorm_1.EntityRepository)(usersWorkForCompanies_entity_1.UsersWorkForCompanies)

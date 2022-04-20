@@ -15,7 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersWorkForCompaniesController = void 0;
 const get_user_decorator_1 = require("../auth/get-user.decorator");
 const user_entity_1 = require("../auth/user.entity");
+const company_entity_1 = require("../company/company.entity");
 const company_service_1 = require("../company/company.service");
+const get_company_decorator_1 = require("../company/get-company.decorator");
+const create_usersWorkForCompanies_dto_1 = require("./dto/create-usersWorkForCompanies.dto");
 const get_usersWorkForComponaies_filter_dto_1 = require("./dto/get-usersWorkForComponaies-filter.dto");
 const usersWorkForCompanies_service_1 = require("./usersWorkForCompanies.service");
 const common_1 = require("@nestjs/common");
@@ -37,6 +40,11 @@ let UsersWorkForCompaniesController = class UsersWorkForCompaniesController {
         const userWorkForCompanies = this.getUserWorkForCompaniesById(id, user);
         this.logger.verbose(`the content of userWorkForCompanies is: ${userWorkForCompanies}`);
         return this.getUsersWorkForCompanies(filterDto, user);
+    }
+    createUsersWorkForCompany(createUsersWorkForCompaniesDto, user, company, id) {
+        const userWorkForCompanies = this.getUserWorkForCompaniesById(id, user);
+        this.logger.verbose(`the content of userWorkForCompanies is: ${userWorkForCompanies}`);
+        return this.usersWorkForCompaniesService.createUsersWorkForCompany(createUsersWorkForCompaniesDto, user, company);
     }
 };
 __decorate([
@@ -66,8 +74,20 @@ __decorate([
         user_entity_1.User, String]),
     __metadata("design:returntype", Promise)
 ], UsersWorkForCompaniesController.prototype, "getUsersWorkForMyCompany", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Query)()),
+    __param(1, (0, get_user_decorator_1.GetUser)()),
+    __param(2, (0, get_company_decorator_1.GetCompany)()),
+    __param(3, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_usersWorkForCompanies_dto_1.CreateUsersWorkForCompaniesDto,
+        user_entity_1.User,
+        company_entity_1.Company, String]),
+    __metadata("design:returntype", Promise)
+], UsersWorkForCompaniesController.prototype, "createUsersWorkForCompany", null);
 UsersWorkForCompaniesController = __decorate([
-    (0, common_1.Controller)('usersWorkForCompanies'),
+    (0, common_1.Controller)('api/v0/usersWorkForCompanies'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
     __metadata("design:paramtypes", [usersWorkForCompanies_service_1.UsersWorkForCompaniesService,
         company_service_1.CompanyService])

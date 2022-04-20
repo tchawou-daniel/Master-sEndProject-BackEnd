@@ -1,6 +1,9 @@
 import { GetUser } from '@api/auth/get-user.decorator';
 import { User } from '@api/auth/user.entity';
+import { Company } from '@api/company/company.entity';
 import { CompanyService } from '@api/company/company.service';
+import { GetCompany } from '@api/company/get-company.decorator';
+import { CreateUsersWorkForCompaniesDto } from '@api/usersWorkForCompanies/dto/create-usersWorkForCompanies.dto';
 import { GetUsersWorkForComponiesFilterDto } from '@api/usersWorkForCompanies/dto/get-usersWorkForComponaies-filter.dto';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { UsersWorkForCompaniesService } from '@api/usersWorkForCompanies/usersWorkForCompanies.service';
@@ -9,12 +12,13 @@ import {
   Get,
   Logger,
   Param,
+  Post,
   Query,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller('usersWorkForCompanies')
+@Controller('api/v0/usersWorkForCompanies')
 @UseGuards(AuthGuard())
 export class UsersWorkForCompaniesController {
   private logger = new Logger('UsersWorkForCompaniesController');
@@ -77,4 +81,23 @@ export class UsersWorkForCompaniesController {
   //   companyService.getCompanyByName();
   //   return this.companyService.getCompanyId();
   // }
+
+  @Post()
+  createUsersWorkForCompany(
+    @Query() createUsersWorkForCompaniesDto: CreateUsersWorkForCompaniesDto,
+    @GetUser() user: User,
+    @GetCompany() company: Company,
+    @Param('id') id: string,
+  ): Promise<UsersWorkForCompanies> {
+    const userWorkForCompanies = this.getUserWorkForCompaniesById(id, user);
+    this.logger.verbose(
+      `the content of userWorkForCompanies is: ${userWorkForCompanies}`,
+    );
+
+    return this.usersWorkForCompaniesService.createUsersWorkForCompany(
+      createUsersWorkForCompaniesDto,
+      user,
+      company,
+    );
+  }
 }
