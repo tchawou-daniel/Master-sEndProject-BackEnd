@@ -21,10 +21,10 @@ export class EmploymentPeriods extends BaseEntity {
   })
   employmentPeriodStatus: EmploymentPeriodStatus;
 
-  @Column()
+  @Column({ type: 'int' })
   numberOfHours: number;
 
-  @Column({ default: null })
+  @Column({ type: 'int', default: null })
   numberOfDays: number;
 
   @ManyToOne(

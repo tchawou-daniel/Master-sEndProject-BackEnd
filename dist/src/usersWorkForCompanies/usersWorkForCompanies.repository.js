@@ -46,14 +46,14 @@ let UsersWorkForCompaniesRepository = class UsersWorkForCompaniesRepository exte
             return query.getMany();
         }
     }
-    async createUsersWorkForComany(createUsersWorkForCompanies, company, user) {
-        const { scoreCompany, companyReviews, workerReviews } = createUsersWorkForCompanies;
+    async createUsersWorkForComany(createUsersWorkForCompanies, user) {
+        const { scoreCompany, companyReviews, workerReviews, companyId } = createUsersWorkForCompanies;
         const usersWorkForCompanies = this.create({
             scoreCompany,
             companyReviews,
             workerReviews,
-            company,
             user,
+            companyId,
         });
         await this.save(usersWorkForCompanies);
         return usersWorkForCompanies;

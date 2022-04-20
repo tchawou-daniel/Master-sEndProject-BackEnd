@@ -16,9 +16,9 @@ const employmentDays_entity_1 = require("../employmentDays/employmentDays.entity
 const base_entity_1 = require("../SHARED/entities/base.entity");
 const usersWorkForCompanies_entity_1 = require("../usersWorkForCompanies/usersWorkForCompanies.entity");
 const workerPeriods_entity_1 = require("../worker-periods/workerPeriods.entity");
+const class_transformer_1 = require("class-transformer");
 const typeorm_1 = require("typeorm");
 const user_1 = require("../../common/types/user");
-const class_transformer_1 = require("class-transformer");
 let User = class User extends base_entity_1.BaseEntity {
 };
 __decorate([

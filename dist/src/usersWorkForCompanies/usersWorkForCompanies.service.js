@@ -35,8 +35,17 @@ let UsersWorkForCompaniesService = class UsersWorkForCompaniesService {
         }
         return found;
     }
-    createUsersWorkForCompany(createUsersWorkForCompaniesDto, user, company) {
-        return this.usersWorkForCompaniesRepository.createUsersWorkForComany(createUsersWorkForCompaniesDto, company, user);
+    createUsersWorkForCompany(createUsersWorkForCompaniesDto, user) {
+        return this.usersWorkForCompaniesRepository.createUsersWorkForComany(createUsersWorkForCompaniesDto, user);
+    }
+    async updateUsersWorkForCompaniesService(id, updateUsersWorkForCompaniesDto, user) {
+        const usersWorkForCompany = await this.getUserWorkForCompaniesById(id, user);
+        const { scoreCompany, companyReviews, workerReviews } = updateUsersWorkForCompaniesDto;
+        usersWorkForCompany.scoreCompany = scoreCompany;
+        usersWorkForCompany.companyReviews = companyReviews;
+        usersWorkForCompany.workerReviews = workerReviews;
+        await this.usersWorkForCompaniesRepository.save(usersWorkForCompany);
+        return usersWorkForCompany;
     }
 };
 __decorate([

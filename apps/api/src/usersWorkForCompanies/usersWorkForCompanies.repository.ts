@@ -79,18 +79,17 @@ export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForComp
 
   async createUsersWorkForComany(
     createUsersWorkForCompanies: CreateUsersWorkForCompaniesDto,
-    company: Company,
     user: User,
   ): Promise<UsersWorkForCompanies> {
-    const { scoreCompany, companyReviews, workerReviews } =
+    const { scoreCompany, companyReviews, workerReviews, companyId } =
       createUsersWorkForCompanies;
 
     const usersWorkForCompanies = this.create({
       scoreCompany,
       companyReviews,
       workerReviews,
-      company,
       user,
+      companyId,
     });
 
     await this.save(usersWorkForCompanies);

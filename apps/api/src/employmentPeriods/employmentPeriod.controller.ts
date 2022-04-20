@@ -38,7 +38,7 @@ export class EmploymentPeriodController {
   }
 
   @Post()
-  async createEmploymentPeriods(
+  createEmploymentPeriods(
     @Body() createEmploymentDto: CreateEmploymentPeriodsDto,
   ): Promise<EmploymentPeriods> {
     return this.employmentPeriodsService.createEmploymentPeriod(
@@ -49,7 +49,6 @@ export class EmploymentPeriodController {
   @Patch('/:id')
   updateEmploymentPeriod(
     @Param('id') id: string,
-    @GetUser() employment: Employment,
     @Body() updateEmploymentDto: UpdateEmploymentPeriodDto,
   ): Promise<EmploymentPeriods> {
     return this.employmentPeriodsService.updateEmployment(

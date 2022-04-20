@@ -1,15 +1,19 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsInt, IsNumber, IsOptional } from 'class-validator';
 
 export class UpdateUsersWorkForCompaniesDto {
   @IsOptional()
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   scoreCompany?: number;
 
   @IsOptional()
-  @IsString()
-  companyReviews?: string;
+  @IsInt()
+  @Type(() => Number)
+  companyReviews?: number;
 
   @IsOptional()
-  @IsNumber()
-  workerReviews?: string;
+  @IsInt()
+  @Type(() => Number)
+  workerReviews?: number;
 }

@@ -18,23 +18,23 @@ let UsersWorkForCompanies = class UsersWorkForCompanies extends base_entity_1.Ba
 };
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], UsersWorkForCompanies.prototype, "userId", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], UsersWorkForCompanies.prototype, "companyId", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: 'int', nullable: true }),
     __metadata("design:type", Number)
 ], UsersWorkForCompanies.prototype, "scoreCompany", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    (0, typeorm_1.Column)({ type: 'int', nullable: true }),
+    __metadata("design:type", Number)
 ], UsersWorkForCompanies.prototype, "companyReviews", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    (0, typeorm_1.Column)({ type: 'int', nullable: true }),
+    __metadata("design:type", Number)
 ], UsersWorkForCompanies.prototype, "workerReviews", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.usersWorkForCompanies),

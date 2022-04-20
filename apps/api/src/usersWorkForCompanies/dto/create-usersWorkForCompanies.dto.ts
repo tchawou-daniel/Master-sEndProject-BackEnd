@@ -1,15 +1,22 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsInt, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateUsersWorkForCompaniesDto {
   @IsOptional()
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   scoreCompany?: number;
 
   @IsOptional()
-  @IsString()
-  companyReviews?: string;
+  @IsInt()
+  @Type(() => Number)
+  companyReviews?: number;
 
   @IsOptional()
-  @IsNumber()
-  workerReviews?: string;
+  @IsInt()
+  @Type(() => Number)
+  workerReviews?: number;
+
+  @IsNotEmpty()
+  companyId: string;
 }

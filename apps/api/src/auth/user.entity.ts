@@ -4,10 +4,10 @@ import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { BaseEntity } from '@api/SHARED/entities/base.entity';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
+import { Exclude } from 'class-transformer';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 import { UserRole, WorkerIntegrationStatus } from '../../common/types/user';
-import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User extends BaseEntity {

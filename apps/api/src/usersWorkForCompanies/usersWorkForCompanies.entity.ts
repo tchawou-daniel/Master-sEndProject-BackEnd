@@ -7,19 +7,19 @@ import { BaseEntity } from '../SHARED/entities/base.entity';
 @Entity()
 export class UsersWorkForCompanies extends BaseEntity {
   @Column()
-  public userId!: number;
+  public userId!: string;
 
   @Column()
-  public companyId!: number;
+  public companyId!: string;
 
-  @Column()
+  @Column({ type: 'int', nullable: true })
   public scoreCompany!: number;
 
-  @Column()
-  public companyReviews!: string;
+  @Column({ type: 'int', nullable: true })
+  public companyReviews!: number;
 
-  @Column()
-  public workerReviews!: string;
+  @Column({ type: 'int', nullable: true })
+  public workerReviews!: number;
 
   @ManyToOne(() => User, (user) => user.usersWorkForCompanies)
   public user!: User;

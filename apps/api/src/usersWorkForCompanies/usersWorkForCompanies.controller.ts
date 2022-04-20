@@ -3,15 +3,22 @@ import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
 import { CompanyService } from '@api/company/company.service';
 import { GetCompany } from '@api/company/get-company.decorator';
+import { Employment } from '@api/employment/employment.entity';
+import { CreateEmploymentPeriodsDto } from '@api/employmentPeriods/dto/create-employment-periods.dto';
+import { UpdateEmploymentPeriodDto } from '@api/employmentPeriods/dto/update-employment-period.dto';
+import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { CreateUsersWorkForCompaniesDto } from '@api/usersWorkForCompanies/dto/create-usersWorkForCompanies.dto';
 import { GetUsersWorkForComponiesFilterDto } from '@api/usersWorkForCompanies/dto/get-usersWorkForComponaies-filter.dto';
+import { UpdateUsersWorkForCompaniesDto } from '@api/usersWorkForCompanies/dto/update-usersWorkForCompanies.dto';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { UsersWorkForCompaniesService } from '@api/usersWorkForCompanies/usersWorkForCompanies.service';
 import {
+  Body,
   Controller,
   Get,
   Logger,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -84,20 +91,26 @@ export class UsersWorkForCompaniesController {
 
   @Post()
   createUsersWorkForCompany(
-    @Query() createUsersWorkForCompaniesDto: CreateUsersWorkForCompaniesDto,
+    @Body() createUsersWorkForCompaniesDto: CreateUsersWorkForCompaniesDto,
     @GetUser() user: User,
-    @GetCompany() company: Company,
-    @Param('id') id: string,
   ): Promise<UsersWorkForCompanies> {
-    const userWorkForCompanies = this.getUserWorkForCompaniesById(id, user);
-    this.logger.verbose(
-      `the content of userWorkForCompanies is: ${userWorkForCompanies}`,
-    );
-
     return this.usersWorkForCompaniesService.createUsersWorkForCompany(
       createUsersWorkForCompaniesDto,
       user,
-      company,
+    );
+  }
+
+  @Patch('/:id')
+  updateUsersWorkForCompany(
+    @Body() updateEmploymentPeriodDto: UpdateUsersWorkForCompaniesDto,
+    @GetUser() user: User,
+    @Param('id') id: string,
+  ): Promise<UsersWorkForCompanies> {
+    this.logger.verbose({ updateEmploymentPeriodDto });
+    return this.usersWorkForCompaniesService.updateUsersWorkForCompaniesService(
+      id,
+      updateEmploymentPeriodDto,
+      user,
     );
   }
 }
