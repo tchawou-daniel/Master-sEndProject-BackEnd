@@ -1,20 +1,27 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 
 import {
   EmploymentDayStatus,
   WeekDays,
 } from '../../../common/types/employmentDays';
 
-export class EmploymentDaysDto {
+export class CreateEmploymentDaysDto {
   @IsNotEmpty()
-  @IsOptional()
-  @IsNumber()
-  startTime: number;
+  @IsString()
+  @MaxLength(5)
+  startTime: string;
 
   @IsNotEmpty()
-  @IsOptional()
-  @IsNumber()
-  endTime: number;
+  @IsString()
+  @MaxLength(5)
+  endTime: string;
 
   @IsOptional()
   @IsNumber()

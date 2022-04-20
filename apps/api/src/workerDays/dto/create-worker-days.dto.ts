@@ -4,7 +4,7 @@ import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 import { WeekDays, WorkerDayStatus } from '../../../common/types/workerDays';
 
-export class WorkerDaysDto {
+export class CreateWorkerDaysDto {
   @IsNotEmpty()
   @IsString()
   startTime: string;

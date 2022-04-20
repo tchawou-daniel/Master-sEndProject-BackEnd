@@ -1,6 +1,6 @@
 import { GetWorkerDayFilterDto } from '@api/workerDays/dto/get-worker-day-filter.dto';
 import { UpdateWorkerDaysDto } from '@api/workerDays/dto/update-workerDays.dto';
-import { WorkerDaysDto } from '@api/workerDays/dto/worker-days.dto';
+import { CreateWorkerDaysDto } from '@api/workerDays/dto/create-worker-days.dto';
 import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import { WorkerDaysRepository } from '@api/workerDays/workerDays.repository';
 import { Get, Injectable, Logger, NotFoundException } from '@nestjs/common';
@@ -32,7 +32,7 @@ export class WorkerDaysService {
     return found;
   }
 
-  createWorkerDay(createWorkerDayDto: WorkerDaysDto): Promise<WorkerDays> {
+  createWorkerDay(createWorkerDayDto: CreateWorkerDaysDto): Promise<WorkerDays> {
     this.logger.verbose(createWorkerDayDto);
     return this.workerDaysRepository.createWorkerDay(createWorkerDayDto);
   }

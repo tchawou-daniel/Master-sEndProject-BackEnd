@@ -1,4 +1,5 @@
-import { EmploymentDaysDto } from '@api/employmentDays/dto/employment-days.dto';
+import { User } from '@api/auth/user.entity';
+import { CreateEmploymentDaysDto } from '@api/employmentDays/dto/create-employment-days.dto';
 import { UpdateEmploymentDaysDto } from '@api/employmentDays/dto/update-employment-days.dto';
 import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { EmploymentDaysRepository } from '@api/employmentDays/employmentDays.repository';
@@ -16,7 +17,9 @@ export class EmploymentDaysService {
   ) {}
 
   @Get()
-  getEmploymentDays(filterDto: EmploymentDaysDto): Promise<EmploymentDays[]> {
+  getEmploymentDays(
+    filterDto: CreateEmploymentDaysDto,
+  ): Promise<EmploymentDays[]> {
     return this.employmentDaysRepository.getEmploymentDays(filterDto);
   }
 
@@ -31,12 +34,14 @@ export class EmploymentDaysService {
   }
 
   createEmploymentDay(
-    createEmploymentDayDto: EmploymentDaysDto,
+    createEmploymentDayDto: CreateEmploymentDaysDto,
     employmentPeriod: EmploymentPeriods,
+    user: User,
   ): Promise<EmploymentDays> {
     return this.employmentDaysRepository.createEmploymentDay(
       createEmploymentDayDto,
       employmentPeriod,
+      user,
     );
   }
 

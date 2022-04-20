@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { IsEnum, IsOptional, IsString, MaxLength } from 'class-validator';
 
 import {
   EmploymentDayStatus,
@@ -7,15 +7,17 @@ import {
 
 export class GetEmploymentDto {
   @IsOptional()
-  @IsNumber()
-  startTime: number;
+  @IsString()
+  @MaxLength(5)
+  startTime: string;
 
   @IsOptional()
-  @IsNumber()
-  endTime: number;
+  @IsString()
+  @MaxLength(5)
+  endTime: string;
 
   @IsOptional()
-  @IsNumber()
+  @IsString()
   numberOfHours: number;
 
   @IsOptional()

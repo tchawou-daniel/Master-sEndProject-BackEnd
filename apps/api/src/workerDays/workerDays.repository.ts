@@ -1,6 +1,6 @@
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 import { GetWorkerDayFilterDto } from '@api/workerDays/dto/get-worker-day-filter.dto';
-import { WorkerDaysDto } from '@api/workerDays/dto/worker-days.dto';
+import { CreateWorkerDaysDto } from '@api/workerDays/dto/create-worker-days.dto';
 import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import { EntityRepository, Repository } from 'typeorm';
 
@@ -39,7 +39,7 @@ export class WorkerDaysRepository extends Repository<WorkerDays> {
   }
 
   async createWorkerDay(
-    createWorkerDayDto: WorkerDaysDto,
+    createWorkerDayDto: CreateWorkerDaysDto,
   ): Promise<WorkerDays> {
     const {
       startTime,

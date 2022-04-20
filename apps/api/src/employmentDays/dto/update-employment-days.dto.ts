@@ -1,4 +1,11 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 
 import {
   EmploymentDayStatus,
@@ -6,13 +13,15 @@ import {
 } from '../../../common/types/employmentDays';
 
 export class UpdateEmploymentDaysDto {
-  @IsOptional()
-  @IsNumber()
-  startTime: number;
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(5)
+  startTime: string;
 
-  @IsOptional()
-  @IsNumber()
-  endTime: number;
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(5)
+  endTime: string;
 
   @IsOptional()
   @IsNumber()

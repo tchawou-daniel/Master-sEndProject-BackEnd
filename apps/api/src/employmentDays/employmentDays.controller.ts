@@ -1,4 +1,6 @@
-import { EmploymentDaysDto } from '@api/employmentDays/dto/employment-days.dto';
+import { GetUser } from '@api/auth/get-user.decorator';
+import { User } from '@api/auth/user.entity';
+import { CreateEmploymentDaysDto } from '@api/employmentDays/dto/create-employment-days.dto';
 import { GetEmploymentDto } from '@api/employmentDays/dto/get-employment-dto';
 import { UpdateEmploymentDaysStatusDto } from '@api/employmentDays/dto/update-employment-days-status.dto';
 import { UpdateEmploymentDaysDto } from '@api/employmentDays/dto/update-employment-days.dto';
@@ -40,12 +42,14 @@ export class EmploymentDaysController {
 
   @Post()
   createEmploymentPeriods(
-    @Body() createEmploymentDto: EmploymentDaysDto,
+    @Body() createEmploymentDto: CreateEmploymentDaysDto,
     @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
+    @GetUser() user: User,
   ): Promise<EmploymentDays> {
     return this.employmentDaysService.createEmploymentDay(
       createEmploymentDto,
       employmentPeriods,
+      user,
     );
   }
 

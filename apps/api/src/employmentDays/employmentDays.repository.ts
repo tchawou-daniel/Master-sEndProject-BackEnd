@@ -1,4 +1,5 @@
-import { EmploymentDaysDto } from '@api/employmentDays/dto/employment-days.dto';
+import { User } from '@api/auth/user.entity';
+import { CreateEmploymentDaysDto } from '@api/employmentDays/dto/create-employment-days.dto';
 import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { EntityRepository, Repository } from 'typeorm';
@@ -6,7 +7,7 @@ import { EntityRepository, Repository } from 'typeorm';
 @EntityRepository(EmploymentDays)
 export class EmploymentDaysRepository extends Repository<EmploymentDays> {
   async getEmploymentDays(
-    filterDto: EmploymentDaysDto,
+    filterDto: CreateEmploymentDaysDto,
   ): Promise<EmploymentDays[]> {
     const { numberOfHours, startTime, endTime, weekday, status } = filterDto;
 
@@ -43,8 +44,9 @@ export class EmploymentDaysRepository extends Repository<EmploymentDays> {
   }
 
   async createEmploymentDay(
-    createEmploymentDayDto: EmploymentDaysDto,
+    createEmploymentDayDto: CreateEmploymentDaysDto,
     employmentPeriods: EmploymentPeriods,
+    user: User,
   ): Promise<EmploymentDays> {
     const { startTime, endTime, weekday, numberOfHours, status } =
       createEmploymentDayDto;
@@ -56,6 +58,7 @@ export class EmploymentDaysRepository extends Repository<EmploymentDays> {
       employmentPeriods,
       numberOfHours,
       employmentDayStatus: status,
+      user,
     });
     await this.save(employmentDay);
     return employmentDay;
