@@ -22,5 +22,10 @@ export class CreateWorkerPeriodsDto {
   numberOfHours: number;
 
   @IsOptional()
+  @IsInt()
+  @Type(() => Number)
+  numberOfDays: number;
+
+  @IsOptional()
   workerPeriodStatus: WorkerPeriodStatus;
 }

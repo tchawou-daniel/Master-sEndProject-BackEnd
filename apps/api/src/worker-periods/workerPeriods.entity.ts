@@ -21,6 +21,9 @@ export class WorkerPeriods extends BaseEntity {
   })
   workerPeriodStatus?: WorkerPeriodStatus;
 
+  @Column({ default: null })
+  numberOfDays: number;
+
   @Column({ type: 'int' })
   numberOfHours: number;
 

@@ -1,11 +1,11 @@
 import { User } from '@api/auth/user.entity';
+import { CreateWorkerPeriodsDto } from '@api/worker-periods/dto/create-worker-periods.dto';
 import { GetWorkerPeriodsFilterDto } from '@api/worker-periods/dto/get-worker-periods-filter.dto';
 import { UpdateWorkerPeriodsDto } from '@api/worker-periods/dto/update-worker-periods.dto';
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 import { WorkerPeriodsRepository } from '@api/worker-periods/workerPeriods.repository';
 import { Get, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateWorkerPeriodsDto } from '@api/worker-periods/dto/create-worker-periods.dto';
 
 @Injectable()
 export class WorkerPeriodsService {

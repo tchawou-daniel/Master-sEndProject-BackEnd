@@ -34,13 +34,19 @@ export class WorkerPeriodsRepository extends Repository<WorkerPeriods> {
     createWorkerPeriods: CreateWorkerPeriodsDto,
     user: User,
   ): Promise<WorkerPeriods> {
-    const { effectiveAsOf, effectiveUntil, numberOfHours, workerPeriodStatus } =
-      createWorkerPeriods;
+    const {
+      effectiveAsOf,
+      effectiveUntil,
+      numberOfHours,
+      numberOfDays,
+      workerPeriodStatus,
+    } = createWorkerPeriods;
     const workerPeriods = this.create({
       effectiveAsOf,
       effectiveUntil,
       workerPeriodStatus,
       numberOfHours,
+      numberOfDays,
       user,
     });
     await this.save(workerPeriods);
