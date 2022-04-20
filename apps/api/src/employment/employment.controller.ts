@@ -112,13 +112,12 @@ export class EmploymentController {
     @Param('id') id: string,
     @Body() updateEmploymentStatusDto: UpdateEmploymentStatusDto,
   ): Promise<Employment> {
-    return this.employmentService.updateEmploymentStatus(
-      id,
-      updateEmploymentStatusDto,
-    );
+    const { hiringStatus } = updateEmploymentStatusDto;
+    this.logger.verbose(hiringStatus);
+    return this.employmentService.updateEmploymentStatus(id, hiringStatus);
   }
 
-  @Patch('/employment/')
+  @Patch('/employment')
   updateEmployment(
     @Param('id') id: string,
     @Body() updateEmploymentDto: UpdateEmploymentDto,

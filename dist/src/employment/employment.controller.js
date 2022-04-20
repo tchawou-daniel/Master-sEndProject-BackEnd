@@ -49,7 +49,9 @@ let EmploymentController = class EmploymentController {
         return this.employmentService.createEmployment(createEmploymentDto, user);
     }
     updateEmploymentStatus(id, updateEmploymentStatusDto) {
-        return this.employmentService.updateEmploymentStatus(id, updateEmploymentStatusDto);
+        const { hiringStatus } = updateEmploymentStatusDto;
+        this.logger.verbose(hiringStatus);
+        return this.employmentService.updateEmploymentStatus(id, hiringStatus);
     }
     updateEmployment(id, updateEmploymentDto) {
         return this.employmentService.updateEmployment(id, updateEmploymentDto);
@@ -121,7 +123,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], EmploymentController.prototype, "updateEmploymentStatus", null);
 __decorate([
-    (0, common_1.Patch)('/employment/'),
+    (0, common_1.Patch)('/employment'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

@@ -62,9 +62,9 @@ let EmploymentService = class EmploymentService {
         return this.employmentRepository.createEmployment(createEmploymentDto, user);
         throw new common_1.NotFoundException(`Not found`);
     }
-    async updateEmploymentStatus(id, updateEmploymentStatusDto) {
+    async updateEmploymentStatus(id, hiringStatus) {
         const employment = await this.getEmploymentById(id);
-        employment.hiringStatus = updateEmploymentStatusDto.hiringStatus;
+        employment.hiringStatus = hiringStatus;
         await this.employmentRepository.save(employment);
         return employment;
     }

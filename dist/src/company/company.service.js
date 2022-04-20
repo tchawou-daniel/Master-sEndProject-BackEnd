@@ -26,8 +26,10 @@ let CompanyService = class CompanyService {
         this.companyRepository = companyRepository;
     }
     getCompanies(filterDto, user) {
-        console.log(user);
-        return this.companyRepository.getCompanies(filterDto, user);
+        if (user) {
+            return this.companyRepository.getCompanies(filterDto, user);
+        }
+        return this.companyRepository.getCompanies(filterDto);
     }
     async getCompanyById(id, user) {
         const found = await this.companyRepository.findOne({ where: { id, user } });
@@ -52,9 +54,23 @@ let CompanyService = class CompanyService {
     createCompany(createCompanyDto, user) {
         return this.companyRepository.createCompany(createCompanyDto, user);
     }
-    async updateCompany(id, user, updateCompanyDto) {
+    async updateCompany(id, updateCompanyDto, user) {
         const company = await this.getCompanyById(id, user);
         company.name = updateCompanyDto.name;
+        company.companyStatus = updateCompanyDto.companyStatus;
+        company.country = updateCompanyDto.country;
+        company.town = updateCompanyDto.town;
+        company.street = updateCompanyDto.street;
+        company.zipCode = updateCompanyDto.zipCode;
+        company.description = updateCompanyDto.description;
+        company.companySector = updateCompanyDto.companySector;
+        company.hiringStatus = updateCompanyDto.hiringStatus;
+        await this.companyRepository.save(company);
+        return company;
+    }
+    async updateCompanyHiringStatus(id, hiringStatus, user) {
+        const company = await this.getCompanyById(id, user);
+        company.hiringStatus = hiringStatus;
         await this.companyRepository.save(company);
         return company;
     }

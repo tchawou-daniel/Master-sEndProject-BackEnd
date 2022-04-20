@@ -13,7 +13,9 @@ let CompanyRepository = class CompanyRepository extends typeorm_1.Repository {
     async getCompanies(filterDto, user) {
         const { hiringStatus, search } = filterDto;
         const query = this.createQueryBuilder('company');
-        query.where({ user });
+        if (user) {
+            query.where({ user });
+        }
         if (hiringStatus) {
             query.andWhere('company.hiringStatus = :hiringStatus', { hiringStatus });
         }

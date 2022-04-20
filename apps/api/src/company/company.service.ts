@@ -3,13 +3,13 @@ import { Company } from '@api/company/company.entity';
 import { CompanyRepository } from '@api/company/company.repository';
 import { CreateCompanyDto } from '@api/company/dto/create-company.dto';
 import { GetCompaniesFilterDto } from '@api/company/dto/get-companies-filter.dto';
+import { UpdateCompanyDto } from '@api/company/dto/update-company.dto';
 import { Get, Injectable, NotFoundException, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isEqual } from 'lodash';
 
 import { Hiring } from '../../common/types/company';
 import { UserRole } from '../../common/types/user';
-import { UpdateCompanyDto } from '@api/company/dto/update-company.dto';
 
 @Injectable()
 export class CompanyService {
@@ -21,10 +21,12 @@ export class CompanyService {
   @Get()
   getCompanies(
     filterDto: GetCompaniesFilterDto,
-    user: User,
+    user?: User,
   ): Promise<Company[]> {
-    console.log(user);
-    return this.companyRepository.getCompanies(filterDto, user);
+    if (user) {
+      return this.companyRepository.getCompanies(filterDto, user);
+    }
+    return this.companyRepository.getCompanies(filterDto);
   }
 
   async getCompanyById(id: string, user: User): Promise<Company> {
@@ -63,11 +65,31 @@ export class CompanyService {
 
   async updateCompany(
     id: string,
-    user: User,
     updateCompanyDto: UpdateCompanyDto,
+    user?: User,
   ): Promise<Company> {
     const company = await this.getCompanyById(id, user);
     company.name = updateCompanyDto.name;
+    company.companyStatus = updateCompanyDto.companyStatus;
+    company.country = updateCompanyDto.country;
+    company.town = updateCompanyDto.town;
+    company.street = updateCompanyDto.street;
+    company.zipCode = updateCompanyDto.zipCode;
+    company.description = updateCompanyDto.description;
+    company.companySector = updateCompanyDto.companySector;
+    company.hiringStatus = updateCompanyDto.hiringStatus;
+    await this.companyRepository.save(company);
+
+    return company;
+  }
+
+  async updateCompanyHiringStatus(
+    id: string,
+    hiringStatus: Hiring,
+    user?: User,
+  ): Promise<Company> {
+    const company = await this.getCompanyById(id, user);
+    company.hiringStatus = hiringStatus;
     await this.companyRepository.save(company);
 
     return company;

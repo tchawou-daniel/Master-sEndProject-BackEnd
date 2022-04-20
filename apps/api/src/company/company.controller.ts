@@ -4,6 +4,7 @@ import { Company } from '@api/company/company.entity';
 import { CompanyService } from '@api/company/company.service';
 import { CreateCompanyDto } from '@api/company/dto/create-company.dto';
 import { GetCompaniesFilterDto } from '@api/company/dto/get-companies-filter.dto';
+import { UpdateCompanyHiringStatusDto } from '@api/company/dto/update-company-hiring-status.dto';
 import { UpdateCompanyDto } from '@api/company/dto/update-company.dto';
 import {
   Body,
@@ -60,6 +61,20 @@ export class CompanyController {
     @GetUser() user: User,
     @Body() updateCompanyDto: UpdateCompanyDto,
   ): Promise<Company> {
-    return this.companyService.updateCompany(id, user, updateCompanyDto);
+    return this.companyService.updateCompany(id, updateCompanyDto, user);
+  }
+
+  @Patch('/:id/status')
+  updateCompanyHiringStatus(
+    @Param('id') id: string,
+    @GetUser() user: User,
+    @Body() updateCompanyHiringStatusDto: UpdateCompanyHiringStatusDto,
+  ): Promise<Company> {
+    const { hiringStatus } = updateCompanyHiringStatusDto;
+    return this.companyService.updateCompanyHiringStatus(
+      id,
+      hiringStatus,
+      user,
+    );
   }
 }

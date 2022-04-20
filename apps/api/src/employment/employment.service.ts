@@ -10,6 +10,7 @@ import { Get, Injectable, NotFoundException, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isEqual } from 'lodash';
 
+import { Hiring } from '../../common/types/employment';
 import { UserRole } from '../../common/types/user';
 
 @Injectable()
@@ -95,10 +96,11 @@ export class EmploymentService {
 
   async updateEmploymentStatus(
     id: string,
-    updateEmploymentStatusDto: UpdateEmploymentStatusDto,
+    hiringStatus: Hiring,
   ): Promise<Employment> {
     const employment = await this.getEmploymentById(id);
-    employment.hiringStatus = updateEmploymentStatusDto.hiringStatus;
+
+    employment.hiringStatus = hiringStatus;
     await this.employmentRepository.save(employment);
     return employment;
   }

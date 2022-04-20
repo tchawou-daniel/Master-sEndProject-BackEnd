@@ -5,17 +5,18 @@ import { GetCompaniesFilterDto } from '@api/company/dto/get-companies-filter.dto
 import { isEqual } from 'lodash';
 import { EntityRepository, Repository } from 'typeorm';
 
-
 @EntityRepository(Company)
 export class CompanyRepository extends Repository<Company> {
   // according to the user access
   async getCompanies(
     filterDto: GetCompaniesFilterDto,
-    user: User,
+    user?: User,
   ): Promise<Company[]> {
     const { hiringStatus, search } = filterDto;
     const query = this.createQueryBuilder('company');
-    query.where({ user });
+    if (user) {
+      query.where({ user });
+    }
 
     if (hiringStatus) {
       query.andWhere('company.hiringStatus = :hiringStatus', { hiringStatus });
