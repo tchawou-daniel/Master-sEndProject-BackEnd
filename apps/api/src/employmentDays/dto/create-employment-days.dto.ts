@@ -11,6 +11,7 @@ import {
   EmploymentDayStatus,
   WeekDays,
 } from '../../../common/types/employmentDays';
+import { Type } from 'class-transformer';
 
 export class CreateEmploymentDaysDto {
   @IsNotEmpty()
@@ -25,6 +26,7 @@ export class CreateEmploymentDaysDto {
 
   @IsOptional()
   @IsNumber()
+  @Type(() => Number)
   numberOfHours: number;
 
   @IsNotEmpty()

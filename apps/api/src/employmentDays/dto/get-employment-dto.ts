@@ -1,9 +1,10 @@
-import { IsEnum, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
 
 import {
   EmploymentDayStatus,
   WeekDays,
 } from '../../../common/types/employmentDays';
+import { Type } from 'class-transformer';
 
 export class GetEmploymentDto {
   @IsOptional()
@@ -17,7 +18,8 @@ export class GetEmploymentDto {
   endTime: string;
 
   @IsOptional()
-  @IsString()
+  @IsNumber()
+  @Type(() => Number)
   numberOfHours: number;
 
   @IsOptional()

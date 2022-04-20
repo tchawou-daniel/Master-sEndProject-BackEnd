@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsEnum,
   IsNotEmpty,
@@ -23,11 +24,12 @@ export class UpdateEmploymentDaysDto {
   @MaxLength(5)
   endTime: string;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
+  @Type(() => Number)
   numberOfHours: number;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(WeekDays)
   weekday: WeekDays;
 

@@ -27,10 +27,8 @@ export class EmploymentDaysController {
   constructor(private employmentDaysService: EmploymentDaysService) {}
 
   @Get('/:id')
-  getEmploymentDaysByID(
-    @Query() filterDto: GetEmploymentDto,
-  ): Promise<EmploymentDays[]> {
-    return this.employmentDaysService.getEmploymentDays(filterDto);
+  getEmploymentDaysByID(@Param('id') id: string): Promise<EmploymentDays> {
+    return this.employmentDaysService.getEmploymentDayById(id);
   }
 
   @Get()
