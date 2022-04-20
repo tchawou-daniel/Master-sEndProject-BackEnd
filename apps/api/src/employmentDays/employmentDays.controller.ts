@@ -41,12 +41,10 @@ export class EmploymentDaysController {
   @Post()
   createEmploymentPeriods(
     @Body() createEmploymentDto: CreateEmploymentDaysDto,
-    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
     @GetUser() user: User,
   ): Promise<EmploymentDays> {
     return this.employmentDaysService.createEmploymentDay(
       createEmploymentDto,
-      employmentPeriods,
       user,
     );
   }

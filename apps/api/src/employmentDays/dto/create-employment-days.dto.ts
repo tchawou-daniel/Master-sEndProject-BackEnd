@@ -1,3 +1,5 @@
+import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
+import { Type } from 'class-transformer';
 import {
   IsEnum,
   IsNotEmpty,
@@ -11,7 +13,6 @@ import {
   EmploymentDayStatus,
   WeekDays,
 } from '../../../common/types/employmentDays';
-import { Type } from 'class-transformer';
 
 export class CreateEmploymentDaysDto {
   @IsNotEmpty()
@@ -36,4 +37,7 @@ export class CreateEmploymentDaysDto {
   @IsNotEmpty()
   @IsEnum(EmploymentDayStatus)
   status: EmploymentDayStatus;
+
+  @IsNotEmpty()
+  employmentPeriods: EmploymentPeriods;
 }

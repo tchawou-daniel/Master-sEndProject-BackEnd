@@ -32,7 +32,9 @@ export class WorkerDaysService {
     return found;
   }
 
-  createWorkerDay(createWorkerDayDto: CreateWorkerDaysDto): Promise<WorkerDays> {
+  createWorkerDay(
+    createWorkerDayDto: CreateWorkerDaysDto,
+  ): Promise<WorkerDays> {
     this.logger.verbose(createWorkerDayDto);
     return this.workerDaysRepository.createWorkerDay(createWorkerDayDto);
   }
