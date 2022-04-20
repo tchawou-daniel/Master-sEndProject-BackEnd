@@ -1,8 +1,8 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsEnum } from 'class-validator';
 
 import { Hiring } from '../../../common/types/employment';
 
 export class UpdateEmploymentStatusDto {
-  @IsNotEmpty()
+  @IsEnum(Hiring)
   hiringStatus: Hiring;
 }

@@ -33,7 +33,6 @@ export class Employment extends BaseEntity {
     enum: Hiring,
     default: Hiring.ONGOING,
   })
-  @IsEmpty()
   hiringStatus: Hiring;
 
   @Column({ type: 'timestamp', default: null, nullable: true })

@@ -56,6 +56,14 @@ export class EmploymentService {
       } else {
         return foundFromCurrentUser;
       }
+    } else {
+      const found = await this.employmentRepository.findOne({
+        where: { id },
+      });
+      if (!found) {
+        throw new NotFoundException(`Employment day with ID "${id}" not found`);
+      }
+      return found;
     }
   }
 
@@ -95,11 +103,11 @@ export class EmploymentService {
 
   async updateEmploymentStatus(
     id: string,
-    hiringStatus: Hiring,
+    hiring: Hiring,
   ): Promise<Employment> {
     const employment = await this.getEmploymentById(id);
 
-    employment.hiringStatus = hiringStatus;
+    employment.hiringStatus = Hiring.DEACTIVATE;
     await this.employmentRepository.save(employment);
     return employment;
   }
