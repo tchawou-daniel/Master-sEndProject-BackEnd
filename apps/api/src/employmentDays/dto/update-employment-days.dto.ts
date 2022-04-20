@@ -5,7 +5,7 @@ import {
   WeekDays,
 } from '../../../common/types/employmentDays';
 
-export class GetEmploymentDto {
+export class UpdateEmploymentDaysDto {
   @IsOptional()
   @IsNumber()
   startTime: number;

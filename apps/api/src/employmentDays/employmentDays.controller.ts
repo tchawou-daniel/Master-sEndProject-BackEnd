@@ -1,6 +1,7 @@
 import { EmploymentDaysDto } from '@api/employmentDays/dto/employment-days.dto';
 import { GetEmploymentDto } from '@api/employmentDays/dto/get-employment-dto';
 import { UpdateEmploymentDaysStatusDto } from '@api/employmentDays/dto/update-employment-days-status.dto';
+import { UpdateEmploymentDaysDto } from '@api/employmentDays/dto/update-employment-days.dto';
 import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { EmploymentDaysService } from '@api/employmentDays/employmentDays.service';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
@@ -26,24 +27,15 @@ export class EmploymentDaysController {
   @Get('/:id')
   getEmploymentDaysByID(
     @Query() filterDto: GetEmploymentDto,
-    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
   ): Promise<EmploymentDays[]> {
-    return this.employmentDaysService.getEmploymentDays(
-      filterDto,
-      employmentPeriods,
-    );
+    return this.employmentDaysService.getEmploymentDays(filterDto);
   }
 
-  // For a Period
-  @Get('/employmentPeriod/:id')
-  getEmploymentDaysByEmploymentPeriodId(
+  @Get()
+  getEmploymentDays(
     @Query() filterDto: GetEmploymentDto,
-    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
   ): Promise<EmploymentDays[]> {
-    return this.employmentDaysService.getEmploymentDays(
-      filterDto,
-      employmentPeriods,
-    );
+    return this.employmentDaysService.getEmploymentDays(filterDto);
   }
 
   @Post()
@@ -60,38 +52,25 @@ export class EmploymentDaysController {
   @Patch('/:id/status')
   updateEmploymentDayStatus(
     @Param('id') id: string,
-    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
     @Body() updateEmploymentDayStatusDto: UpdateEmploymentDaysStatusDto,
   ): Promise<EmploymentDays> {
     const { status } = updateEmploymentDayStatusDto;
-    return this.employmentDaysService.updateEmploymentDaysStatus(
-      id,
-      status,
-      employmentPeriods,
-    );
+    return this.employmentDaysService.updateEmploymentDaysStatus(id, status);
   }
 
   @Patch('/:id')
   updateEmploymentDay(
     @Param('id') id: string,
-    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
-    @Body() updateEmploymentDayDto: EmploymentDaysDto,
+    @Body() updateEmploymentDayDto: UpdateEmploymentDaysDto,
   ): Promise<EmploymentDays> {
     return this.employmentDaysService.updateEmploymentDay(
       id,
       updateEmploymentDayDto,
-      employmentPeriods,
     );
   }
 
   @Delete('/:id')
-  deleteEmploymentDay(
-    @Param('id') id: string,
-    @GetEmploymentPeriods() employmentPeriods: EmploymentPeriods,
-  ): Promise<void> {
-    return this.employmentDaysService.deleteEmploymentDay(
-      id,
-      employmentPeriods,
-    );
+  deleteEmploymentDay(@Param('id') id: string): Promise<void> {
+    return this.employmentDaysService.deleteEmploymentDay(id);
   }
 }

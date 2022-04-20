@@ -12,7 +12,6 @@ export declare class Employment extends BaseEntity {
     zipCode: string;
     hiringStatus: Hiring;
     clearedAt: Date;
-    companyName: Date;
     hasManySubsidiaries: boolean;
     employmentSector: EmploymentSector;
     company: Company;

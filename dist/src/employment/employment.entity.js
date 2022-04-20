@@ -58,10 +58,6 @@ __decorate([
     __metadata("design:type", Date)
 ], Employment.prototype, "clearedAt", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'timestamp', default: null, nullable: true }),
-    __metadata("design:type", Date)
-], Employment.prototype, "companyName", void 0);
-__decorate([
     (0, typeorm_1.Column)({ default: false }),
     __metadata("design:type", Boolean)
 ], Employment.prototype, "hasManySubsidiaries", void 0);

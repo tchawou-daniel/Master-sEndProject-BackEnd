@@ -7,12 +7,10 @@ import { EntityRepository, Repository } from 'typeorm';
 export class EmploymentDaysRepository extends Repository<EmploymentDays> {
   async getEmploymentDays(
     filterDto: EmploymentDaysDto,
-    employmentPeriod: EmploymentPeriods,
   ): Promise<EmploymentDays[]> {
     const { numberOfHours, startTime, endTime, weekday, status } = filterDto;
 
     const query = this.createQueryBuilder('employmentDays');
-    query.where({ employmentPeriod });
 
     if (numberOfHours) {
       query.andWhere('employment_days.numberOfHours = :nbHours', {

@@ -1,6 +1,6 @@
 import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
-import { EmploymentDto } from '@api/employment/dto/employment.dto';
+import { CreateEmploymentDto } from '@api/employment/dto/create-employment.dto';
 import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-filter.dto';
 import { Employment } from '@api/employment/employment.entity';
 import { EntityRepository, Repository } from 'typeorm';
@@ -39,9 +39,8 @@ export class EmploymentRepository extends Repository<Employment> {
   }
 
   async createEmployment(
-    createEmploymentDto: EmploymentDto,
+    createEmploymentDto: CreateEmploymentDto,
     createdBy: User,
-    company: Company,
   ): Promise<Employment> {
     const {
       name,
@@ -55,8 +54,8 @@ export class EmploymentRepository extends Repository<Employment> {
       clearedAt,
       updatedAt,
       createdAt,
-      companyName,
       hasManySubsidiaries,
+      company,
     } = createEmploymentDto;
 
     const employment = this.create({
@@ -71,7 +70,6 @@ export class EmploymentRepository extends Repository<Employment> {
       clearedAt,
       updatedAt,
       createdAt,
-      companyName,
       hasManySubsidiaries,
       createdBy,
       company,

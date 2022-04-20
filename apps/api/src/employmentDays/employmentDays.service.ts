@@ -1,4 +1,5 @@
 import { EmploymentDaysDto } from '@api/employmentDays/dto/employment-days.dto';
+import { UpdateEmploymentDaysDto } from '@api/employmentDays/dto/update-employment-days.dto';
 import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { EmploymentDaysRepository } from '@api/employmentDays/employmentDays.repository';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
@@ -15,22 +16,13 @@ export class EmploymentDaysService {
   ) {}
 
   @Get()
-  getEmploymentDays(
-    filterDto: EmploymentDaysDto,
-    employmentPeriod: EmploymentPeriods,
-  ): Promise<EmploymentDays[]> {
-    return this.employmentDaysRepository.getEmploymentDays(
-      filterDto,
-      employmentPeriod,
-    );
+  getEmploymentDays(filterDto: EmploymentDaysDto): Promise<EmploymentDays[]> {
+    return this.employmentDaysRepository.getEmploymentDays(filterDto);
   }
 
-  async getEmploymentDayById(
-    id: string,
-    employmentPeriod: EmploymentPeriods,
-  ): Promise<EmploymentDays> {
+  async getEmploymentDayById(id: string): Promise<EmploymentDays> {
     const found = await this.employmentDaysRepository.findOne({
-      where: { id, employmentPeriod },
+      where: { id },
     });
     if (!found) {
       throw new NotFoundException(`Employment day with ID "${id}" not found`);
@@ -48,13 +40,9 @@ export class EmploymentDaysService {
     );
   }
 
-  async deleteEmploymentDay(
-    id: string,
-    employmentPeriods: EmploymentPeriods,
-  ): Promise<void> {
+  async deleteEmploymentDay(id: string): Promise<void> {
     const result = await this.employmentDaysRepository.delete({
       id,
-      employmentPeriods,
     });
     if (result.affected === 0) {
       throw new NotFoundException(`Employment day with ID "${id}" not found`);
@@ -64,12 +52,8 @@ export class EmploymentDaysService {
   async updateEmploymentDaysStatus(
     id: string,
     status: EmploymentDayStatus,
-    employmentPeriod: EmploymentPeriods,
   ): Promise<EmploymentDays> {
-    const employmentDays = await this.getEmploymentDayById(
-      id,
-      employmentPeriod,
-    );
+    const employmentDays = await this.getEmploymentDayById(id);
 
     employmentDays.employmentDayStatus = status;
     await this.employmentDaysRepository.save(employmentDays);
@@ -79,14 +63,14 @@ export class EmploymentDaysService {
 
   async updateEmploymentDay(
     id: string,
-    employmentDay: EmploymentDaysDto,
-    employmentPeriod: EmploymentPeriods,
+    updateEmploymentDayDto: UpdateEmploymentDaysDto,
   ): Promise<EmploymentDays> {
-    const employmentDays = await this.getEmploymentDayById(
-      id,
-      employmentPeriod,
-    );
-
+    const employmentDays = await this.getEmploymentDayById(id);
+    employmentDays.employmentDayStatus = updateEmploymentDayDto.status;
+    employmentDays.weekday = updateEmploymentDayDto.weekday;
+    employmentDays.numberOfHours = updateEmploymentDayDto.numberOfHours;
+    employmentDays.startTime = updateEmploymentDayDto.startTime;
+    employmentDays.endTime = updateEmploymentDayDto.endTime;
     await this.employmentDaysRepository.save(employmentDays);
 
     return employmentDays;

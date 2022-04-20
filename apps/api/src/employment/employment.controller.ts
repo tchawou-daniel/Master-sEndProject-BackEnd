@@ -2,8 +2,10 @@ import { GetUser } from '@api/auth/get-user.decorator';
 import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
 import { GetCompany } from '@api/company/get-company.decorator';
-import { EmploymentDto } from '@api/employment/dto/employment.dto';
+import { CreateEmploymentDto } from '@api/employment/dto/create-employment.dto';
 import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-filter.dto';
+import { UpdateEmploymentStatusDto } from '@api/employment/dto/update-employment-status.dto';
+import { UpdateEmploymentDto } from '@api/employment/dto/update-employment.dto';
 import { Employment } from '@api/employment/employment.entity';
 import { EmploymentService } from '@api/employment/employment.service';
 import {
@@ -20,7 +22,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller('/api/v0/employment')
+@Controller('/api/v0')
 @UseGuards(AuthGuard())
 export class EmploymentController {
   private logger = new Logger('EmploymentController');
@@ -37,23 +39,21 @@ export class EmploymentController {
     return this.employmentService.getEmployments(filterDto);
   }
 
-  @Get('/admin/employmentByCompanyId/')
+  @Get('/admin/employment/:id')
   getEmploymentsByCompanyIdFromAdminUser(
     @Param('id') id: string,
     @Query() filterDto: GetEmploymentsFilterDto,
     @GetCompany() company,
-    @GetUser() createdBy: User,
   ): Promise<Employment[]> {
     return this.employmentService.getEmploymentsByCompanyId(
       id,
       filterDto,
-      createdBy,
       company,
     );
   }
 
   // all employment create by the current user
-  @Get()
+  @Get('/employment')
   getEmployments(
     @Query() filterDto: GetEmploymentsFilterDto,
     @GetUser() user: User,
@@ -66,8 +66,23 @@ export class EmploymentController {
     return this.employmentService.getEmployments(filterDto, user);
   }
 
+  @Get('/employment/:id')
+  getEmploymentsById(
+    @Param('id') id: string,
+    @Query() filterDto: GetEmploymentsFilterDto,
+    @GetCompany() company,
+    @GetUser() createdBy: User,
+  ): Promise<Employment[]> {
+    return this.employmentService.getEmploymentsByCompanyId(
+      id,
+      filterDto,
+      company,
+      createdBy,
+    );
+  }
+
   // getEmploymentByCompanyId create by the current user
-  @Get()
+  @Get('/employment')
   getEmploymentsByCompanyId(
     @Param('id') id: string,
     @Query() filterDto: GetEmploymentsFilterDto,
@@ -77,45 +92,44 @@ export class EmploymentController {
     return this.employmentService.getEmploymentsByCompanyId(
       id,
       filterDto,
+      company,
       createdBy,
-      company,
     );
   }
 
-  @Post()
+  @Post('/employment')
   createEmployment(
-    @Body() createEmploymentDto: EmploymentDto,
+    @Body() createEmploymentDto: CreateEmploymentDto,
     @GetUser() user: User,
-    @GetCompany() company: Company,
   ): Promise<Employment> {
-    return this.employmentService.createEmployment(
-      createEmploymentDto,
-      user,
-      company,
-    );
+    return this.employmentService.createEmployment(createEmploymentDto, user);
   }
 
   // check the rights in the front end if the job belongs to the user's
   // company and if the user has the rights. Or if the user is admin
-  @Delete('/:id')
-  deleteEmployment(@Param('id') id: string): Promise<void> {
-    return this.employmentService.deleteEmployment(id);
-  }
-
-  // check the rights in the front end if the job belongs to the user's
-  // company and if the user has the rights. Or if the user is admin
-  @Patch('/:id')
+  @Patch('/employment/:id/status')
   updateEmploymentStatus(
     @Param('id') id: string,
-    @GetUser() createdUser: User,
-    @GetCompany() company: Company,
+    @Body() updateEmploymentStatusDto: UpdateEmploymentStatusDto,
   ): Promise<Employment> {
-    if (createdUser !== null) {
-      return this.employmentService.updateEmploymentStatus(
-        id,
-        company,
-        createdUser,
-      );
-    }
+    return this.employmentService.updateEmploymentStatus(
+      id,
+      updateEmploymentStatusDto,
+    );
+  }
+
+  @Patch('/employment/')
+  updateEmployment(
+    @Param('id') id: string,
+    @Body() updateEmploymentDto: UpdateEmploymentDto,
+  ): Promise<Employment> {
+    return this.employmentService.updateEmployment(id, updateEmploymentDto);
+  }
+
+  // check the rights in the front end if the job belongs to the user's
+  // company and if the user has the rights. Or if the user is admin
+  @Delete('/employment/:id')
+  deleteEmployment(@Param('id') id: string): Promise<void> {
+    return this.employmentService.deleteEmployment(id);
   }
 }

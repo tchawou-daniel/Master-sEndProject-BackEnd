@@ -10,36 +10,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateEmploymentDto = void 0;
+const company_entity_1 = require("../../company/company.entity");
 const class_validator_1 = require("class-validator");
 const employment_1 = require("../../../common/types/employment");
 class CreateEmploymentDto {
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateEmploymentDto.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateEmploymentDto.prototype, "description", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateEmploymentDto.prototype, "country", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateEmploymentDto.prototype, "town", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateEmploymentDto.prototype, "street", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateEmploymentDto.prototype, "zipCode", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsEnum)(employment_1.EmploymentSector),
     __metadata("design:type", String)
 ], CreateEmploymentDto.prototype, "employmentSector", void 0);
 __decorate([
@@ -60,11 +68,11 @@ __decorate([
 ], CreateEmploymentDto.prototype, "createdAt", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Date)
-], CreateEmploymentDto.prototype, "companyName", void 0);
-__decorate([
-    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Boolean)
 ], CreateEmploymentDto.prototype, "hasManySubsidiaries", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", company_entity_1.Company)
+], CreateEmploymentDto.prototype, "company", void 0);
 exports.CreateEmploymentDto = CreateEmploymentDto;
 //# sourceMappingURL=create-employment.dto.js.map

@@ -1,30 +1,30 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsEmpty, IsOptional } from 'class-validator';
 
 import { EmploymentSector, Hiring } from '../../../common/types/employment';
 
-export class EmploymentDto {
-  @IsNotEmpty()
+export class UpdateEmploymentDto {
+  @IsEmpty()
   readonly name: string;
 
-  @IsNotEmpty()
+  @IsEmpty()
   readonly description: string;
 
-  @IsNotEmpty()
+  @IsEmpty()
   readonly country: string;
 
-  @IsNotEmpty()
+  @IsEmpty()
   readonly town: string;
 
-  @IsNotEmpty()
+  @IsEmpty()
   readonly street: string;
 
-  @IsNotEmpty()
+  @IsEmpty()
   readonly zipCode: string;
 
-  @IsNotEmpty()
+  @IsEmpty()
   readonly employmentSector: EmploymentSector;
 
-  @IsOptional()
+  @IsEmpty()
   readonly hiringStatus: Hiring;
 
   @IsOptional()
@@ -33,12 +33,6 @@ export class EmploymentDto {
   @IsOptional()
   readonly updatedAt: Date;
 
-  @IsOptional()
-  readonly createdAt: Date;
-
-  @IsOptional()
-  readonly companyName: Date;
-
-  @IsOptional()
+  @IsEmpty()
   readonly hasManySubsidiaries: boolean;
 }

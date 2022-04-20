@@ -39,9 +39,6 @@ export class Employment extends BaseEntity {
   @Column({ type: 'timestamp', default: null, nullable: true })
   clearedAt: Date;
 
-  @Column({ type: 'timestamp', default: null, nullable: true })
-  companyName: Date;
-
   @Column({ default: false })
   hasManySubsidiaries: boolean;
 

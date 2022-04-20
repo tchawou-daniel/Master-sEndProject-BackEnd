@@ -30,8 +30,8 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
         const employments = await query.getMany();
         return employments;
     }
-    async createEmployment(createEmploymentDto, createdBy, company) {
-        const { name, description, country, town, street, zipCode, employmentSector, hiringStatus, clearedAt, updatedAt, createdAt, companyName, hasManySubsidiaries, } = createEmploymentDto;
+    async createEmployment(createEmploymentDto, createdBy) {
+        const { name, description, country, town, street, zipCode, employmentSector, hiringStatus, clearedAt, updatedAt, createdAt, hasManySubsidiaries, company, } = createEmploymentDto;
         const employment = this.create({
             name,
             description,
@@ -44,7 +44,6 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
             clearedAt,
             updatedAt,
             createdAt,
-            companyName,
             hasManySubsidiaries,
             createdBy,
             company,

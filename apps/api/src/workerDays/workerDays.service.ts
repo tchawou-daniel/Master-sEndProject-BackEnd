@@ -1,4 +1,3 @@
-import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 import { GetWorkerDayFilterDto } from '@api/workerDays/dto/get-worker-day-filter.dto';
 import { UpdateWorkerDaysDto } from '@api/workerDays/dto/update-workerDays.dto';
 import { WorkerDaysDto } from '@api/workerDays/dto/worker-days.dto';

@@ -1,3 +1,4 @@
+import { Company } from '@api/company/company.entity';
 import { EmploymentSector, Hiring } from '../../../common/types/employment';
 export declare class CreateEmploymentDto {
     readonly name: string;
@@ -11,6 +12,6 @@ export declare class CreateEmploymentDto {
     readonly clearedAt: Date;
     readonly updatedAt: Date;
     readonly createdAt: Date;
-    readonly companyName: Date;
     readonly hasManySubsidiaries: boolean;
+    readonly company: Company;
 }
