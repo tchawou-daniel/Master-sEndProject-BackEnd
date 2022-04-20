@@ -5,6 +5,7 @@ import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
 import { WorkerPeriodsRepository } from '@api/worker-periods/workerPeriods.repository';
 import { Get, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateWorkerPeriodsDto } from '@api/worker-periods/dto/create-worker-periods.dto';
 
 @Injectable()
 export class WorkerPeriodsService {
@@ -22,7 +23,7 @@ export class WorkerPeriodsService {
   }
 
   createWorkerPeriod(
-    createWorkerPeriodsDto: UpdateWorkerPeriodsDto,
+    createWorkerPeriodsDto: CreateWorkerPeriodsDto,
     user: User,
   ): Promise<WorkerPeriods> {
     return this.workerPeriodRepository.createWorkerPeriod(

@@ -15,6 +15,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { CreateWorkerPeriodsDto } from '@api/worker-periods/dto/create-worker-periods.dto';
 
 @Controller('api/v0/workerPeriods')
 @UseGuards(AuthGuard())
@@ -39,7 +40,7 @@ export class WorkerPeriodsController {
 
   @Post()
   createWorkerPeriods(
-    @Body() createWorkerDto: UpdateWorkerPeriodsDto,
+    @Body() createWorkerDto: CreateWorkerPeriodsDto,
     @GetUser() user: User,
   ): Promise<WorkerPeriods> {
     return this.workerPeriodsService.createWorkerPeriod(createWorkerDto, user);

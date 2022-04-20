@@ -5,10 +5,6 @@ import { EmploymentDays } from '@api/employmentDays/employmentDays.entity';
 import { EmploymentDaysService } from '@api/employmentDays/employmentDays.service';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { GetEmploymentPeriods } from '@api/employmentPeriods/get-employmentPeriods.decorate';
-import { GetWorkerPeriods } from '@api/worker-periods/get-workerPeriods.decorator';
-import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
-import { GetWorkerDayFilterDto } from '@api/workerDays/dto/get-worker-day-filter.dto';
-import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import {
   Body,
   Controller,
