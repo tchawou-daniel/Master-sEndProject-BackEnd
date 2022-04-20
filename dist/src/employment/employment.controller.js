@@ -27,20 +27,49 @@ let EmploymentController = class EmploymentController {
         this.employmentService = employmentService;
         this.logger = new common_1.Logger('EmploymentController');
     }
-    getEmployment(filterDto, user) {
+    getEmploymentsFromAdminUser(filterDto) {
+        this.logger.verbose(`"User admin retrieving all employments Filters: ${JSON.stringify(filterDto)}`);
+        return this.employmentService.getEmployments(filterDto);
+    }
+    getEmploymentsByCompanyIdFromAdminUser(id, filterDto, company, createdBy) {
+        return this.employmentService.getEmploymentsByCompanyId(id, filterDto, createdBy, company);
+    }
+    getEmployments(filterDto, user) {
         this.logger.verbose(`"User ${user.firstName}" retrieving all employments Filters: ${JSON.stringify(filterDto)}`);
         return this.employmentService.getEmployments(filterDto, user);
     }
-    createEmployment(createEmploymentDto, user) {
-        return this.employmentService.createEmployment(createEmploymentDto, user);
+    getEmploymentsByCompanyId(id, filterDto, company, createdBy) {
+        return this.employmentService.getEmploymentsByCompanyId(id, filterDto, createdBy, company);
+    }
+    createEmployment(createEmploymentDto, user, company) {
+        return this.employmentService.createEmployment(createEmploymentDto, user, company);
     }
     deleteEmployment(id) {
         return this.employmentService.deleteEmployment(id);
     }
-    updateEmploymentStatus(id, company) {
-        return this.employmentService.updateEmploymentStatus(id, company);
+    updateEmploymentStatus(id, createdUser, company) {
+        if (createdUser !== null) {
+            return this.employmentService.updateEmploymentStatus(id, company, createdUser);
+        }
     }
 };
+__decorate([
+    (0, common_1.Get)('/admin/employments'),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [get_employments_filter_dto_1.GetEmploymentsFilterDto]),
+    __metadata("design:returntype", void 0)
+], EmploymentController.prototype, "getEmploymentsFromAdminUser", null);
+__decorate([
+    (0, common_1.Get)('/admin/employmentByCompanyId/'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Query)()),
+    __param(2, (0, get_company_decorator_1.GetCompany)()),
+    __param(3, (0, get_user_decorator_1.GetUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, get_employments_filter_dto_1.GetEmploymentsFilterDto, Object, user_entity_1.User]),
+    __metadata("design:returntype", Promise)
+], EmploymentController.prototype, "getEmploymentsByCompanyIdFromAdminUser", null);
 __decorate([
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)()),
@@ -49,14 +78,26 @@ __decorate([
     __metadata("design:paramtypes", [get_employments_filter_dto_1.GetEmploymentsFilterDto,
         user_entity_1.User]),
     __metadata("design:returntype", void 0)
-], EmploymentController.prototype, "getEmployment", null);
+], EmploymentController.prototype, "getEmployments", null);
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Query)()),
+    __param(2, (0, get_company_decorator_1.GetCompany)()),
+    __param(3, (0, get_user_decorator_1.GetUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, get_employments_filter_dto_1.GetEmploymentsFilterDto, Object, user_entity_1.User]),
+    __metadata("design:returntype", Promise)
+], EmploymentController.prototype, "getEmploymentsByCompanyId", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, get_user_decorator_1.GetUser)()),
+    __param(2, (0, get_company_decorator_1.GetCompany)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [employment_dto_1.EmploymentDto,
-        user_entity_1.User]),
+        user_entity_1.User,
+        company_entity_1.Company]),
     __metadata("design:returntype", Promise)
 ], EmploymentController.prototype, "createEmployment", null);
 __decorate([
@@ -69,9 +110,11 @@ __decorate([
 __decorate([
     (0, common_1.Patch)('/:id'),
     __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, get_company_decorator_1.GetCompany)()),
+    __param(1, (0, get_user_decorator_1.GetUser)()),
+    __param(2, (0, get_company_decorator_1.GetCompany)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, company_entity_1.Company]),
+    __metadata("design:paramtypes", [String, user_entity_1.User,
+        company_entity_1.Company]),
     __metadata("design:returntype", Promise)
 ], EmploymentController.prototype, "updateEmploymentStatus", null);
 EmploymentController = __decorate([

@@ -1,7 +1,8 @@
-import { IsDecimal, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
+import { Type } from 'class-transformer';
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 import { WeekDays, WorkerDayStatus } from '../../../common/types/workerDays';
-import { Type } from 'class-transformer';
 
 export class WorkerDaysDto {
   @IsNotEmpty()
@@ -24,4 +25,7 @@ export class WorkerDaysDto {
   @IsNotEmpty()
   @IsEnum(WorkerDayStatus)
   workerDayStatus: WorkerDayStatus;
+
+  @IsNotEmpty()
+  workerPeriodsId: WorkerPeriods;
 }

@@ -7,7 +7,9 @@ import { Get, Injectable, NotFoundException, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isEqual } from 'lodash';
 
+import { Hiring } from '../../common/types/company';
 import { UserRole } from '../../common/types/user';
+import { UpdateCompanyDto } from '@api/company/dto/update-company.dto';
 
 @Injectable()
 export class CompanyService {
@@ -33,10 +35,7 @@ export class CompanyService {
     return found;
   }
 
-  async getCompanyByName(
-    companyName: string,
-    user: User,
-  ): Promise<Company> {
+  async getCompanyByName(companyName: string, user: User): Promise<Company> {
     if (
       !isEqual(UserRole.PERMANENT_WORKER, user.role) ||
       !isEqual(UserRole.TEMPORARY_WORKER, user.role)
@@ -60,6 +59,18 @@ export class CompanyService {
     user: User,
   ): Promise<Company> {
     return this.companyRepository.createCompany(createCompanyDto, user);
+  }
+
+  async updateCompany(
+    id: string,
+    user: User,
+    updateCompanyDto: UpdateCompanyDto,
+  ): Promise<Company> {
+    const company = await this.getCompanyById(id, user);
+    company.name = updateCompanyDto.name;
+    await this.companyRepository.save(company);
+
+    return company;
   }
 
   // async deleteCompany(id: string, user: User): Promise<void> {

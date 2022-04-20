@@ -18,6 +18,7 @@ const user_entity_1 = require("../auth/user.entity");
 const company_service_1 = require("./company.service");
 const create_company_dto_1 = require("./dto/create-company.dto");
 const get_companies_filter_dto_1 = require("./dto/get-companies-filter.dto");
+const update_company_dto_1 = require("./dto/update-company.dto");
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 let CompanyController = class CompanyController {
@@ -34,6 +35,9 @@ let CompanyController = class CompanyController {
     }
     createCompany(createCompanyDto, user) {
         return this.companyService.createCompany(createCompanyDto, user);
+    }
+    updateCompany(id, user, updateCompanyDto) {
+        return this.companyService.updateCompany(id, user, updateCompanyDto);
     }
 };
 __decorate([
@@ -62,6 +66,16 @@ __decorate([
         user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], CompanyController.prototype, "createCompany", null);
+__decorate([
+    (0, common_1.Patch)('/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, get_user_decorator_1.GetUser)()),
+    __param(2, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, user_entity_1.User,
+        update_company_dto_1.UpdateCompanyDto]),
+    __metadata("design:returntype", Promise)
+], CompanyController.prototype, "updateCompany", null);
 CompanyController = __decorate([
     (0, common_1.Controller)('/api/v0/company'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),

@@ -3,6 +3,7 @@ import { Company } from '@api/company/company.entity';
 import { CompanyService } from '@api/company/company.service';
 import { CreateCompanyDto } from '@api/company/dto/create-company.dto';
 import { GetCompaniesFilterDto } from '@api/company/dto/get-companies-filter.dto';
+import { UpdateCompanyDto } from '@api/company/dto/update-company.dto';
 export declare class CompanyController {
     private companyService;
     private logger;
@@ -10,4 +11,5 @@ export declare class CompanyController {
     getCompanies(filterDto: GetCompaniesFilterDto, user: User): Promise<Company[]>;
     getCompanyById(id: string, user: User): Promise<Company>;
     createCompany(createCompanyDto: CreateCompanyDto, user: User): Promise<Company>;
+    updateCompany(id: string, user: User, updateCompanyDto: UpdateCompanyDto): Promise<Company>;
 }

@@ -1,4 +1,5 @@
 import { User } from '@api/auth/user.entity';
+import { Company } from '@api/company/company.entity';
 import { EmploymentDto } from '@api/employment/dto/employment.dto';
 import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-filter.dto';
 import { Employment } from '@api/employment/employment.entity';
@@ -6,14 +7,20 @@ import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(Employment)
 export class EmploymentRepository extends Repository<Employment> {
-  async getEmployements(
+  async getEmployments(
     filterDto: GetEmploymentsFilterDto,
-    user: User,
+    company?: Company,
+    createdBy?: User,
   ): Promise<Employment[]> {
     const { hiringStatus, search } = filterDto;
 
     const query = this.createQueryBuilder('employment');
-
+    if (createdBy) {
+      query.andWhere({ createdBy });
+    }
+    if (company) {
+      query.andWhere({ company });
+    }
     if (hiringStatus) {
       query.andWhere('employment.hiringStatus = :hiringStatus', {
         hiringStatus,
@@ -33,7 +40,8 @@ export class EmploymentRepository extends Repository<Employment> {
 
   async createEmployment(
     createEmploymentDto: EmploymentDto,
-    user: User,
+    createdBy: User,
+    company: Company,
   ): Promise<Employment> {
     const {
       name,
@@ -65,6 +73,8 @@ export class EmploymentRepository extends Repository<Employment> {
       createdAt,
       companyName,
       hasManySubsidiaries,
+      createdBy,
+      company,
     });
     await this.save(employment);
     return employment;

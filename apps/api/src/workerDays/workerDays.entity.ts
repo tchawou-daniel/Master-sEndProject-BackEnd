@@ -31,7 +31,7 @@ export class WorkerDays extends BaseEntity {
   @ManyToOne(
     (_type) => WorkerPeriods,
     (workerPeriods) => workerPeriods.workerDays,
-    { eager: false },
+    { eager: false, nullable: false },
   )
-  workerPeriods: WorkerPeriods;
+  workerPeriodsId: WorkerPeriods;
 }

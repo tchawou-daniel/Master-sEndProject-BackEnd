@@ -2,7 +2,7 @@ import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { Exclude } from 'class-transformer';
-import { IsOptional } from 'class-validator';
+import { IsEmpty, IsNotEmpty, IsOptional } from 'class-validator';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 import { EmploymentSector, Hiring } from '../../common/types/employment';
@@ -33,6 +33,7 @@ export class Employment extends BaseEntity {
     enum: Hiring,
     default: Hiring.ONGOING,
   })
+  @IsEmpty()
   hiringStatus: Hiring;
 
   @Column({ type: 'timestamp', default: null, nullable: true })
@@ -44,7 +45,11 @@ export class Employment extends BaseEntity {
   @Column({ default: false })
   hasManySubsidiaries: boolean;
 
-  @IsOptional()
+  @Column({
+    type: 'enum',
+    enum: EmploymentSector,
+    default: EmploymentSector.SERVICES_AUTRES,
+  })
   employmentSector: EmploymentSector;
 
   @ManyToOne((_type) => Company, (company) => company.employments, {
@@ -60,7 +65,9 @@ export class Employment extends BaseEntity {
   )
   employmentPeriods: EmploymentPeriods[];
 
-  @ManyToOne((_type) => User, (user) => user.employments, { eager: false })
+  @ManyToOne((_type) => User, (createdBy) => createdBy.employments, {
+    eager: false,
+  })
   @Exclude({ toPlainOnly: true })
   createdBy: User;
 }

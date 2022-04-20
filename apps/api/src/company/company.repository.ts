@@ -5,7 +5,6 @@ import { GetCompaniesFilterDto } from '@api/company/dto/get-companies-filter.dto
 import { isEqual } from 'lodash';
 import { EntityRepository, Repository } from 'typeorm';
 
-import { UserRole } from '../../common/types/user';
 
 @EntityRepository(Company)
 export class CompanyRepository extends Repository<Company> {

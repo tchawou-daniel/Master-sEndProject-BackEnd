@@ -10,9 +10,15 @@ exports.EmploymentRepository = void 0;
 const employment_entity_1 = require("./employment.entity");
 const typeorm_1 = require("typeorm");
 let EmploymentRepository = class EmploymentRepository extends typeorm_1.Repository {
-    async getEmployements(filterDto, user) {
+    async getEmployments(filterDto, company, createdBy) {
         const { hiringStatus, search } = filterDto;
         const query = this.createQueryBuilder('employment');
+        if (createdBy) {
+            query.andWhere({ createdBy });
+        }
+        if (company) {
+            query.andWhere({ company });
+        }
         if (hiringStatus) {
             query.andWhere('employment.hiringStatus = :hiringStatus', {
                 hiringStatus,
@@ -24,7 +30,7 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
         const employments = await query.getMany();
         return employments;
     }
-    async createEmployment(createEmploymentDto, user) {
+    async createEmployment(createEmploymentDto, createdBy, company) {
         const { name, description, country, town, street, zipCode, employmentSector, hiringStatus, clearedAt, updatedAt, createdAt, companyName, hasManySubsidiaries, } = createEmploymentDto;
         const employment = this.create({
             name,
@@ -40,6 +46,8 @@ let EmploymentRepository = class EmploymentRepository extends typeorm_1.Reposito
             createdAt,
             companyName,
             hasManySubsidiaries,
+            createdBy,
+            company,
         });
         await this.save(employment);
         return employment;

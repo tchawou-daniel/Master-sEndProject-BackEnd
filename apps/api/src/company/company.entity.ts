@@ -42,7 +42,7 @@ export class Company extends BaseEntity {
   @Column({
     type: 'enum',
     enum: CompanySector,
-    default: CompanySector.EAUDECHETS,
+    default: CompanySector.EAU_DECHETS,
   })
   companySector?: CompanySector;
 

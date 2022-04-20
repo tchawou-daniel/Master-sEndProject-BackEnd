@@ -55,7 +55,7 @@ __decorate([
     (0, typeorm_1.Column)({
         type: 'enum',
         enum: company_1.CompanySector,
-        default: company_1.CompanySector.EAUDECHETS,
+        default: company_1.CompanySector.EAU_DECHETS,
     }),
     __metadata("design:type", String)
 ], Company.prototype, "companySector", void 0);

@@ -6,7 +6,6 @@ import { EmploymentDto } from '@api/employment/dto/employment.dto';
 import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-filter.dto';
 import { Employment } from '@api/employment/employment.entity';
 import { EmploymentService } from '@api/employment/employment.service';
-import { GetEmployment } from '@api/employment/get-employment.decorator';
 import {
   Body,
   Controller,
@@ -21,8 +20,6 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-import { Hiring } from '../../common/types/employment';
-
 @Controller('/api/v0/employment')
 @UseGuards(AuthGuard())
 export class EmploymentController {
@@ -30,8 +27,34 @@ export class EmploymentController {
 
   constructor(private employmentService: EmploymentService) {}
 
+  @Get('/admin/employments')
+  getEmploymentsFromAdminUser(@Query() filterDto: GetEmploymentsFilterDto) {
+    this.logger.verbose(
+      `"User admin retrieving all employments Filters: ${JSON.stringify(
+        filterDto,
+      )}`,
+    );
+    return this.employmentService.getEmployments(filterDto);
+  }
+
+  @Get('/admin/employmentByCompanyId/')
+  getEmploymentsByCompanyIdFromAdminUser(
+    @Param('id') id: string,
+    @Query() filterDto: GetEmploymentsFilterDto,
+    @GetCompany() company,
+    @GetUser() createdBy: User,
+  ): Promise<Employment[]> {
+    return this.employmentService.getEmploymentsByCompanyId(
+      id,
+      filterDto,
+      createdBy,
+      company,
+    );
+  }
+
+  // all employment create by the current user
   @Get()
-  getEmployment(
+  getEmployments(
     @Query() filterDto: GetEmploymentsFilterDto,
     @GetUser() user: User,
   ) {
@@ -43,24 +66,56 @@ export class EmploymentController {
     return this.employmentService.getEmployments(filterDto, user);
   }
 
+  // getEmploymentByCompanyId create by the current user
+  @Get()
+  getEmploymentsByCompanyId(
+    @Param('id') id: string,
+    @Query() filterDto: GetEmploymentsFilterDto,
+    @GetCompany() company,
+    @GetUser() createdBy: User,
+  ): Promise<Employment[]> {
+    return this.employmentService.getEmploymentsByCompanyId(
+      id,
+      filterDto,
+      createdBy,
+      company,
+    );
+  }
+
   @Post()
   createEmployment(
     @Body() createEmploymentDto: EmploymentDto,
     @GetUser() user: User,
+    @GetCompany() company: Company,
   ): Promise<Employment> {
-    return this.employmentService.createEmployment(createEmploymentDto, user);
+    return this.employmentService.createEmployment(
+      createEmploymentDto,
+      user,
+      company,
+    );
   }
 
+  // check the rights in the front end if the job belongs to the user's
+  // company and if the user has the rights. Or if the user is admin
   @Delete('/:id')
   deleteEmployment(@Param('id') id: string): Promise<void> {
     return this.employmentService.deleteEmployment(id);
   }
 
+  // check the rights in the front end if the job belongs to the user's
+  // company and if the user has the rights. Or if the user is admin
   @Patch('/:id')
   updateEmploymentStatus(
     @Param('id') id: string,
+    @GetUser() createdUser: User,
     @GetCompany() company: Company,
   ): Promise<Employment> {
-    return this.employmentService.updateEmploymentStatus(id, company);
+    if (createdUser !== null) {
+      return this.employmentService.updateEmploymentStatus(
+        id,
+        company,
+        createdUser,
+      );
+    }
   }
 }

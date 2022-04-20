@@ -52,6 +52,12 @@ let CompanyService = class CompanyService {
     createCompany(createCompanyDto, user) {
         return this.companyRepository.createCompany(createCompanyDto, user);
     }
+    async updateCompany(id, user, updateCompanyDto) {
+        const company = await this.getCompanyById(id, user);
+        company.name = updateCompanyDto.name;
+        await this.companyRepository.save(company);
+        return company;
+    }
 };
 __decorate([
     (0, common_1.Get)(),

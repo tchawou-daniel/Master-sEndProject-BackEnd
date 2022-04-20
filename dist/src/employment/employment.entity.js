@@ -50,6 +50,7 @@ __decorate([
         enum: employment_1.Hiring,
         default: employment_1.Hiring.ONGOING,
     }),
+    (0, class_validator_1.IsEmpty)(),
     __metadata("design:type", String)
 ], Employment.prototype, "hiringStatus", void 0);
 __decorate([
@@ -65,7 +66,11 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Employment.prototype, "hasManySubsidiaries", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
+    (0, typeorm_1.Column)({
+        type: 'enum',
+        enum: employment_1.EmploymentSector,
+        default: employment_1.EmploymentSector.SERVICES_AUTRES,
+    }),
     __metadata("design:type", String)
 ], Employment.prototype, "employmentSector", void 0);
 __decorate([
@@ -80,7 +85,9 @@ __decorate([
     __metadata("design:type", Array)
 ], Employment.prototype, "employmentPeriods", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)((_type) => user_entity_1.User, (user) => user.employments, { eager: false }),
+    (0, typeorm_1.ManyToOne)((_type) => user_entity_1.User, (createdBy) => createdBy.employments, {
+        eager: false,
+    }),
     (0, class_transformer_1.Exclude)({ toPlainOnly: true }),
     __metadata("design:type", user_entity_1.User)
 ], Employment.prototype, "createdBy", void 0);

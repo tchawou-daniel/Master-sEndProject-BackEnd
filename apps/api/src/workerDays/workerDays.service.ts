@@ -1,8 +1,10 @@
 import { WorkerPeriods } from '@api/worker-periods/workerPeriods.entity';
+import { GetWorkerDayFilterDto } from '@api/workerDays/dto/get-worker-day-filter.dto';
+import { UpdateWorkerDaysDto } from '@api/workerDays/dto/update-workerDays.dto';
 import { WorkerDaysDto } from '@api/workerDays/dto/worker-days.dto';
 import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import { WorkerDaysRepository } from '@api/workerDays/workerDays.repository';
-import { Get, Injectable, NotFoundException } from '@nestjs/common';
+import { Get, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { WorkerDayStatus } from '../../common/types/workerDays';
@@ -14,20 +16,16 @@ export class WorkerDaysService {
     private workerDaysRepository: WorkerDaysRepository,
   ) {}
 
+  private logger = new Logger('WorkerDaysService');
+
   @Get()
-  getWorkerDays(
-    filterDto: WorkerDaysDto,
-    workerPeriod: WorkerPeriods,
-  ): Promise<WorkerDays[]> {
-    return this.workerDaysRepository.getWorkerDays(filterDto, workerPeriod);
+  getWorkerDays(filterDto: GetWorkerDayFilterDto): Promise<WorkerDays[]> {
+    return this.workerDaysRepository.getWorkerDays(filterDto);
   }
 
-  async getWorkerDayById(
-    id: string,
-    workerPeriod: WorkerPeriods,
-  ): Promise<WorkerDays> {
+  async getWorkerDayById(id: string): Promise<WorkerDays> {
     const found = await this.workerDaysRepository.findOne({
-      where: { id, workerPeriod },
+      where: { id },
     });
     if (!found) {
       throw new NotFoundException(`Worker day with ID "${id}" not found`);
@@ -35,23 +33,14 @@ export class WorkerDaysService {
     return found;
   }
 
-  createWorkerDay(
-    createWorkerDayDto: WorkerDaysDto,
-    workerPeriod: WorkerPeriods,
-  ): Promise<WorkerDays> {
-    return this.workerDaysRepository.createWorkerDay(
-      createWorkerDayDto,
-      workerPeriod,
-    );
+  createWorkerDay(createWorkerDayDto: WorkerDaysDto): Promise<WorkerDays> {
+    this.logger.verbose(createWorkerDayDto);
+    return this.workerDaysRepository.createWorkerDay(createWorkerDayDto);
   }
 
-  async deleteWorkerDay(
-    id: string,
-    workerPeriods: WorkerPeriods,
-  ): Promise<void> {
+  async deleteWorkerDay(id: string): Promise<void> {
     const result = await this.workerDaysRepository.delete({
       id,
-      workerPeriods,
     });
     if (result.affected === 0) {
       throw new NotFoundException(`Worker day with ID "${id}" not found`);
@@ -61,9 +50,8 @@ export class WorkerDaysService {
   async updateWorkerDaysStatus(
     id: string,
     status: WorkerDayStatus,
-    workerPeriod: WorkerPeriods,
   ): Promise<WorkerDays> {
-    const workerDays = await this.getWorkerDayById(id, workerPeriod);
+    const workerDays = await this.getWorkerDayById(id);
 
     workerDays.workerDayStatus = status;
     await this.workerDaysRepository.save(workerDays);
@@ -73,11 +61,15 @@ export class WorkerDaysService {
 
   async updateWorkerDay(
     id: string,
-    workerDay: WorkerDaysDto,
-    workerPeriod: WorkerPeriods,
+    updateWorkerkDayDto: UpdateWorkerDaysDto,
   ): Promise<WorkerDays> {
-    const workerDays = await this.getWorkerDayById(id, workerPeriod);
-
+    const workerDays = await this.getWorkerDayById(id);
+    workerDays.workerDayStatus = updateWorkerkDayDto.workerDayStatus;
+    workerDays.weekday = updateWorkerkDayDto.weekday;
+    workerDays.endTime = updateWorkerkDayDto.endTime;
+    workerDays.startTime = updateWorkerkDayDto.startTime;
+    workerDays.numberOfHours = updateWorkerkDayDto.numberOfHours;
+    this.logger.verbose({ workerDays });
     await this.workerDaysRepository.save(workerDays);
 
     return workerDays;

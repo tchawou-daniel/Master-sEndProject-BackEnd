@@ -6,8 +6,9 @@ import { Employment } from '@api/employment/employment.entity';
 import { EmploymentRepository } from '@api/employment/employment.repository';
 import { Get, Injectable, NotFoundException, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { isEqual } from 'lodash';
 
-import { Hiring } from '../../common/types/employment';
+import { UserRole } from '../../common/types/user';
 
 @Injectable()
 export class EmploymentService {
@@ -19,18 +20,56 @@ export class EmploymentService {
   @Get()
   getEmployments(
     filterDto: GetEmploymentsFilterDto,
-    user: User,
+    user?: User,
   ): Promise<Employment[]> {
-    return this.employmentRepository.getEmployements(filterDto, user);
+    return this.employmentRepository.getEmployments(filterDto, null, user);
   }
 
   @Get()
-  async getEmploymentById(id: string, company: Company): Promise<Employment> {
-    const found = await this.employmentRepository.findOne({
-      where: { id, company },
-    });
+  getEmploymentsByCompanyId(
+    id: string,
+    filterDto: GetEmploymentsFilterDto,
+    user: User,
+    company: Company,
+  ): Promise<Employment[]> {
+    // ceux qui ne sont pas de la company et qui ne sont pas
+    const found = this.employmentRepository.getEmployments(
+      filterDto,
+      company,
+      null,
+    );
     if (!found) {
-      throw new NotFoundException(`Employment with ID "${id}" not found`);
+      throw new NotFoundException(
+        `Employments with ID Company"${id}" not found`,
+      );
+    }
+    return found;
+  }
+
+  // restreindre au niveau des autres users(employées, partner employee...)
+  // egalement pour les autres fonctions
+  @Get()
+  async getEmploymentById(
+    id: string,
+    user: User,
+    company: Company,
+  ): Promise<Employment> {
+    const foundFromCurrentUser = await this.employmentRepository.findOne({
+      where: { id, user, company },
+    });
+
+    if (!foundFromCurrentUser) {
+      if (
+        isEqual(user.role, UserRole.ADMIN) ||
+        isEqual(user.role, UserRole.EMPLOYMENT_AGENCY)
+      ) {
+        const foundFromAdminUser = await this.employmentRepository.findOne({
+          where: { id, company },
+        });
+        if (!foundFromCurrentUser && !foundFromAdminUser) {
+          throw new NotFoundException(`Employment with ID "${id}" not found`);
+        }
+      }
     }
     return this.employmentRepository.findOne(id);
   }
@@ -39,11 +78,16 @@ export class EmploymentService {
   createEmployment(
     createEmploymentDto: EmploymentDto,
     user: User,
+    company: Company,
   ): Promise<Employment> {
-    return this.employmentRepository.createEmployment(
-      createEmploymentDto,
-      user,
-    );
+    if (company) {
+      return this.employmentRepository.createEmployment(
+        createEmploymentDto,
+        user,
+        company,
+      );
+    }
+    throw new NotFoundException(`Not found`);
   }
 
   async deleteEmployment(id: string): Promise<void> {
@@ -53,14 +97,13 @@ export class EmploymentService {
     }
   }
 
-  // check rights in front-end part
   async updateEmploymentStatus(
     id: string,
     company: Company,
+    createdBy: User,
   ): Promise<Employment> {
-    const employment = await this.getEmploymentById(id, company);
+    const employment = await this.getEmploymentById(id, createdBy, company);
     await this.employmentRepository.save(employment);
-
     return employment;
   }
 }

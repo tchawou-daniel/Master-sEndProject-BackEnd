@@ -20,24 +20,44 @@ const get_employments_filter_dto_1 = require("./dto/get-employments-filter.dto")
 const employment_repository_1 = require("./employment.repository");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const lodash_1 = require("lodash");
+const user_1 = require("../../common/types/user");
 let EmploymentService = class EmploymentService {
     constructor(employmentRepository) {
         this.employmentRepository = employmentRepository;
     }
     getEmployments(filterDto, user) {
-        return this.employmentRepository.getEmployements(filterDto, user);
+        return this.employmentRepository.getEmployments(filterDto, null, user);
     }
-    async getEmploymentById(id, company) {
-        const found = await this.employmentRepository.findOne({
-            where: { id, company },
-        });
+    getEmploymentsByCompanyId(id, filterDto, user, company) {
+        const found = this.employmentRepository.getEmployments(filterDto, company, null);
         if (!found) {
-            throw new common_1.NotFoundException(`Employment with ID "${id}" not found`);
+            throw new common_1.NotFoundException(`Employments with ID Company"${id}" not found`);
+        }
+        return found;
+    }
+    async getEmploymentById(id, user, company) {
+        const foundFromCurrentUser = await this.employmentRepository.findOne({
+            where: { id, user, company },
+        });
+        if (!foundFromCurrentUser) {
+            if ((0, lodash_1.isEqual)(user.role, user_1.UserRole.ADMIN) ||
+                (0, lodash_1.isEqual)(user.role, user_1.UserRole.EMPLOYMENT_AGENCY)) {
+                const foundFromAdminUser = await this.employmentRepository.findOne({
+                    where: { id, company },
+                });
+                if (!foundFromCurrentUser && !foundFromAdminUser) {
+                    throw new common_1.NotFoundException(`Employment with ID "${id}" not found`);
+                }
+            }
         }
         return this.employmentRepository.findOne(id);
     }
-    createEmployment(createEmploymentDto, user) {
-        return this.employmentRepository.createEmployment(createEmploymentDto, user);
+    createEmployment(createEmploymentDto, user, company) {
+        if (company) {
+            return this.employmentRepository.createEmployment(createEmploymentDto, user, company);
+        }
+        throw new common_1.NotFoundException(`Not found`);
     }
     async deleteEmployment(id) {
         const result = await this.employmentRepository.delete({ id });
@@ -45,8 +65,8 @@ let EmploymentService = class EmploymentService {
             throw new common_1.NotFoundException(`Employment with ID "${id}" not found`);
         }
     }
-    async updateEmploymentStatus(id, company) {
-        const employment = await this.getEmploymentById(id, company);
+    async updateEmploymentStatus(id, company, createdBy) {
+        const employment = await this.getEmploymentById(id, createdBy, company);
         await this.employmentRepository.save(employment);
         return employment;
     }
@@ -61,14 +81,24 @@ __decorate([
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, company_entity_1.Company]),
+    __metadata("design:paramtypes", [String, get_employments_filter_dto_1.GetEmploymentsFilterDto,
+        user_entity_1.User,
+        company_entity_1.Company]),
+    __metadata("design:returntype", Promise)
+], EmploymentService.prototype, "getEmploymentsByCompanyId", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, user_entity_1.User,
+        company_entity_1.Company]),
     __metadata("design:returntype", Promise)
 ], EmploymentService.prototype, "getEmploymentById", null);
 __decorate([
     (0, common_1.Post)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [employment_dto_1.EmploymentDto,
-        user_entity_1.User]),
+        user_entity_1.User,
+        company_entity_1.Company]),
     __metadata("design:returntype", Promise)
 ], EmploymentService.prototype, "createEmployment", null);
 EmploymentService = __decorate([

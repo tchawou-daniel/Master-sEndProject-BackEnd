@@ -29,8 +29,12 @@ export class WorkerPeriods extends BaseEntity {
   user: User;
 
   // bind with workerPeriods entity
-  @OneToMany((_type) => WorkerDays, (workerDays) => workerDays.workerPeriods, {
-    eager: true,
-  })
+  @OneToMany(
+    (_type) => WorkerDays,
+    (workerDays) => workerDays.workerPeriodsId,
+    {
+      eager: true,
+    },
+  )
   workerDays: WorkerDays[];
 }

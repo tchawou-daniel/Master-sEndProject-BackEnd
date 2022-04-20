@@ -7,9 +7,10 @@ import { EmploymentRepository } from '@api/employment/employment.repository';
 export declare class EmploymentService {
     private employmentRepository;
     constructor(employmentRepository: EmploymentRepository);
-    getEmployments(filterDto: GetEmploymentsFilterDto, user: User): Promise<Employment[]>;
-    getEmploymentById(id: string, company: Company): Promise<Employment>;
-    createEmployment(createEmploymentDto: EmploymentDto, user: User): Promise<Employment>;
+    getEmployments(filterDto: GetEmploymentsFilterDto, user?: User): Promise<Employment[]>;
+    getEmploymentsByCompanyId(id: string, filterDto: GetEmploymentsFilterDto, user: User, company: Company): Promise<Employment[]>;
+    getEmploymentById(id: string, user: User, company: Company): Promise<Employment>;
+    createEmployment(createEmploymentDto: EmploymentDto, user: User, company: Company): Promise<Employment>;
     deleteEmployment(id: string): Promise<void>;
-    updateEmploymentStatus(id: string, company: Company): Promise<Employment>;
+    updateEmploymentStatus(id: string, company: Company, createdBy: User): Promise<Employment>;
 }
