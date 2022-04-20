@@ -1,6 +1,5 @@
 import { GetUser } from '@api/auth/get-user.decorator';
 import { User } from '@api/auth/user.entity';
-import { Company } from '@api/company/company.entity';
 import { GetCompany } from '@api/company/get-company.decorator';
 import { CreateEmploymentDto } from '@api/employment/dto/create-employment.dto';
 import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-filter.dto';
