@@ -21,6 +21,7 @@ const employment_repository_1 = require("./employment.repository");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const lodash_1 = require("lodash");
+const employment_1 = require("../../common/types/employment");
 const user_1 = require("../../common/types/user");
 let EmploymentService = class EmploymentService {
     constructor(employmentRepository) {
@@ -50,6 +51,15 @@ let EmploymentService = class EmploymentService {
                 return foundFromCurrentUser;
             }
         }
+        else {
+            const found = await this.employmentRepository.findOne({
+                where: { id },
+            });
+            if (!found) {
+                throw new common_1.NotFoundException(`Employment day with ID "${id}" not found`);
+            }
+            return found;
+        }
     }
     getEmploymentsByCompanyId(id, filterDto, company, user) {
         const found = this.employmentRepository.getEmployments(filterDto, company, null);
@@ -62,9 +72,9 @@ let EmploymentService = class EmploymentService {
         return this.employmentRepository.createEmployment(createEmploymentDto, user);
         throw new common_1.NotFoundException(`Not found`);
     }
-    async updateEmploymentStatus(id, hiringStatus) {
+    async updateEmploymentStatus(id, hiring) {
         const employment = await this.getEmploymentById(id);
-        employment.hiringStatus = hiringStatus;
+        employment.hiringStatus = employment_1.Hiring.DEACTIVATE;
         await this.employmentRepository.save(employment);
         return employment;
     }

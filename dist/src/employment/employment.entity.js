@@ -14,7 +14,6 @@ const user_entity_1 = require("../auth/user.entity");
 const company_entity_1 = require("../company/company.entity");
 const employmentPeriods_entity_1 = require("../employmentPeriods/employmentPeriods.entity");
 const class_transformer_1 = require("class-transformer");
-const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
 const employment_1 = require("../../common/types/employment");
 const base_entity_1 = require("../SHARED/entities/base.entity");
@@ -50,7 +49,6 @@ __decorate([
         enum: employment_1.Hiring,
         default: employment_1.Hiring.ONGOING,
     }),
-    (0, class_validator_1.IsEmpty)(),
     __metadata("design:type", String)
 ], Employment.prototype, "hiringStatus", void 0);
 __decorate([

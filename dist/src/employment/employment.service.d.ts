@@ -13,7 +13,7 @@ export declare class EmploymentService {
     getEmploymentById(id: string, user?: User, company?: Company): Promise<Employment>;
     getEmploymentsByCompanyId(id: string, filterDto: GetEmploymentsFilterDto, company: Company, user?: User): Promise<Employment[]>;
     createEmployment(createEmploymentDto: CreateEmploymentDto, user: User): Promise<Employment>;
-    updateEmploymentStatus(id: string, hiringStatus: Hiring): Promise<Employment>;
+    updateEmploymentStatus(id: string, hiring: Hiring): Promise<Employment>;
     updateEmployment(id: string, updateEmploymentDto: UpdateEmploymentDto): Promise<Employment>;
     deleteEmployment(id: string): Promise<void>;
 }
