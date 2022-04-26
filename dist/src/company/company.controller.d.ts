@@ -9,7 +9,8 @@ export declare class CompanyController {
     private companyService;
     private logger;
     constructor(companyService: CompanyService);
-    getCompanies(filterDto: GetCompaniesFilterDto, user: User): Promise<Company[]>;
+    getMyOwnedCompanies(filterDto: GetCompaniesFilterDto, user: User): Promise<Company[]>;
+    getCompanies(filterDto: GetCompaniesFilterDto): Promise<Company[]>;
     getCompanyById(id: string, user: User): Promise<Company>;
     createCompany(createCompanyDto: CreateCompanyDto, user: User): Promise<Company>;
     updateCompany(id: string, user: User, updateCompanyDto: UpdateCompanyDto): Promise<Company>;

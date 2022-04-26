@@ -26,8 +26,9 @@ export class CompanyController {
 
   constructor(private companyService: CompanyService) {}
 
-  @Get()
-  getCompanies(
+  // company create by User
+  @Get('/')
+  getMyOwnedCompanies(
     @Query() filterDto: GetCompaniesFilterDto,
     @GetUser() user: User,
   ): Promise<Company[]> {
@@ -39,6 +40,13 @@ export class CompanyController {
     return this.companyService.getCompanies(filterDto, user);
   }
 
+  /// /////////////////// check if it's an admin
+  @Get()
+  getCompanies(@Query() filterDto: GetCompaniesFilterDto): Promise<Company[]> {
+    return this.companyService.getCompanies(filterDto);
+  }
+
+  // retrieve just the company he created (((( vérifier après))))
   @Get('/:id')
   getCompanyById(
     @Param('id') id: string,

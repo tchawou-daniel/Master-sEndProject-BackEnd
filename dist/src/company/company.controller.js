@@ -27,9 +27,12 @@ let CompanyController = class CompanyController {
         this.companyService = companyService;
         this.logger = new common_1.Logger('CompanyController');
     }
-    getCompanies(filterDto, user) {
+    getMyOwnedCompanies(filterDto, user) {
         this.logger.verbose(`"User ${user.firstName}" retrieving all company Filters: ${JSON.stringify(filterDto)}`);
         return this.companyService.getCompanies(filterDto, user);
+    }
+    getCompanies(filterDto) {
+        return this.companyService.getCompanies(filterDto);
     }
     getCompanyById(id, user) {
         return this.companyService.getCompanyById(id, user);
@@ -46,12 +49,19 @@ let CompanyController = class CompanyController {
     }
 };
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('/'),
     __param(0, (0, common_1.Query)()),
     __param(1, (0, get_user_decorator_1.GetUser)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [get_companies_filter_dto_1.GetCompaniesFilterDto,
         user_entity_1.User]),
+    __metadata("design:returntype", Promise)
+], CompanyController.prototype, "getMyOwnedCompanies", null);
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [get_companies_filter_dto_1.GetCompaniesFilterDto]),
     __metadata("design:returntype", Promise)
 ], CompanyController.prototype, "getCompanies", null);
 __decorate([

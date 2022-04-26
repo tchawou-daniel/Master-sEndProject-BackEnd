@@ -1,0 +1,1814 @@
+{
+	"info": {
+		"_postman_id": "2b3c3a94-7cf9-4d57-9788-42c4928080aa",
+		"name": "Master2project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentification",
+			"item": [
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "jeremi@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "SuperSecretP4word",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/auth/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "jeremi",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "nouma",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "jeremi@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "SuperSecretP4word",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/auth/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "getCompanies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NTM3MTQsImV4cCI6MTY1MDQ1NzMxNH0.HrV37-brzsicHVWZnIHI6A3nJBrdSyfpe1FD5n9s7uM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/company",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCompanyById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NTM3MTQsImV4cCI6MTY1MDQ1NzMxNH0.HrV37-brzsicHVWZnIHI6A3nJBrdSyfpe1FD5n9s7uM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/company/59e7fdf7-d5bf-4be9-8645-3de725bbce30",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"company",
+								"59e7fdf7-d5bf-4be9-8645-3de725bbce30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCompany",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTAzNzQzODMsImV4cCI6MTY1MDM3Nzk4M30.oqYhg47M9Z2wWYunWOfweJHjeitNiPxk3Dqazhr2Lzw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "ENEO",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "Cameoroun",
+									"type": "text"
+								},
+								{
+									"key": "town",
+									"value": "Douala",
+									"type": "text"
+								},
+								{
+									"key": "street",
+									"value": "rue des palmier",
+									"type": "text"
+								},
+								{
+									"key": "zipCode",
+									"value": "25534",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "H",
+									"type": "text"
+								},
+								{
+									"key": "companySector",
+									"value": "EAU_DECHETS",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/company",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCompany",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTAzNzQzODMsImV4cCI6MTY1MDM3Nzk4M30.oqYhg47M9Z2wWYunWOfweJHjeitNiPxk3Dqazhr2Lzw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCompany",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NTM3MTQsImV4cCI6MTY1MDQ1NzMxNH0.HrV37-brzsicHVWZnIHI6A3nJBrdSyfpe1FD5n9s7uM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "name",
+								"value": "Sapelcam",
+								"type": "text"
+							},
+							{
+								"key": "country",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "town",
+								"value": "Yaounde",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "street",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "zipCode",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "description",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "companySector",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "RobinCam",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "Cameroun",
+									"type": "text"
+								},
+								{
+									"key": "town",
+									"value": "Yaounde",
+									"type": "text"
+								},
+								{
+									"key": "street",
+									"value": "nkomkana",
+									"type": "text"
+								},
+								{
+									"key": "zipCode",
+									"value": "23745",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "F",
+									"type": "text"
+								},
+								{
+									"key": "companySector",
+									"value": "EAU_DECHETS",
+									"type": "text"
+								},
+								{
+									"key": "hiringStatus",
+									"value": "DEACTIVATE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/company/59e7fdf7-d5bf-4be9-8645-3de725bbce30",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"company",
+								"59e7fdf7-d5bf-4be9-8645-3de725bbce30"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCompanyStatus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NTM3MTQsImV4cCI6MTY1MDQ1NzMxNH0.HrV37-brzsicHVWZnIHI6A3nJBrdSyfpe1FD5n9s7uM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "hiringStatus",
+									"value": "ONGOING",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/company/59e7fdf7-d5bf-4be9-8645-3de725bbce30/status",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"company",
+								"59e7fdf7-d5bf-4be9-8645-3de725bbce30",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employment",
+			"item": [
+				{
+					"name": "getEmploymentsFromTheCurrentUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0Njg1MzQsImV4cCI6MTY1MDQ3MjEzNH0.MkeoZQDiUbXSxmFlYVWf6zH6heymD5sdfEvApN1z5J4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/employment",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmployementsFromTheAmdin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NTM3MTQsImV4cCI6MTY1MDQ1NzMxNH0.HrV37-brzsicHVWZnIHI6A3nJBrdSyfpe1FD5n9s7uM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/admin/employments",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"admin",
+								"employments"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "employmentPeriodStatus",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "town",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "street",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "zipCode",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "hiringStatus",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "clearedAt",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "companyName",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmployementsByIdFromTheAmdin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NTM3MTQsImV4cCI6MTY1MDQ1NzMxNH0.HrV37-brzsicHVWZnIHI6A3nJBrdSyfpe1FD5n9s7uM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/admin/employment/1c64df7b-82db-491d-aa50-0e6e23ade195",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"admin",
+								"employment",
+								"1c64df7b-82db-491d-aa50-0e6e23ade195"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "employmentPeriodStatus",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "town",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "street",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "zipCode",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "hiringStatus",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "clearedAt",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "companyName",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createEmployment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NTM3MTQsImV4cCI6MTY1MDQ1NzMxNH0.HrV37-brzsicHVWZnIHI6A3nJBrdSyfpe1FD5n9s7uM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Testeur",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "code toute la journée",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "France",
+									"type": "text"
+								},
+								{
+									"key": "town",
+									"value": "Lille",
+									"type": "text"
+								},
+								{
+									"key": "street",
+									"value": "rue de condé",
+									"type": "text"
+								},
+								{
+									"key": "zipCode",
+									"value": "59000",
+									"type": "text"
+								},
+								{
+									"key": "employmentSector",
+									"value": "SERVICES_AUTRES",
+									"type": "text"
+								},
+								{
+									"key": "company",
+									"value": "59e7fdf7-d5bf-4be9-8645-3de725bbce30",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/employment",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deteEmployment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/Employment/bdec8048-bf1b-4780-a473-9de94461892d",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"Employment",
+								"bdec8048-bf1b-4780-a473-9de94461892d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmploymentStatus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0Njg1MzQsImV4cCI6MTY1MDQ3MjEzNH0.MkeoZQDiUbXSxmFlYVWf6zH6heymD5sdfEvApN1z5J4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "hiringStatus",
+									"value": "DEACTIVATE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/employment/1c64df7b-82db-491d-aa50-0e6e23ade195/status",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employment",
+								"1c64df7b-82db-491d-aa50-0e6e23ade195",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmploymentsByIdFromTheCurrentUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NTM3MTQsImV4cCI6MTY1MDQ1NzMxNH0.HrV37-brzsicHVWZnIHI6A3nJBrdSyfpe1FD5n9s7uM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/employment/1c64df7b-82db-491d-aa50-0e6e23ade195",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employment",
+								"1c64df7b-82db-491d-aa50-0e6e23ade195"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmployment",
+					"request": {
+						"method": "PATCH",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WokerPeriods",
+			"item": [
+				{
+					"name": "getWorkerPeriods",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTAzNTYxMTEsImV4cCI6MTY1MDM1OTcxMX0.Jg95408BlTmnZN4veME7DFq-3FKVKFdtybc8ICkPeeE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/workerPeriods",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"workerPeriods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createWorkerPeriods",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NDk5NDEzNTIsImV4cCI6MTY0OTk0NDk1Mn0.QTe-bt-Noa_ObFYLw4UoLVGpnFyv5wn72vkaBLc4hag",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "effectiveAsOf",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "effectiveUntil",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "workerPeriodStatus",
+									"value": "OCCUPIED",
+									"type": "text"
+								},
+								{
+									"key": "numberOfHours",
+									"value": "45",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/workerPeriods",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"workerPeriods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateWorkerPeriods",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNpcGVkYW5pZWxAZ21haWwuY29tIiwiaWF0IjoxNjQ5ODczODQ1LCJleHAiOjE2NDk4Nzc0NDV9.V9WKZjS7vkiOmfrP6yhhuSYkGBW4WeHSfmHPVTsZg0w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "AVAILABLE",
+									"type": "text"
+								},
+								{
+									"key": "numberOfHours",
+									"value": "35",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/workerPeriods/99c26d70-0144-4990-bab1-e70db8f31722",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"workerPeriods",
+								"99c26d70-0144-4990-bab1-e70db8f31722"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteWorkerPeriods",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/workerPeriods/99c26d70-0144-4990-bab1-e70db8f31722",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"workerPeriods",
+								"99c26d70-0144-4990-bab1-e70db8f31722"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWorkerPeriodsById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNpcGVkYW5pZWxAZ21haWwuY29tIiwiaWF0IjoxNjQ5ODczODQ1LCJleHAiOjE2NDk4Nzc0NDV9.V9WKZjS7vkiOmfrP6yhhuSYkGBW4WeHSfmHPVTsZg0w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/workerPeriods/99c26d70-0144-4990-bab1-e70db8f31722",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"workerPeriods",
+								"99c26d70-0144-4990-bab1-e70db8f31722"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "workerDays",
+			"item": [
+				{
+					"name": "getworkerDays",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTAzNTY5MDQsImV4cCI6MTY1MDM2MDUwNH0.DvzemhmcXWdqOJg3RyV3Izsvg9NEGPKFZPt6XUys1ys",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/workerDays",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"workerDays"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getWorkerDayById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTAzNTE0NDMsImV4cCI6MTY1MDM1NTA0M30.LCoax0LJGTffxcTGBLW2hlartEWwjd5GJs04UtQyfCc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/workerDays/period/d9407829-4ce3-434e-928e-8a161aacca1d",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"workerDays",
+								"period",
+								"d9407829-4ce3-434e-928e-8a161aacca1d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteWorkerDay",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "updateWorkerDay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTAzNTY5MDQsImV4cCI6MTY1MDM2MDUwNH0.DvzemhmcXWdqOJg3RyV3Izsvg9NEGPKFZPt6XUys1ys",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "startTime",
+									"value": "10:00",
+									"type": "text"
+								},
+								{
+									"key": "endTime",
+									"value": "12:00",
+									"type": "text"
+								},
+								{
+									"key": "numberOfHours",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "workerDayStatus",
+									"value": "OCCUPIED",
+									"type": "text"
+								},
+								{
+									"key": "weekday",
+									"value": "FRIDAY",
+									"type": "text"
+								},
+								{
+									"key": "workerPeriods",
+									"value": "2bf8a3a5-d405-489e-9bdf-fcd7a34066b3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/workerDays/d9407829-4ce3-434e-928e-8a161aacca1d",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"workerDays",
+								"d9407829-4ce3-434e-928e-8a161aacca1d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createWorkerDay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTAzNzQyMzEsImV4cCI6MTY1MDM3NzgzMX0.xtV9hLDOsWls49ulIPuV5kLxgr1Sxu6xzp6NHecvEgA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "workerDayStatus",
+									"value": "OCCUPIED",
+									"type": "text"
+								},
+								{
+									"key": "weekday",
+									"value": "FRIDAY",
+									"type": "text"
+								},
+								{
+									"key": "workerPeriodsId",
+									"value": "2bf8a3a5-d405-489e-9bdf-fcd7a34066b3",
+									"type": "text"
+								},
+								{
+									"key": "startTime",
+									"value": "20:30",
+									"type": "text"
+								},
+								{
+									"key": "endTime",
+									"value": "00:30",
+									"type": "text"
+								},
+								{
+									"key": "numberOfHours",
+									"value": "5.0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/workerDays/",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"workerDays",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateWorkerDaySatus",
+					"request": {
+						"method": "PATCH",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employmentDays",
+			"item": [
+				{
+					"name": "getEmploymentDays",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0Njg1MzQsImV4cCI6MTY1MDQ3MjEzNH0.MkeoZQDiUbXSxmFlYVWf6zH6heymD5sdfEvApN1z5J4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/employmentDays",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employmentDays"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmploymentDaysById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NjQ5MDEsImV4cCI6MTY1MDQ2ODUwMX0.1YWvnF1D6svC0jQPzrvjda5kgnwu3Rt2C_sMcxzhG2s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/employmentDays/a2f37793-dde1-4e76-9d12-a1c8e6cb4ebf",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employmentDays",
+								"a2f37793-dde1-4e76-9d12-a1c8e6cb4ebf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmployementDay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NjQ5MDEsImV4cCI6MTY1MDQ2ODUwMX0.1YWvnF1D6svC0jQPzrvjda5kgnwu3Rt2C_sMcxzhG2s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "startTime",
+									"value": "20:00",
+									"type": "text"
+								},
+								{
+									"key": "endTime",
+									"value": "00:00",
+									"type": "text"
+								},
+								{
+									"key": "numberOfHours",
+									"value": "24",
+									"type": "text"
+								},
+								{
+									"key": "weekday",
+									"value": "FRIDAY",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "OCCUPIED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/employmentDays/a2f37793-dde1-4e76-9d12-a1c8e6cb4ebf",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employmentDays",
+								"a2f37793-dde1-4e76-9d12-a1c8e6cb4ebf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createEmploymentDay",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0Njg1MzQsImV4cCI6MTY1MDQ3MjEzNH0.MkeoZQDiUbXSxmFlYVWf6zH6heymD5sdfEvApN1z5J4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "status",
+								"value": "OCCUPIED",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "weekday",
+									"value": "MONDAY",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "OCCUPIED",
+									"type": "text"
+								},
+								{
+									"key": "startTime",
+									"value": "13:20",
+									"type": "text"
+								},
+								{
+									"key": "endTime",
+									"value": "15:50",
+									"type": "text"
+								},
+								{
+									"key": "employmentPeriods",
+									"value": "2cd5a71e-6e51-4399-b4a5-ab58af7fb6bf",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/employmentDays/",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employmentDays",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmploymentDayStatus",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NjQ5MDEsImV4cCI6MTY1MDQ2ODUwMX0.1YWvnF1D6svC0jQPzrvjda5kgnwu3Rt2C_sMcxzhG2s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "OCCUPIED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/employmentDays/a2f37793-dde1-4e76-9d12-a1c8e6cb4ebf/status",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employmentDays",
+								"a2f37793-dde1-4e76-9d12-a1c8e6cb4ebf",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EmploymentPeriods",
+			"item": [
+				{
+					"name": "getEmploymentPeriods",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NTM3MTQsImV4cCI6MTY1MDQ1NzMxNH0.HrV37-brzsicHVWZnIHI6A3nJBrdSyfpe1FD5n9s7uM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/employmentPeriods",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employmentPeriods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmploymentPeriodsById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0NTM3MTQsImV4cCI6MTY1MDQ1NzMxNH0.HrV37-brzsicHVWZnIHI6A3nJBrdSyfpe1FD5n9s7uM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/employmentPeriods/ecaded16-873a-486d-8e5e-ae39a0bf5e31",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employmentPeriods",
+								"ecaded16-873a-486d-8e5e-ae39a0bf5e31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createEmploymentPeriods",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "effectiveAsOf",
+									"value": "1650457300089",
+									"type": "text"
+								},
+								{
+									"key": "effectiveUntil",
+									"value": "1650457323256",
+									"type": "text"
+								},
+								{
+									"key": "employmentPeriodStatus",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "numberOfHours",
+									"value": "70",
+									"type": "text"
+								},
+								{
+									"key": "employmentId",
+									"value": "1c64df7b-82db-491d-aa50-0e6e23ade195",
+									"type": "text"
+								},
+								{
+									"key": "numberOfDays",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/employmentPeriods/",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employmentPeriods",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmploymentPeriods",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "effectiveAsOf",
+									"value": "1650457300089",
+									"type": "text"
+								},
+								{
+									"key": "effectiveUntil",
+									"value": "1650457323256",
+									"type": "text"
+								},
+								{
+									"key": "numberOfHours",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "employmentPeriodStatus",
+									"value": "OCCUPIED",
+									"type": "text"
+								},
+								{
+									"key": "numberOfDays",
+									"value": "20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/employmentPeriods/ecaded16-873a-486d-8e5e-ae39a0bf5e31",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employmentPeriods",
+								"ecaded16-873a-486d-8e5e-ae39a0bf5e31"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmploymentPeriodStatus",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "AVAILABLE",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/employmentPeriods/ecaded16-873a-486d-8e5e-ae39a0bf5e31/status",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"employmentPeriods",
+								"ecaded16-873a-486d-8e5e-ae39a0bf5e31",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UsersWorkForCompanies",
+			"item": [
+				{
+					"name": "getUsersWorkForCompanies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0OTQ0MzYsImV4cCI6MTY1MDQ5ODAzNn0.yQ5hGqzEcvZrRX3hrDhNdGfyL0kZzaocmZ-V4Z1FrZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/usersWorkForCompanies",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"usersWorkForCompanies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsersWorkForCompaniesById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0OTQ0MzYsImV4cCI6MTY1MDQ5ODAzNn0.yQ5hGqzEcvZrRX3hrDhNdGfyL0kZzaocmZ-V4Z1FrZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v0/usersWorkForCompanies/7ae2d65e-e40d-4de9-b05f-f3c7af22b37f",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"usersWorkForCompanies",
+								"7ae2d65e-e40d-4de9-b05f-f3c7af22b37f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUsersWorkForCompany",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0OTQ0MzYsImV4cCI6MTY1MDQ5ODAzNn0.yQ5hGqzEcvZrRX3hrDhNdGfyL0kZzaocmZ-V4Z1FrZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "scoreCompany",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "companyReviews",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "workerReviews",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/usersWorkForCompanies/7ae2d65e-e40d-4de9-b05f-f3c7af22b37f",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"usersWorkForCompanies",
+								"7ae2d65e-e40d-4de9-b05f-f3c7af22b37f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUsersWorkForCompany",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVtaUBnbWFpbC5jb20iLCJpYXQiOjE2NTA0OTQ0MzYsImV4cCI6MTY1MDQ5ODAzNn0.yQ5hGqzEcvZrRX3hrDhNdGfyL0kZzaocmZ-V4Z1FrZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "companyReviews",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "workerReviews",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "companyId",
+									"value": "a67e9731-6ce8-41e2-bb2d-17052d852862",
+									"type": "text"
+								},
+								{
+									"key": "scoreCompany",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/api/v0/usersWorkForCompanies",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v0",
+								"usersWorkForCompanies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
