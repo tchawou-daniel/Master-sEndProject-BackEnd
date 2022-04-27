@@ -12,7 +12,7 @@ import { User } from './user.entity';
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
   async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    const { firstName, lastName, email, password } = authCredentialsDto;
+    const { firstName, lastName, email, password, role } = authCredentialsDto;
     const logger = new Logger('UsersRepository');
     logger.verbose(`User "${authCredentialsDto}"`);
     console.log(authCredentialsDto);
@@ -25,6 +25,7 @@ export class UsersRepository extends Repository<User> {
       firstName,
       lastName,
       email,
+      role,
       password: hashedPassword,
     });
     try {

@@ -1,3 +1,4 @@
+import { AbilityFactory } from '@api/ability/ability.factory';
 import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
 import { CompanyService } from '@api/company/company.service';
@@ -7,8 +8,9 @@ import { UpdateCompanyHiringStatusDto } from '@api/company/dto/update-company-hi
 import { UpdateCompanyDto } from '@api/company/dto/update-company.dto';
 export declare class CompanyController {
     private companyService;
+    private abilityFactory;
     private logger;
-    constructor(companyService: CompanyService);
+    constructor(companyService: CompanyService, abilityFactory: AbilityFactory);
     getMyOwnedCompanies(filterDto: GetCompaniesFilterDto, user: User): Promise<Company[]>;
     getCompanies(filterDto: GetCompaniesFilterDto): Promise<Company[]>;
     getCompanyById(id: string, user: User): Promise<Company>;

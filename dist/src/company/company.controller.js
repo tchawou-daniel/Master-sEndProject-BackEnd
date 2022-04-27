@@ -13,6 +13,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyController = void 0;
+const abilities_decorator_1 = require("../ability/abilities.decorator");
+const ability_factory_1 = require("../ability/ability.factory");
 const get_user_decorator_1 = require("../auth/get-user.decorator");
 const user_entity_1 = require("../auth/user.entity");
 const company_service_1 = require("./company.service");
@@ -20,11 +22,13 @@ const create_company_dto_1 = require("./dto/create-company.dto");
 const get_companies_filter_dto_1 = require("./dto/get-companies-filter.dto");
 const update_company_hiring_status_dto_1 = require("./dto/update-company-hiring-status.dto");
 const update_company_dto_1 = require("./dto/update-company.dto");
+const ability_1 = require("@casl/ability");
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
 let CompanyController = class CompanyController {
-    constructor(companyService) {
+    constructor(companyService, abilityFactory) {
         this.companyService = companyService;
+        this.abilityFactory = abilityFactory;
         this.logger = new common_1.Logger('CompanyController');
     }
     getMyOwnedCompanies(filterDto, user) {
@@ -38,7 +42,16 @@ let CompanyController = class CompanyController {
         return this.companyService.getCompanyById(id, user);
     }
     createCompany(createCompanyDto, user) {
-        return this.companyService.createCompany(createCompanyDto, user);
+        const ability = this.abilityFactory.defineAbility(user);
+        try {
+            ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Create, user_entity_1.User);
+            return this.companyService.createCompany(createCompanyDto, user);
+        }
+        catch (error) {
+            if (error instanceof ability_1.ForbiddenError) {
+                throw new common_1.ForbiddenException(error.message);
+            }
+        }
     }
     updateCompany(id, user, updateCompanyDto) {
         return this.companyService.updateCompany(id, updateCompanyDto, user);
@@ -74,6 +87,7 @@ __decorate([
 ], CompanyController.prototype, "getCompanyById", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, abilities_decorator_1.CheckAbilities)({ action: ability_factory_1.Action.Delete, subject: user_entity_1.User }),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, get_user_decorator_1.GetUser)()),
     __metadata("design:type", Function),
@@ -104,7 +118,8 @@ __decorate([
 CompanyController = __decorate([
     (0, common_1.Controller)('/api/v0/company'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    __metadata("design:paramtypes", [company_service_1.CompanyService])
+    __metadata("design:paramtypes", [company_service_1.CompanyService,
+        ability_factory_1.AbilityFactory])
 ], CompanyController);
 exports.CompanyController = CompanyController;
 //# sourceMappingURL=company.controller.js.map

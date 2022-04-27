@@ -1,29 +1,11 @@
 import { User } from '@api/auth/user.entity';
 import { SetMetadata } from '@nestjs/common';
 
-import {
-  Action,
-  EmploymentDaysSubject,
-  EmploymentPeriodsSubject,
-  EmploymentSubject,
-  UserSubject,
-  UsersWorkForCompaniesSubject,
-  WorkerDaysSubject,
-  WorkerPeriodsSubject,
-  WorkerSubject,
-} from './ability.factory';
+import { Action, Subjects } from './ability.factory';
 
 export interface RequiredRule {
   action: Action;
-  subject:
-    | UserSubject
-    | EmploymentSubject
-    | EmploymentPeriodsSubject
-    | EmploymentDaysSubject
-    | UsersWorkForCompaniesSubject
-    | WorkerSubject
-    | WorkerPeriodsSubject
-    | WorkerDaysSubject;
+  subject: Subjects;
 }
 
 export const CHECK_ABILITY = 'check_ability';

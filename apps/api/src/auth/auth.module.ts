@@ -1,3 +1,4 @@
+import { AbilityModule } from '@api/ability/ability.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
@@ -8,7 +9,6 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStartegy } from './jwt.startegy';
 import { UsersRepository } from './users.repository';
-import { AbilityModule } from '@api/ability/ability.module';
 
 @Module({
   imports: [

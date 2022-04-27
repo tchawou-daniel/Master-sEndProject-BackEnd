@@ -5,4 +5,5 @@ export declare class CreateUserDto {
     readonly role: UserRole;
     readonly email: string;
     readonly password: string;
+    readonly workerIntegrationStatus: string;
 }

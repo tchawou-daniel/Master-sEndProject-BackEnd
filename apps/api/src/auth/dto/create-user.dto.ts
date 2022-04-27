@@ -8,7 +8,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-import { UserRole } from '../../../common/types/user';
+import { UserRole, WorkerIntegrationStatus } from '../../../common/types/user';
 
 export class CreateUserDto {
   @IsOptional()
@@ -31,4 +31,8 @@ export class CreateUserDto {
     message: 'password is too weak',
   })
   readonly password: string;
+
+  @IsEnum(WorkerIntegrationStatus)
+  @IsOptional()
+  readonly workerIntegrationStatus: string;
 }

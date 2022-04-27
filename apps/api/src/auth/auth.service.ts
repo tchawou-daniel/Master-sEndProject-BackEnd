@@ -19,7 +19,6 @@ export class AuthService {
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
     const logger = new Logger('UsersRepository');
     logger.verbose(`User "${authCredentialsDto}"`);
-    console.log(authCredentialsDto);
     return this.usersRepository.createUser(authCredentialsDto);
   }
 
