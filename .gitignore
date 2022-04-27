@@ -1,12 +1,16 @@
 # dependencies
 /node_modules
-/dist
 
 # testing
 /coveragegot
 
 .idea
 .vscode
+
+# dist
+/dist
+/tmp
+
 
 
 cypress/screenshots
@@ -23,3 +27,5 @@ cypress/screenshots
 
 .env.stage.dev
 .env.stage.prod
+
+.progress

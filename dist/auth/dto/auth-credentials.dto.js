@@ -8,9 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthCredentialsDto = void 0;
 const class_validator_1 = require("class-validator");
+const user_1 = require("../../../common/user");
 class AuthCredentialsDto {
 }
 __decorate([
@@ -18,7 +20,22 @@ __decorate([
     (0, class_validator_1.MinLength)(4),
     (0, class_validator_1.MaxLength)(20),
     __metadata("design:type", String)
-], AuthCredentialsDto.prototype, "username", void 0);
+], AuthCredentialsDto.prototype, "firstName", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(4),
+    (0, class_validator_1.MaxLength)(20),
+    __metadata("design:type", String)
+], AuthCredentialsDto.prototype, "lastName", void 0);
+__decorate([
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], AuthCredentialsDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsEnum)(user_1.UserRole),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", typeof (_a = typeof user_1.UserRole !== "undefined" && user_1.UserRole) === "function" ? _a : Object)
+], AuthCredentialsDto.prototype, "role", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(4),

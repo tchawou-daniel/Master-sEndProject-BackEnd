@@ -14,29 +14,30 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const users_repository_1 = require("./users.repository");
+const jwt_1 = require("@nestjs/jwt");
 const typeorm_1 = require("@nestjs/typeorm");
 const bcrypt = require("bcrypt");
-const jwt_1 = require("@nestjs/jwt");
+const users_repository_1 = require("./users.repository");
 let AuthService = class AuthService {
     constructor(usersRepository, jwtService) {
         this.usersRepository = usersRepository;
         this.jwtService = jwtService;
     }
     async signUp(authCredentialsDto) {
+        let logger = new common_1.Logger('UsersRepository');
+        logger.verbose(`User "${authCredentialsDto}"`);
+        console.log(authCredentialsDto);
         return this.usersRepository.createUser(authCredentialsDto);
     }
     async signIn(authCredentialsDto) {
-        const { username, password } = authCredentialsDto;
-        const user = await this.usersRepository.findOne({ username });
+        const { email, password } = authCredentialsDto;
+        const user = await this.usersRepository.findOne({ email });
         if (user && (await bcrypt.compare(password, user.password))) {
-            const payload = { username };
+            const payload = { email };
             const accessToken = this.jwtService.sign(payload);
             return { accessToken };
         }
-        else {
-            throw new common_1.UnauthorizedException('Please check your login credentials');
-        }
+        throw new common_1.UnauthorizedException('Please check your login credentials');
     }
 };
 AuthService = __decorate([

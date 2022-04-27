@@ -10,7 +10,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "resolveJsonModule": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "skipLibCheck": true,
     "paths": {
       "@api/*": [
