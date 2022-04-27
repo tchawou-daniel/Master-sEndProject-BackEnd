@@ -1,3 +1,5 @@
+import { CheckAbilities } from '@api/ability/abilities.decorator';
+import { AbilityFactory, Action } from '@api/ability/ability.factory';
 import { GetUser } from '@api/auth/get-user.decorator';
 import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
@@ -6,9 +8,10 @@ import { CreateCompanyDto } from '@api/company/dto/create-company.dto';
 import { GetCompaniesFilterDto } from '@api/company/dto/get-companies-filter.dto';
 import { UpdateCompanyHiringStatusDto } from '@api/company/dto/update-company-hiring-status.dto';
 import { UpdateCompanyDto } from '@api/company/dto/update-company.dto';
+import { ForbiddenError } from '@casl/ability';
 import {
   Body,
-  Controller,
+  Controller, ForbiddenException,
   Get,
   Logger,
   Param,
@@ -24,7 +27,10 @@ import { AuthGuard } from '@nestjs/passport';
 export class CompanyController {
   private logger = new Logger('CompanyController');
 
-  constructor(private companyService: CompanyService) {}
+  constructor(
+    private companyService: CompanyService,
+    private abilityFactory: AbilityFactory,
+  ) {}
 
   // company create by User
   @Get('/')
@@ -56,11 +62,20 @@ export class CompanyController {
   }
 
   @Post()
+  @CheckAbilities({ action: Action.Delete, subject: User })
   createCompany(
     @Body() createCompanyDto: CreateCompanyDto,
     @GetUser() user: User,
   ): Promise<Company> {
-    return this.companyService.createCompany(createCompanyDto, user);
+    const ability = this.abilityFactory.defineAbility(user);
+    try {
+      ForbiddenError.from(ability).throwUnlessCan(Action.Create, User);
+      return this.companyService.createCompany(createCompanyDto, user);
+    } catch (error) {
+      if (error instanceof ForbiddenError) {
+        throw new ForbiddenException(error.message);
+      }
+    }
   }
 
   @Patch('/:id')
