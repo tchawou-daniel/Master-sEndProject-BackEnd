@@ -42,20 +42,31 @@ export type Subjects =
     >
   | 'all';
 
+export type AppEntity =
+  | User
+  | Company
+  | UsersWorkForCompanies
+  | Employment
+  | EmploymentPeriods
+  | EmploymentDays
+  | Worker
+  | WorkerPeriods
+  | WorkerDays;
+
 export type AppAbility = Ability<[Action, Subjects]>;
 @Injectable()
 export class AbilityFactory {
-  defineAbility(user: User) {
+  defineAbility(appEntity: AppEntity) {
     const { can, cannot, build } = new AbilityBuilder(
       Ability as AbilityClass<AppAbility>,
     );
-    switch (user.role) {
+    switch ((appEntity as User).role) {
       case UserRole.ADMIN:
         can(Action.Manage, 'all');
         break;
       case UserRole.EMPLOYMENT_AGENCY:
         can(Action.Manage, User);
-        cannot(Action.Manage, User, { role: { $ne: user.role } }).because(
+        cannot(Action.Manage, User, { role: { $ne: UserRole.ADMIN } }).because(
           "You don't have the rights",
         );
         can(Action.Manage, Company);
@@ -68,15 +79,54 @@ export class AbilityFactory {
         can(Action.Manage, WorkerDays);
         break;
       case UserRole.PARTNER_COMPANY_EMPLOYEE:
+        cannot(Action.Manage, User).because("You don't have the rights");
+        // company
+        can([Action.Read, Action.Create, Action.Update], Company, {
+          id: { $ne: (appEntity as UsersWorkForCompanies).companyId }, // compare id to Id after an evaluation
+        });
+        cannot(Action.Delete, Company);
+        // usersWorkForCompanies
+        can(
+          [Action.Read, Action.Create, Action.Update],
+          UsersWorkForCompanies,
+          {
+            userId: { $ne: (appEntity as User).id },
+          },
+        );
+        cannot(Action.Delete, UsersWorkForCompanies);
+        // Employment
+        can(Action.Manage, Employment, {
+          company: { $ne: appEntity as Company },
+        });
+        cannot(Action.Delete, Employment);
+        // EmploymentPeriods
+        can(Action.Manage, EmploymentPeriods,{
+
+        });
+        cannot(Action.Delete, EmploymentPeriods);
+        // EmploymentDays
+        can(Action.Manage, EmploymentDays);
+        // Worker
+        can(Action.Manage, Worker);
+        // WorkerPeriods
+        can(Action.Manage, WorkerPeriods);
+        // WorkerDays
+        can(Action.Manage, WorkerDays);
         break;
       case UserRole.PARTNER_COMPANY_EMPLOYEE_ADMIN:
+        cannot(Action.Manage, User);
+        cannot(Action.Manage, Company);
+        cannot(Action.Manage, UsersWorkForCompanies);
+        cannot(Action.Manage, Employment);
+        cannot(Action.Manage, EmploymentPeriods);
+        cannot(Action.Manage, EmploymentDays);
+        cannot(Action.Manage, Worker);
+        cannot(Action.Manage, WorkerPeriods);
+        cannot(Action.Manage, WorkerDays);
         break;
       case UserRole.TEMPORARY_WORKER:
-        can(Action.Manage, User);
-        cannot(Action.Manage, User, { role: { $ne: user.role } }).because(
-          "You don't have the rights",
-        );
-        cannot(Action.Create, Company);
+        cannot(Action.Manage, User);
+        cannot(Action.Manage, Company);
         cannot(Action.Manage, UsersWorkForCompanies);
         cannot(Action.Manage, Employment);
         cannot(Action.Manage, EmploymentPeriods);

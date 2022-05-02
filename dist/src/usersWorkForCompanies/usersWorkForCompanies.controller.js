@@ -28,9 +28,9 @@ let UsersWorkForCompaniesController = class UsersWorkForCompaniesController {
         this.companyService = companyService;
         this.logger = new common_1.Logger('UsersWorkForCompaniesController');
     }
-    getUsersWorkForCompanies(filterDto, user) {
+    getUsersWorkForCompanies(user, filterDto) {
         this.logger.verbose(`"User ${user.firstName}" retrieving all users work for companies Filters: ${JSON.stringify(filterDto)}`);
-        return this.usersWorkForCompaniesService.getUsersWorkForCompanies(filterDto, user);
+        return this.usersWorkForCompaniesService.getUsersWorkForCompanies(user, filterDto);
     }
     getUserWorkForCompaniesById(id, user) {
         return this.usersWorkForCompaniesService.getUserWorkForCompaniesById(id, user);
@@ -38,7 +38,7 @@ let UsersWorkForCompaniesController = class UsersWorkForCompaniesController {
     getUsersWorkForMyCompany(filterDto, user, id) {
         const userWorkForCompanies = this.getUserWorkForCompaniesById(id, user);
         this.logger.verbose(`the content of userWorkForCompanies is: ${userWorkForCompanies}`);
-        return this.getUsersWorkForCompanies(filterDto, user);
+        return this.getUsersWorkForCompanies(user, filterDto);
     }
     createUsersWorkForCompany(createUsersWorkForCompaniesDto, user) {
         return this.usersWorkForCompaniesService.createUsersWorkForCompany(createUsersWorkForCompaniesDto, user);
@@ -50,11 +50,11 @@ let UsersWorkForCompaniesController = class UsersWorkForCompaniesController {
 };
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Query)()),
-    __param(1, (0, get_user_decorator_1.GetUser)()),
+    __param(0, (0, get_user_decorator_1.GetUser)()),
+    __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [get_usersWorkForComponaies_filter_dto_1.GetUsersWorkForComponiesFilterDto,
-        user_entity_1.User]),
+    __metadata("design:paramtypes", [user_entity_1.User,
+        get_usersWorkForComponaies_filter_dto_1.GetUsersWorkForComponiesFilterDto]),
     __metadata("design:returntype", Promise)
 ], UsersWorkForCompaniesController.prototype, "getUsersWorkForCompanies", null);
 __decorate([

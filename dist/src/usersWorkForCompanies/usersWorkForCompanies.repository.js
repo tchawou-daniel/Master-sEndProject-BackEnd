@@ -8,12 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersWorkForCompaniesRepository = void 0;
 const usersWorkForCompanies_entity_1 = require("./usersWorkForCompanies.entity");
+const common_1 = require("@nestjs/common");
 const lodash_1 = require("lodash");
 const typeorm_1 = require("typeorm");
 const user_1 = require("../../common/types/user");
 let UsersWorkForCompaniesRepository = class UsersWorkForCompaniesRepository extends typeorm_1.Repository {
+    constructor() {
+        super(...arguments);
+        this.logger = new common_1.Logger('UsersWorkForCompaniesRepository');
+    }
     async getUsersWorkForCompanies(filterDto, user) {
-        const { scoreCompany, companyReviews, workerReviews } = filterDto;
+        const { scoreCompany, companyReviews, workerReviews } = filterDto || {};
+        this.logger.verbose({ user });
         const query = this.createQueryBuilder('usersWorkForCompanies');
         query.where({ user });
         if (scoreCompany) {
@@ -28,6 +34,7 @@ let UsersWorkForCompaniesRepository = class UsersWorkForCompaniesRepository exte
             query.andWhere('(LOWER(usersWorkForCompanies.workerReviews) LIKE LOWER(:search)', { search: `%${workerReviews}%` });
         }
         const usersWorkForCompanies = await query.getMany();
+        this.logger.verbose({ usersWorkForCompanies });
         return usersWorkForCompanies;
     }
     async getMyOwnCompanies(filterDto, user) {

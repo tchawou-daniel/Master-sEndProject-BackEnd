@@ -20,7 +20,7 @@ export class CompanyService {
 
   @Get()
   getCompanies(
-    filterDto: GetCompaniesFilterDto,
+    filterDto?: GetCompaniesFilterDto,
     user?: User,
   ): Promise<Company[]> {
     if (user) {

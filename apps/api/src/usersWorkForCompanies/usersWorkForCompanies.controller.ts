@@ -37,8 +37,8 @@ export class UsersWorkForCompaniesController {
 
   @Get()
   getUsersWorkForCompanies(
-    @Query() filterDto: GetUsersWorkForComponiesFilterDto,
     @GetUser() user: User,
+    @Query() filterDto?: GetUsersWorkForComponiesFilterDto,
   ): Promise<UsersWorkForCompanies[]> {
     this.logger.verbose(
       `"User ${
@@ -48,8 +48,8 @@ export class UsersWorkForCompaniesController {
       )}`,
     );
     return this.usersWorkForCompaniesService.getUsersWorkForCompanies(
-      filterDto,
       user,
+      filterDto,
     );
   }
 
@@ -75,7 +75,7 @@ export class UsersWorkForCompaniesController {
       `the content of userWorkForCompanies is: ${userWorkForCompanies}`,
     );
 
-    return this.getUsersWorkForCompanies(filterDto, user);
+    return this.getUsersWorkForCompanies(user, filterDto);
   }
   //
   // @Get('/:id')

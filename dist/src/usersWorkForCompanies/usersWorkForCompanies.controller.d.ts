@@ -10,7 +10,7 @@ export declare class UsersWorkForCompaniesController {
     private companyService;
     private logger;
     constructor(usersWorkForCompaniesService: UsersWorkForCompaniesService, companyService: CompanyService);
-    getUsersWorkForCompanies(filterDto: GetUsersWorkForComponiesFilterDto, user: User): Promise<UsersWorkForCompanies[]>;
+    getUsersWorkForCompanies(user: User, filterDto?: GetUsersWorkForComponiesFilterDto): Promise<UsersWorkForCompanies[]>;
     getUserWorkForCompaniesById(id: string, user: User): Promise<UsersWorkForCompanies>;
     getUsersWorkForMyCompany(filterDto: GetUsersWorkForComponiesFilterDto, user: User, id: string): Promise<UsersWorkForCompanies[]>;
     createUsersWorkForCompany(createUsersWorkForCompaniesDto: CreateUsersWorkForCompaniesDto, user: User): Promise<UsersWorkForCompanies>;

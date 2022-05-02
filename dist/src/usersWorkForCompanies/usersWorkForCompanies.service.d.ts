@@ -6,8 +6,9 @@ import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCo
 import { UsersWorkForCompaniesRepository } from '@api/usersWorkForCompanies/usersWorkForCompanies.repository';
 export declare class UsersWorkForCompaniesService {
     private usersWorkForCompaniesRepository;
+    private logger;
     constructor(usersWorkForCompaniesRepository: UsersWorkForCompaniesRepository);
-    getUsersWorkForCompanies(filterDto: GetUsersWorkForComponiesFilterDto, user: User): Promise<UsersWorkForCompanies[]>;
+    getUsersWorkForCompanies(user: User, filterDto?: GetUsersWorkForComponiesFilterDto): Promise<UsersWorkForCompanies[]>;
     getUserWorkForCompaniesById(id: string, user: User): Promise<UsersWorkForCompanies>;
     createUsersWorkForCompany(createUsersWorkForCompaniesDto: CreateUsersWorkForCompaniesDto, user: User): Promise<UsersWorkForCompanies>;
     updateUsersWorkForCompaniesService(id: string, updateUsersWorkForCompaniesDto: UpdateUsersWorkForCompaniesDto, user: User): Promise<UsersWorkForCompanies>;
