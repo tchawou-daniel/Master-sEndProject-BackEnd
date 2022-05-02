@@ -24,6 +24,8 @@ export enum Action {
   Manage = 'manage',
   Create = 'create',
   Read = 'read',
+  Read_All_CreatedBy_SpecificUser = 'read_all_createdBySpecificUser',
+  Read_All = 'read_all',
   Update = 'update',
   Delete = 'delete',
 }
@@ -100,9 +102,7 @@ export class AbilityFactory {
         });
         cannot(Action.Delete, Employment);
         // EmploymentPeriods
-        can(Action.Manage, EmploymentPeriods,{
-
-        });
+        can(Action.Manage, EmploymentPeriods, {});
         cannot(Action.Delete, EmploymentPeriods);
         // EmploymentDays
         can(Action.Manage, EmploymentDays);
@@ -125,8 +125,10 @@ export class AbilityFactory {
         cannot(Action.Manage, WorkerDays);
         break;
       case UserRole.TEMPORARY_WORKER:
-        cannot(Action.Manage, User);
-        cannot(Action.Manage, Company);
+        can(Action.Read, Company);
+        can(Action.Read_All, Company);
+        can(Action.Read_All_CreatedBy_SpecificUser, Company);
+        can(Action.Read, User); // possibility to read user because we use two parameters when we call some functions
         cannot(Action.Manage, UsersWorkForCompanies);
         cannot(Action.Manage, Employment);
         cannot(Action.Manage, EmploymentPeriods);

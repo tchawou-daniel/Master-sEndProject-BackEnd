@@ -13,10 +13,11 @@ export declare class CompanyController {
     private usersWorkForCompaniesService;
     private logger;
     constructor(companyService: CompanyService, abilityFactory: AbilityFactory, usersWorkForCompaniesService: UsersWorkForCompaniesService);
-    getCompanies(filterDto: GetCompaniesFilterDto): Promise<Company[]>;
+    getCompanies(filterDto: GetCompaniesFilterDto, user: User): Promise<Company[]>;
     getMyOwnedCompanies(filterDto: GetCompaniesFilterDto, user: User): Promise<Company[]>;
     getAllCompanyCreatedByTheCurrentUser(filterDto: GetCompaniesFilterDto, user: User): Promise<Company[]>;
     getCompanyById(id: string, user: User): Promise<Company>;
+    getCompaniesCreatedByASpecificUser(id: string, user: User): Promise<Company>;
     createCompany(createCompanyDto: CreateCompanyDto, user: User): Promise<Company>;
     updateCompany(id: string, user: User, updateCompanyDto: UpdateCompanyDto): Promise<Company>;
     updateCompanyHiringStatus(id: string, user: User, updateCompanyHiringStatusDto: UpdateCompanyHiringStatusDto): Promise<Company>;

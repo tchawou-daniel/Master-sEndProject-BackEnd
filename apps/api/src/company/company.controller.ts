@@ -41,9 +41,20 @@ export class CompanyController {
 
   // Get all companies
   @Get('/')
-  @CheckAbilities({ action: Action.Read, subject: User })
-  getCompanies(@Query() filterDto: GetCompaniesFilterDto): Promise<Company[]> {
-    return this.companyService.getCompanies(filterDto);
+  @CheckAbilities({ action: Action.Read_All, subject: User })
+  getCompanies(
+    @Query() filterDto: GetCompaniesFilterDto,
+    @GetUser() user: User,
+  ): Promise<Company[]> {
+    const ability = this.abilityFactory.defineAbility(user);
+    try {
+      ForbiddenError.from(ability).throwUnlessCan(Action.Read_All, User);
+      return this.companyService.getCompanies(filterDto);
+    } catch (error) {
+      if (error instanceof ForbiddenError) {
+        throw new ForbiddenException(error.message);
+      }
+    }
   }
 
   // Companies where the current user works
@@ -80,7 +91,7 @@ export class CompanyController {
     return res;
   }
 
-  // get all the companies create by the current user
+  // Get all the companies create by the current user
   @Get('/createdbycurrent_user/')
   @CheckAbilities({ action: Action.Read, subject: User })
   getAllCompanyCreatedByTheCurrentUser(
@@ -97,6 +108,7 @@ export class CompanyController {
     @Param('id') id: string,
     @GetUser() user: User,
   ): Promise<Company> {
+    this.logger.verbose(`user: ${JSON.stringify(user)}`);
     const ability = this.abilityFactory.defineAbility(user);
     try {
       ForbiddenError.from(ability).throwUnlessCan(Action.Read, User);
@@ -109,6 +121,29 @@ export class CompanyController {
   }
 
   // Get all companies created by a specific user
+  @Get('/createdby_specific_user/:id')
+  @CheckAbilities({
+    action: Action.Read_All_CreatedBy_SpecificUser,
+    subject: User,
+  })
+  getCompaniesCreatedByASpecificUser(
+    @Param('id') id: string, // Id of the user
+    @GetUser() user: User,
+  ): Promise<Company> {
+    const ability = this.abilityFactory.defineAbility(user);
+    try {
+      ForbiddenError.from(ability).throwUnlessCan(
+        Action.Read_All_CreatedBy_SpecificUser,
+        User,
+      );
+
+      return this.companyService.getCompanyCreatedByASpecificUser(id);
+    } catch (error) {
+      if (error instanceof ForbiddenError) {
+        throw new ForbiddenException(error.message);
+      }
+    }
+  }
 
   // Create a company
   @Post()

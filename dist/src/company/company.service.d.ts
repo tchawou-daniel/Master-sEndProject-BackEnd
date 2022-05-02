@@ -10,6 +10,7 @@ export declare class CompanyService {
     constructor(companyRepository: CompanyRepository);
     getCompanies(filterDto?: GetCompaniesFilterDto, user?: User): Promise<Company[]>;
     getCompanyById(id: string, user: User): Promise<Company>;
+    getCompanyCreatedByASpecificUser(user: string): Promise<Company>;
     getCompanyByName(companyName: string, user: User): Promise<Company>;
     createCompany(createCompanyDto: CreateCompanyDto, user: User): Promise<Company>;
     updateCompany(id: string, updateCompanyDto: UpdateCompanyDto, user?: User): Promise<Company>;

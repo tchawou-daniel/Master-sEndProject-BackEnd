@@ -33,8 +33,17 @@ let CompanyController = class CompanyController {
         this.usersWorkForCompaniesService = usersWorkForCompaniesService;
         this.logger = new common_1.Logger('CompanyController');
     }
-    getCompanies(filterDto) {
-        return this.companyService.getCompanies(filterDto);
+    getCompanies(filterDto, user) {
+        const ability = this.abilityFactory.defineAbility(user);
+        try {
+            ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Read_All, user_entity_1.User);
+            return this.companyService.getCompanies(filterDto);
+        }
+        catch (error) {
+            if (error instanceof ability_1.ForbiddenError) {
+                throw new common_1.ForbiddenException(error.message);
+            }
+        }
     }
     async getMyOwnedCompanies(filterDto, user) {
         const usersWorkForCompaniesForAnUser = await this.usersWorkForCompaniesService.getUsersWorkForCompanies(user);
@@ -54,10 +63,23 @@ let CompanyController = class CompanyController {
         return this.companyService.getCompanies(filterDto, user);
     }
     getCompanyById(id, user) {
+        this.logger.verbose(`user: ${JSON.stringify(user)}`);
         const ability = this.abilityFactory.defineAbility(user);
         try {
             ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Read, user_entity_1.User);
             return this.companyService.getCompanyById(id, user);
+        }
+        catch (error) {
+            if (error instanceof ability_1.ForbiddenError) {
+                throw new common_1.ForbiddenException(error.message);
+            }
+        }
+    }
+    getCompaniesCreatedByASpecificUser(id, user) {
+        const ability = this.abilityFactory.defineAbility(user);
+        try {
+            ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Read_All_CreatedBy_SpecificUser, user_entity_1.User);
+            return this.companyService.getCompanyCreatedByASpecificUser(id);
         }
         catch (error) {
             if (error instanceof ability_1.ForbiddenError) {
@@ -105,10 +127,12 @@ let CompanyController = class CompanyController {
 };
 __decorate([
     (0, common_1.Get)('/'),
-    (0, abilities_decorator_1.CheckAbilities)({ action: ability_factory_1.Action.Read, subject: user_entity_1.User }),
+    (0, abilities_decorator_1.CheckAbilities)({ action: ability_factory_1.Action.Read_All, subject: user_entity_1.User }),
     __param(0, (0, common_1.Query)()),
+    __param(1, (0, get_user_decorator_1.GetUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [get_companies_filter_dto_1.GetCompaniesFilterDto]),
+    __metadata("design:paramtypes", [get_companies_filter_dto_1.GetCompaniesFilterDto,
+        user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], CompanyController.prototype, "getCompanies", null);
 __decorate([
@@ -143,6 +167,18 @@ __decorate([
     __metadata("design:paramtypes", [String, user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], CompanyController.prototype, "getCompanyById", null);
+__decorate([
+    (0, common_1.Get)('/createdby_specific_user/:id'),
+    (0, abilities_decorator_1.CheckAbilities)({
+        action: ability_factory_1.Action.Read_All_CreatedBy_SpecificUser,
+        subject: user_entity_1.User,
+    }),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, get_user_decorator_1.GetUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, user_entity_1.User]),
+    __metadata("design:returntype", Promise)
+], CompanyController.prototype, "getCompaniesCreatedByASpecificUser", null);
 __decorate([
     (0, common_1.Post)(),
     (0, abilities_decorator_1.CheckAbilities)({ action: ability_factory_1.Action.Create, subject: user_entity_1.User }),
