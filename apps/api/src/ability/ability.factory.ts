@@ -126,9 +126,10 @@ export class AbilityFactory {
         break;
       case UserRole.TEMPORARY_WORKER:
         can(Action.Read, Company);
-        can(Action.Read_All, Company);
-        can(Action.Read_All_CreatedBy_SpecificUser, Company);
+        cannot(Action.Read_All, Company);
+        cannot(Action.Read_All_CreatedBy_SpecificUser, Company);
         can(Action.Read, User); // possibility to read user because we use two parameters when we call some functions
+
         cannot(Action.Manage, UsersWorkForCompanies);
         cannot(Action.Manage, Employment);
         cannot(Action.Manage, EmploymentPeriods);

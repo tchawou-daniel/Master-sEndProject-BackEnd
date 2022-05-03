@@ -38,6 +38,10 @@ let UsersRepository = class UsersRepository extends typeorm_1.Repository {
             }
         }
     }
+    async getUsers(filterDto, user) {
+        const query = this.createQueryBuilder('user');
+        return query.getMany();
+    }
 };
 UsersRepository = __decorate([
     (0, typeorm_1.EntityRepository)(user_entity_1.User)

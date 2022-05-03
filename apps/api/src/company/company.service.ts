@@ -38,8 +38,9 @@ export class CompanyService {
     return found;
   }
 
-  async getCompanyCreatedByASpecificUser(user: string) {
-    const found = await this.companyRepository.findOne({ where: { user } });
+  async getCompaniesCreatedByASpecificUser(user: string) {
+    const found =
+      await this.companyRepository.getCompaniesCreatedByAspecificUser(user);
     if (!found) {
       throw new NotFoundException(`Company of the user "${user}" not found`);
     }

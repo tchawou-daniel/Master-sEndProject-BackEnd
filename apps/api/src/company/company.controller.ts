@@ -129,7 +129,7 @@ export class CompanyController {
   getCompaniesCreatedByASpecificUser(
     @Param('id') id: string, // Id of the user
     @GetUser() user: User,
-  ): Promise<Company> {
+  ): Promise<Company[]> {
     const ability = this.abilityFactory.defineAbility(user);
     try {
       ForbiddenError.from(ability).throwUnlessCan(
@@ -137,7 +137,7 @@ export class CompanyController {
         User,
       );
 
-      return this.companyService.getCompanyCreatedByASpecificUser(id);
+      return this.companyService.getCompaniesCreatedByASpecificUser(id);
     } catch (error) {
       if (error instanceof ForbiddenError) {
         throw new ForbiddenException(error.message);

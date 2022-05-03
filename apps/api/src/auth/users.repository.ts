@@ -1,3 +1,4 @@
+import { GetUsersFliterDto } from '@api/auth/dto/get-users-fliter.dto';
 import {
   ConflictException,
   InternalServerErrorException,
@@ -38,5 +39,11 @@ export class UsersRepository extends Repository<User> {
         throw new InternalServerErrorException();
       }
     }
+  }
+
+  async getUsers(filterDto: GetUsersFliterDto, user?: User): Promise<User[]> {
+    const query = this.createQueryBuilder('user');
+
+    return query.getMany();
   }
 }

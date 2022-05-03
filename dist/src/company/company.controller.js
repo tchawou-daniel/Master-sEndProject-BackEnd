@@ -79,7 +79,7 @@ let CompanyController = class CompanyController {
         const ability = this.abilityFactory.defineAbility(user);
         try {
             ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Read_All_CreatedBy_SpecificUser, user_entity_1.User);
-            return this.companyService.getCompanyCreatedByASpecificUser(id);
+            return this.companyService.getCompaniesCreatedByASpecificUser(id);
         }
         catch (error) {
             if (error instanceof ability_1.ForbiddenError) {

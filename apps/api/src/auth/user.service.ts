@@ -1,0 +1,26 @@
+import { GetUsersFliterDto } from '@api/auth/dto/get-users-fliter.dto';
+import { User } from '@api/auth/user.entity';
+import { UsersRepository } from '@api/auth/users.repository';
+import { Get, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
+export class UserService {
+  constructor(
+    @InjectRepository(UsersRepository)
+    private userRepository: UsersRepository,
+  ) {}
+
+  @Get()
+  getUsers(filterDto?: GetUsersFliterDto): Promise<User[]> {
+    return this.userRepository.getUsers(filterDto);
+  }
+
+  async getUserById(id: string): Promise<User> {
+    const found = await this.userRepository.findOne({ where: { id } });
+
+    if (!found) {
+      throw new NotFoundException(`Company with ID "${id}" not found`);
+    }
+    return found;
+  }
+}

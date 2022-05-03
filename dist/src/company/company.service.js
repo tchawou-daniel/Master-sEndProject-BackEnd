@@ -38,8 +38,8 @@ let CompanyService = class CompanyService {
         }
         return found;
     }
-    async getCompanyCreatedByASpecificUser(user) {
-        const found = await this.companyRepository.findOne({ where: { user } });
+    async getCompaniesCreatedByASpecificUser(user) {
+        const found = await this.companyRepository.getCompaniesCreatedByAspecificUser(user);
         if (!found) {
             throw new common_1.NotFoundException(`Company of the user "${user}" not found`);
         }
