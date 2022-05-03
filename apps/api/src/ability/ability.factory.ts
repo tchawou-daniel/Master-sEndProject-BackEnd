@@ -83,18 +83,14 @@ export class AbilityFactory {
       case UserRole.PARTNER_COMPANY_EMPLOYEE:
         cannot(Action.Manage, User).because("You don't have the rights");
         // company
-        can([Action.Read, Action.Create, Action.Update], Company, {
-          id: { $ne: (appEntity as UsersWorkForCompanies).companyId }, // compare id to Id after an evaluation
+        can([Action.Read], Company, {
+          id: { $ne: (appEntity as UsersWorkForCompanies).companyId }, // compare id company to Id UsersWorkFor Companies after an evaluation
         });
         cannot(Action.Delete, Company);
         // usersWorkForCompanies
-        can(
-          [Action.Read, Action.Create, Action.Update],
-          UsersWorkForCompanies,
-          {
-            userId: { $ne: (appEntity as User).id },
-          },
-        );
+        can([Action.Read], UsersWorkForCompanies, {
+          userId: { $ne: (appEntity as User).id },
+        });
         cannot(Action.Delete, UsersWorkForCompanies);
         // Employment
         can(Action.Manage, Employment, {
@@ -114,20 +110,46 @@ export class AbilityFactory {
         can(Action.Manage, WorkerDays);
         break;
       case UserRole.PARTNER_COMPANY_EMPLOYEE_ADMIN:
-        cannot(Action.Manage, User);
-        cannot(Action.Manage, Company);
-        cannot(Action.Manage, UsersWorkForCompanies);
-        cannot(Action.Manage, Employment);
-        cannot(Action.Manage, EmploymentPeriods);
-        cannot(Action.Manage, EmploymentDays);
+        can(Action.Manage, User);
+
+        // limit to one's own business
+        can([Action.Read, Action.Delete, Action.Update], Company);
+        cannot(
+          [Action.Read_All, Action.Read_All_CreatedBy_SpecificUser],
+          Company,
+        );
+
+        // limit to one's own business
+        can(Action.Read, UsersWorkForCompanies);
+        cannot(
+          [
+            Action.Read_All,
+            Action.Delete,
+            Action.Update,
+            Action.Create,
+            Action.Read_All_CreatedBy_SpecificUser,
+          ],
+          UsersWorkForCompanies,
+        );
+
+        // limit to one's own employment
+        can(Action.Manage, Employment);
+
+        can(Action.Read, EmploymentPeriods);
+        can(Action.Read, EmploymentDays);
+
+        // limit to one's own business
         cannot(Action.Manage, Worker);
         cannot(Action.Manage, WorkerPeriods);
         cannot(Action.Manage, WorkerDays);
         break;
+
       case UserRole.TEMPORARY_WORKER:
         can(Action.Read, Company);
-        cannot(Action.Read_All, Company);
-        cannot(Action.Read_All_CreatedBy_SpecificUser, Company);
+        cannot(
+          [Action.Read_All, Action.Read_All_CreatedBy_SpecificUser],
+          Company,
+        );
         can(Action.Read, User); // possibility to read user because we use two parameters when we call some functions
 
         cannot(Action.Manage, UsersWorkForCompanies);
