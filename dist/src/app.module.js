@@ -8,16 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const auth_module_1 = require("./auth/auth.module");
+const user_module_1 = require("./auth/user.module");
 const config_schema_1 = require("./config.schema");
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const throttler_1 = require("@nestjs/throttler");
 const typeorm_1 = require("@nestjs/typeorm");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const company_module_1 = require("./company/company.module");
+const employment_module_1 = require("./employment/employment.module");
 const employmentDays_module_1 = require("./employmentDays/employmentDays.module");
 const employmentPeriod_module_1 = require("./employmentPeriods/employmentPeriod.module");
-const employment_module_1 = require("./employment/employment.module");
 const usersWorkForCompanies_module_1 = require("./usersWorkForCompanies/usersWorkForCompanies.module");
 const workerPeriods_module_1 = require("./worker-periods/workerPeriods.module");
 const workerDays_module_1 = require("./workerDays/workerDays.module");
@@ -29,6 +31,10 @@ AppModule = __decorate([
             config_1.ConfigModule.forRoot({
                 envFilePath: [`.env.stage.${process.env.STAGE}`],
                 validationSchema: config_schema_1.configValidationSchema,
+            }),
+            throttler_1.ThrottlerModule.forRoot({
+                ttl: 120,
+                limit: 20,
             }),
             typeorm_1.TypeOrmModule.forRootAsync({
                 imports: [config_1.ConfigModule],
@@ -53,6 +59,7 @@ AppModule = __decorate([
                 },
             }),
             auth_module_1.AuthModule,
+            user_module_1.UsersModule,
             company_module_1.CompanyModule,
             usersWorkForCompanies_module_1.UsersWorkForCompaniesModule,
             employment_module_1.EmploymentModule,

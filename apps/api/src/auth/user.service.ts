@@ -23,4 +23,16 @@ export class UserService {
     }
     return found;
   }
+
+  async updateUserAfterConnection(id: string): Promise<User> {
+    const userFromDb = await this.getUserById(id);
+
+    if (!userFromDb.joinedAt) {
+      userFromDb.joinedAt = new Date();
+    }
+    await this.userRepository.save(userFromDb);
+
+    userFromDb.lastConnection = new Date();
+    return userFromDb;
+  }
 }
