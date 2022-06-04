@@ -13,11 +13,20 @@ async function bootstrap() {
         .setVersion('0.0')
         .addTag('empreintt')
         .build();
+    const cors = {
+        origin: ['http://localhost:3000'],
+        methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
+        preflightContinue: false,
+        optionsSuccessStatus: 204,
+        credentials: true,
+        allowedHeaders: ['Accept', 'Content-Type'],
+    };
     const document = swagger_1.SwaggerModule.createDocument(app, options);
     swagger_1.SwaggerModule.setup('api', app, document);
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.useGlobalInterceptors(new transform_repository_1.TransformInterceptor());
     const port = process.env.PORT;
+    app.enableCors(cors);
     await app.listen(port);
 }
 bootstrap();

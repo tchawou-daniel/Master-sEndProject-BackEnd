@@ -39,7 +39,7 @@ export class UpdateUserDto {
 
   @Type(() => Date)
   @IsDate()
-  readonly joinAt: Date;
+  readonly joinedAt: Date;
 
   @Type(() => Date)
   @IsDate()

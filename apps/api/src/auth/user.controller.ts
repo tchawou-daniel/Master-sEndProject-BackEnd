@@ -5,8 +5,19 @@ import { GetUser } from '@api/auth/get-user.decorator';
 import { User } from '@api/auth/user.entity';
 import { UserService } from '@api/auth/user.service';
 import { ForbiddenError } from '@casl/ability';
-import { ForbiddenException, Get, Logger, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  ForbiddenException,
+  Get,
+  Logger,
+  Param,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
+@Controller('/api/v0/users')
+@UseGuards(AuthGuard())
 export class UserController {
   private logger = new Logger('User');
 
@@ -14,6 +25,16 @@ export class UserController {
     private userService: UserService,
     private abilityFactory: AbilityFactory,
   ) {}
+
+  @Get('/me')
+  @CheckAbilities({ action: Action.Read_All, subject: User })
+  async getAuthenticatedUser(@GetUser() user): Promise<GetUsersFliterDto> {
+    this.logger.log(user);
+    const userToReturn = await this.userService.updateUserAfterConnection(
+      user.email,
+    );
+    return userToReturn;
+  }
 
   // Get all User
   @Get('/')

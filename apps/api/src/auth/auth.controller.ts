@@ -22,7 +22,8 @@ export class AuthController {
   signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
   ): Promise<{ accessToken: string }> {
-    this.logger.verbose(`User "${authCredentialsDto}"`);
+    this.logger.verbose(`User "${JSON.stringify(authCredentialsDto)}"`);
+    console.log(authCredentialsDto);
     return this.authService.signIn(authCredentialsDto);
   }
 

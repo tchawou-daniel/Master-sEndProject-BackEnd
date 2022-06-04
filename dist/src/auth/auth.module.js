@@ -30,7 +30,7 @@ AuthModule = __decorate([
                 useFactory: async (configService) => ({
                     secret: configService.get('JWT_SECRET'),
                     signOptions: {
-                        expiresIn: 3600,
+                        expiresIn: configService.get('JWT_ACCESS_TOKEN_EXPIRATION_TIME'),
                     },
                 }),
             }),
