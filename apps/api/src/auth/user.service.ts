@@ -19,8 +19,29 @@ export class UserService {
     const found = await this.userRepository.findOne({ where: { id } });
 
     if (!found) {
-      throw new NotFoundException(`Company with ID "${id}" not found`);
+      throw new NotFoundException(`User with ID "${id}" not found`);
     }
     return found;
+  }
+
+  async getUserByEmail(email: string): Promise<User> {
+    const found = await this.userRepository.findOne({ where: { email } });
+
+    if (!found) {
+      throw new NotFoundException(`User with ID "${email}" not found`);
+    }
+    return found;
+  }
+
+  async updateUserAfterConnection(id: string): Promise<User> {
+    const userFromDb = await this.getUserById(id);
+
+    if (!userFromDb.joinedAt) {
+      userFromDb.joinedAt = new Date();
+    }
+    await this.userRepository.save(userFromDb);
+
+    userFromDb.lastConnection = new Date();
+    return userFromDb;
   }
 }

@@ -1,4 +1,5 @@
 import { AuthModule } from '@api/auth/auth.module';
+import { UsersModule } from '@api/auth/user.module';
 import { configValidationSchema } from '@api/config.schema';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -7,9 +8,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CompanyModule } from './company/company.module';
+import { EmploymentModule } from './employment/employment.module';
 import { EmploymentDaysModule } from './employmentDays/employmentDays.module';
 import { EmploymentPeriodModule } from './employmentPeriods/employmentPeriod.module';
-import { EmploymentModule } from './employment/employment.module';
 import { UsersWorkForCompaniesModule } from './usersWorkForCompanies/usersWorkForCompanies.module';
 import { WorkerPeriodsModule } from './worker-periods/workerPeriods.module';
 import { WorkerDaysModule } from './workerDays/workerDays.module';
@@ -44,6 +45,7 @@ import { WorkerDaysModule } from './workerDays/workerDays.module';
       },
     }),
     AuthModule,
+    UsersModule,
     CompanyModule,
     UsersWorkForCompaniesModule,
     EmploymentModule,
