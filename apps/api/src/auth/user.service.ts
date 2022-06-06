@@ -1,6 +1,8 @@
 import { GetUsersFliterDto } from '@api/auth/dto/get-users-fliter.dto';
+import { UpdateUserDto } from '@api/auth/dto/update-user.dto';
 import { User } from '@api/auth/user.entity';
 import { UsersRepository } from '@api/auth/users.repository';
+import { Employment } from '@api/employment/employment.entity';
 import { Get, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -31,6 +33,17 @@ export class UserService {
       throw new NotFoundException(`User with ID "${email}" not found`);
     }
     return found;
+  }
+
+  async updateMe(id: string, updateMeDto: UpdateUserDto): Promise<User> {
+    const user = await this.getUserById(id);
+    user.bio = updateMeDto.bio;
+    user.lastName = updateMeDto.lastName;
+    user.firstName = updateMeDto.firstName;
+    user.avatar = updateMeDto.avatar;
+
+    await this.userRepository.save(user);
+    return user;
   }
 
   async updateUserAfterConnection(id: string): Promise<User> {

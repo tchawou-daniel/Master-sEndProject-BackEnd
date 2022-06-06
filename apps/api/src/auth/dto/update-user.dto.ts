@@ -5,6 +5,7 @@ import {
   MaxLength,
   MinLength,
   IsDate,
+  IsOptional,
 } from 'class-validator';
 
 import { UserRole, WorkerIntegrationStatus } from '../../../common/types/user';
@@ -21,9 +22,11 @@ export class UpdateUserDto {
   readonly lastName: string;
 
   @IsEnum(UserRole)
+  @IsOptional()
   readonly role: UserRole;
 
   @IsEnum(WorkerIntegrationStatus)
+  @IsOptional()
   readonly workerIntegrationStatus?: WorkerIntegrationStatus;
 
   @MinLength(8)
@@ -35,13 +38,16 @@ export class UpdateUserDto {
 
   @Type(() => Date)
   @IsDate()
+  @IsOptional()
   readonly clearedAt: Date;
 
   @Type(() => Date)
   @IsDate()
+  @IsOptional()
   readonly joinedAt: Date;
 
   @Type(() => Date)
   @IsDate()
+  @IsOptional()
   readonly lastConnection: Date;
 }

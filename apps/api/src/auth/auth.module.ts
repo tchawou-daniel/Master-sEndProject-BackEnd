@@ -20,7 +20,7 @@ import { UsersRepository } from './users.repository';
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get('JWT_SECRET'),
         signOptions: {
-          expiresIn: 3600,
+          expiresIn: configService.get('JWT_ACCESS_TOKEN_EXPIRATION_TIME'),
         },
       }),
     }),

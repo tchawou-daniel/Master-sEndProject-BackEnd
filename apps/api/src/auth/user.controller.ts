@@ -4,15 +4,20 @@ import { GetUsersFliterDto } from '@api/auth/dto/get-users-fliter.dto';
 import { GetUser } from '@api/auth/get-user.decorator';
 import { User } from '@api/auth/user.entity';
 import { UserService } from '@api/auth/user.service';
+import { UpdateEmploymentDto } from '@api/employment/dto/update-employment.dto';
+import { Employment } from '@api/employment/employment.entity';
 import { ForbiddenError } from '@casl/ability';
 import {
+  Body,
   Controller,
   ForbiddenException,
   Get,
   Logger,
   Param,
+  Patch,
   Query,
 } from '@nestjs/common';
+import { UpdateUserDto } from '@api/auth/dto/update-user.dto';
 
 @Controller('/api/v0/users')
 export class UserController {
@@ -64,5 +69,13 @@ export class UserController {
         throw new ForbiddenException(error.message);
       }
     }
+  }
+
+  @Patch('/me/:id')
+  updateMe(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    return this.userService.updateMe(id, updateUserDto);
   }
 }
