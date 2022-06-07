@@ -25,6 +25,14 @@ let CompanyRepository = class CompanyRepository extends typeorm_1.Repository {
         const companies = await query.getMany();
         return companies;
     }
+    async getCompaniesCreatedByAspecificUser(idUser) {
+        const query = this.createQueryBuilder('company');
+        if (idUser) {
+            query.where('company.user = :user', { user: idUser });
+        }
+        const companies = await query.getMany();
+        return companies;
+    }
     async createCompany(createCompanyDto, user) {
         const { name, companyStatus, country, town, street, zipCode, description, companySector, hiringStatus, clearedAt, } = createCompanyDto;
         const company = this.create({

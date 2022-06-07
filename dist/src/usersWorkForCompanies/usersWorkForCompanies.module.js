@@ -25,6 +25,7 @@ UsersWorkForCompaniesModule = __decorate([
         ],
         controllers: [usersWorkForCompanies_controller_1.UsersWorkForCompaniesController],
         providers: [usersWorkForCompanies_service_1.UsersWorkForCompaniesService],
+        exports: [usersWorkForCompanies_service_1.UsersWorkForCompaniesService],
     })
 ], UsersWorkForCompaniesModule);
 exports.UsersWorkForCompaniesModule = UsersWorkForCompaniesModule;

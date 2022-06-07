@@ -20,7 +20,7 @@ export class CompanyService {
 
   @Get()
   getCompanies(
-    filterDto: GetCompaniesFilterDto,
+    filterDto?: GetCompaniesFilterDto,
     user?: User,
   ): Promise<Company[]> {
     if (user) {
@@ -31,8 +31,18 @@ export class CompanyService {
 
   async getCompanyById(id: string, user: User): Promise<Company> {
     const found = await this.companyRepository.findOne({ where: { id, user } });
+
     if (!found) {
       throw new NotFoundException(`Company with ID "${id}" not found`);
+    }
+    return found;
+  }
+
+  async getCompaniesCreatedByASpecificUser(user: string) {
+    const found =
+      await this.companyRepository.getCompaniesCreatedByAspecificUser(user);
+    if (!found) {
+      throw new NotFoundException(`Company of the user "${user}" not found`);
     }
     return found;
   }

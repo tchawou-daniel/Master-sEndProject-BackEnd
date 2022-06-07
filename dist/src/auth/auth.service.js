@@ -26,7 +26,6 @@ let AuthService = class AuthService {
     async signUp(authCredentialsDto) {
         const logger = new common_1.Logger('UsersRepository');
         logger.verbose(`User "${authCredentialsDto}"`);
-        console.log(authCredentialsDto);
         return this.usersRepository.createUser(authCredentialsDto);
     }
     async signIn(authCredentialsDto) {

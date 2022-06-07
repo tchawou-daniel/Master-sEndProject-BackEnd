@@ -33,6 +33,15 @@ export class CompanyRepository extends Repository<Company> {
     return companies;
   }
 
+  async getCompaniesCreatedByAspecificUser(idUser: string): Promise<Company[]> {
+    const query = this.createQueryBuilder('company');
+    if (idUser) {
+      query.where('company.user = :user', { user: idUser });
+    }
+    const companies = await query.getMany();
+    return companies;
+  }
+
   async createCompany(
     createCompanyDto: CreateCompanyDto,
     user: User,

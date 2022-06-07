@@ -29,10 +29,12 @@ __decorate([
 ], UpdateUserDto.prototype, "lastName", void 0);
 __decorate([
     (0, class_validator_1.IsEnum)(user_1.UserRole),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "role", void 0);
 __decorate([
     (0, class_validator_1.IsEnum)(user_1.WorkerIntegrationStatus),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "workerIntegrationStatus", void 0);
 __decorate([
@@ -47,16 +49,19 @@ __decorate([
 __decorate([
     (0, class_transformer_1.Type)(() => Date),
     (0, class_validator_1.IsDate)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Date)
 ], UpdateUserDto.prototype, "clearedAt", void 0);
 __decorate([
     (0, class_transformer_1.Type)(() => Date),
     (0, class_validator_1.IsDate)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Date)
-], UpdateUserDto.prototype, "joinAt", void 0);
+], UpdateUserDto.prototype, "joinedAt", void 0);
 __decorate([
     (0, class_transformer_1.Type)(() => Date),
     (0, class_validator_1.IsDate)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Date)
 ], UpdateUserDto.prototype, "lastConnection", void 0);
 exports.UpdateUserDto = UpdateUserDto;

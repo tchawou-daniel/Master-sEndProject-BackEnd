@@ -7,8 +7,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyModule = void 0;
+const ability_module_1 = require("../ability/ability.module");
 const auth_module_1 = require("../auth/auth.module");
 const company_repository_1 = require("./company.repository");
+const usersWorkForCompanies_repository_1 = require("../usersWorkForCompanies/usersWorkForCompanies.repository");
+const usersWorkForCompanies_service_1 = require("../usersWorkForCompanies/usersWorkForCompanies.service");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const company_controller_1 = require("./company.controller");
@@ -17,9 +20,16 @@ let CompanyModule = class CompanyModule {
 };
 CompanyModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([company_repository_1.CompanyRepository]), auth_module_1.AuthModule],
+        imports: [
+            typeorm_1.TypeOrmModule.forFeature([
+                company_repository_1.CompanyRepository,
+                usersWorkForCompanies_repository_1.UsersWorkForCompaniesRepository,
+            ]),
+            auth_module_1.AuthModule,
+            ability_module_1.AbilityModule,
+        ],
         controllers: [company_controller_1.CompanyController],
-        providers: [company_service_1.CompanyService],
+        providers: [company_service_1.CompanyService, usersWorkForCompanies_service_1.UsersWorkForCompaniesService],
         exports: [company_service_1.CompanyService],
     })
 ], CompanyModule);

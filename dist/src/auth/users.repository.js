@@ -13,7 +13,7 @@ const typeorm_1 = require("typeorm");
 const user_entity_1 = require("./user.entity");
 let UsersRepository = class UsersRepository extends typeorm_1.Repository {
     async createUser(authCredentialsDto) {
-        const { firstName, lastName, email, password } = authCredentialsDto;
+        const { firstName, lastName, email, password, role } = authCredentialsDto;
         const logger = new common_1.Logger('UsersRepository');
         logger.verbose(`User "${authCredentialsDto}"`);
         console.log(authCredentialsDto);
@@ -23,6 +23,7 @@ let UsersRepository = class UsersRepository extends typeorm_1.Repository {
             firstName,
             lastName,
             email,
+            role,
             password: hashedPassword,
         });
         try {
@@ -36,6 +37,10 @@ let UsersRepository = class UsersRepository extends typeorm_1.Repository {
                 throw new common_1.InternalServerErrorException();
             }
         }
+    }
+    async getUsers(filterDto, user) {
+        const query = this.createQueryBuilder('user');
+        return query.getMany();
     }
 };
 UsersRepository = __decorate([

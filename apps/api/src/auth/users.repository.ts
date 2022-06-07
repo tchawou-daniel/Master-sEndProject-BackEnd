@@ -1,3 +1,4 @@
+import { GetUsersFliterDto } from '@api/auth/dto/get-users-fliter.dto';
 import {
   ConflictException,
   InternalServerErrorException,
@@ -12,7 +13,7 @@ import { User } from './user.entity';
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
   async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    const { firstName, lastName, email, password } = authCredentialsDto;
+    const { firstName, lastName, email, password, role } = authCredentialsDto;
     const logger = new Logger('UsersRepository');
     logger.verbose(`User "${authCredentialsDto}"`);
     console.log(authCredentialsDto);
@@ -25,6 +26,7 @@ export class UsersRepository extends Repository<User> {
       firstName,
       lastName,
       email,
+      role,
       password: hashedPassword,
     });
     try {
@@ -37,5 +39,11 @@ export class UsersRepository extends Repository<User> {
         throw new InternalServerErrorException();
       }
     }
+  }
+
+  async getUsers(filterDto: GetUsersFliterDto, user?: User): Promise<User[]> {
+    const query = this.createQueryBuilder('user');
+
+    return query.getMany();
   }
 }

@@ -7,6 +7,6 @@ export declare class UpdateUserDto {
     readonly bio: string;
     readonly avatar: string;
     readonly clearedAt: Date;
-    readonly joinAt: Date;
+    readonly joinedAt: Date;
     readonly lastConnection: Date;
 }

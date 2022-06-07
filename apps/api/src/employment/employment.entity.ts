@@ -2,7 +2,6 @@ import { User } from '@api/auth/user.entity';
 import { Company } from '@api/company/company.entity';
 import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { Exclude } from 'class-transformer';
-import { IsEmpty } from 'class-validator';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 import { EmploymentSector, Hiring } from '../../common/types/employment';

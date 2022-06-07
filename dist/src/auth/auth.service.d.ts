@@ -1,7 +1,7 @@
+import { User } from '@api/auth/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { UsersRepository } from './users.repository';
-import { User } from '@api/auth/user.entity';
 export declare class AuthService {
     private usersRepository;
     private jwtService;

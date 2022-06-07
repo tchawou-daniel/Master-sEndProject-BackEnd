@@ -7,11 +7,13 @@ import { GetUsersWorkForComponiesFilterDto } from '@api/usersWorkForCompanies/dt
 import { UpdateUsersWorkForCompaniesDto } from '@api/usersWorkForCompanies/dto/update-usersWorkForCompanies.dto';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
 import { UsersWorkForCompaniesRepository } from '@api/usersWorkForCompanies/usersWorkForCompanies.repository';
-import { Get, Injectable, NotFoundException } from '@nestjs/common';
+import { Get, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UsersWorkForCompaniesService {
+  private logger = new Logger('UsersWorkForCompaniesService');
+
   constructor(
     @InjectRepository(UsersWorkForCompaniesRepository)
     private usersWorkForCompaniesRepository: UsersWorkForCompaniesRepository,
@@ -19,9 +21,10 @@ export class UsersWorkForCompaniesService {
 
   @Get()
   getUsersWorkForCompanies(
-    filterDto: GetUsersWorkForComponiesFilterDto,
     user: User,
+    filterDto?: GetUsersWorkForComponiesFilterDto,
   ): Promise<UsersWorkForCompanies[]> {
+    // this.logger.verbose({ user });
     return this.usersWorkForCompaniesRepository.getUsersWorkForCompanies(
       filterDto,
       user,

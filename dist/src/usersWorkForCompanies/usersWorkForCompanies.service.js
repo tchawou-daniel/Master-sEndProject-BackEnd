@@ -21,8 +21,9 @@ const typeorm_1 = require("@nestjs/typeorm");
 let UsersWorkForCompaniesService = class UsersWorkForCompaniesService {
     constructor(usersWorkForCompaniesRepository) {
         this.usersWorkForCompaniesRepository = usersWorkForCompaniesRepository;
+        this.logger = new common_1.Logger('UsersWorkForCompaniesService');
     }
-    getUsersWorkForCompanies(filterDto, user) {
+    getUsersWorkForCompanies(user, filterDto) {
         return this.usersWorkForCompaniesRepository.getUsersWorkForCompanies(filterDto, user);
     }
     async getUserWorkForCompaniesById(id, user) {
@@ -51,8 +52,8 @@ let UsersWorkForCompaniesService = class UsersWorkForCompaniesService {
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [get_usersWorkForComponaies_filter_dto_1.GetUsersWorkForComponiesFilterDto,
-        user_entity_1.User]),
+    __metadata("design:paramtypes", [user_entity_1.User,
+        get_usersWorkForComponaies_filter_dto_1.GetUsersWorkForComponiesFilterDto]),
     __metadata("design:returntype", Promise)
 ], UsersWorkForCompaniesService.prototype, "getUsersWorkForCompanies", null);
 UsersWorkForCompaniesService = __decorate([

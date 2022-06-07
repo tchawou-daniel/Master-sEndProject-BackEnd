@@ -3,6 +3,7 @@ import { Company } from '@api/company/company.entity';
 import { CreateUsersWorkForCompaniesDto } from '@api/usersWorkForCompanies/dto/create-usersWorkForCompanies.dto';
 import { GetUsersWorkForComponiesFilterDto } from '@api/usersWorkForCompanies/dto/get-usersWorkForComponaies-filter.dto';
 import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCompanies.entity';
+import { Logger } from '@nestjs/common';
 import { isEqual } from 'lodash';
 import { EntityRepository, Repository } from 'typeorm';
 
@@ -10,11 +11,15 @@ import { UserRole } from '../../common/types/user';
 
 @EntityRepository(UsersWorkForCompanies)
 export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForCompanies> {
+  private logger = new Logger('UsersWorkForCompaniesRepository');
+
   async getUsersWorkForCompanies(
-    filterDto: GetUsersWorkForComponiesFilterDto,
-    user: User,
+    filterDto?: GetUsersWorkForComponiesFilterDto,
+    user?: User,
   ): Promise<UsersWorkForCompanies[]> {
-    const { scoreCompany, companyReviews, workerReviews } = filterDto;
+    const { scoreCompany, companyReviews, workerReviews } = filterDto || {};
+
+    this.logger.verbose({ user });
 
     const query = this.createQueryBuilder('usersWorkForCompanies');
     query.where({ user });
@@ -40,6 +45,8 @@ export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForComp
     }
 
     const usersWorkForCompanies = await query.getMany();
+    this.logger.verbose({ usersWorkForCompanies });
+
     return usersWorkForCompanies;
   }
 

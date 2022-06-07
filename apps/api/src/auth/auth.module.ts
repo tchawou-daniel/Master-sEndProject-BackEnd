@@ -1,3 +1,4 @@
+import { AbilityModule } from '@api/ability/ability.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
@@ -14,12 +15,12 @@ import { UsersRepository } from './users.repository';
     ConfigModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
-      imports: [ConfigModule],
+      imports: [ConfigModule, AbilityModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get('JWT_SECRET'),
         signOptions: {
-          expiresIn: 3600,
+          expiresIn: configService.get('JWT_ACCESS_TOKEN_EXPIRATION_TIME'),
         },
       }),
     }),
