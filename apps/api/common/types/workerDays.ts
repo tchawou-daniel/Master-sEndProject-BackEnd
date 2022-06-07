@@ -1,0 +1,14 @@
+export enum WeekDays {
+  MONDAY = 'MONDAY',
+  TUESDAY = 'TUESDAY',
+  WEDNESDAY = 'WEDNESDAY',
+  THURSDAY = 'THURSDAY',
+  FRIDAY = 'FRIDAY',
+  SATURDAY = 'SATURDAY',
+  SUNDAY = 'SUNDAY',
+}
+
+export enum WorkerDayStatus {
+  AVAILABLE = 'AVAILABLE',
+  OCCUPIED = 'OCCUPIED',
+}

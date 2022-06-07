@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+
 /dist
 
 # testing
@@ -28,3 +29,6 @@ cypress/screenshots
 
 .env.stage.dev
 .env.stage.prod
+
+.progress
+
