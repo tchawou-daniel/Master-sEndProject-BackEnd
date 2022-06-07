@@ -2,31 +2,38 @@
 ## Installation
 
 ```bash
+$ npm i -g @nestjs/cli
 $ yarn install
+Create a .env.stage.dev file in the root of the project and configure it
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
+$ yarn start:dev
 
 # production mode
-$ yarn run start:prod
+$ yarn start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ yarn run test
+$ yarn test
 
 # e2e tests
-$ yarn run test:e2e
+$ yarn test:e2e
 
 # test coverage
-$ yarn run test:cov
+$ yarn test:cov
 ```
+
+## Lint
+```bash
+# linter
+$ yarn lint
+```
+
+Postman file path: /Postman/Master2project.postman_collection.json

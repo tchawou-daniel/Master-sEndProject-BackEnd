@@ -146,14 +146,14 @@ export class CompanyController {
   }
 
   // Create a company
-  @Post()
+  @Post('/')
   @CheckAbilities({ action: Action.Create, subject: User })
   createCompany(
     @Body() createCompanyDto: CreateCompanyDto,
     @GetUser() user: User,
   ): Promise<Company> {
     const ability = this.abilityFactory.defineAbility(user);
-
+    this.logger.verbose(createCompanyDto);
     try {
       ForbiddenError.from(ability).throwUnlessCan(Action.Create, User);
       return this.companyService.createCompany(createCompanyDto, user);
