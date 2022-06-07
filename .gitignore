@@ -1,6 +1,8 @@
 # dependencies
 /node_modules
 
+/dist
+
 # testing
 /coveragegot
 
@@ -29,3 +31,4 @@ cypress/screenshots
 .env.stage.prod
 
 .progress
+
