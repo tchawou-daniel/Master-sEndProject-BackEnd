@@ -89,6 +89,7 @@ let CompanyController = class CompanyController {
     }
     createCompany(createCompanyDto, user) {
         const ability = this.abilityFactory.defineAbility(user);
+        this.logger.verbose(createCompanyDto);
         try {
             ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Create, user_entity_1.User);
             return this.companyService.createCompany(createCompanyDto, user);
@@ -180,7 +181,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CompanyController.prototype, "getCompaniesCreatedByASpecificUser", null);
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('/'),
     (0, abilities_decorator_1.CheckAbilities)({ action: ability_factory_1.Action.Create, subject: user_entity_1.User }),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, get_user_decorator_1.GetUser)()),
