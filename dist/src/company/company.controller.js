@@ -34,6 +34,7 @@ let CompanyController = class CompanyController {
         this.logger = new common_1.Logger('CompanyController');
     }
     getCompanies(filterDto, user) {
+        common_1.Logger.log({ user });
         const ability = this.abilityFactory.defineAbility(user);
         try {
             ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Read_All, user_entity_1.User);

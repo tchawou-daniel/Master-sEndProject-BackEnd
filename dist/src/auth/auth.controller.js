@@ -28,7 +28,7 @@ let AuthController = class AuthController {
         return this.authService.signUp(createUserDto);
     }
     signIn(authCredentialsDto) {
-        this.logger.verbose(`User "${authCredentialsDto}"`);
+        this.logger.verbose({ authCredentialsDto });
         return this.authService.signIn(authCredentialsDto);
     }
     test(req) {

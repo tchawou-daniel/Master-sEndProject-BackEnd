@@ -22,7 +22,7 @@ export class AuthController {
   signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
   ): Promise<{ accessToken: string }> {
-    this.logger.verbose(`User "${authCredentialsDto}"`);
+    this.logger.verbose({ authCredentialsDto });
     return this.authService.signIn(authCredentialsDto);
   }
 

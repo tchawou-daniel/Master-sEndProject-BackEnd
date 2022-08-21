@@ -38,7 +38,11 @@ let UsersRepository = class UsersRepository extends typeorm_1.Repository {
             }
         }
     }
-    async getUsers(filterDto, user) {
+    async getUsers() {
+        const query = this.createQueryBuilder('user');
+        return query.getMany();
+    }
+    async getWorkers(filterDto, user) {
         const query = this.createQueryBuilder('user');
         return query.getMany();
     }

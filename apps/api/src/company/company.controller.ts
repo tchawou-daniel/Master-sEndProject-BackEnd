@@ -23,7 +23,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { isEqual } from 'lodash';
 
 @Controller('/api/v0/company')
 @UseGuards(AuthGuard())
@@ -46,6 +45,7 @@ export class CompanyController {
     @Query() filterDto: GetCompaniesFilterDto,
     @GetUser() user: User,
   ): Promise<Company[]> {
+    Logger.log({ user });
     const ability = this.abilityFactory.defineAbility(user);
     try {
       ForbiddenError.from(ability).throwUnlessCan(Action.Read_All, User);

@@ -1,9 +1,10 @@
+import { CreateUserDto } from '@api/auth/dto/create-user.dto';
 import { GetUsersFliterDto } from '@api/auth/dto/get-users-fliter.dto';
 import { UpdateUserDto } from '@api/auth/dto/update-user.dto';
 import { User } from '@api/auth/user.entity';
 import { UsersRepository } from '@api/auth/users.repository';
 import { Employment } from '@api/employment/employment.entity';
-import { Get, NotFoundException } from '@nestjs/common';
+import { Get, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 export class UserService {
@@ -14,7 +15,12 @@ export class UserService {
 
   @Get()
   getUsers(filterDto?: GetUsersFliterDto): Promise<User[]> {
-    return this.userRepository.getUsers(filterDto);
+    return this.userRepository.getUsers();
+  }
+
+  @Get()
+  getWorkers(filterDto?: GetUsersFliterDto): Promise<User[]> {
+    return this.userRepository.getWorkers(filterDto);
   }
 
   async getUserById(id: string): Promise<User> {
@@ -33,6 +39,12 @@ export class UserService {
       throw new NotFoundException(`User with ID "${email}" not found`);
     }
     return found;
+  }
+
+  async createAWorker(createUserDto: CreateUserDto): Promise<void> {
+    const logger = new Logger('UsersRepository');
+    logger.verbose(`User "${createUserDto}"`);
+    return this.userRepository.createUser(createUserDto);
   }
 
   async updateMe(id: string, updateMeDto: UpdateUserDto): Promise<User> {

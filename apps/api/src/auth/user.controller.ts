@@ -1,11 +1,10 @@
 import { CheckAbilities } from '@api/ability/abilities.decorator';
 import { AbilityFactory, Action } from '@api/ability/ability.factory';
 import { GetUsersFliterDto } from '@api/auth/dto/get-users-fliter.dto';
+import { UpdateUserDto } from '@api/auth/dto/update-user.dto';
 import { GetUser } from '@api/auth/get-user.decorator';
 import { User } from '@api/auth/user.entity';
 import { UserService } from '@api/auth/user.service';
-import { UpdateEmploymentDto } from '@api/employment/dto/update-employment.dto';
-import { Employment } from '@api/employment/employment.entity';
 import { ForbiddenError } from '@casl/ability';
 import {
   Body,
@@ -14,13 +13,15 @@ import {
   Get,
   Logger,
   Param,
-  Patch,
-  Query,
+  Patch, Post,
+  Query, UseGuards,
 } from '@nestjs/common';
-import { UpdateUserDto } from '@api/auth/dto/update-user.dto';
+import { CreateUserDto } from '@api/auth/dto/create-user.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('/api/v0/users')
-export class UserController {
+@UseGuards(AuthGuard())
+export class AuthController {
   private logger = new Logger('User');
 
   constructor(
@@ -35,10 +36,30 @@ export class UserController {
     @Query() filterDto: GetUsersFliterDto,
     @GetUser() user: User,
   ): Promise<User[]> {
+    Logger.log({ user });
     const ability = this.abilityFactory.defineAbility(user);
     try {
       ForbiddenError.from(ability).throwUnlessCan(Action.Read_All, User);
       return this.userService.getUsers(filterDto);
+    } catch (error) {
+      if (error instanceof ForbiddenError) {
+        throw new ForbiddenException(error.message);
+      }
+    }
+  }
+
+  @Get('/workers')
+  @CheckAbilities({ action: Action.Read_All, subject: User })
+  getWorkers(
+    @Query() filterDto: GetUsersFliterDto,
+    @GetUser() user: User,
+  ): Promise<User[]> {
+    Logger.log({ user });
+    Logger.log("user");
+    const ability = this.abilityFactory.defineAbility(user);
+    try {
+      ForbiddenError.from(ability).throwUnlessCan(Action.Read_All, User);
+      return this.userService.getWorkers(filterDto);
     } catch (error) {
       if (error instanceof ForbiddenError) {
         throw new ForbiddenException(error.message);
@@ -69,6 +90,14 @@ export class UserController {
         throw new ForbiddenException(error.message);
       }
     }
+  }
+
+  @Post('/worker')
+  createAnEmployee(@Body() createUserDto: CreateUserDto): Promise<void> {
+    this.logger.verbose(`User "${{ createUserDto }}"`);
+    console.log({ createUserDto });
+
+    return this.userService.createAWorker(createUserDto);
   }
 
   @Patch('/me/:id')
