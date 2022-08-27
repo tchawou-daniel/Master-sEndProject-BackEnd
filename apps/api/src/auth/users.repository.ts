@@ -46,6 +46,10 @@ export class UsersRepository extends Repository<User> {
 
     return query.getMany();
   }
+  //
+  // async updateAWorker():Promise<User[]> {
+  //      return this.user.updateCompany(id, updateCompanyDto, user);
+  // }
 
   async getWorkers(filterDto: GetUsersFliterDto, user?: User): Promise<User[]> {
     const query = this.createQueryBuilder('user');

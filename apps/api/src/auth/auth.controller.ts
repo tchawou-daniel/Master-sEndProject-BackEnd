@@ -13,7 +13,7 @@ export class AuthController {
 
   @Post('/signup')
   signUp(@Body() createUserDto: CreateUserDto): Promise<void> {
-    this.logger.verbose(`User "${createUserDto}"`);
+    // this.logger.verbose(`User "${createUserDto}"`);
 
     return this.authService.signUp(createUserDto);
   }
@@ -22,13 +22,13 @@ export class AuthController {
   signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
   ): Promise<{ accessToken: string }> {
-    this.logger.verbose({ authCredentialsDto });
+    // this.logger.verbose({ authCredentialsDto });
     return this.authService.signIn(authCredentialsDto);
   }
 
   @Post('/test')
   @UseGuards(AuthGuard())
   test(@Req() req) {
-    console.log(req);
+    // console.log(req);
   }
 }

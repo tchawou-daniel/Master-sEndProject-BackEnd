@@ -45,7 +45,7 @@ export class CompanyController {
     @Query() filterDto: GetCompaniesFilterDto,
     @GetUser() user: User,
   ): Promise<Company[]> {
-    Logger.log({ user });
+    // Logger.log({ user });
     const ability = this.abilityFactory.defineAbility(user);
     try {
       ForbiddenError.from(ability).throwUnlessCan(Action.Read_All, User);
@@ -83,11 +83,11 @@ export class CompanyController {
 
     // companies.filter(currentUsersCompany => currentUsersCompany.includes(usersWorkForCompanies));
     // employees.filter(u => !assignedUserIds.includes(u.id))
-    this.logger.verbose(
-      `"User ${
-        user.firstName
-      }" retrieving all company Filters: ${JSON.stringify(res)}`,
-    );
+    // this.logger.verbose(
+    //   `"User ${
+    //     user.firstName
+    //   }" retrieving all company Filters: ${JSON.stringify(res)}`,
+    // );
     return res;
   }
 
@@ -108,7 +108,7 @@ export class CompanyController {
     @Param('id') id: string,
     @GetUser() user: User,
   ): Promise<Company> {
-    this.logger.verbose(`user: ${JSON.stringify(user)}`);
+    // this.logger.verbose(`user: ${JSON.stringify(user)}`);
     const ability = this.abilityFactory.defineAbility(user);
     try {
       ForbiddenError.from(ability).throwUnlessCan(Action.Read, User);
@@ -153,7 +153,7 @@ export class CompanyController {
     @GetUser() user: User,
   ): Promise<Company> {
     const ability = this.abilityFactory.defineAbility(user);
-    this.logger.verbose(createCompanyDto);
+    // this.logger.verbose(createCompanyDto);
     try {
       ForbiddenError.from(ability).throwUnlessCan(Action.Create, User);
       return this.companyService.createCompany(createCompanyDto, user);

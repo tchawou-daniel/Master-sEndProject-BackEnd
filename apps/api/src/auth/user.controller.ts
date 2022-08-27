@@ -1,5 +1,6 @@
 import { CheckAbilities } from '@api/ability/abilities.decorator';
 import { AbilityFactory, Action } from '@api/ability/ability.factory';
+import { CreateUserDto } from '@api/auth/dto/create-user.dto';
 import { GetUsersFliterDto } from '@api/auth/dto/get-users-fliter.dto';
 import { UpdateUserDto } from '@api/auth/dto/update-user.dto';
 import { GetUser } from '@api/auth/get-user.decorator';
@@ -13,10 +14,11 @@ import {
   Get,
   Logger,
   Param,
-  Patch, Post,
-  Query, UseGuards,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
 } from '@nestjs/common';
-import { CreateUserDto } from '@api/auth/dto/create-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('/api/v0/users')
@@ -36,30 +38,11 @@ export class AuthController {
     @Query() filterDto: GetUsersFliterDto,
     @GetUser() user: User,
   ): Promise<User[]> {
-    Logger.log({ user });
+    // Logger.log({ user });
     const ability = this.abilityFactory.defineAbility(user);
     try {
       ForbiddenError.from(ability).throwUnlessCan(Action.Read_All, User);
       return this.userService.getUsers(filterDto);
-    } catch (error) {
-      if (error instanceof ForbiddenError) {
-        throw new ForbiddenException(error.message);
-      }
-    }
-  }
-
-  @Get('/workers')
-  @CheckAbilities({ action: Action.Read_All, subject: User })
-  getWorkers(
-    @Query() filterDto: GetUsersFliterDto,
-    @GetUser() user: User,
-  ): Promise<User[]> {
-    Logger.log({ user });
-    Logger.log("user");
-    const ability = this.abilityFactory.defineAbility(user);
-    try {
-      ForbiddenError.from(ability).throwUnlessCan(Action.Read_All, User);
-      return this.userService.getWorkers(filterDto);
     } catch (error) {
       if (error instanceof ForbiddenError) {
         throw new ForbiddenException(error.message);
@@ -92,19 +75,46 @@ export class AuthController {
     }
   }
 
-  @Post('/worker')
-  createAnEmployee(@Body() createUserDto: CreateUserDto): Promise<void> {
-    this.logger.verbose(`User "${{ createUserDto }}"`);
-    console.log({ createUserDto });
-
-    return this.userService.createAWorker(createUserDto);
-  }
-
   @Patch('/me/:id')
   updateMe(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<User> {
+    this.logger.verbose(`User "${updateUserDto.email}"`);
     return this.userService.updateMe(id, updateUserDto);
+  }
+
+  @Post('/worker')
+  createAnEmployee(@Body() createUserDto: CreateUserDto): Promise<void> {
+    // this.logger.verbose(`User "${{ createUserDto }}"`);
+    return this.userService.createAWorker(createUserDto);
+  }
+
+  @Get('/workers')
+  @CheckAbilities({ action: Action.Read_All, subject: User })
+  getWorkers(
+    @Query() filterDto: GetUsersFliterDto,
+    @GetUser() user: User,
+  ): Promise<User[]> {
+    // Logger.log({ user });
+    // Logger.log('user');
+    const ability = this.abilityFactory.defineAbility(user);
+    try {
+      ForbiddenError.from(ability).throwUnlessCan(Action.Read_All, User);
+      return this.userService.getWorkers(filterDto);
+    } catch (error) {
+      if (error instanceof ForbiddenError) {
+        throw new ForbiddenException(error.message);
+      }
+    }
+  }
+
+  @Patch('/worker/:id')
+  updateAnEmployee(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    // this.logger.verbose(`User "${updateUserDto.}"`);
+    return this.userService.updateAWorker(id, updateUserDto);
   }
 }

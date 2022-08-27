@@ -34,7 +34,6 @@ let CompanyController = class CompanyController {
         this.logger = new common_1.Logger('CompanyController');
     }
     getCompanies(filterDto, user) {
-        common_1.Logger.log({ user });
         const ability = this.abilityFactory.defineAbility(user);
         try {
             ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Read_All, user_entity_1.User);
@@ -57,14 +56,12 @@ let CompanyController = class CompanyController {
                 return uwfc.companyId === currentUsersCompany.id;
             });
         });
-        this.logger.verbose(`"User ${user.firstName}" retrieving all company Filters: ${JSON.stringify(res)}`);
         return res;
     }
     getAllCompanyCreatedByTheCurrentUser(filterDto, user) {
         return this.companyService.getCompanies(filterDto, user);
     }
     getCompanyById(id, user) {
-        this.logger.verbose(`user: ${JSON.stringify(user)}`);
         const ability = this.abilityFactory.defineAbility(user);
         try {
             ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Read, user_entity_1.User);
@@ -90,7 +87,6 @@ let CompanyController = class CompanyController {
     }
     createCompany(createCompanyDto, user) {
         const ability = this.abilityFactory.defineAbility(user);
-        this.logger.verbose(createCompanyDto);
         try {
             ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Create, user_entity_1.User);
             return this.companyService.createCompany(createCompanyDto, user);

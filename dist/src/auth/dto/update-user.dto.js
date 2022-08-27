@@ -28,6 +28,10 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "lastName", void 0);
 __decorate([
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], UpdateUserDto.prototype, "email", void 0);
+__decorate([
     (0, class_validator_1.IsEnum)(user_1.UserRole),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)

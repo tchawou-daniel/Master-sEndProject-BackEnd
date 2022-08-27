@@ -32,6 +32,18 @@ export class UserService {
     return found;
   }
 
+    async updateMe(id: string, updateMeDto: UpdateUserDto): Promise<User> {
+    const user = await this.getUserById(id);
+    user.bio = updateMeDto.bio;
+    user.lastName = updateMeDto.lastName;
+    user.email = updateMeDto.email;
+    user.firstName = updateMeDto.firstName;
+    user.avatar = updateMeDto.avatar;
+
+    await this.userRepository.save(user);
+    return user;
+  }
+
   async getUserByEmail(email: string): Promise<User> {
     const found = await this.userRepository.findOne({ where: { email } });
 
@@ -47,15 +59,16 @@ export class UserService {
     return this.userRepository.createUser(createUserDto);
   }
 
-  async updateMe(id: string, updateMeDto: UpdateUserDto): Promise<User> {
-    const user = await this.getUserById(id);
-    user.bio = updateMeDto.bio;
-    user.lastName = updateMeDto.lastName;
-    user.firstName = updateMeDto.firstName;
-    user.avatar = updateMeDto.avatar;
+  async updateAWorker(id: string, updateMeDto: UpdateUserDto): Promise<User> {
+    const worker = await this.getUserById(id);
+    worker.bio = updateMeDto.bio;
+    worker.lastName = updateMeDto.lastName;
+    worker.firstName = updateMeDto.firstName;
+    worker.email = updateMeDto.email;
+    worker.avatar = updateMeDto.avatar;
 
-    await this.userRepository.save(user);
-    return user;
+    await this.userRepository.save(worker);
+    return worker;
   }
 
   async updateUserAfterConnection(id: string): Promise<User> {
