@@ -13,6 +13,7 @@ import { ForbiddenError } from '@casl/ability';
 import {
   Body,
   Controller,
+  Delete,
   ForbiddenException,
   Get,
   Logger,
@@ -205,5 +206,12 @@ export class CompanyController {
         throw new ForbiddenException(error.message);
       }
     }
+  }
+
+  @Delete(':id')
+  // @CheckAbilities({ action: Action.Update, subject: User })
+  async delete(@GetUser() user: User, @Param('id') id: string): Promise<void> {
+    Logger.log(id);
+    await this.companyService.delete(id, user);
   }
 }

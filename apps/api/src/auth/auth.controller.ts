@@ -1,4 +1,5 @@
 import { CreateUserDto } from '@api/auth/dto/create-user.dto';
+import { User } from '@api/auth/user.entity';
 import { Body, Controller, Post, Req, UseGuards, Logger } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -12,7 +13,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/signup')
-  signUp(@Body() createUserDto: CreateUserDto): Promise<void> {
+  signUp(@Body() createUserDto: CreateUserDto): Promise<User> {
     // this.logger.verbose(`User "${createUserDto}"`);
 
     return this.authService.signUp(createUserDto);

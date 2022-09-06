@@ -21,4 +21,5 @@ export declare class CompanyController {
     createCompany(createCompanyDto: CreateCompanyDto, user: User): Promise<Company>;
     updateCompany(id: string, user: User, updateCompanyDto: UpdateCompanyDto): Promise<Company>;
     updateCompanyHiringStatus(id: string, user: User, updateCompanyHiringStatusDto: UpdateCompanyHiringStatusDto): Promise<Company>;
+    delete(user: User, id: string): Promise<void>;
 }

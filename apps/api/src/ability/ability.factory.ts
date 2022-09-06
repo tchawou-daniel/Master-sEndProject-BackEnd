@@ -61,7 +61,6 @@ export class AbilityFactory {
     const { can, cannot, build } = new AbilityBuilder(
       Ability as AbilityClass<AppAbility>,
     );
-    // Logger.log({ appEntity });
     switch ((appEntity as User).role) {
       case UserRole.ADMIN:
         can(Action.Manage, 'all');

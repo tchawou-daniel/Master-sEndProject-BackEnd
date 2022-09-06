@@ -56,7 +56,10 @@ export class Company extends BaseEntity {
   @Column({ type: 'timestamptz', default: null, nullable: true })
   clearedAt: Date;
 
-  @ManyToOne((_type) => User, (user) => user.companies, { eager: false })
+  @ManyToOne((_type) => User, (user) => user.companies, {
+    eager: false,
+    onDelete: 'CASCADE',
+  })
   @Exclude({ toPlainOnly: true })
   user: User;
 

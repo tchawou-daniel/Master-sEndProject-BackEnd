@@ -9,9 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersWorkForCompaniesRepository = void 0;
 const usersWorkForCompanies_entity_1 = require("./usersWorkForCompanies.entity");
 const common_1 = require("@nestjs/common");
-const lodash_1 = require("lodash");
 const typeorm_1 = require("typeorm");
-const user_1 = require("../../common/types/user");
 let UsersWorkForCompaniesRepository = class UsersWorkForCompaniesRepository extends typeorm_1.Repository {
     constructor() {
         super(...arguments);
@@ -37,33 +35,45 @@ let UsersWorkForCompaniesRepository = class UsersWorkForCompaniesRepository exte
         this.logger.verbose({ usersWorkForCompanies });
         return usersWorkForCompanies;
     }
-    async getMyOwnCompanies(filterDto, user) {
+    async getUsersWorkForASpecificCompany(companyId) {
         const query = this.createQueryBuilder('usersWorkForCompanies');
-        query.where({ user });
+        query.where('usersWorkForCompanies.companyId = :companyId', { companyId });
         return query.getMany();
     }
-    async getWorkerOfMyCompany(filterDto, company, usersWorkForCompanies, user) {
-        if ((0, lodash_1.isEqual)(user.role, user_1.UserRole.PARTNER_COMPANY_EMPLOYEE_ADMIN) ||
-            (0, lodash_1.isEqual)(user.role, user_1.UserRole.PARTNER_COMPANY_EMPLOYEE)) {
-            const query = this.createQueryBuilder('usersWorkForCompanies');
-            const { companyId } = usersWorkForCompanies;
-            query.where('usersWorkForCompanies.user = :userId', { user });
-            query.where('usersWorkForCompanies.company = :companyId', { user });
-            query.andWhere({ user });
-            return query.getMany();
-        }
-    }
     async createUsersWorkForComany(createUsersWorkForCompanies, user) {
-        const { scoreCompany, companyReviews, workerReviews, companyId } = createUsersWorkForCompanies;
+        const { scoreCompany, companyReviews, workerReviews, companyId, userId } = createUsersWorkForCompanies;
         const usersWorkForCompanies = this.create({
             scoreCompany,
             companyReviews,
             workerReviews,
-            user,
+            userId,
             companyId,
         });
         await this.save(usersWorkForCompanies);
         return usersWorkForCompanies;
+    }
+    async getUserWorkForCompanyByIds(companyId, userId) {
+        const query = this.createQueryBuilder('usersWorkForCompanies');
+        query.where('usersWorkForCompanies.companyId = :companyId', { companyId });
+        query.andWhere('usersWorkForCompanies.userId = :userId', {
+            userId,
+        });
+        const result = await query.getOne();
+        common_1.Logger.log(result);
+        return result;
+    }
+    async deleteAUserCompany(userId, companyId, user) {
+        const query = this.createQueryBuilder('usersWorkForCompanies');
+        await this.createQueryBuilder()
+            .delete()
+            .from(usersWorkForCompanies_entity_1.UsersWorkForCompanies)
+            .where('usersWorkForCompanies.userId = :userId', {
+            userId,
+        })
+            .andWhere('usersWorkForCompanies.companyId = :companyId', {
+            companyId,
+        })
+            .execute();
     }
 };
 UsersWorkForCompaniesRepository = __decorate([

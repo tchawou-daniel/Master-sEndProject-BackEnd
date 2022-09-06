@@ -122,6 +122,10 @@ let CompanyController = class CompanyController {
             }
         }
     }
+    async delete(user, id) {
+        common_1.Logger.log(id);
+        await this.companyService.delete(id, user);
+    }
 };
 __decorate([
     (0, common_1.Get)('/'),
@@ -209,6 +213,14 @@ __decorate([
         update_company_hiring_status_dto_1.UpdateCompanyHiringStatusDto]),
     __metadata("design:returntype", Promise)
 ], CompanyController.prototype, "updateCompanyHiringStatus", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, get_user_decorator_1.GetUser)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.User, String]),
+    __metadata("design:returntype", Promise)
+], CompanyController.prototype, "delete", null);
 CompanyController = __decorate([
     (0, common_1.Controller)('/api/v0/company'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),

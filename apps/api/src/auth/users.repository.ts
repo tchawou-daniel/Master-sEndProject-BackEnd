@@ -1,8 +1,7 @@
 import { GetUsersFliterDto } from '@api/auth/dto/get-users-fliter.dto';
 import {
   ConflictException,
-  InternalServerErrorException,
-  Logger,
+  InternalServerErrorException, Logger,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { EntityRepository, Repository } from 'typeorm';
@@ -12,11 +11,8 @@ import { User } from './user.entity';
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
-  async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
+  async createUser(authCredentialsDto: AuthCredentialsDto): Promise<User> {
     const { firstName, lastName, email, password, role } = authCredentialsDto;
-    const logger = new Logger('UsersRepository');
-    logger.verbose(`User "${authCredentialsDto}"`);
-    console.log(authCredentialsDto);
 
     // hash
     const salt = await bcrypt.genSalt();
@@ -30,7 +26,10 @@ export class UsersRepository extends Repository<User> {
       password: hashedPassword,
     });
     try {
-      await this.save(user);
+      Logger.log(`abc${await this.save(user)}`);
+      // return
+      Logger.log(user);
+      return user;
     } catch (error) {
       if (error.code === '23505') {
         // duplicate email

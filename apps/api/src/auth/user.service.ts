@@ -4,8 +4,15 @@ import { UpdateUserDto } from '@api/auth/dto/update-user.dto';
 import { User } from '@api/auth/user.entity';
 import { UsersRepository } from '@api/auth/users.repository';
 import { Employment } from '@api/employment/employment.entity';
-import { Get, Logger, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Get,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+
+import { CompanyStatus } from '../../common/types/company';
 
 export class UserService {
   constructor(
@@ -32,7 +39,7 @@ export class UserService {
     return found;
   }
 
-    async updateMe(id: string, updateMeDto: UpdateUserDto): Promise<User> {
+  async updateMe(id: string, updateMeDto: UpdateUserDto): Promise<User> {
     const user = await this.getUserById(id);
     user.bio = updateMeDto.bio;
     user.lastName = updateMeDto.lastName;
@@ -53,7 +60,7 @@ export class UserService {
     return found;
   }
 
-  async createAWorker(createUserDto: CreateUserDto): Promise<void> {
+  async createAWorker(createUserDto: CreateUserDto): Promise<User> {
     const logger = new Logger('UsersRepository');
     logger.verbose(`User "${createUserDto}"`);
     return this.userRepository.createUser(createUserDto);
@@ -81,5 +88,9 @@ export class UserService {
 
     userFromDb.lastConnection = new Date();
     return userFromDb;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.userRepository.delete(id);
   }
 }

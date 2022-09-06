@@ -1,4 +1,3 @@
-import { UpdateEmploymentDto } from '@api/employment/dto/update-employment.dto';
 import { Employment } from '@api/employment/employment.entity';
 import { CreateEmploymentPeriodsDto } from '@api/employmentPeriods/dto/create-employment-periods.dto';
 import { GetEmploymentPeriodsFilterDto } from '@api/employmentPeriods/dto/get-employment-periods-filter.dto';

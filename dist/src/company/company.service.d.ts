@@ -15,4 +15,6 @@ export declare class CompanyService {
     createCompany(createCompanyDto: CreateCompanyDto, user: User): Promise<Company>;
     updateCompany(id: string, updateCompanyDto: UpdateCompanyDto, user?: User): Promise<Company>;
     updateCompanyHiringStatus(id: string, hiringStatus: Hiring, user?: User): Promise<Company>;
+    findById(id: string, user: User): Promise<Company>;
+    delete(id: string, user: User): Promise<void>;
 }

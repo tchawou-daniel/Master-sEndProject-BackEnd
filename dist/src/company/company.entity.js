@@ -72,7 +72,10 @@ __decorate([
     __metadata("design:type", Date)
 ], Company.prototype, "clearedAt", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)((_type) => user_entity_1.User, (user) => user.companies, { eager: false }),
+    (0, typeorm_1.ManyToOne)((_type) => user_entity_1.User, (user) => user.companies, {
+        eager: false,
+        onDelete: 'CASCADE',
+    }),
     (0, class_transformer_1.Exclude)({ toPlainOnly: true }),
     __metadata("design:type", user_entity_1.User)
 ], Company.prototype, "user", void 0);

@@ -10,6 +10,7 @@ import { ForbiddenError } from '@casl/ability';
 import {
   Body,
   Controller,
+  Delete,
   ForbiddenException,
   Get,
   Logger,
@@ -38,7 +39,6 @@ export class AuthController {
     @Query() filterDto: GetUsersFliterDto,
     @GetUser() user: User,
   ): Promise<User[]> {
-    // Logger.log({ user });
     const ability = this.abilityFactory.defineAbility(user);
     try {
       ForbiddenError.from(ability).throwUnlessCan(Action.Read_All, User);
@@ -80,13 +80,11 @@ export class AuthController {
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<User> {
-    this.logger.verbose(`User "${updateUserDto.email}"`);
     return this.userService.updateMe(id, updateUserDto);
   }
 
   @Post('/worker')
-  createAnEmployee(@Body() createUserDto: CreateUserDto): Promise<void> {
-    // this.logger.verbose(`User "${{ createUserDto }}"`);
+  createAnEmployee(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.userService.createAWorker(createUserDto);
   }
 
@@ -96,8 +94,6 @@ export class AuthController {
     @Query() filterDto: GetUsersFliterDto,
     @GetUser() user: User,
   ): Promise<User[]> {
-    // Logger.log({ user });
-    // Logger.log('user');
     const ability = this.abilityFactory.defineAbility(user);
     try {
       ForbiddenError.from(ability).throwUnlessCan(Action.Read_All, User);
@@ -114,7 +110,11 @@ export class AuthController {
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<User> {
-    // this.logger.verbose(`User "${updateUserDto.}"`);
     return this.userService.updateAWorker(id, updateUserDto);
+  }
+
+  @Delete('/:id')
+  async delete(@GetUser() user: User, @Param('id') id: string): Promise<void> {
+    await this.userService.delete(id);
   }
 }

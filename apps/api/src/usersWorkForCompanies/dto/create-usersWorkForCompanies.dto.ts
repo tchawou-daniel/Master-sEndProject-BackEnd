@@ -19,4 +19,7 @@ export class CreateUsersWorkForCompaniesDto {
 
   @IsNotEmpty()
   companyId: string;
+
+  @IsNotEmpty()
+  userId: string;
 }

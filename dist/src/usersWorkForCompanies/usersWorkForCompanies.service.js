@@ -26,6 +26,17 @@ let UsersWorkForCompaniesService = class UsersWorkForCompaniesService {
     getUsersWorkForCompanies(user, filterDto) {
         return this.usersWorkForCompaniesRepository.getUsersWorkForCompanies(filterDto, user);
     }
+    async getUsersWorkForASpecificCompany(companyId) {
+        const found = await this.usersWorkForCompaniesRepository.getUsersWorkForASpecificCompany(companyId);
+        if (!found) {
+            throw new common_1.NotFoundException(`User work for company with ID "${companyId}" not found`);
+        }
+        return found;
+    }
+    async getASpecificUserWorkForCompany(companyId, userId) {
+        const found = await this.usersWorkForCompaniesRepository.getUserWorkForCompanyByIds(companyId, userId);
+        return found;
+    }
     async getUserWorkForCompaniesById(id, user) {
         const found = await this.usersWorkForCompaniesRepository.findOne({
             id,
@@ -41,12 +52,17 @@ let UsersWorkForCompaniesService = class UsersWorkForCompaniesService {
     }
     async updateUsersWorkForCompaniesService(id, updateUsersWorkForCompaniesDto, user) {
         const usersWorkForCompany = await this.getUserWorkForCompaniesById(id, user);
-        const { scoreCompany, companyReviews, workerReviews } = updateUsersWorkForCompaniesDto;
+        const { scoreCompany, companyReviews, workerReviews, userId, companyId } = updateUsersWorkForCompaniesDto;
         usersWorkForCompany.scoreCompany = scoreCompany;
         usersWorkForCompany.companyReviews = companyReviews;
         usersWorkForCompany.workerReviews = workerReviews;
+        usersWorkForCompany.userId = userId;
+        usersWorkForCompany.companyId = companyId;
         await this.usersWorkForCompaniesRepository.save(usersWorkForCompany);
         return usersWorkForCompany;
+    }
+    async delete(userId, companyId, user) {
+        await this.usersWorkForCompaniesRepository.deleteAUserCompany(userId, companyId, user);
     }
 };
 __decorate([

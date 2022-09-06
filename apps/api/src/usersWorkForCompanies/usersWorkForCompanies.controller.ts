@@ -1,12 +1,5 @@
 import { GetUser } from '@api/auth/get-user.decorator';
 import { User } from '@api/auth/user.entity';
-import { Company } from '@api/company/company.entity';
-import { CompanyService } from '@api/company/company.service';
-import { GetCompany } from '@api/company/get-company.decorator';
-import { Employment } from '@api/employment/employment.entity';
-import { CreateEmploymentPeriodsDto } from '@api/employmentPeriods/dto/create-employment-periods.dto';
-import { UpdateEmploymentPeriodDto } from '@api/employmentPeriods/dto/update-employment-period.dto';
-import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { CreateUsersWorkForCompaniesDto } from '@api/usersWorkForCompanies/dto/create-usersWorkForCompanies.dto';
 import { GetUsersWorkForComponiesFilterDto } from '@api/usersWorkForCompanies/dto/get-usersWorkForComponaies-filter.dto';
 import { UpdateUsersWorkForCompaniesDto } from '@api/usersWorkForCompanies/dto/update-usersWorkForCompanies.dto';
@@ -15,6 +8,7 @@ import { UsersWorkForCompaniesService } from '@api/usersWorkForCompanies/usersWo
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Logger,
   Param,
@@ -24,6 +18,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiParam } from '@nestjs/swagger';
 
 @Controller('api/v0/usersWorkForCompanies')
 @UseGuards(AuthGuard())
@@ -32,7 +27,6 @@ export class UsersWorkForCompaniesController {
 
   constructor(
     private usersWorkForCompaniesService: UsersWorkForCompaniesService,
-    private companyService: CompanyService,
   ) {}
 
   @Get()
@@ -64,20 +58,32 @@ export class UsersWorkForCompaniesController {
     );
   }
 
-  @Get('/:id')
-  getUsersWorkForMyCompany(
+  @Get('/usersInASpecificCompany/:companyId')
+  getUsersWorkForASpecificCompany(
     @Query() filterDto: GetUsersWorkForComponiesFilterDto,
     @GetUser() user: User,
-    @Param('id') id: string,
+    @Param('companyId') companyId: string,
   ): Promise<UsersWorkForCompanies[]> {
-    const userWorkForCompanies = this.getUserWorkForCompaniesById(id, user);
-    this.logger.verbose(
-      `the content of userWorkForCompanies is: ${userWorkForCompanies}`,
+    return this.usersWorkForCompaniesService.getUsersWorkForASpecificCompany(
+      companyId,
     );
-
-    return this.getUsersWorkForCompanies(user, filterDto);
   }
-  //
+
+  @Get('/userWorkForCompany/:companyId/:userId')
+  @ApiParam({ name: 'companyId', type: 'string' })
+  @ApiParam({ name: ':userId', type: 'string' })
+  getASpecificUserWorkForCompany(
+    @Query() filterDto: GetUsersWorkForComponiesFilterDto,
+    @GetUser() user: User,
+    @Param('companyId') companyId: string,
+    @Param('userId') userId: string,
+  ): Promise<UsersWorkForCompanies> {
+    return this.usersWorkForCompaniesService.getASpecificUserWorkForCompany(
+      companyId,
+      userId,
+    );
+  }
+
   // @Get('/:id')
   // getWorkerOfMyCompany(
   //   @Query() filterDto: GetUsersWorkForComponiesFilterDto,
@@ -112,5 +118,16 @@ export class UsersWorkForCompaniesController {
       updateEmploymentPeriodDto,
       user,
     );
+  }
+
+  // delete from idUser
+  @Delete('/:companyId/:userId')
+  // @CheckAbilities({ action: Action.Update, subject: User })
+  async delete(
+    @GetUser() user: User,
+    @Param('companyId') companyId: string,
+    @Param('userId') userId: string,
+  ): Promise<void> {
+    await this.usersWorkForCompaniesService.delete(userId, companyId, user);
   }
 }

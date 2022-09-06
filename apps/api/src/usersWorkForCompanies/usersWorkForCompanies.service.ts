@@ -1,7 +1,4 @@
 import { User } from '@api/auth/user.entity';
-import { Company } from '@api/company/company.entity';
-import { UpdateEmploymentPeriodDto } from '@api/employmentPeriods/dto/update-employment-period.dto';
-import { EmploymentPeriods } from '@api/employmentPeriods/employmentPeriods.entity';
 import { CreateUsersWorkForCompaniesDto } from '@api/usersWorkForCompanies/dto/create-usersWorkForCompanies.dto';
 import { GetUsersWorkForComponiesFilterDto } from '@api/usersWorkForCompanies/dto/get-usersWorkForComponaies-filter.dto';
 import { UpdateUsersWorkForCompaniesDto } from '@api/usersWorkForCompanies/dto/update-usersWorkForCompanies.dto';
@@ -29,6 +26,33 @@ export class UsersWorkForCompaniesService {
       filterDto,
       user,
     );
+  }
+
+  async getUsersWorkForASpecificCompany(
+    companyId: string,
+  ): Promise<UsersWorkForCompanies[]> {
+    const found =
+      await this.usersWorkForCompaniesRepository.getUsersWorkForASpecificCompany(
+        companyId,
+      );
+    if (!found) {
+      throw new NotFoundException(
+        `User work for company with ID "${companyId}" not found`,
+      );
+    }
+    return found;
+  }
+
+  async getASpecificUserWorkForCompany(
+    companyId: string,
+    userId: string,
+  ): Promise<UsersWorkForCompanies> {
+    const found =
+      await this.usersWorkForCompaniesRepository.getUserWorkForCompanyByIds(
+        companyId,
+        userId,
+      );
+    return found;
   }
 
   async getUserWorkForCompaniesById(
@@ -67,15 +91,25 @@ export class UsersWorkForCompaniesService {
       user,
     );
 
-    const { scoreCompany, companyReviews, workerReviews } =
+    const { scoreCompany, companyReviews, workerReviews, userId, companyId } =
       updateUsersWorkForCompaniesDto;
 
     usersWorkForCompany.scoreCompany = scoreCompany;
     usersWorkForCompany.companyReviews = companyReviews;
     usersWorkForCompany.workerReviews = workerReviews;
+    usersWorkForCompany.userId = userId;
+    usersWorkForCompany.companyId = companyId;
 
     await this.usersWorkForCompaniesRepository.save(usersWorkForCompany);
 
     return usersWorkForCompany;
+  }
+
+  async delete(userId: string, companyId: string, user: User): Promise<void> {
+    await this.usersWorkForCompaniesRepository.deleteAUserCompany(
+      userId,
+      companyId,
+      user,
+    );
   }
 }

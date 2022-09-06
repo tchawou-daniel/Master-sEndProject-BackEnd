@@ -9,7 +9,10 @@ export declare class UsersWorkForCompaniesService {
     private logger;
     constructor(usersWorkForCompaniesRepository: UsersWorkForCompaniesRepository);
     getUsersWorkForCompanies(user: User, filterDto?: GetUsersWorkForComponiesFilterDto): Promise<UsersWorkForCompanies[]>;
+    getUsersWorkForASpecificCompany(companyId: string): Promise<UsersWorkForCompanies[]>;
+    getASpecificUserWorkForCompany(companyId: string, userId: string): Promise<UsersWorkForCompanies>;
     getUserWorkForCompaniesById(id: string, user: User): Promise<UsersWorkForCompanies>;
     createUsersWorkForCompany(createUsersWorkForCompaniesDto: CreateUsersWorkForCompaniesDto, user: User): Promise<UsersWorkForCompanies>;
     updateUsersWorkForCompaniesService(id: string, updateUsersWorkForCompaniesDto: UpdateUsersWorkForCompaniesDto, user: User): Promise<UsersWorkForCompanies>;
+    delete(userId: string, companyId: string, user: User): Promise<void>;
 }

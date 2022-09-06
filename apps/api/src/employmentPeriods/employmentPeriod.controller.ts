@@ -1,7 +1,4 @@
-import { GetUser } from '@api/auth/get-user.decorator';
-import { User } from '@api/auth/user.entity';
 import { GetEmploymentsFilterDto } from '@api/employment/dto/get-employments-filter.dto';
-import { Employment } from '@api/employment/employment.entity';
 import { EmploymentService } from '@api/employment/employment.service';
 import { CreateEmploymentPeriodsDto } from '@api/employmentPeriods/dto/create-employment-periods.dto';
 import { UpdateEmploymentPeriodDto } from '@api/employmentPeriods/dto/update-employment-period.dto';

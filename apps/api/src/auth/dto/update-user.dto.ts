@@ -12,8 +12,6 @@ import { UserRole, WorkerIntegrationStatus } from '../../../common/types/user';
 
 export class UpdateUserDto {
   @IsString()
-  @MinLength(4)
-  @MaxLength(20)
   readonly firstName: string;
 
   @IsString()
