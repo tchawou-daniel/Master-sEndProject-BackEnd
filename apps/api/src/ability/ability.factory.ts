@@ -15,8 +15,7 @@ import {
   ExtractSubjectType,
   InferSubjects,
 } from '@casl/ability';
-import { Injectable } from '@nestjs/common';
-import { isEqual } from 'lodash';
+import { Injectable, Logger } from '@nestjs/common';
 
 import { UserRole } from '../../common/types/user';
 
@@ -86,20 +85,20 @@ export class AbilityFactory {
         can([Action.Read], Company, {
           id: { $ne: (appEntity as UsersWorkForCompanies).companyId }, // compare id company to Id UsersWorkFor Companies after an evaluation
         });
-        cannot(Action.Delete, Company);
+        // cannot(Action.Delete, Company);
         // usersWorkForCompanies
         can([Action.Read], UsersWorkForCompanies, {
           userId: { $ne: (appEntity as User).id },
         });
-        cannot(Action.Delete, UsersWorkForCompanies);
+        // cannot(Action.Delete, UsersWorkForCompanies);
         // Employment
         can(Action.Manage, Employment, {
           company: { $ne: appEntity as Company },
         });
-        cannot(Action.Delete, Employment);
+        // cannot(Action.Delete, Employment);
         // EmploymentPeriods
         can(Action.Manage, EmploymentPeriods, {});
-        cannot(Action.Delete, EmploymentPeriods);
+        // cannot(Action.Delete, EmploymentPeriods);
         // EmploymentDays
         can(Action.Manage, EmploymentDays);
         // Worker
@@ -114,23 +113,23 @@ export class AbilityFactory {
 
         // limit to one's own business
         can([Action.Read, Action.Delete, Action.Update], Company);
-        cannot(
-          [Action.Read_All, Action.Read_All_CreatedBy_SpecificUser],
-          Company,
-        );
+        // cannot(
+        //   [Action.Read_All, Action.Read_All_CreatedBy_SpecificUser],
+        //   Company,
+        // );
 
         // limit to one's own business
         can(Action.Read, UsersWorkForCompanies);
-        cannot(
-          [
-            Action.Read_All,
-            Action.Delete,
-            Action.Update,
-            Action.Create,
-            Action.Read_All_CreatedBy_SpecificUser,
-          ],
-          UsersWorkForCompanies,
-        );
+        // cannot(
+        //   [
+        //     Action.Read_All,
+        //     Action.Delete,
+        //     Action.Update,
+        //     Action.Create,
+        //     Action.Read_All_CreatedBy_SpecificUser,
+        //   ],
+        //   UsersWorkForCompanies,
+        // );
 
         // limit to one's own employment
         can(Action.Manage, Employment);
@@ -152,13 +151,13 @@ export class AbilityFactory {
         );
         can(Action.Read, User); // possibility to read user because we use two parameters when we call some functions
 
-        cannot(Action.Manage, UsersWorkForCompanies);
-        cannot(Action.Manage, Employment);
-        cannot(Action.Manage, EmploymentPeriods);
-        cannot(Action.Manage, EmploymentDays);
-        cannot(Action.Manage, Worker);
-        cannot(Action.Manage, WorkerPeriods);
-        cannot(Action.Manage, WorkerDays);
+        // cannot(Action.Manage, UsersWorkForCompanies);
+        // cannot(Action.Manage, Employment);
+        // cannot(Action.Manage, EmploymentPeriods);
+        // cannot(Action.Manage, EmploymentDays);
+        // cannot(Action.Manage, Worker);
+        // cannot(Action.Manage, WorkerPeriods);
+        // cannot(Action.Manage, WorkerDays);
         break;
       case UserRole.PERMANENT_WORKER:
         break;

@@ -1,4 +1,5 @@
 import { CreateUserDto } from '@api/auth/dto/create-user.dto';
+import { User } from '@api/auth/user.entity';
 import { Body, Controller, Post, Req, UseGuards, Logger } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -12,9 +13,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/signup')
-  signUp(@Body() createUserDto: CreateUserDto): Promise<void> {
-    this.logger.verbose(`User "${createUserDto}"`);
-
+  signUp(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.authService.signUp(createUserDto);
   }
 
@@ -22,13 +21,10 @@ export class AuthController {
   signIn(
     @Body() authCredentialsDto: AuthCredentialsDto,
   ): Promise<{ accessToken: string }> {
-    this.logger.verbose(`User "${authCredentialsDto}"`);
     return this.authService.signIn(authCredentialsDto);
   }
 
   @Post('/test')
   @UseGuards(AuthGuard())
-  test(@Req() req) {
-    console.log(req);
-  }
+  test(@Req() req) {}
 }

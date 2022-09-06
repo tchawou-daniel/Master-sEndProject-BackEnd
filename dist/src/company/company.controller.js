@@ -56,14 +56,12 @@ let CompanyController = class CompanyController {
                 return uwfc.companyId === currentUsersCompany.id;
             });
         });
-        this.logger.verbose(`"User ${user.firstName}" retrieving all company Filters: ${JSON.stringify(res)}`);
         return res;
     }
     getAllCompanyCreatedByTheCurrentUser(filterDto, user) {
         return this.companyService.getCompanies(filterDto, user);
     }
     getCompanyById(id, user) {
-        this.logger.verbose(`user: ${JSON.stringify(user)}`);
         const ability = this.abilityFactory.defineAbility(user);
         try {
             ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Read, user_entity_1.User);
@@ -89,7 +87,6 @@ let CompanyController = class CompanyController {
     }
     createCompany(createCompanyDto, user) {
         const ability = this.abilityFactory.defineAbility(user);
-        this.logger.verbose(createCompanyDto);
         try {
             ability_1.ForbiddenError.from(ability).throwUnlessCan(ability_factory_1.Action.Create, user_entity_1.User);
             return this.companyService.createCompany(createCompanyDto, user);
@@ -124,6 +121,10 @@ let CompanyController = class CompanyController {
                 throw new common_1.ForbiddenException(error.message);
             }
         }
+    }
+    async delete(user, id) {
+        common_1.Logger.log(id);
+        await this.companyService.delete(id, user);
     }
 };
 __decorate([
@@ -212,6 +213,14 @@ __decorate([
         update_company_hiring_status_dto_1.UpdateCompanyHiringStatusDto]),
     __metadata("design:returntype", Promise)
 ], CompanyController.prototype, "updateCompanyHiringStatus", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, get_user_decorator_1.GetUser)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.User, String]),
+    __metadata("design:returntype", Promise)
+], CompanyController.prototype, "delete", null);
 CompanyController = __decorate([
     (0, common_1.Controller)('/api/v0/company'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),

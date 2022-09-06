@@ -24,7 +24,6 @@ __decorate([
 ], CreateUserDto.prototype, "lastName", void 0);
 __decorate([
     (0, class_validator_1.IsEnum)(user_1.UserRole),
-    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "role", void 0);
 __decorate([

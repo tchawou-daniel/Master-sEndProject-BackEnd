@@ -5,21 +5,22 @@ import {
   MaxLength,
   MinLength,
   IsDate,
-  IsOptional,
+  IsOptional, IsEmail,
 } from 'class-validator';
 
 import { UserRole, WorkerIntegrationStatus } from '../../../common/types/user';
 
 export class UpdateUserDto {
   @IsString()
-  @MinLength(4)
-  @MaxLength(20)
   readonly firstName: string;
 
   @IsString()
   @MinLength(4)
   @MaxLength(20)
   readonly lastName: string;
+
+  @IsEmail()
+  readonly email: string;
 
   @IsEnum(UserRole)
   @IsOptional()

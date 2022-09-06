@@ -15,17 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersWorkForCompaniesController = void 0;
 const get_user_decorator_1 = require("../auth/get-user.decorator");
 const user_entity_1 = require("../auth/user.entity");
-const company_service_1 = require("../company/company.service");
 const create_usersWorkForCompanies_dto_1 = require("./dto/create-usersWorkForCompanies.dto");
 const get_usersWorkForComponaies_filter_dto_1 = require("./dto/get-usersWorkForComponaies-filter.dto");
 const update_usersWorkForCompanies_dto_1 = require("./dto/update-usersWorkForCompanies.dto");
 const usersWorkForCompanies_service_1 = require("./usersWorkForCompanies.service");
 const common_1 = require("@nestjs/common");
 const passport_1 = require("@nestjs/passport");
+const swagger_1 = require("@nestjs/swagger");
 let UsersWorkForCompaniesController = class UsersWorkForCompaniesController {
-    constructor(usersWorkForCompaniesService, companyService) {
+    constructor(usersWorkForCompaniesService) {
         this.usersWorkForCompaniesService = usersWorkForCompaniesService;
-        this.companyService = companyService;
         this.logger = new common_1.Logger('UsersWorkForCompaniesController');
     }
     getUsersWorkForCompanies(user, filterDto) {
@@ -35,10 +34,11 @@ let UsersWorkForCompaniesController = class UsersWorkForCompaniesController {
     getUserWorkForCompaniesById(id, user) {
         return this.usersWorkForCompaniesService.getUserWorkForCompaniesById(id, user);
     }
-    getUsersWorkForMyCompany(filterDto, user, id) {
-        const userWorkForCompanies = this.getUserWorkForCompaniesById(id, user);
-        this.logger.verbose(`the content of userWorkForCompanies is: ${userWorkForCompanies}`);
-        return this.getUsersWorkForCompanies(user, filterDto);
+    getUsersWorkForASpecificCompany(filterDto, user, companyId) {
+        return this.usersWorkForCompaniesService.getUsersWorkForASpecificCompany(companyId);
+    }
+    getASpecificUserWorkForCompany(filterDto, user, companyId, userId) {
+        return this.usersWorkForCompaniesService.getASpecificUserWorkForCompany(companyId, userId);
     }
     createUsersWorkForCompany(createUsersWorkForCompaniesDto, user) {
         return this.usersWorkForCompaniesService.createUsersWorkForCompany(createUsersWorkForCompaniesDto, user);
@@ -46,6 +46,9 @@ let UsersWorkForCompaniesController = class UsersWorkForCompaniesController {
     updateUsersWorkForCompany(updateEmploymentPeriodDto, user, id) {
         this.logger.verbose({ updateEmploymentPeriodDto });
         return this.usersWorkForCompaniesService.updateUsersWorkForCompaniesService(id, updateEmploymentPeriodDto, user);
+    }
+    async delete(user, companyId, userId) {
+        await this.usersWorkForCompaniesService.delete(userId, companyId, user);
     }
 };
 __decorate([
@@ -66,15 +69,28 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersWorkForCompaniesController.prototype, "getUserWorkForCompaniesById", null);
 __decorate([
-    (0, common_1.Get)('/:id'),
+    (0, common_1.Get)('/usersInASpecificCompany/:companyId'),
     __param(0, (0, common_1.Query)()),
     __param(1, (0, get_user_decorator_1.GetUser)()),
-    __param(2, (0, common_1.Param)('id')),
+    __param(2, (0, common_1.Param)('companyId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [get_usersWorkForComponaies_filter_dto_1.GetUsersWorkForComponiesFilterDto,
         user_entity_1.User, String]),
     __metadata("design:returntype", Promise)
-], UsersWorkForCompaniesController.prototype, "getUsersWorkForMyCompany", null);
+], UsersWorkForCompaniesController.prototype, "getUsersWorkForASpecificCompany", null);
+__decorate([
+    (0, common_1.Get)('/userWorkForCompany/:companyId/:userId'),
+    (0, swagger_1.ApiParam)({ name: 'companyId', type: 'string' }),
+    (0, swagger_1.ApiParam)({ name: ':userId', type: 'string' }),
+    __param(0, (0, common_1.Query)()),
+    __param(1, (0, get_user_decorator_1.GetUser)()),
+    __param(2, (0, common_1.Param)('companyId')),
+    __param(3, (0, common_1.Param)('userId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [get_usersWorkForComponaies_filter_dto_1.GetUsersWorkForComponiesFilterDto,
+        user_entity_1.User, String, String]),
+    __metadata("design:returntype", Promise)
+], UsersWorkForCompaniesController.prototype, "getASpecificUserWorkForCompany", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
@@ -94,11 +110,19 @@ __decorate([
         user_entity_1.User, String]),
     __metadata("design:returntype", Promise)
 ], UsersWorkForCompaniesController.prototype, "updateUsersWorkForCompany", null);
+__decorate([
+    (0, common_1.Delete)('/:companyId/:userId'),
+    __param(0, (0, get_user_decorator_1.GetUser)()),
+    __param(1, (0, common_1.Param)('companyId')),
+    __param(2, (0, common_1.Param)('userId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.User, String, String]),
+    __metadata("design:returntype", Promise)
+], UsersWorkForCompaniesController.prototype, "delete", null);
 UsersWorkForCompaniesController = __decorate([
     (0, common_1.Controller)('api/v0/usersWorkForCompanies'),
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)()),
-    __metadata("design:paramtypes", [usersWorkForCompanies_service_1.UsersWorkForCompaniesService,
-        company_service_1.CompanyService])
+    __metadata("design:paramtypes", [usersWorkForCompanies_service_1.UsersWorkForCompaniesService])
 ], UsersWorkForCompaniesController);
 exports.UsersWorkForCompaniesController = UsersWorkForCompaniesController;
 //# sourceMappingURL=usersWorkForCompanies.controller.js.map

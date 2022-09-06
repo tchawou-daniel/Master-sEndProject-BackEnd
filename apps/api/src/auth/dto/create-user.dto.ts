@@ -18,7 +18,6 @@ export class CreateUserDto {
   readonly lastName: string;
 
   @IsEnum(UserRole)
-  @IsOptional()
   readonly role: UserRole;
 
   @IsEmail()

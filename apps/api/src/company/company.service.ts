@@ -4,11 +4,18 @@ import { CompanyRepository } from '@api/company/company.repository';
 import { CreateCompanyDto } from '@api/company/dto/create-company.dto';
 import { GetCompaniesFilterDto } from '@api/company/dto/get-companies-filter.dto';
 import { UpdateCompanyDto } from '@api/company/dto/update-company.dto';
-import { Get, Injectable, NotFoundException, Post } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Get,
+  Injectable,
+  Logger,
+  NotFoundException,
+  Post,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { isEqual } from 'lodash';
 
-import { Hiring } from '../../common/types/company';
+import { CompanyStatus, Hiring } from '../../common/types/company';
 import { UserRole } from '../../common/types/user';
 
 @Injectable()
@@ -105,10 +112,18 @@ export class CompanyService {
     return company;
   }
 
-  // async deleteCompany(id: string, user: User): Promise<void> {
-  //     const result = await this.companyRepository.delete({id, user});
-  //     if (result.affected === 0) {
-  //         throw new NotFoundException(`Company with ID "${id}" not found`);
-  //     }
-  // }
+  async findById(id: string, user: User): Promise<Company> {
+    return this.companyRepository.findOne({ where: { id, user } });
+  }
+
+  async delete(id: string, user: User): Promise<void> {
+    const company = await this.findById(id, user);
+    Logger.log({ company });
+    if (company.companyStatus !== CompanyStatus.INACTIVE) {
+      throw new ForbiddenException(
+        'Company is still ACTIVE. Only INACTIVE companies can be deleted',
+      );
+    }
+    await this.companyRepository.delete(id);
+  }
 }

@@ -24,16 +24,12 @@ let AuthController = class AuthController {
         this.logger = new common_1.Logger('AuthController');
     }
     signUp(createUserDto) {
-        this.logger.verbose(`User "${createUserDto}"`);
         return this.authService.signUp(createUserDto);
     }
     signIn(authCredentialsDto) {
-        this.logger.verbose(`User "${authCredentialsDto}"`);
         return this.authService.signIn(authCredentialsDto);
     }
-    test(req) {
-        console.log(req);
-    }
+    test(req) { }
 };
 __decorate([
     (0, common_1.Post)('/signup'),

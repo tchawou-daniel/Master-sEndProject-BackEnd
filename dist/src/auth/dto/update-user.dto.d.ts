@@ -2,6 +2,7 @@ import { UserRole, WorkerIntegrationStatus } from '../../../common/types/user';
 export declare class UpdateUserDto {
     readonly firstName: string;
     readonly lastName: string;
+    readonly email: string;
     readonly role: UserRole;
     readonly workerIntegrationStatus?: WorkerIntegrationStatus;
     readonly bio: string;

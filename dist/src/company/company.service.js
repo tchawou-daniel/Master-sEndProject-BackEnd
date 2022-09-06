@@ -20,6 +20,7 @@ const get_companies_filter_dto_1 = require("./dto/get-companies-filter.dto");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const lodash_1 = require("lodash");
+const company_1 = require("../../common/types/company");
 const user_1 = require("../../common/types/user");
 let CompanyService = class CompanyService {
     constructor(companyRepository) {
@@ -80,6 +81,17 @@ let CompanyService = class CompanyService {
         company.hiringStatus = hiringStatus;
         await this.companyRepository.save(company);
         return company;
+    }
+    async findById(id, user) {
+        return this.companyRepository.findOne({ where: { id, user } });
+    }
+    async delete(id, user) {
+        const company = await this.findById(id, user);
+        common_1.Logger.log({ company });
+        if (company.companyStatus !== company_1.CompanyStatus.INACTIVE) {
+            throw new common_1.ForbiddenException('Company is still ACTIVE. Only INACTIVE companies can be deleted');
+        }
+        await this.companyRepository.delete(id);
     }
 };
 __decorate([
