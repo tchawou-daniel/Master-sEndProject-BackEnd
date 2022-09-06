@@ -29,8 +29,7 @@ let AuthController = class AuthController {
     signIn(authCredentialsDto) {
         return this.authService.signIn(authCredentialsDto);
     }
-    test(req) {
-    }
+    test(req) { }
 };
 __decorate([
     (0, common_1.Post)('/signup'),

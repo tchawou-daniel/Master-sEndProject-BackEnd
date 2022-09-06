@@ -1,6 +1,6 @@
+import { CreateWorkerDaysDto } from '@api/workerDays/dto/create-worker-days.dto';
 import { GetWorkerDayFilterDto } from '@api/workerDays/dto/get-worker-day-filter.dto';
 import { UpdateWorkerDaysDto } from '@api/workerDays/dto/update-workerDays.dto';
-import { CreateWorkerDaysDto } from '@api/workerDays/dto/create-worker-days.dto';
 import { WorkerDays } from '@api/workerDays/workerDays.entity';
 import { WorkerDaysRepository } from '@api/workerDays/workerDays.repository';
 import { Get, Injectable, Logger, NotFoundException } from '@nestjs/common';

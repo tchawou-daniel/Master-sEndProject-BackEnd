@@ -5,7 +5,6 @@ import { UsersWorkForCompanies } from '@api/usersWorkForCompanies/usersWorkForCo
 import { Logger } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 
-
 @EntityRepository(UsersWorkForCompanies)
 export class UsersWorkForCompaniesRepository extends Repository<UsersWorkForCompanies> {
   private logger = new Logger('UsersWorkForCompaniesRepository');

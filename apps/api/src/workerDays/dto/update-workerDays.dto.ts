@@ -3,7 +3,8 @@ import {
   IsEnum,
   IsNumber,
   IsOptional,
-  IsString, MaxLength,
+  IsString,
+  MaxLength,
 } from 'class-validator';
 
 import { WeekDays, WorkerDayStatus } from '../../../common/types/workerDays';

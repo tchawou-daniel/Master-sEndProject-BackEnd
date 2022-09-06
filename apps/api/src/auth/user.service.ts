@@ -3,16 +3,8 @@ import { GetUsersFliterDto } from '@api/auth/dto/get-users-fliter.dto';
 import { UpdateUserDto } from '@api/auth/dto/update-user.dto';
 import { User } from '@api/auth/user.entity';
 import { UsersRepository } from '@api/auth/users.repository';
-import { Employment } from '@api/employment/employment.entity';
-import {
-  ForbiddenException,
-  Get,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { Get, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-
-import { CompanyStatus } from '../../common/types/company';
 
 export class UserService {
   constructor(
